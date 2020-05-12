@@ -1,7 +1,7 @@
 # qontrol_api
-Python Library for **Qontrol** Q8 serial controller hardware interface. See [Qontrol's website!](https://qontrol.co.uk/)
+Python Library for interfacing with **Qontrol** integrated optics control hardware. See [our website](https://qontrol.co.uk/) for more details!
 
-This library will enable to control your Qontrol controller from Python code, once this has been connected through Serial interface.
+This library lets you control your Qontrol controller from Python, via a serial interface.
 
 ## Table of contents
     - Installation
