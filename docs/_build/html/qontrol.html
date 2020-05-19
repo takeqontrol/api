@@ -81,6 +81,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide/getting_started.html">GETTING STARTED GUIDE</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">qontrol_api</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">qontrol module</a></li>
 </ul>
@@ -153,45 +155,45 @@
             
   <div class="section" id="module-qontrol">
 <span id="qontrol-module"></span><h1>qontrol module<a class="headerlink" href="#module-qontrol" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+<dl class="class">
 <dt id="qontrol.ChannelVector">
-<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">ChannelVector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_list</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.ChannelVector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">ChannelVector</code><span class="sig-paren">(</span><em class="sig-param">base_list</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.ChannelVector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Custom list class which has a fixed length but mutable (typed) elements, and which phones home when its elements are read or modified.</p>
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="qontrol.ChannelVector.get_handle">
 <code class="sig-name descname">get_handle</code><em class="property"> = None</em><a class="headerlink" href="#qontrol.ChannelVector.get_handle" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="qontrol.ChannelVector.set_handle">
 <code class="sig-name descname">set_handle</code><em class="property"> = None</em><a class="headerlink" href="#qontrol.ChannelVector.set_handle" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
+<dl class="attribute">
 <dt id="qontrol.ChannelVector.valid_types">
 <code class="sig-name descname">valid_types</code><em class="property"> = (&lt;class 'int'&gt;, &lt;class 'float'&gt;)</em><a class="headerlink" href="#qontrol.ChannelVector.valid_types" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="qontrol.QXOutput">
-<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">QXOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">QXOutput</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#qontrol.Qontroller" title="qontrol.Qontroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">qontrol.Qontroller</span></code></a></p>
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.QXOutput.get_all_values">
-<code class="sig-name descname">get_all_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">para</span><span class="o">=</span><span class="default_value">'V'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_all_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_all_values</code><span class="sig-paren">(</span><em class="sig-param">para='V'</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_all_values" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.QXOutput.get_value">
-<code class="sig-name descname">get_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ch</span></em>, <em class="sig-param"><span class="n">para</span><span class="o">=</span><span class="default_value">'V'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_value</code><span class="sig-paren">(</span><em class="sig-param">ch</em>, <em class="sig-param">para='V'</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.QXOutput.set_all_values">
-<code class="sig-name descname">set_all_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">para</span><span class="o">=</span><span class="default_value">'V'</span></em>, <em class="sig-param"><span class="n">values</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_all_values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_all_values</code><span class="sig-paren">(</span><em class="sig-param">para='V'</em>, <em class="sig-param">values=0</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_all_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience function for slicing up set commands into vectors for each module and transmitting.</p>
 <blockquote>
 <div><p>para:          Parameter to set {‘V’ or ‘I’}
@@ -199,16 +201,16 @@ values:        Either float/int or list of float/int of length n_chs</p>
 </div></blockquote>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.QXOutput.set_value">
-<code class="sig-name descname">set_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ch</span></em>, <em class="sig-param"><span class="n">para</span><span class="o">=</span><span class="default_value">'V'</span></em>, <em class="sig-param"><span class="n">new</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_value" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_value</code><span class="sig-paren">(</span><em class="sig-param">ch</em>, <em class="sig-param">para='V'</em>, <em class="sig-param">new=0</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="qontrol.Qontroller">
-<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">Qontroller</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">qontrol.</code><code class="sig-name descname">Qontroller</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Super class which handles serial communication, device identification, and logging.</p>
 <blockquote>
@@ -236,15 +238,15 @@ The log handler may be used to catch and dynamically handle certain errors, as t
 </dl>
 <p>q.log_handler = my_log_handler</p>
 </div></blockquote>
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.close">
 <code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Release resources</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.issue_binary_command">
-<code class="sig-name descname">issue_binary_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command_id</span></em>, <em class="sig-param"><span class="n">ch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">BCAST</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ALLCH</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ADDM</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">RW</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ACT</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">DEXT</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">value_int</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">addr_id_num</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">n_lines_requested</span><span class="o">=</span><span class="default_value">2147483648</span></em>, <em class="sig-param"><span class="n">target_errors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_regex</span><span class="o">=</span><span class="default_value">'(.*)'</span></em>, <em class="sig-param"><span class="n">special_timeout</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_binary_command" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">issue_binary_command</code><span class="sig-paren">(</span><em class="sig-param">command_id</em>, <em class="sig-param">ch=None</em>, <em class="sig-param">BCAST=0</em>, <em class="sig-param">ALLCH=0</em>, <em class="sig-param">ADDM=0</em>, <em class="sig-param">RW=0</em>, <em class="sig-param">ACT=0</em>, <em class="sig-param">DEXT=0</em>, <em class="sig-param">value_int=0</em>, <em class="sig-param">addr_id_num=0</em>, <em class="sig-param">n_lines_requested=2147483648</em>, <em class="sig-param">target_errors=None</em>, <em class="sig-param">output_regex='(.*)'</em>, <em class="sig-param">special_timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_binary_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transmit command ([command_id][ch][operator][value]) to device, collect response.</p>
 <blockquote>
 <div><p>command_id:             Command descriptor, either int (command index) or str (command name).
@@ -263,9 +265,9 @@ addr_id_num:    For device-wise addressing mode (ADDM=1) only, hex device ID cod
 <p>All other arguments same as those for issue_command()</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.issue_command">
-<code class="sig-name descname">issue_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command_id</span></em>, <em class="sig-param"><span class="n">ch</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_lines_requested</span><span class="o">=</span><span class="default_value">2147483648</span></em>, <em class="sig-param"><span class="n">target_errors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">output_regex</span><span class="o">=</span><span class="default_value">'(.*)'</span></em>, <em class="sig-param"><span class="n">special_timeout</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_command" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">issue_command</code><span class="sig-paren">(</span><em class="sig-param">command_id</em>, <em class="sig-param">ch=None</em>, <em class="sig-param">operator=''</em>, <em class="sig-param">value=None</em>, <em class="sig-param">n_lines_requested=2147483648</em>, <em class="sig-param">target_errors=None</em>, <em class="sig-param">output_regex='(.*)'</em>, <em class="sig-param">special_timeout=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transmit command ([command_id][ch][operator][value]) to device, collect response.</p>
 <blockquote>
 <div><p>command_id                      Command header (e.g. ‘v’ in ‘v7=1.0’)
@@ -278,39 +280,39 @@ special_timeout         Timeout to use for this command only (!= self.response_t
 </div></blockquote>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.log_append">
-<code class="sig-name descname">log_append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">'err'</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">ch</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">desc</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">raw</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.log_append" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">log_append</code><span class="sig-paren">(</span><em class="sig-param">type='err'</em>, <em class="sig-param">id=''</em>, <em class="sig-param">ch=0</em>, <em class="sig-param">value=0</em>, <em class="sig-param">desc=''</em>, <em class="sig-param">raw=''</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.log_append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append an event to the log, adding both a calendar- and a process-timestamp.”</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.parse_error">
-<code class="sig-name descname">parse_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error_str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.parse_error" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">parse_error</code><span class="sig-paren">(</span><em class="sig-param">error_str</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.parse_error" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse an encoded error (e.g. E02:07) into its code, channel, and human-readable description.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.print_log">
-<code class="sig-name descname">print_log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.print_log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">print_log</code><span class="sig-paren">(</span><em class="sig-param">n=None</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.print_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the n last log entries. If n == None, print all log entries.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.receive">
 <code class="sig-name descname">receive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.receive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Low-level receive data method which also checks for errors.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.transmit">
-<code class="sig-name descname">transmit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">command_string</span></em>, <em class="sig-param"><span class="n">binary_mode</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.transmit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">transmit</code><span class="sig-paren">(</span><em class="sig-param">command_string</em>, <em class="sig-param">binary_mode=False</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.transmit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Low-level transmit data method. command_string can be of type str or bytearray</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="qontrol.Qontroller.wait">
-<code class="sig-name descname">wait</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seconds</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.wait" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wait</code><span class="sig-paren">(</span><em class="sig-param">seconds=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.wait" title="Permalink to this definition">¶</a></dt>
 <dd><p>Do nothing while watching for errors on the serial bus.</p>
 </dd></dl>
 

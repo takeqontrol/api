@@ -9,12 +9,14 @@ This documentation describes teh functionality of the main commands for the pyth
 See 'https://qontrol.co.uk/'
 
 
-
 ===================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   intro
+   guide/getting_started
 
    modules
 
