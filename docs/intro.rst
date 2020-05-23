@@ -16,4 +16,7 @@
 Introduction
 ============
 
+
 qontrol.py is a library for configuring and controlling through python the qontrol products.
+
+This guide will guide you through the process of setting up your Qontrol Q8 device and give you a description of the basic commands.
