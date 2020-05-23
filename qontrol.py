@@ -924,3 +924,161 @@ class QXOutput(Qontroller):
 		
 		object.__setattr__(self, attr, val)
 
+
+
+def run_interactive_shell():
+	"""Interactive shell for interacting directly with Qontrol hardware."""
+	
+	print ("- "*14)
+	print (" Qontrol Interactive Shell")
+	print ("- "*14+"\n")
+	
+	baudrate = 115200
+	
+	def tty_supports_color():
+		"""
+		Returns True if the running system's terminal supports color, and False
+		otherwise. From django.core.management.color.supports_color.
+		"""
+		plat = sys.platform
+		supported_platform = plat != 'Pocket PC' and (plat != 'win32' or
+													  'ANSICON' in os.environ)
+		# isatty is not always implemented, #6223.
+		is_a_tty = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
+		return supported_platform and is_a_tty
+	
+	if tty_supports_color():
+		normal_text = "\033[0m"
+		in_text = "\033[33;1m"
+		out_text = "\033[36;1m"
+	else:
+		normal_text = ""
+		in_text = ""
+		out_text = ""
+	
+	# List available serial ports
+	ports = list(list_ports.grep('.*'))
+	n_ports = len(ports)
+	print ("Available ports:")
+	for i,port in enumerate(ports):
+		print (" #{:2} - {:15}".format(i, str(port)))
+	
+	# Ask user which port to target
+	for i in range(3):
+		requested_port_str = input("\nWhich would you like to communicate with? #")
+		try:
+			requested_port_index = int(requested_port_str)
+			if requested_port_index > n_ports:
+				raise RuntimeError()
+			break
+		except:
+			print ("Port index '{:}' not recognised.".format(requested_port_str))
+	
+	for i,port in enumerate(ports):
+		if i == requested_port_index:
+			break
+	
+	port = serial.Serial(port.device, baudrate, timeout = 0)
+	
+	
+	# Multithread the user and hardware monitoring
+	import threading, copy, collections
+
+	class WatcherThread(threading.Thread):
+
+		def __init__(self, stream, name='keyboard-input-thread'):
+			self.stream = stream
+			self.buffer = fifo(maxlen = 8) # Unlikely to ever need > 1
+			super(WatcherThread, self).__init__(name=name, daemon=True)
+			self.stop_flag = False
+			self.start()
+
+		def run(self):
+			while True:
+				r = self.stream.readline()
+				if r:
+					if type(r) is bytes:
+						try:
+							self.buffer.appendleft(r.decode('ascii'))
+						except UnicodeDecodeError:
+							import binascii
+							self.buffer.appendleft(str(binascii.hexlify(r)))
+					else:
+						self.buffer.appendleft(r)
+				if self.stop_flag:
+					break
+		
+		def has_data(self):
+			return (len(self.buffer) > 0)
+		
+		def pop(self):
+			return self.buffer.pop()
+		
+		def stop(self):
+			self.stop_flag = True
+
+	# Start threads
+	user_watcher = WatcherThread(sys.stdin)
+	hardware_watcher = WatcherThread(port)
+	
+	print ("\nEntering interactive mode. Use Ctrl+C/stop/quit/exit to finish.\n")
+	print ("- "*14+'\n')
+	sys.stdout.write(out_text + " > " + normal_text)
+	sys.stdout.flush()
+	cmd = ""
+	resp = ""
+	try:
+		while True:
+			
+			# Handle commands from user
+			if user_watcher.has_data():
+				cmd = user_watcher.pop().strip()
+				
+				# Safe words
+				if cmd in ['quit', 'exit', 'stop']:
+					break
+				
+				cmd = cmd + '\n'
+				port.write(cmd.encode('ascii'))
+				
+				
+# 				sys.stdout.write("\r"+" "*40+"\r")
+# 				sys.stdout.write('> ' + cmd.strip() + "\r\n")
+				sys.stdout.write(out_text + " > " + normal_text)
+				sys.stdout.flush()
+			
+			# Handle response from hardware
+			if hardware_watcher.has_data():
+				resp = hardware_watcher.pop()
+				
+				resp = resp.strip()
+				sys.stdout.write("\r"+" "*40+"\r")
+				sys.stdout.write(in_text + " < " + normal_text + resp + "\r\n")
+				sys.stdout.write(out_text + " > " + normal_text)
+				sys.stdout.flush()
+	
+	except KeyboardInterrupt:
+		print("\n")
+	
+	# Kill our threaded friends
+	try:
+		user_watcher._stop()
+	except:
+		pass
+	try:
+		hardware_watcher._stop()
+	except:
+		pass
+	
+	print ("- "*14+'\n')
+	
+	print ("Interactive shell closed.")
+
+
+
+
+if __name__ == '__main__':
+	
+	run_interactive_shell()
+	
+	
