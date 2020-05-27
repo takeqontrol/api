@@ -95,6 +95,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#connection-of-the-unit">Connection of the unit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration-of-the-serial-communication">Configuration of the serial communication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#controlling-the-unit-using-the-provided-qontrol-api-serial-communication-commands">Controlling the unit using the provided Qontrol API serial communication commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#controlling-the-unit-using-a-serial-communication-software">Controlling the unit using a serial communication software</a></li>
 </ul>
 </li>
@@ -172,8 +173,11 @@
 <h1>Getting Started Guide<a class="headerlink" href="#getting-started-guide" title="Permalink to this headline">¶</a></h1>
 <p>This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard.</p>
-<p>This guide requires :</p>
+<p>The operations described in this guide require:</p>
 <ul class="simple">
+<li>a Qontrol controller (e.g. Q8iv or Q8)</li>
+<li>a Qontrol motherboard (e.g. BP8)</li>
+<li>the corresponding power supply (e.g. PS15KIT)</li>
 <li>a computer connected to the internet to let the system download the serial port USB drivers</li>
 <li>(optionally) a program for serial port communication (e.g. Teraterm for windows, CoolTerm for Mac Osx, Linux)</li>
 </ul>
@@ -196,6 +200,11 @@ attached to a Qontrol motherboard.</p>
 </div>
 <div class="section" id="configuration-of-the-serial-communication">
 <h2>Configuration of the serial communication<a class="headerlink" href="#configuration-of-the-serial-communication" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="controlling-the-unit-using-the-provided-qontrol-api-serial-communication-commands">
+<h3>Controlling the unit using the provided Qontrol API serial communication commands<a class="headerlink" href="#controlling-the-unit-using-the-provided-qontrol-api-serial-communication-commands" title="Permalink to this headline">¶</a></h3>
+<p>This API provides also a command line interface for direct communication with the Qontrol unit.</p>
+<p>To set the communication</p>
+</div>
 <div class="section" id="controlling-the-unit-using-a-serial-communication-software">
 <h3>Controlling the unit using a serial communication software<a class="headerlink" href="#controlling-the-unit-using-a-serial-communication-software" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -207,26 +216,88 @@ attached to a Qontrol motherboard.</p>
 </ul>
 </div></blockquote>
 <p><strong>General Configuration settings.</strong></p>
-<p><em>Serial parameters</em>:</p>
-<ul class="simple">
-<li>8 bits for Data</li>
-<li>1 bit for stop</li>
-<li>no parity check</li>
-<li>no flow control</li>
-<li>Baud Rate 115200</li>
+<p><em>Serial parameters settings</em> :</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Setting</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Data bits</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>Stop bit</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>Par. check</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>Flow ctrl.</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>Baud rate</td>
+<td>115200</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Windows Teraterm Configuration</strong></p>
+<p><strong>Mac OSX CoolTerm Configuration</strong></p>
+<ul>
+<li><p class="first">Open a Terminal</p>
+</li>
+<li><p class="first">check the name of the device with the command:</p>
+<p>ls /dev/tty.usb*</p>
+</li>
+<li><p class="first">Example of output:
+/dev/tty.usbserial-FT31EUVZ</p>
+</li>
+<li><p class="first">the name “FT31EUVZ” identifies the connection to the Qontrol motherboard</p>
+</li>
+<li><p class="first">Open CoolTerm and select options</p>
+</li>
 </ul>
-<p><strong>Teraterm Configuration</strong></p>
-<p><strong>Mac CoolTerm Configuration</strong>
-To check the name of the device</p>
-<p>ls /dev/tty.usb*</p>
+<a class="reference internal image-reference" href="../_images/CoolTerm0.png"><img alt="Click on options" src="../_images/CoolTerm0.png" style="width: 350px;" /></a>
+<ul class="simple">
+<li>Select the correct device and the proper settings</li>
+<li>Open CoolTerm and select the appropriate options</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/CoolTerm1.png"><img alt="Click on options" src="../_images/CoolTerm1.png" style="width: 350px;" /></a>
+<ul class="simple">
+<li>Select Ok and start typing the commands</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/CoolTerm2.png"><img alt="Click on options" src="../_images/CoolTerm2.png" style="width: 350px;" /></a>
 <p><strong>Linux Command Line</strong></p>
-<p><a class="reference external" href="http://my.fit.edu/~msilaghi/ROB/iCreate/serial.pdf">http://my.fit.edu/~msilaghi/ROB/iCreate/serial.pdf</a></p>
-<p>To check the name of the device</p>
+<p>In Linux is also possible to use terminal software such as <strong>minicorn</strong></p>
+<ul>
+<li><p class="first">Check the name of the device</p>
 <p>ls /dev/tty.usb*</p>
+</li>
+<li><p class="first">Serial ports devices will appear as /dev/ttyS#</p>
+</li>
+<li><p class="first">To change the serial port configuration use the command <strong>‘ssty’</strong>, use the command
+“man stty”
+for specific operation details</p>
+</li>
+<li><p class="first">Example to set the Baudrate to 115200 and odd parity
+stty -F /dev/ttyS# 115200 parodd</p>
+</li>
+<li><p class="first">Issue Comands using the <strong>“echo”</strong> command
+echo ‘vipall?’ &gt; /dev/ttyusb#</p>
+</li>
+<li><p class="first">Read the data with <strong>cat</strong>:
+cat /dev/ttyusb#</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="first-operations-and-tests">
 <h2>First operations and tests<a class="headerlink" href="#first-operations-and-tests" title="Permalink to this headline">¶</a></h2>
+<p>If the unit has been configured correctly</p>
 </div>
 <div class="section" id="first-troubleshouting">
 <h2>First Troubleshouting<a class="headerlink" href="#first-troubleshouting" title="Permalink to this headline">¶</a></h2>

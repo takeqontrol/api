@@ -1,3 +1,16 @@
+
+.. _intro:
+
+============
+Introduction
+============
+
+
+qontrol.py is a library for configuring and controlling through python the qontrol products.
+
+This guide will guide you through the process of setting up your Qontrol Q8 device and give you a description of the basic commands.
+
+
   
 ..
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"),
@@ -10,13 +23,3 @@
      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
       WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     
-.. _intro:
-
-============
-Introduction
-============
-
-
-qontrol.py is a library for configuring and controlling through python the qontrol products.
-
-This guide will guide you through the process of setting up your Qontrol Q8 device and give you a description of the basic commands.

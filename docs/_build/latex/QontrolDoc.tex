@@ -56,7 +56,7 @@
 
 
 \title{QontrolDoc Documentation}
-\date{May 23, 2020}
+\date{May 27, 2020}
 \release{0}
 \author{Qontrol}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -85,12 +85,21 @@ This guide will guide you through the process of setting up your Qontrol Q8 devi
 
 
 \chapter{Getting Started Guide}
-\label{\detokenize{guide/getting_started:getting-started-guide}}\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:introduction}}\label{\detokenize{guide/getting_started:intro}}
+\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:intro}}\label{\detokenize{guide/getting_started:introduction}}\label{\detokenize{guide/getting_started:getting-started-guide}}
 This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard.
 
-This guide requires :
+The operations described in this guide require:
 \begin{itemize}
+\item {} 
+a Qontrol controller (e.g. Q8iv or Q8)
+
+\item {} 
+a Qontrol motherboard (e.g. BP8)
+
+\item {} 
+the corresponding power supply (e.g. PS15KIT)
+
 \item {} 
 a computer connected to the internet to let the system download the serial port USB drivers
 
@@ -128,6 +137,13 @@ Al the side LEDs in the units should progressively turn on and off again leaving
 \section{Configuration of the serial communication}
 \label{\detokenize{guide/getting_started:configuration-of-the-serial-communication}}
 
+\subsection{Controlling the unit using the provided Qontrol API serial communication commands}
+\label{\detokenize{guide/getting_started:controlling-the-unit-using-the-provided-qontrol-api-serial-communication-commands}}
+This API provides also a command line interface for direct communication with the Qontrol unit.
+
+To set the communication
+
+
 \subsection{Controlling the unit using a serial communication software}
 \label{\detokenize{guide/getting_started:controlling-the-unit-using-a-serial-communication-software}}\begin{quote}
 
@@ -147,43 +163,127 @@ Terminal/Command line (Linux)
 
 \sphinxstylestrong{General Configuration settings.}
 
-\sphinxstyleemphasis{Serial parameters}:
+\sphinxstyleemphasis{Serial parameters settings} :
+
+
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|T|}
+\hline
+\sphinxstyletheadfamily 
+Setting
+&\sphinxstyletheadfamily 
+Value
+\\
+\hline
+Data bits
+&
+8
+\\
+\hline
+Stop bit
+&
+1
+\\
+\hline
+Par. check
+&
+None
+\\
+\hline
+Flow ctrl.
+&
+None
+\\
+\hline
+Baud rate
+&
+115200
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+\sphinxstylestrong{Windows Teraterm Configuration}
+
+\sphinxstylestrong{Mac OSX CoolTerm Configuration}
 \begin{itemize}
 \item {} 
-8 bits for Data
+Open a Terminal
 
 \item {} 
-1 bit for stop
+check the name of the device with the command:
+
+ls /dev/tty.usb*
 
 \item {} 
-no parity check
+Example of output:
+/dev/tty.usbserial-FT31EUVZ
 
 \item {} 
-no flow control
+the name “FT31EUVZ” identifies the connection to the Qontrol motherboard
 
 \item {} 
-Baud Rate 115200
+Open CoolTerm and select options
 
 \end{itemize}
 
-\sphinxstylestrong{Teraterm Configuration}
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{CoolTerm0}.png}
+\begin{itemize}
+\item {} 
+Select the correct device and the proper settings
 
-\sphinxstylestrong{Mac CoolTerm Configuration}
-To check the name of the device
+\item {} 
+Open CoolTerm and select the appropriate options
 
-ls /dev/tty.usb*
+\end{itemize}
+
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{CoolTerm1}.png}
+\begin{itemize}
+\item {} 
+Select Ok and start typing the commands
+
+\end{itemize}
+
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{CoolTerm2}.png}
 
 \sphinxstylestrong{Linux Command Line}
 
-\sphinxurl{http://my.fit.edu/~msilaghi/ROB/iCreate/serial.pdf}
-
-To check the name of the device
+In Linux is also possible to use terminal software such as \sphinxstylestrong{minicorn}
+\begin{itemize}
+\item {} 
+Check the name of the device
 
 ls /dev/tty.usb*
+
+\item {} 
+Serial ports devices will appear as /dev/ttyS\#
+
+\item {} 
+To change the serial port configuration use the command \sphinxstylestrong{‘ssty’}, use the command
+“man stty”
+for specific operation details
+
+\item {} 
+Example to set the Baudrate to 115200 and odd parity
+stty -F /dev/ttyS\# 115200 parodd
+
+\item {} 
+Issue Comands using the \sphinxstylestrong{“echo”} command
+echo ‘vipall?’ \textgreater{} /dev/ttyusb\#
+
+\item {} 
+Read the data with \sphinxstylestrong{cat}:
+cat /dev/ttyusb\#
+
+\end{itemize}
 
 
 \section{First operations and tests}
 \label{\detokenize{guide/getting_started:first-operations-and-tests}}
+If the unit has been configured correctly
+
 
 \section{First Troubleshouting}
 \label{\detokenize{guide/getting_started:first-troubleshouting}}
@@ -198,10 +298,10 @@ Qontrol Systems LLP, its subsidiaries and associates accept no liability for dam
 
 
 \chapter{qontrol\_api}
-\label{\detokenize{modules:qontrol-api}}\label{\detokenize{modules::doc}}
+\label{\detokenize{modules::doc}}\label{\detokenize{modules:qontrol-api}}
 
 \section{qontrol module}
-\label{\detokenize{qontrol:module-qontrol}}\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:qontrol-module}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
+\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:module-qontrol}}\label{\detokenize{qontrol:qontrol-module}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{ChannelVector}}}{\emph{base\_list}}{}

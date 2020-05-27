@@ -2,12 +2,13 @@
 \contentsline {chapter}{\numberline {1}Getting Started Guide}{3}{chapter.1}
 \contentsline {section}{\numberline {1.1}Connection of the unit}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Configuration of the serial communication}{4}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Controlling the unit using a serial communication software}{4}{subsection.1.2.1}
-\contentsline {section}{\numberline {1.3}First operations and tests}{4}{section.1.3}
-\contentsline {section}{\numberline {1.4}First Troubleshouting}{4}{section.1.4}
-\contentsline {section}{\numberline {1.5}Notes and disclaimer}{4}{section.1.5}
-\contentsline {chapter}{\numberline {2}qontrol\_api}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}qontrol module}{5}{section.2.1}
-\contentsline {chapter}{\numberline {3}Indices and tables}{7}{chapter.3}
-\contentsline {chapter}{Python Module Index}{9}{section*.23}
-\contentsline {chapter}{Index}{11}{section*.24}
+\contentsline {subsection}{\numberline {1.2.1}Controlling the unit using the provided Qontrol API serial communication commands}{4}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Controlling the unit using a serial communication software}{4}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}First operations and tests}{6}{section.1.3}
+\contentsline {section}{\numberline {1.4}First Troubleshouting}{6}{section.1.4}
+\contentsline {section}{\numberline {1.5}Notes and disclaimer}{6}{section.1.5}
+\contentsline {chapter}{\numberline {2}qontrol\_api}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}qontrol module}{9}{section.2.1}
+\contentsline {chapter}{\numberline {3}Indices and tables}{11}{chapter.3}
+\contentsline {chapter}{Python Module Index}{13}{section*.23}
+\contentsline {chapter}{Index}{15}{section*.24}

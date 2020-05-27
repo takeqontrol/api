@@ -5,7 +5,13 @@ Getting Started Guide
 This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard. 
 
-This guide requires :
+The operations described in this guide require:
+
+- a Qontrol controller (e.g. Q8iv or Q8)
+
+- a Qontrol motherboard (e.g. BP8)
+
+- the corresponding power supply (e.g. PS15KIT)
 
 - a computer connected to the internet to let the system download the serial port USB drivers 
 
@@ -59,6 +65,14 @@ This procedure is valid for both the Q8 and the Q8iv products.
 Configuration of the serial communication
 #########################################
 
+Controlling the unit using the provided Qontrol API serial communication commands
+*********************************************************************************
+
+This API provides also a command line interface for direct communication with the Qontrol unit.
+
+To set the communication
+
+
 Controlling the unit using a serial communication software
 **********************************************************
  Serial communication software in any operating system (OS) can be used to control the units, some examples: 
@@ -70,36 +84,99 @@ Controlling the unit using a serial communication software
 
 **General Configuration settings.**
 
-*Serial parameters*:
+*Serial parameters settings* :
 
-- 8 bits for Data 
-- 1 bit for stop 
-- no parity check 
-- no flow control
-- Baud Rate 115200
+.. - 8 bits for Data 
+.. - no parity check 
+.. - 1 bit for stop 
+.. - no flow control
+.. - Baud Rate 115200
 
-**Teraterm Configuration** 
 
-**Mac CoolTerm Configuration**
-To check the name of the device
++------------+------------+
+| Setting    |   Value    |
++============+============+
+|  Data bits |      8     |
++------------+------------+
+|  Stop bit  |      1     |
++------------+------------+
+| Par. check |    None    |
++------------+------------+
+| Flow ctrl. |    None    |
++------------+------------+
+|  Baud rate |   115200   |
++------------+------------+
 
-ls /dev/tty.usb*
+
+
+**Windows Teraterm Configuration** 
+
+**Mac OSX CoolTerm Configuration**
+
+- Open a Terminal 
+- check the name of the device with the command:
+
+  ls /dev/tty.usb*
+
+- Example of output:
+  /dev/tty.usbserial-FT31EUVZ
+- the name "FT31EUVZ" identifies the connection to the Qontrol motherboard
+- Open CoolTerm and select options 
+
+.. image:: Images/CoolTerm0.png
+  :width: 350
+  :alt: Click on options
+
+- Select the correct device and the proper settings 
+- Open CoolTerm and select the appropriate options 
+
+.. image:: Images/CoolTerm1.png
+  :width: 350
+  :alt: Click on options
+
+- Select Ok and start typing the commands 
+
+.. image:: Images/CoolTerm2.png
+  :width: 350
+  :alt: Click on options
+
+
 
 
 
 **Linux Command Line**
 
-http://my.fit.edu/~msilaghi/ROB/iCreate/serial.pdf
+.. http://my.fit.edu/~msilaghi/ROB/iCreate/serial.pdf
+
+In Linux is also possible to use terminal software such as **minicorn**
+
+- Check the name of the device
+
+  ls /dev/tty.usb*
+
+-  Serial ports devices will appear as /dev/ttyS#
+
+- To change the serial port configuration use the command **'ssty'**, use the command
+  "man stty"
+  for specific operation details
+- Example to set the Baudrate to 115200 and odd parity
+  stty -F /dev/ttyS# 115200 parodd
+- Issue Comands using the **"echo"** command
+  echo 'vipall?' > /dev/ttyusb#
+- Read the data with **cat**:
+  cat /dev/ttyusb#
 
 
-To check the name of the device
-
-ls /dev/tty.usb*
 
 
 
 First operations and tests
 ##############################
+
+If the unit has been configured correctly 
+
+
+
 
 First Troubleshouting 
 #####################
