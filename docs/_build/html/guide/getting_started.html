@@ -20,20 +20,11 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -175,28 +166,29 @@
 attached to a Qontrol motherboard.</p>
 <p>The operations described in this guide require:</p>
 <ul class="simple">
-<li>a Qontrol controller (e.g. Q8iv or Q8)</li>
-<li>a Qontrol motherboard (e.g. BP8)</li>
-<li>the corresponding power supply (e.g. PS15KIT)</li>
-<li>a computer connected to the internet to let the system download the serial port USB drivers</li>
-<li>(optionally) a program for serial port communication (e.g. Teraterm for windows, CoolTerm for Mac Osx, Linux)</li>
+<li><p>a Qontrol controller (e.g. Q8iv or Q8)</p></li>
+<li><p>a Qontrol motherboard (e.g. BP8)</p></li>
+<li><p>the corresponding power supply (e.g. PS15KIT)</p></li>
+<li><p>a computer connected to the internet to let the system download the serial port USB drivers</p></li>
+<li><p>(optionally) a program for serial port communication (e.g. Teraterm for windows, CoolTerm for Mac Osx, Linux)</p></li>
 </ul>
 <div class="section" id="connection-of-the-unit">
 <h2>Connection of the unit<a class="headerlink" href="#connection-of-the-unit" title="Permalink to this headline">¶</a></h2>
 <p>This procedure is valid for both the Q8 and the Q8iv products.</p>
 <ul>
-<li><p class="first">Insert the Q8iv (or any other compatible control unit) in one of the backplanes/motherboards (e.g. BP8):</p>
+<li><p>Insert the Q8iv (or any other compatible control unit) in one of the backplanes/motherboards (e.g. BP8):</p>
 <p><a class="reference internal" href="../_images/Q8iv_stil.jpg"><img alt="UQ8iv picture of the device" src="../_images/Q8iv_stil.jpg" style="width: 75px;" /></a> <a class="reference internal" href="../_images/BP8-top.jpg"><img alt="BP8-top motherboard image" src="../_images/BP8-top.jpg" style="width: 100px;" /></a></p>
 </li>
-<li><p class="first">Connect the backplane (motherboard) unit to the computer using a cable/adapter with a USB mini b female plug at one of the two ends, like the one shown below:</p>
+<li><p>Connect the backplane (motherboard) unit to the computer using a cable/adapter with a USB mini b female plug at one of the two ends, like the one shown below:</p>
 <a class="reference internal image-reference" href="../_images/usbminib.jpg"><img alt="USB mini b cable adapter" src="../_images/usbminib.jpg" style="width: 100px;" /></a>
 </li>
-<li><p class="first">Power the unit, using a compatible power supply (e.g. PS15KIT):</p>
+<li><p>Power the unit, using a compatible power supply (e.g. PS15KIT):</p>
 <a class="reference internal image-reference" href="../_images/PS15KIT.jpg"><img alt="USB mini b cable adapter" src="../_images/PS15KIT.jpg" style="width: 100px;" /></a>
 </li>
-<li><p class="first">Al the side LEDs in the units should progressively turn on and off again leaving only the bottom green LEDs on, while the units are in idle.</p>
-</li>
+<li><p>Al the side LEDs in the units should progressively turn on and off again leaving only the bottom green LEDs on, while the units are in idle.</p></li>
 </ul>
+<p>Whole system:</p>
+<p><a class="reference internal" href="../_images/Qontrol-system-overview.png"><img alt="BP8-top motherboard image" src="../_images/Qontrol-system-overview.png" style="width: 300px;" /></a></p>
 </div>
 <div class="section" id="configuration-of-the-serial-communication">
 <h2>Configuration of the serial communication<a class="headerlink" href="#configuration-of-the-serial-communication" title="Permalink to this headline">¶</a></h2>
@@ -210,88 +202,79 @@ attached to a Qontrol motherboard.</p>
 <blockquote>
 <div><p>Serial communication software in any operating system (OS) can be used to control the units, some examples:</p>
 <ul class="simple">
-<li>Teraterm (Windows)</li>
-<li>CoolTerm (Mac)</li>
-<li>Terminal/Command line (Linux)</li>
+<li><p>Teraterm (Windows)</p></li>
+<li><p>CoolTerm (Mac)</p></li>
+<li><p>Terminal/Command line (Linux)</p></li>
 </ul>
 </div></blockquote>
 <p><strong>General Configuration settings.</strong></p>
 <p><em>Serial parameters settings</em> :</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Setting</th>
-<th class="head">Value</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Value</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Data bits</td>
-<td>8</td>
+<tbody>
+<tr class="row-even"><td><p>Data bits</p></td>
+<td><p>8</p></td>
 </tr>
-<tr class="row-odd"><td>Stop bit</td>
-<td>1</td>
+<tr class="row-odd"><td><p>Stop bit</p></td>
+<td><p>1</p></td>
 </tr>
-<tr class="row-even"><td>Par. check</td>
-<td>None</td>
+<tr class="row-even"><td><p>Par. check</p></td>
+<td><p>None</p></td>
 </tr>
-<tr class="row-odd"><td>Flow ctrl.</td>
-<td>None</td>
+<tr class="row-odd"><td><p>Flow ctrl.</p></td>
+<td><p>None</p></td>
 </tr>
-<tr class="row-even"><td>Baud rate</td>
-<td>115200</td>
+<tr class="row-even"><td><p>Baud rate</p></td>
+<td><p>115200</p></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Windows Teraterm Configuration</strong></p>
 <p><strong>Mac OSX CoolTerm Configuration</strong></p>
 <ul>
-<li><p class="first">Open a Terminal</p>
-</li>
-<li><p class="first">check the name of the device with the command:</p>
+<li><p>Open a Terminal</p></li>
+<li><p>check the name of the device with the command:</p>
 <p>ls /dev/tty.usb*</p>
 </li>
-<li><p class="first">Example of output:
-/dev/tty.usbserial-FT31EUVZ</p>
-</li>
-<li><p class="first">the name “FT31EUVZ” identifies the connection to the Qontrol motherboard</p>
-</li>
-<li><p class="first">Open CoolTerm and select options</p>
-</li>
+<li><p>Example of output:
+/dev/tty.usbserial-FT31EUVZ</p></li>
+<li><p>the name “FT31EUVZ” identifies the connection to the Qontrol motherboard</p></li>
+<li><p>Open CoolTerm and select options</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/CoolTerm0.png"><img alt="Click on options" src="../_images/CoolTerm0.png" style="width: 350px;" /></a>
 <ul class="simple">
-<li>Select the correct device and the proper settings</li>
-<li>Open CoolTerm and select the appropriate options</li>
+<li><p>Select the correct device and the proper settings</p></li>
+<li><p>Open CoolTerm and select the appropriate options</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/CoolTerm1.png"><img alt="Click on options" src="../_images/CoolTerm1.png" style="width: 350px;" /></a>
 <ul class="simple">
-<li>Select Ok and start typing the commands</li>
+<li><p>Select Ok and start typing the commands</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/CoolTerm2.png"><img alt="Click on options" src="../_images/CoolTerm2.png" style="width: 350px;" /></a>
 <p><strong>Linux Command Line</strong></p>
 <p>In Linux is also possible to use terminal software such as <strong>minicorn</strong></p>
 <ul>
-<li><p class="first">Check the name of the device</p>
+<li><p>Check the name of the device</p>
 <p>ls /dev/tty.usb*</p>
 </li>
-<li><p class="first">Serial ports devices will appear as /dev/ttyS#</p>
-</li>
-<li><p class="first">To change the serial port configuration use the command <strong>‘ssty’</strong>, use the command
+<li><p>Serial ports devices will appear as /dev/ttyS#</p></li>
+<li><p>To change the serial port configuration use the command <strong>‘ssty’</strong>, use the command
 “man stty”
-for specific operation details</p>
-</li>
-<li><p class="first">Example to set the Baudrate to 115200 and odd parity
-stty -F /dev/ttyS# 115200 parodd</p>
-</li>
-<li><p class="first">Issue Comands using the <strong>“echo”</strong> command
-echo ‘vipall?’ &gt; /dev/ttyusb#</p>
-</li>
-<li><p class="first">Read the data with <strong>cat</strong>:
-cat /dev/ttyusb#</p>
-</li>
+for specific operation details</p></li>
+<li><p>Example to set the Baudrate to 115200 and odd parity
+stty -F /dev/ttyS# 115200 parodd</p></li>
+<li><p>Issue Comands using the <strong>“echo”</strong> command
+echo ‘vipall?’ &gt; /dev/ttyusb#</p></li>
+<li><p>Read the data with <strong>cat</strong>:
+cat /dev/ttyusb#</p></li>
 </ul>
 </div>
 </div>

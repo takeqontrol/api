@@ -8,31 +8,56 @@
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
 \ifdefined\DeclareUnicodeCharacter
- \ifdefined\DeclareUnicodeCharacterAsOptional
-  \DeclareUnicodeCharacter{"00A0}{\nobreakspace}
-  \DeclareUnicodeCharacter{"2500}{\sphinxunichar{2500}}
-  \DeclareUnicodeCharacter{"2502}{\sphinxunichar{2502}}
-  \DeclareUnicodeCharacter{"2514}{\sphinxunichar{2514}}
-  \DeclareUnicodeCharacter{"251C}{\sphinxunichar{251C}}
-  \DeclareUnicodeCharacter{"2572}{\textbackslash}
- \else
-  \DeclareUnicodeCharacter{00A0}{\nobreakspace}
-  \DeclareUnicodeCharacter{2500}{\sphinxunichar{2500}}
-  \DeclareUnicodeCharacter{2502}{\sphinxunichar{2502}}
-  \DeclareUnicodeCharacter{2514}{\sphinxunichar{2514}}
-  \DeclareUnicodeCharacter{251C}{\sphinxunichar{251C}}
-  \DeclareUnicodeCharacter{2572}{\textbackslash}
- \fi
+% support both utf8 and utf8x syntaxes
+  \ifdefined\DeclareUnicodeCharacterAsOptional
+    \def\sphinxDUC#1{\DeclareUnicodeCharacter{"#1}}
+  \else
+    \let\sphinxDUC\DeclareUnicodeCharacter
+  \fi
+  \sphinxDUC{00A0}{\nobreakspace}
+  \sphinxDUC{2500}{\sphinxunichar{2500}}
+  \sphinxDUC{2502}{\sphinxunichar{2502}}
+  \sphinxDUC{2514}{\sphinxunichar{2514}}
+  \sphinxDUC{251C}{\sphinxunichar{251C}}
+  \sphinxDUC{2572}{\textbackslash}
 \fi
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amstext}
 \usepackage{babel}
+
+
+
 \usepackage{times}
+\expandafter\ifx\csname T@LGR\endcsname\relax
+\else
+% LGR was declared as font encoding
+  \substitutefont{LGR}{\rmdefault}{cmr}
+  \substitutefont{LGR}{\sfdefault}{cmss}
+  \substitutefont{LGR}{\ttdefault}{cmtt}
+\fi
+\expandafter\ifx\csname T@X2\endcsname\relax
+  \expandafter\ifx\csname T@T2A\endcsname\relax
+  \else
+  % T2A was declared as font encoding
+    \substitutefont{T2A}{\rmdefault}{cmr}
+    \substitutefont{T2A}{\sfdefault}{cmss}
+    \substitutefont{T2A}{\ttdefault}{cmtt}
+  \fi
+\else
+% X2 was declared as font encoding
+  \substitutefont{X2}{\rmdefault}{cmr}
+  \substitutefont{X2}{\sfdefault}{cmss}
+  \substitutefont{X2}{\ttdefault}{cmtt}
+\fi
+
+
 \usepackage[Bjarne]{fncychap}
 \usepackage{sphinx}
 
+\fvset{fontsize=\small}
 \usepackage{geometry}
+
 
 % Include hyperref last.
 \usepackage{hyperref}
@@ -42,31 +67,25 @@
 \urlstyle{same}
 \addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
 
-\addto\captionsenglish{\renewcommand{\figurename}{Fig.}}
-\addto\captionsenglish{\renewcommand{\tablename}{Table}}
-\addto\captionsenglish{\renewcommand{\literalblockname}{Listing}}
-
-\addto\captionsenglish{\renewcommand{\literalblockcontinuedname}{continued from previous page}}
-\addto\captionsenglish{\renewcommand{\literalblockcontinuesname}{continues on next page}}
-
-\addto\extrasenglish{\def\pageautorefname{page}}
-
+\usepackage{sphinxmessages}
 \setcounter{tocdepth}{1}
 
 
 
 \title{QontrolDoc Documentation}
-\date{May 27, 2020}
+\date{Jun 05, 2020}
 \release{0}
 \author{Qontrol}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
 \makeindex
-
 \begin{document}
 
-\maketitle
+\pagestyle{empty}
+\sphinxmaketitle
+\pagestyle{plain}
 \sphinxtableofcontents
+\pagestyle{normal}
 \phantomsection\label{\detokenize{index::doc}}
 Welcome to Qontrol’s documentation!
 
@@ -85,7 +104,7 @@ This guide will guide you through the process of setting up your Qontrol Q8 devi
 
 
 \chapter{Getting Started Guide}
-\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:intro}}\label{\detokenize{guide/getting_started:introduction}}\label{\detokenize{guide/getting_started:getting-started-guide}}
+\label{\detokenize{guide/getting_started:getting-started-guide}}\label{\detokenize{guide/getting_started::doc}}
 This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard.
 
@@ -132,6 +151,9 @@ Power the unit, using a compatible power supply (e.g. PS15KIT):
 Al the side LEDs in the units should progressively turn on and off again leaving only the bottom green LEDs on, while the units are in idle.
 
 \end{itemize}
+
+Whole system:
+\sphinxincludegraphics[width=100\sphinxpxdimen]{{Qontrol-system-overview}.png}
 
 
 \section{Configuration of the serial communication}
@@ -219,7 +241,7 @@ ls /dev/tty.usb*
 
 \item {} 
 Example of output:
-/dev/tty.usbserial-FT31EUVZ
+/dev/tty.usbserial\sphinxhyphen{}FT31EUVZ
 
 \item {} 
 the name “FT31EUVZ” identifies the connection to the Qontrol motherboard
@@ -267,7 +289,7 @@ for specific operation details
 
 \item {} 
 Example to set the Baudrate to 115200 and odd parity
-stty -F /dev/ttyS\# 115200 parodd
+stty \sphinxhyphen{}F /dev/ttyS\# 115200 parodd
 
 \item {} 
 Issue Comands using the \sphinxstylestrong{“echo”} command
@@ -298,58 +320,58 @@ Qontrol Systems LLP, its subsidiaries and associates accept no liability for dam
 
 
 \chapter{qontrol\_api}
-\label{\detokenize{modules::doc}}\label{\detokenize{modules:qontrol-api}}
+\label{\detokenize{modules:qontrol-api}}\label{\detokenize{modules::doc}}
 
 \section{qontrol module}
-\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:module-qontrol}}\label{\detokenize{qontrol:qontrol-module}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
+\label{\detokenize{qontrol:module-qontrol}}\label{\detokenize{qontrol:qontrol-module}}\label{\detokenize{qontrol::doc}}\index{qontrol (module)@\spxentry{qontrol}\spxextra{module}}\index{ChannelVector (class in qontrol)@\spxentry{ChannelVector}\spxextra{class in qontrol}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{ChannelVector}}}{\emph{base\_list}}{}
 Bases: \sphinxcode{\sphinxupquote{object}}
 
 Custom list class which has a fixed length but mutable (typed) elements, and which phones home when its elements are read or modified.
-\index{get\_handle (qontrol.ChannelVector attribute)}
+\index{get\_handle (qontrol.ChannelVector attribute)@\spxentry{get\_handle}\spxextra{qontrol.ChannelVector attribute}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector.get_handle}}\pysigline{\sphinxbfcode{\sphinxupquote{get\_handle}}\sphinxbfcode{\sphinxupquote{ = None}}}
 \end{fulllineitems}
 
-\index{set\_handle (qontrol.ChannelVector attribute)}
+\index{set\_handle (qontrol.ChannelVector attribute)@\spxentry{set\_handle}\spxextra{qontrol.ChannelVector attribute}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector.set_handle}}\pysigline{\sphinxbfcode{\sphinxupquote{set\_handle}}\sphinxbfcode{\sphinxupquote{ = None}}}
 \end{fulllineitems}
 
-\index{valid\_types (qontrol.ChannelVector attribute)}
+\index{valid\_types (qontrol.ChannelVector attribute)@\spxentry{valid\_types}\spxextra{qontrol.ChannelVector attribute}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector.valid_types}}\pysigline{\sphinxbfcode{\sphinxupquote{valid\_types}}\sphinxbfcode{\sphinxupquote{ = (\textless{}class 'int'\textgreater{}, \textless{}class 'float'\textgreater{})}}}
+\phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector.valid_types}}\pysigline{\sphinxbfcode{\sphinxupquote{valid\_types}}\sphinxbfcode{\sphinxupquote{ = (\textless{}class \textquotesingle{}int\textquotesingle{}\textgreater{}, \textless{}class \textquotesingle{}float\textquotesingle{}\textgreater{})}}}
 \end{fulllineitems}
 
 
 \end{fulllineitems}
 
-\index{QXOutput (class in qontrol)}
+\index{QXOutput (class in qontrol)@\spxentry{QXOutput}\spxextra{class in qontrol}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.QXOutput}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{QXOutput}}}{\emph{*args}, \emph{**kwargs}}{}
 Bases: {\hyperref[\detokenize{qontrol:qontrol.Qontroller}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{qontrol.Qontroller}}}}}
-\index{get\_all\_values() (qontrol.QXOutput method)}
+\index{get\_all\_values() (qontrol.QXOutput method)@\spxentry{get\_all\_values()}\spxextra{qontrol.QXOutput method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.get_all_values}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_all\_values}}}{\emph{para='V'}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.get_all_values}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_all\_values}}}{\emph{para=\textquotesingle{}V\textquotesingle{}}}{}
 \end{fulllineitems}
 
-\index{get\_value() (qontrol.QXOutput method)}
+\index{get\_value() (qontrol.QXOutput method)@\spxentry{get\_value()}\spxextra{qontrol.QXOutput method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.get_value}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_value}}}{\emph{ch}, \emph{para='V'}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.get_value}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{get\_value}}}{\emph{ch}, \emph{para=\textquotesingle{}V\textquotesingle{}}}{}
 \end{fulllineitems}
 
-\index{set\_all\_values() (qontrol.QXOutput method)}
+\index{set\_all\_values() (qontrol.QXOutput method)@\spxentry{set\_all\_values()}\spxextra{qontrol.QXOutput method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.set_all_values}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{set\_all\_values}}}{\emph{para='V'}, \emph{values=0}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.set_all_values}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{set\_all\_values}}}{\emph{para=\textquotesingle{}V\textquotesingle{}}, \emph{values=0}}{}
 Convenience function for slicing up set commands into vectors for each module and transmitting.
 \begin{quote}
 
@@ -359,16 +381,16 @@ values:        Either float/int or list of float/int of length n\_chs
 
 \end{fulllineitems}
 
-\index{set\_value() (qontrol.QXOutput method)}
+\index{set\_value() (qontrol.QXOutput method)@\spxentry{set\_value()}\spxextra{qontrol.QXOutput method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.set_value}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{set\_value}}}{\emph{ch}, \emph{para='V'}, \emph{new=0}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.QXOutput.set_value}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{set\_value}}}{\emph{ch}, \emph{para=\textquotesingle{}V\textquotesingle{}}, \emph{new=0}}{}
 \end{fulllineitems}
 
 
 \end{fulllineitems}
 
-\index{Qontroller (class in qontrol)}
+\index{Qontroller (class in qontrol)@\spxentry{Qontroller}\spxextra{class in qontrol}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{Qontroller}}}{\emph{*args}, \emph{**kwargs}}{}
@@ -406,7 +428,7 @@ raise RuntimeError(‘Caught Qontrol error “\{1\}” at \{0\} ms’.format(100
 
 q.log\_handler = my\_log\_handler
 \end{quote}
-\index{close() (qontrol.Qontroller method)}
+\index{close() (qontrol.Qontroller method)@\spxentry{close()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.close}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{close}}}{}{}
@@ -414,10 +436,10 @@ Release resources
 
 \end{fulllineitems}
 
-\index{issue\_binary\_command() (qontrol.Qontroller method)}
+\index{issue\_binary\_command() (qontrol.Qontroller method)@\spxentry{issue\_binary\_command()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.issue_binary_command}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{issue\_binary\_command}}}{\emph{command\_id}, \emph{ch=None}, \emph{BCAST=0}, \emph{ALLCH=0}, \emph{ADDM=0}, \emph{RW=0}, \emph{ACT=0}, \emph{DEXT=0}, \emph{value\_int=0}, \emph{addr\_id\_num=0}, \emph{n\_lines\_requested=2147483648}, \emph{target\_errors=None}, \emph{output\_regex='(.*)'}, \emph{special\_timeout=None}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.issue_binary_command}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{issue\_binary\_command}}}{\emph{command\_id}, \emph{ch=None}, \emph{BCAST=0}, \emph{ALLCH=0}, \emph{ADDM=0}, \emph{RW=0}, \emph{ACT=0}, \emph{DEXT=0}, \emph{value\_int=0}, \emph{addr\_id\_num=0}, \emph{n\_lines\_requested=2147483648}, \emph{target\_errors=None}, \emph{output\_regex=\textquotesingle{}(.*)\textquotesingle{}}, \emph{special\_timeout=None}}{}
 Transmit command ({[}command\_id{]}{[}ch{]}{[}operator{]}{[}value{]}) to device, collect response.
 \begin{quote}
 
@@ -434,17 +456,17 @@ DEXT:                  Header byte bits. See Programming Manual for full descrip
 \end{quote}
 
 value\_int:              Data, either int (DEXT=0) or list of int (DEXT=1).
-addr\_id\_num:    For device-wise addressing mode (ADDM=1) only, hex device ID code.
+addr\_id\_num:    For device\sphinxhyphen{}wise addressing mode (ADDM=1) only, hex device ID code.
 \end{quote}
 
 All other arguments same as those for issue\_command()
 
 \end{fulllineitems}
 
-\index{issue\_command() (qontrol.Qontroller method)}
+\index{issue\_command() (qontrol.Qontroller method)@\spxentry{issue\_command()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.issue_command}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{issue\_command}}}{\emph{command\_id}, \emph{ch=None}, \emph{operator=''}, \emph{value=None}, \emph{n\_lines\_requested=2147483648}, \emph{target\_errors=None}, \emph{output\_regex='(.*)'}, \emph{special\_timeout=None}}{}
+\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.issue_command}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{issue\_command}}}{\emph{command\_id}, \emph{ch=None}, \emph{operator=\textquotesingle{}\textquotesingle{}}, \emph{value=None}, \emph{n\_lines\_requested=2147483648}, \emph{target\_errors=None}, \emph{output\_regex=\textquotesingle{}(.*)\textquotesingle{}}, \emph{special\_timeout=None}}{}
 Transmit command ({[}command\_id{]}{[}ch{]}{[}operator{]}{[}value{]}) to device, collect response.
 \begin{quote}
 
@@ -459,23 +481,23 @@ special\_timeout         Timeout to use for this command only (!= self.response\
 
 \end{fulllineitems}
 
-\index{log\_append() (qontrol.Qontroller method)}
+\index{log\_append() (qontrol.Qontroller method)@\spxentry{log\_append()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.log_append}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{log\_append}}}{\emph{type='err'}, \emph{id=''}, \emph{ch=0}, \emph{value=0}, \emph{desc=''}, \emph{raw=''}}{}
-Append an event to the log, adding both a calendar- and a process-timestamp.”
+\phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.log_append}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{log\_append}}}{\emph{type=\textquotesingle{}err\textquotesingle{}}, \emph{id=\textquotesingle{}\textquotesingle{}}, \emph{ch=0}, \emph{value=0}, \emph{desc=\textquotesingle{}\textquotesingle{}}, \emph{raw=\textquotesingle{}\textquotesingle{}}}{}
+Append an event to the log, adding both a calendar\sphinxhyphen{} and a process\sphinxhyphen{}timestamp.”
 
 \end{fulllineitems}
 
-\index{parse\_error() (qontrol.Qontroller method)}
+\index{parse\_error() (qontrol.Qontroller method)@\spxentry{parse\_error()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.parse_error}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{parse\_error}}}{\emph{error\_str}}{}
-Parse an encoded error (e.g. E02:07) into its code, channel, and human-readable description.
+Parse an encoded error (e.g. E02:07) into its code, channel, and human\sphinxhyphen{}readable description.
 
 \end{fulllineitems}
 
-\index{print\_log() (qontrol.Qontroller method)}
+\index{print\_log() (qontrol.Qontroller method)@\spxentry{print\_log()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.print_log}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{print\_log}}}{\emph{n=None}}{}
@@ -483,23 +505,23 @@ Print the n last log entries. If n == None, print all log entries.
 
 \end{fulllineitems}
 
-\index{receive() (qontrol.Qontroller method)}
+\index{receive() (qontrol.Qontroller method)@\spxentry{receive()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.receive}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{receive}}}{}{}
-Low-level receive data method which also checks for errors.
+Low\sphinxhyphen{}level receive data method which also checks for errors.
 
 \end{fulllineitems}
 
-\index{transmit() (qontrol.Qontroller method)}
+\index{transmit() (qontrol.Qontroller method)@\spxentry{transmit()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.transmit}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{transmit}}}{\emph{command\_string}, \emph{binary\_mode=False}}{}
-Low-level transmit data method. command\_string can be of type str or bytearray
+Low\sphinxhyphen{}level transmit data method. command\_string can be of type str or bytearray
 
 \end{fulllineitems}
 
-\index{wait() (qontrol.Qontroller method)}
+\index{wait() (qontrol.Qontroller method)@\spxentry{wait()}\spxextra{qontrol.Qontroller method}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.Qontroller.wait}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{wait}}}{\emph{seconds=0.0}}{}
@@ -510,7 +532,7 @@ Do nothing while watching for errors on the serial bus.
 
 \end{fulllineitems}
 
-\index{run\_interactive\_shell() (in module qontrol)}
+\index{run\_interactive\_shell() (in module qontrol)@\spxentry{run\_interactive\_shell()}\spxextra{in module qontrol}}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.run_interactive_shell}}\pysiglinewithargsret{\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{run\_interactive\_shell}}}{}{}
@@ -536,9 +558,9 @@ Interactive shell for interacting directly with Qontrol hardware.
 
 \renewcommand{\indexname}{Python Module Index}
 \begin{sphinxtheindex}
-\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+\let\bigletter\sphinxstyleindexlettergroup
 \bigletter{q}
-\item {\sphinxstyleindexentry{qontrol}}\sphinxstyleindexpageref{qontrol:\detokenize{module-qontrol}}
+\item\relax\sphinxstyleindexentry{qontrol}\sphinxstyleindexpageref{qontrol:\detokenize{module-qontrol}}
 \end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}

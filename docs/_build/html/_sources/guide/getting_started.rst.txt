@@ -33,6 +33,9 @@ Connection of the unit
   :width: 100
   :alt: BP8-top motherboard image
 
+.. |Connections| image:: Images/Qontrol-system-overview.png
+  :width: 300
+  :alt: BP8-top motherboard image
 
 
 This procedure is valid for both the Q8 and the Q8iv products. 
@@ -60,6 +63,10 @@ This procedure is valid for both the Q8 and the Q8iv products.
     :alt: USB mini b cable adapter
 
 * Al the side LEDs in the units should progressively turn on and off again leaving only the bottom green LEDs on, while the units are in idle. 
+
+Whole system:
+
+|Connections|
 
 
 Configuration of the serial communication
