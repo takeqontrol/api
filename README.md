@@ -13,13 +13,11 @@ This library lets you control your Qontrol controller from Python, via a serial 
 
 ## Installation
 
+pip install qontrol
+
 ### Required libraries:
     - serial
     - collections
-
-Clone this project directly on your working directory. 
-
-    git clone https://github.com/takeqontrol/qontrol_api.git
 
 
 ## Usage
