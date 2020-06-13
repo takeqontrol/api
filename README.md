@@ -30,6 +30,9 @@ If you want to contribute to this library contact ...
 
 ## Credits
 List of contributors and authors:
+Qontrol
+Joshua W. Silverstone
+Raffaele Santagati
 
 
 ## License
