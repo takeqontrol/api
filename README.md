@@ -12,8 +12,9 @@ This library lets you control your Qontrol controller from Python, via a serial 
 
 
 ## Installation
+With python>3.6 installed at the command prompt type:
 
-pip install qontrol
+`pip install qontrol`
 
 ### Required libraries:
     - serial
