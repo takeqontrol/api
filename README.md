@@ -16,7 +16,7 @@ With python>3.6 installed at the command prompt type:
 
 `pip install qontrol`
 
-### Required libraries:
+### The following libraries will also be installed:
     - serial
     - collections
 
