@@ -22,11 +22,11 @@ With python>3.6 installed at the command prompt type:
 
 
 ## Usage
-See help and documentation at 
+See help and documentation at https://takeqontrol.github.io/qontrol_api/
 
 ## Contributing
 
-If you want to contribute to this library contact ...
+If you want to contribute to this library contact hello@qontrol.co.uk
 
 ## Credits
 List of contributors and authors:
