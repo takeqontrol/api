@@ -16,10 +16,10 @@ print("type y if you agree in setting voltages to values different thatn 0 V:")
 value_in = input()
 
 print(value_in)
-if value_in == "n":
+if (value_in == "n") or (value_in == "N"):
 	q.close()
 	sys.exit("You have chosen not to set the voltage. Exiting test.")
-elif value_in == "y":
+elif (value_in == "y") or (value_in == "Y"):
 	# Set voltage on each channel to its index in volts, read voltage, current
 	for channel in range(q.n_chs):
 		set_voltage = channel
