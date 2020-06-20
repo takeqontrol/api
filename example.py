@@ -11,7 +11,7 @@ print ("Qontroller '{:}' initialised with firmware {:} and {:} channels".format(
 
 
 print("\n\n WARNING!!! \n\n This test is going to set voltages on the driver different from 0 V. \n Please disconnect any sensitive Hardware from controller.\n\n")
-print("type y if you agree in setting voltages to values different thatn 0 V:")
+print("type Y and press Enter if you agree in setting voltages to values different thatn 0 V:")
 
 value_in = input()
 
