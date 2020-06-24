@@ -34,7 +34,8 @@ Q8x_ERRORS = {0:'Unknown error.',
 	17:'SPI error.',
 	18:'ADC error.',
 	19:'I2C error.',
-	30:'Firmware error.',
+	30:'Too many errors, some have been suppressed.',
+	31:'Firmware trap.',
 	90:'Powered up.'}
 
 
