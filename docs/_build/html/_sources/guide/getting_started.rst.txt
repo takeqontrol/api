@@ -34,7 +34,7 @@ Connection of the unit
   :alt: BP8-top motherboard image
 
 .. |Connections| image:: Images/Qontrol-system-overview.png
-  :width: 300
+  :width: 500
   :alt: BP8-top motherboard image
 
 
@@ -47,6 +47,8 @@ This procedure is valid for both the Q8 and the Q8iv products.
 
   
   |Q8iVStilImg| |BackPlaneImg| 
+
+* In the Q8iV the 5 leds indicate (from the bottom): pwr, rx, tx, activity, err. In the Q8b the 3 leds indicate: pwr, activity, err
 
 * Connect the backplane (motherboard) unit to the computer using a cable/adapter with a USB mini b female plug at one of the two ends, like the one shown below:
 
@@ -76,13 +78,26 @@ Controlling the unit using the provided Qontrol API serial communication command
 *********************************************************************************
 
 This API provides also a command line interface for direct communication with the Qontrol unit.
+The program is called run_interactive_shell(). To run it follow these steps: start python, import qontrol and run the interactive shell.
 
-To set the communication
+:: 
+    $ python
+
+    >>> import qontrol
+
+    >>> qontrol.run_interactive_shell()
+
+Select your controller from the list of available serial devices and you are ready to go. 
+
+
+
+
+
 
 
 Controlling the unit using a serial communication software
 **********************************************************
- Serial communication software in any operating system (OS) can be used to control the units, some examples: 
+ In addition, serial communication software in any operating system (OS) can be used to control the units, some examples: 
 
  - Teraterm (Windows)
  - CoolTerm (Mac) 
@@ -177,18 +192,148 @@ In Linux is also possible to use terminal software such as **minicorn**
 
 
 
-First operations and tests
+Main commands and error codes
 ##############################
 
-If the unit has been configured correctly 
+From the serial interface you can always obtain te list of commands by typing:
+
+:: 
+    > help
+
+
+**CORE COMMAND SET**
+ 
+* Set voltage of a specific "port" to "value" (V) -> v[port]=[value]
+
+* Set current of a specific "port" to "value" (mA) -> i[port]=[value]  
+
+* Read voltage of a specific "port" (V) - > v[port]? 
+
+* Read current of a specific "port" (mA) - > i[port]? 
+
+* Read voltage current and power on all the ports (V, mA, mW)-> vipall?
+
+* Set max voltage limit (V) to a "value" of a specific "port" -> vmax[port]=[value]
+
+* Set max current limit (mA) to a "value" of a specific "port" -> imax[port]=[value]
+
+
++---------------+------------------------------+
+|  Error Code   |         Description          |
++===============+==============================+
+|      00       |         Unknown error        |
++---------------+------------------------------+
+|      01       |         Overvoltage          |
++---------------+------------------------------+
+|      02       |         Overcurrent          |
++---------------+------------------------------+
+|      03       |         Power error          |
++---------------+------------------------------+
+|      04       |      Calibration error       |
++---------------+------------------------------+
+|      10       |      Unrecognised command    |
++---------------+------------------------------+
+|      11       |     Unrecognised parameter   |
++---------------+------------------------------+
+|      12       |       Unrecognised port      |
++---------------+------------------------------+
+|      13       |       Operation forbidden    |
++---------------+------------------------------+
+|     14:00     |  Instruction buffer overflow |
++---------------+------------------------------+
+|     14:01     | Single instruction overflow  |
++---------------+------------------------------+
+|     15:X0     |  Serial overflow detected    |
++---------------+------------------------------+
+|     15:X1     |Serial framing error detected |
++---------------+------------------------------+
+|      16       |     Internal software error  |
++---------------+------------------------------+
 
 
 
+Frequently asked questions (FAQ) and basic troubleshooting
+###########################################################
 
-First Troubleshouting 
-#####################
 
 
+Running the example code
+########################
+The example code *example.py* can be found in the intallation directory of *qontrol.py*.
+
+To run it sympy type:
+
+$ python example.py
+
+The example will set some voltages on your device so it is important to check that no sensitive equipment is connected when running it. 
+
+If the example code runs successfully, the lights on your qontroller will flash as commands are transmitted, and output channels are energised.
+The qontroller’s device ID will be read out, as well as its number of channels. The voltage on each channel will be briefly set to the channel’s number, 
+then return to zero (e.g. channel 3 is set to 3 V). The current of each channel will be read out. Next, we’ll take a look at exactly what’s inside.
+
+
+
+API basics
+##########
+
+First, we read in the qontrol.py API with an import call. 
+
+.. code-block:: python
+
+    import qontrol
+
+
+To initialise an output device (or daisy-chain), like a Q8iv, first use a definition like
+
+.. code-block:: python
+
+    q = qontrol.QXOutput(serial_port_name = "COM1")
+
+
+where q is our qontroller object, which stores information about the hardware, such as its device ID (q.device_id) and number of channels (q.n_chs), and handles all communications and commands.
+COM1 is an example of what the connected serial port name might be on Windows.
+
+Port numbers greater than 10 must be written like 
+
+.. code-block:: python
+
+    //./COM42. 
+
+On Mac or Linux, this will look something like 
+
+
+.. code-block:: python
+
+    /dev/tty.usbserial-FT123ABC.
+
+
+When your code is done with the hardware, it’s good practice to close the connection with a call to
+
+
+.. code-block:: python
+
+    q.close()
+
+
+Controlling outputs, and reading inputs is easy.
+
+Writing to the qontroller object’s v or i arrays (using standard Python array indexing) sets the output for channel with that index. 
+
+Reading from those arrays reads the input values back from the hardware. For example, we can set the voltage on output channel 3 to 4.5V and read back the current (in mA) assigning the value to the variable "measured_current" with the code:
+
+.. code-block:: python
+
+    q.v[3] = 4.5
+    measured_current = q.i[3]
+
+We can do bulk changes to channels using slices. 
+
+.. code-block:: python
+
+    q.v[2:5] = 4.5
+    measured_current = q.i[2:5]
+
+The slice character in Python, :, means either “everything between two indices” (e.g. v[2:5]), “everything from the beginning until an index” (e.g. v[:5]), or “everything from an index until the end” (e.g. v[2:]).
 
 
 
