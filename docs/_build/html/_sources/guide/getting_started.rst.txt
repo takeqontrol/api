@@ -256,6 +256,18 @@ Frequently asked questions (FAQ) and basic troubleshooting
 ###########################################################
 
 
+** Which operating systems are supported? **
+
+Our Python API can be used on any modern OS. All of them that can control a serial port can also use our products in any other language, if you are willing to program this yourself.
+
+
+** Why does the backplane error light turn on when drivers are activated?**
+
+The LSD is inserted the wrong way around!
+
+
+
+
 
 Running the example code
 ########################

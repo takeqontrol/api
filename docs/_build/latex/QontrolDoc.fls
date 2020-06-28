@@ -251,6 +251,10 @@ INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/helvetic/phvb8r.tfm
 INPUT /opt/local/share/texmf-texlive/tex/latex/psnfss/ts1ptm.fd
 INPUT /opt/local/share/texmf-texlive/tex/latex/psnfss/ts1ptm.fd
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/times/ptmr8c.vf
+INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/times/ptmri8t.tfm
+INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/times/ptmri8t.vf
+INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT Q8iv_stil.jpg
 INPUT ./Q8iv_stil.jpg
 INPUT ./Q8iv_stil.jpg
@@ -263,7 +267,6 @@ INPUT ./usbminib.jpg
 INPUT PS15KIT.jpg
 INPUT ./PS15KIT.jpg
 INPUT ./PS15KIT.jpg
-INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/times/ptmr8c.vf
 INPUT Qontrol-system-overview.png
 INPUT ./Qontrol-system-overview.png
 INPUT ./Qontrol-system-overview.png
@@ -275,13 +278,10 @@ INPUT /opt/local/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/courier/pcrr8t.tfm
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/courier/pcrr8t.tfm
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/courier/pcrb8t.tfm
-INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/courier/pcrb8t.vf
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/courier/pcrb8r.tfm
 INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/courier/pcrr8t.vf
 INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/courier/pcrr8r.tfm
-INPUT /opt/local/share/texmf-texlive/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /opt/local/share/texmf-texlive/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT CoolTerm0.png
 INPUT ./CoolTerm0.png
 INPUT ./CoolTerm0.png

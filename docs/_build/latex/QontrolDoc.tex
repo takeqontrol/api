@@ -56,7 +56,7 @@
 
 
 \title{QontrolDoc Documentation}
-\date{Jun 27, 2020}
+\date{Jun 28, 2020}
 \release{0}
 \author{Qontrol}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -79,13 +79,86 @@ See ‘\sphinxurl{https://qontrol.co.uk/}’
 
 
 
+Python Library for interfacing with \sphinxstylestrong{Qontrol} integrated optics control hardware. See {[}our website{]}(\sphinxurl{https://qontrol.co.uk/}) for more details!
+
+This library lets you control your Qontrol controller from Python, via a serial interface.
+
+
+\chapter{Table of contents}
+\label{\detokenize{includeme:qontrol-api}}\label{\detokenize{includeme::doc}}\label{\detokenize{includeme:table-of-contents}}\begin{itemize}
+\item {} 
+Installation
+
+\item {} 
+Usage
+
+\item {} 
+Contributing
+
+\item {} 
+Credits
+
+\item {} 
+License
+
+\end{itemize}
+
+
+\chapter{Installation}
+\label{\detokenize{includeme:installation}}
+With python\textgreater{}3.6 installed at the command prompt type:
+
+\sphinxtitleref{pip install qontrol}
+
+The following libraries will also be installed:
+\begin{itemize}
+\item {} 
+serial
+
+\item {} 
+collections
+
+\end{itemize}
+
+
+\chapter{Usage}
+\label{\detokenize{includeme:usage}}
+See help and documentation at \sphinxurl{https://takeqontrol.github.io/qontrol\_api/}
+
+
+\chapter{Contributing}
+\label{\detokenize{includeme:contributing}}
+If you want to contribute to this library contact \sphinxhref{mailto:hello@qontrol.co.uk}{hello@qontrol.co.uk}
+
+
+\chapter{Credits}
+\label{\detokenize{includeme:credits}}
+List of contributors and authors:
+Qontrol
+Joshua W. Silverstone
+Raffaele Santagati
+
+
+\chapter{License}
+\label{\detokenize{includeme:license}}
+Copyright  \&copy; 2020 Qontrol Systems LLP 2020
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+\chapter{Introduction}
+\label{\detokenize{intro:introduction}}\label{\detokenize{intro::doc}}\label{\detokenize{intro:intro}}
 qontrol.py is a library for configuring and controlling through python the qontrol products.
 
 This guide will guide you through the process of setting up your Qontrol Q8 device and give you a description of the basic commands.
 
 
 \chapter{Getting Started Guide}
-\label{\detokenize{guide/getting_started:getting-started-guide}}\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:intro}}\label{\detokenize{guide/getting_started:introduction}}
+\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:getting-started-guide}}
 This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard.
 
@@ -522,10 +595,10 @@ Qontrol Systems LLP, its subsidiaries and associates accept no liability for dam
 
 
 \chapter{qontrol\_api}
-\label{\detokenize{modules::doc}}\label{\detokenize{modules:qontrol-api}}
+\label{\detokenize{modules:qontrol-api}}\label{\detokenize{modules::doc}}
 
 \section{qontrol module}
-\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:qontrol-module}}\label{\detokenize{qontrol:module-qontrol}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
+\label{\detokenize{qontrol:qontrol-module}}\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:module-qontrol}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{ChannelVector}}}{\emph{base\_list}}{}

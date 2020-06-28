@@ -8,11 +8,8 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 set SOURCEDIR=.
-set BUILDDIR=_build
+set BUILDDIR      = _build
 
-set BUILDDIR      = ../../sphinxdoc-test-docs
-set PDFBUILDDIR   = /tmp
-set PDF           = ../manual.pdf
 
 if "%1" == "" goto help
 
