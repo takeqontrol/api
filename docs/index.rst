@@ -15,6 +15,8 @@ See 'https://qontrol.co.uk/'
    :maxdepth: 2
    :caption: Contents:
 
+   includeme
+   
    intro
    guide/getting_started
 

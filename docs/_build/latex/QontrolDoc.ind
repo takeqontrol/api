@@ -2,56 +2,56 @@
 \def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
 
   \bigletter C
-  \item ChannelVector (class in qontrol), \hyperpage{9}
-  \item close() (qontrol.Qontroller method), \hyperpage{10}
+  \item ChannelVector (class in qontrol), \hyperpage{11}
+  \item close() (qontrol.Qontroller method), \hyperpage{12}
 
   \indexspace
   \bigletter G
-  \item get\_all\_values() (qontrol.QXOutput method), \hyperpage{9}
-  \item get\_handle (qontrol.ChannelVector attribute), \hyperpage{9}
-  \item get\_value() (qontrol.QXOutput method), \hyperpage{9}
+  \item get\_all\_values() (qontrol.QXOutput method), \hyperpage{11}
+  \item get\_handle (qontrol.ChannelVector attribute), \hyperpage{11}
+  \item get\_value() (qontrol.QXOutput method), \hyperpage{11}
 
   \indexspace
   \bigletter I
-  \item issue\_binary\_command() (qontrol.Qontroller method), \hyperpage{10}
-  \item issue\_command() (qontrol.Qontroller method), \hyperpage{10}
+  \item issue\_binary\_command() (qontrol.Qontroller method), \hyperpage{12}
+  \item issue\_command() (qontrol.Qontroller method), \hyperpage{12}
 
   \indexspace
   \bigletter L
-  \item log\_append() (qontrol.Qontroller method), \hyperpage{10}
+  \item log\_append() (qontrol.Qontroller method), \hyperpage{12}
 
   \indexspace
   \bigletter P
-  \item parse\_error() (qontrol.Qontroller method), \hyperpage{10}
-  \item print\_log() (qontrol.Qontroller method), \hyperpage{10}
+  \item parse\_error() (qontrol.Qontroller method), \hyperpage{12}
+  \item print\_log() (qontrol.Qontroller method), \hyperpage{12}
 
   \indexspace
   \bigletter Q
-  \item qontrol (module), \hyperpage{9}
-  \item Qontroller (class in qontrol), \hyperpage{9}
-  \item QXOutput (class in qontrol), \hyperpage{9}
+  \item qontrol (module), \hyperpage{11}
+  \item Qontroller (class in qontrol), \hyperpage{11}
+  \item QXOutput (class in qontrol), \hyperpage{11}
 
   \indexspace
   \bigletter R
-  \item receive() (qontrol.Qontroller method), \hyperpage{10}
-  \item run\_interactive\_shell() (in module qontrol), \hyperpage{10}
+  \item receive() (qontrol.Qontroller method), \hyperpage{12}
+  \item run\_interactive\_shell() (in module qontrol), \hyperpage{12}
 
   \indexspace
   \bigletter S
-  \item set\_all\_values() (qontrol.QXOutput method), \hyperpage{9}
-  \item set\_handle (qontrol.ChannelVector attribute), \hyperpage{9}
-  \item set\_value() (qontrol.QXOutput method), \hyperpage{9}
+  \item set\_all\_values() (qontrol.QXOutput method), \hyperpage{11}
+  \item set\_handle (qontrol.ChannelVector attribute), \hyperpage{11}
+  \item set\_value() (qontrol.QXOutput method), \hyperpage{11}
 
   \indexspace
   \bigletter T
-  \item transmit() (qontrol.Qontroller method), \hyperpage{10}
+  \item transmit() (qontrol.Qontroller method), \hyperpage{12}
 
   \indexspace
   \bigletter V
-  \item valid\_types (qontrol.ChannelVector attribute), \hyperpage{9}
+  \item valid\_types (qontrol.ChannelVector attribute), \hyperpage{11}
 
   \indexspace
   \bigletter W
-  \item wait() (qontrol.Qontroller method), \hyperpage{10}
+  \item wait() (qontrol.Qontroller method), \hyperpage{12}
 
 \end{sphinxtheindex}

@@ -10,6 +10,10 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=.
 set BUILDDIR=_build
 
+set BUILDDIR      = ../../sphinxdoc-test-docs
+set PDFBUILDDIR   = /tmp
+set PDF           = ../manual.pdf
+
 if "%1" == "" goto help
 
 %SPHINXBUILD% >NUL 2>NUL
