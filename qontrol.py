@@ -16,7 +16,7 @@ from collections import deque as fifo
 from random import shuffle
 from serial.tools import list_ports
 import sys
-
+import os
 
 Q8x_ERRORS = {0:'Unknown error.',
 	1:'Over-voltage error on channel {ch}.',
@@ -34,7 +34,8 @@ Q8x_ERRORS = {0:'Unknown error.',
 	17:'SPI error.',
 	18:'ADC error.',
 	19:'I2C error.',
-	30:'Firmware error.',
+	30:'Too many errors, some have been suppressed.',
+	31:'Firmware trap.',
 	90:'Powered up.'}
 
 
@@ -942,13 +943,19 @@ def run_interactive_shell():
 		Returns True if the running system's terminal supports color, and False
 		otherwise. From django.core.management.color.supports_color.
 		"""
+		
 		plat = sys.platform
-		supported_platform = plat != 'Pocket PC' and (plat != 'win32' or
+
+		if plat == "win32":
+			return False
+		else:
+			supported_platform = plat != 'Pocket PC' and (plat != 'win32' or
 													  'ANSICON' in os.environ)
 		# isatty is not always implemented, #6223.
-		is_a_tty = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
-		return supported_platform and is_a_tty
-	
+			is_a_tty = hasattr(sys.stdout, 'isatty') and sys.stdout.isatty()
+			return supported_platform and is_a_tty
+			
+
 	if tty_supports_color():
 		normal_text = "\033[0m"
 		in_text = "\033[33;1m"

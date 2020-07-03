@@ -56,7 +56,7 @@
 
 
 \title{QontrolDoc Documentation}
-\date{Jun 06, 2020}
+\date{Jun 28, 2020}
 \release{0}
 \author{Qontrol}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -79,13 +79,86 @@ See ‘\sphinxurl{https://qontrol.co.uk/}’
 
 
 
+Python Library for interfacing with \sphinxstylestrong{Qontrol} integrated optics control hardware. See {[}our website{]}(\sphinxurl{https://qontrol.co.uk/}) for more details!
+
+This library lets you control your Qontrol controller from Python, via a serial interface.
+
+
+\chapter{Table of contents}
+\label{\detokenize{includeme:qontrol-api}}\label{\detokenize{includeme::doc}}\label{\detokenize{includeme:table-of-contents}}\begin{itemize}
+\item {} 
+Installation
+
+\item {} 
+Usage
+
+\item {} 
+Contributing
+
+\item {} 
+Credits
+
+\item {} 
+License
+
+\end{itemize}
+
+
+\chapter{Installation}
+\label{\detokenize{includeme:installation}}
+With python\textgreater{}3.6 installed at the command prompt type:
+
+\sphinxtitleref{pip install qontrol}
+
+The following libraries will also be installed:
+\begin{itemize}
+\item {} 
+serial
+
+\item {} 
+collections
+
+\end{itemize}
+
+
+\chapter{Usage}
+\label{\detokenize{includeme:usage}}
+See help and documentation at \sphinxurl{https://takeqontrol.github.io/qontrol\_api/}
+
+
+\chapter{Contributing}
+\label{\detokenize{includeme:contributing}}
+If you want to contribute to this library contact \sphinxhref{mailto:hello@qontrol.co.uk}{hello@qontrol.co.uk}
+
+
+\chapter{Credits}
+\label{\detokenize{includeme:credits}}
+List of contributors and authors:
+Qontrol
+Joshua W. Silverstone
+Raffaele Santagati
+
+
+\chapter{License}
+\label{\detokenize{includeme:license}}
+Copyright  \&copy; 2020 Qontrol Systems LLP 2020
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+\chapter{Introduction}
+\label{\detokenize{intro:introduction}}\label{\detokenize{intro::doc}}\label{\detokenize{intro:intro}}
 qontrol.py is a library for configuring and controlling through python the qontrol products.
 
 This guide will guide you through the process of setting up your Qontrol Q8 device and give you a description of the basic commands.
 
 
 \chapter{Getting Started Guide}
-\label{\detokenize{guide/getting_started:introduction}}\label{\detokenize{guide/getting_started:getting-started-guide}}\label{\detokenize{guide/getting_started:intro}}\label{\detokenize{guide/getting_started::doc}}
+\label{\detokenize{guide/getting_started::doc}}\label{\detokenize{guide/getting_started:getting-started-guide}}
 This Getting started document will guide you through the first configuration and test of the q8 unit
 attached to a Qontrol motherboard.
 
@@ -119,6 +192,9 @@ Insert the Q8iv (or any other compatible control unit) in one of the backplanes/
 \sphinxincludegraphics[width=75\sphinxpxdimen]{{Q8iv_stil}.jpg} \sphinxincludegraphics[width=100\sphinxpxdimen]{{BP8-top}.jpg}
 
 \item {} 
+In the Q8iV the 5 leds indicate (from the bottom): pwr, rx, tx, activity, err. In the Q8b the 3 leds indicate: pwr, activity, err
+
+\item {} 
 Connect the backplane (motherboard) unit to the computer using a cable/adapter with a USB mini b female plug at one of the two ends, like the one shown below:
 
 \noindent\sphinxincludegraphics[width=100\sphinxpxdimen]{{usbminib}.jpg}
@@ -144,14 +220,30 @@ Whole system:
 \subsection{Controlling the unit using the provided Qontrol API serial communication commands}
 \label{\detokenize{guide/getting_started:controlling-the-unit-using-the-provided-qontrol-api-serial-communication-commands}}
 This API provides also a command line interface for direct communication with the Qontrol unit.
+The program is called run\_interactive\_shell(). To run it follow these steps: start python, import qontrol and run the interactive shell.
+\begin{description}
+\item[{::}] \leavevmode
+\$ python
 
-To set the communication
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import} \PYG{n+nn}{qontrol}
+\end{sphinxVerbatim}
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qontrol}\PYG{o}{.}\PYG{n}{run\PYGZus{}interactive\PYGZus{}shell}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\end{description}
+
+Select your controller from the list of available serial devices and you are ready to go.
 
 
 \subsection{Controlling the unit using a serial communication software}
 \label{\detokenize{guide/getting_started:controlling-the-unit-using-a-serial-communication-software}}\begin{quote}
 
-Serial communication software in any operating system (OS) can be used to control the units, some examples:
+In addition, serial communication software in any operating system (OS) can be used to control the units, some examples:
 \begin{itemize}
 \item {} 
 Teraterm (Windows)
@@ -284,13 +376,214 @@ cat /dev/ttyusb\#
 \end{itemize}
 
 
-\section{First operations and tests}
-\label{\detokenize{guide/getting_started:first-operations-and-tests}}
-If the unit has been configured correctly
+\section{Main commands and error codes}
+\label{\detokenize{guide/getting_started:main-commands-and-error-codes}}
+From the serial interface you can always obtain te list of commands by typing:
+\begin{description}
+\item[{::}] \leavevmode
+\textgreater{} help
+
+\end{description}
+
+\sphinxstylestrong{CORE COMMAND SET}
+\begin{itemize}
+\item {} 
+Set voltage of a specific “port” to “value” (V) -\textgreater{} v{[}port{]}={[}value{]}
+
+\item {} 
+Set current of a specific “port” to “value” (mA) -\textgreater{} i{[}port{]}={[}value{]}
+
+\item {} 
+Read voltage of a specific “port” (V) - \textgreater{} v{[}port{]}?
+
+\item {} 
+Read current of a specific “port” (mA) - \textgreater{} i{[}port{]}?
+
+\item {} 
+Read voltage current and power on all the ports (V, mA, mW)-\textgreater{} vipall?
+
+\item {} 
+Set max voltage limit (V) to a “value” of a specific “port” -\textgreater{} vmax{[}port{]}={[}value{]}
+
+\item {} 
+Set max current limit (mA) to a “value” of a specific “port” -\textgreater{} imax{[}port{]}={[}value{]}
+
+\end{itemize}
 
 
-\section{First Troubleshouting}
-\label{\detokenize{guide/getting_started:first-troubleshouting}}
+\begin{savenotes}\sphinxattablestart
+\centering
+\begin{tabulary}{\linewidth}[t]{|T|T|}
+\hline
+\sphinxstyletheadfamily 
+Error Code
+&\sphinxstyletheadfamily 
+Description
+\\
+\hline
+00
+&
+Unknown error
+\\
+\hline
+01
+&
+Overvoltage
+\\
+\hline
+02
+&
+Overcurrent
+\\
+\hline
+03
+&
+Power error
+\\
+\hline
+04
+&
+Calibration error
+\\
+\hline
+10
+&
+Unrecognised command
+\\
+\hline
+11
+&
+Unrecognised parameter
+\\
+\hline
+12
+&
+Unrecognised port
+\\
+\hline
+13
+&
+Operation forbidden
+\\
+\hline
+14:00
+&
+Instruction buffer overflow
+\\
+\hline
+14:01
+&
+Single instruction overflow
+\\
+\hline
+15:X0
+&
+Serial overflow detected
+\\
+\hline
+15:X1
+&
+Serial framing error detected
+\\
+\hline
+16
+&
+Internal software error
+\\
+\hline
+\end{tabulary}
+\par
+\sphinxattableend\end{savenotes}
+
+
+\section{Frequently asked questions (FAQ) and basic troubleshooting}
+\label{\detokenize{guide/getting_started:frequently-asked-questions-faq-and-basic-troubleshooting}}
+** Which operating systems are supported? **
+
+Our Python API can be used on any modern OS. All of them that can control a serial port can also use our products in any other language, if you are willing to program this yourself.
+
+** Why does the backplane error light turn on when drivers are activated?**
+
+The LSD is inserted the wrong way around!
+
+
+\section{Running the example code}
+\label{\detokenize{guide/getting_started:running-the-example-code}}
+The example code \sphinxstyleemphasis{example.py} can be found in the intallation directory of \sphinxstyleemphasis{qontrol.py}.
+
+To run it sympy type:
+
+\$ python example.py
+
+The example will set some voltages on your device so it is important to check that no sensitive equipment is connected when running it.
+
+If the example code runs successfully, the lights on your qontroller will flash as commands are transmitted, and output channels are energised.
+The qontroller’s device ID will be read out, as well as its number of channels. The voltage on each channel will be briefly set to the channel’s number,
+then return to zero (e.g. channel 3 is set to 3 V). The current of each channel will be read out. Next, we’ll take a look at exactly what’s inside.
+
+
+\section{API basics}
+\label{\detokenize{guide/getting_started:api-basics}}
+First, we read in the qontrol.py API with an import call.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{qontrol}
+\end{sphinxVerbatim}
+
+To initialise an output device (or daisy-chain), like a Q8iv, first use a definition like
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{q} \PYG{o}{=} \PYG{n}{qontrol}\PYG{o}{.}\PYG{n}{QXOutput}\PYG{p}{(}\PYG{n}{serial\PYGZus{}port\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{COM1}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+where q is our qontroller object, which stores information about the hardware, such as its device ID (q.device\_id) and number of channels (q.n\_chs), and handles all communications and commands.
+COM1 is an example of what the connected serial port name might be on Windows.
+
+Port numbers greater than 10 must be written like
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{/}\PYG{o}{/}\PYG{o}{.}\PYG{o}{/}\PYG{n}{COM42}\PYG{o}{.}
+\end{sphinxVerbatim}
+
+On Mac or Linux, this will look something like
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{/}\PYG{n}{dev}\PYG{o}{/}\PYG{n}{tty}\PYG{o}{.}\PYG{n}{usbserial}\PYG{o}{\PYGZhy{}}\PYG{n}{FT123ABC}\PYG{o}{.}
+\end{sphinxVerbatim}
+
+When your code is done with the hardware, it’s good practice to close the connection with a call to
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{q}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+Controlling outputs, and reading inputs is easy.
+
+Writing to the qontroller object’s v or i arrays (using standard Python array indexing) sets the output for channel with that index.
+
+Reading from those arrays reads the input values back from the hardware. For example, we can set the voltage on output channel 3 to 4.5V and read back the current (in mA) assigning the value to the variable “measured\_current” with the code:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{q}\PYG{o}{.}\PYG{n}{v}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mf}{4.5}
+\PYG{n}{measured\PYGZus{}current} \PYG{o}{=} \PYG{n}{q}\PYG{o}{.}\PYG{n}{i}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+We can do bulk changes to channels using slices.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{q}\PYG{o}{.}\PYG{n}{v}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mf}{4.5}
+\PYG{n}{measured\PYGZus{}current} \PYG{o}{=} \PYG{n}{q}\PYG{o}{.}\PYG{n}{i}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+The slice character in Python, :, means either “everything between two indices” (e.g. v{[}2:5{]}), “everything from the beginning until an index” (e.g. v{[}:5{]}), or “everything from an index until the end” (e.g. v{[}2:{]}).
+
 
 \section{Notes and disclaimer}
 \label{\detokenize{guide/getting_started:notes-and-disclaimer}}
@@ -305,7 +598,7 @@ Qontrol Systems LLP, its subsidiaries and associates accept no liability for dam
 \label{\detokenize{modules:qontrol-api}}\label{\detokenize{modules::doc}}
 
 \section{qontrol module}
-\label{\detokenize{qontrol:qontrol-module}}\label{\detokenize{qontrol:module-qontrol}}\label{\detokenize{qontrol::doc}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
+\label{\detokenize{qontrol:qontrol-module}}\label{\detokenize{qontrol::doc}}\label{\detokenize{qontrol:module-qontrol}}\index{qontrol (module)}\index{ChannelVector (class in qontrol)}
 
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{qontrol:qontrol.ChannelVector}}\pysiglinewithargsret{\sphinxbfcode{\sphinxupquote{class }}\sphinxcode{\sphinxupquote{qontrol.}}\sphinxbfcode{\sphinxupquote{ChannelVector}}}{\emph{base\_list}}{}

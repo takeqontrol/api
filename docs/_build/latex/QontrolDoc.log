@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_2) (preloaded format=pdflatex 2018.7.2)  6 JUN 2020 09:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_2) (preloaded format=pdflatex 2018.7.2)  28 JUN 2020 17:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -845,130 +845,159 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 
 ]
 Chapter 1.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 94.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 89.
 (/opt/local/share/texmf-texlive/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-<Q8iv_stil.jpg, id=95, 927.465pt x 1433.355pt>
-File: Q8iv_stil.jpg Graphic file (type jpg)
-<use Q8iv_stil.jpg>
-Package pdftex.def Info: Q8iv_stil.jpg  used on input line 119.
-(pdftex.def)             Requested size: 56.46057pt x 87.24425pt.
-<BP8-top.jpg, id=96, 1284.8pt x 854.19125pt>
-File: BP8-top.jpg Graphic file (type jpg)
-<use BP8-top.jpg>
-Package pdftex.def Info: BP8-top.jpg  used on input line 119.
-(pdftex.def)             Requested size: 75.28076pt x 50.03711pt.
-<usbminib.jpg, id=97, 280.04625pt x 200.75pt>
-File: usbminib.jpg Graphic file (type jpg)
-<use usbminib.jpg>
-Package pdftex.def Info: usbminib.jpg  used on input line 124.
-(pdftex.def)             Requested size: 75.28076pt x 53.96428pt.
-<PS15KIT.jpg, id=98, 1284.8pt x 854.19125pt>
-File: PS15KIT.jpg Graphic file (type jpg)
-<use PS15KIT.jpg>
-Package pdftex.def Info: PS15KIT.jpg  used on input line 129.
-(pdftex.def)             Requested size: 75.28076pt x 50.03711pt.
- [3 <./Q8iv_stil.jpg> <./BP8-top.jpg> <./usbminib.jpg> <./PS15KIT.jpg>]
-<Qontrol-system-overview.png, id=104, 142.26378pt x 54.48703pt>
-File: Qontrol-system-overview.png Graphic file (type png)
-<use Qontrol-system-overview.png>
-Package pdftex.def Info: Qontrol-system-overview.png  used on input line 138.
-(pdftex.def)             Requested size: 376.40381pt x 144.17621pt.
- [4 <./Qontrol-system-overview.png>]
-<CoolTerm0.png, id=114, 696.6025pt x 562.1pt>
-File: CoolTerm0.png Graphic file (type png)
-<use CoolTerm0.png>
-Package pdftex.def Info: CoolTerm0.png  used on input line 236.
-(pdftex.def)             Requested size: 263.48267pt x 212.60529pt.
-<CoolTerm1.png, id=116, 700.6175pt x 723.70375pt>
-File: CoolTerm1.png Graphic file (type png)
-<use CoolTerm1.png>
-Package pdftex.def Info: CoolTerm1.png  used on input line 246.
-(pdftex.def)             Requested size: 263.48267pt x 272.17227pt.
-<CoolTerm2.png, id=117, 700.6175pt x 722.7pt>
-File: CoolTerm2.png Graphic file (type png)
-<use CoolTerm2.png>
-Package pdftex.def Info: CoolTerm2.png  used on input line 253.
-(pdftex.def)             Requested size: 263.48267pt x 271.79478pt.
- [5 <./CoolTerm0.png> <./CoolTerm1.png>] [6 <./CoolTerm2.png>] [7]
-[8
+) [3] [4
 
 ]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 311.
+[5] [6
+
+]
+Chapter 3.
+[7] [8
+
+]
+Chapter 4.
+[9] [10
+
+]
+Chapter 5.
+[11] [12
+
+]
+Chapter 6.
+[13] [14
+
+]
+Chapter 7.
+[15] [16
+
+]
+Chapter 8.
+<Q8iv_stil.jpg, id=205, 927.465pt x 1433.355pt>
+File: Q8iv_stil.jpg Graphic file (type jpg)
+<use Q8iv_stil.jpg>
+Package pdftex.def Info: Q8iv_stil.jpg  used on input line 192.
+(pdftex.def)             Requested size: 56.46057pt x 87.24425pt.
+<BP8-top.jpg, id=206, 1284.8pt x 854.19125pt>
+File: BP8-top.jpg Graphic file (type jpg)
+<use BP8-top.jpg>
+Package pdftex.def Info: BP8-top.jpg  used on input line 192.
+(pdftex.def)             Requested size: 75.28076pt x 50.03711pt.
+<usbminib.jpg, id=207, 280.04625pt x 200.75pt>
+File: usbminib.jpg Graphic file (type jpg)
+<use usbminib.jpg>
+Package pdftex.def Info: usbminib.jpg  used on input line 200.
+(pdftex.def)             Requested size: 75.28076pt x 53.96428pt.
+<PS15KIT.jpg, id=208, 1284.8pt x 854.19125pt>
+File: PS15KIT.jpg Graphic file (type jpg)
+<use PS15KIT.jpg>
+Package pdftex.def Info: PS15KIT.jpg  used on input line 205.
+(pdftex.def)             Requested size: 75.28076pt x 50.03711pt.
+[17 <./Q8iv_stil.jpg> <./BP8-top.jpg> <./usbminib.jpg>]
+<Qontrol-system-overview.png, id=213, 142.26378pt x 54.48703pt>
+File: Qontrol-system-overview.png Graphic file (type png)
+<use Qontrol-system-overview.png>
+Package pdftex.def Info: Qontrol-system-overview.png  used on input line 214.
+(pdftex.def)             Requested size: 376.40381pt x 144.17621pt.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 229.
+
 (/opt/local/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 311.
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 1.
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 230.
+ [18 <./PS15KIT.jpg> <./Qontrol-system-overview.png>]
+<CoolTerm0.png, id=223, 696.6025pt x 562.1pt>
+File: CoolTerm0.png Graphic file (type png)
+<use CoolTerm0.png>
+Package pdftex.def Info: CoolTerm0.png  used on input line 328.
+(pdftex.def)             Requested size: 263.48267pt x 212.60529pt.
+<CoolTerm1.png, id=225, 700.6175pt x 723.70375pt>
+File: CoolTerm1.png Graphic file (type png)
+<use CoolTerm1.png>
+Package pdftex.def Info: CoolTerm1.png  used on input line 338.
+(pdftex.def)             Requested size: 263.48267pt x 272.17227pt.
+ [19 <./CoolTerm0.png>]
+<CoolTerm2.png, id=232, 700.6175pt x 722.7pt>
+File: CoolTerm2.png Graphic file (type png)
+<use CoolTerm2.png>
+Package pdftex.def Info: CoolTerm2.png  used on input line 345.
+(pdftex.def)             Requested size: 263.48267pt x 271.79478pt.
+ [20 <./CoolTerm1.png> <./CoolTerm2.png>] [21] [22] [23] [24
 
+]
+Chapter 9.
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 604.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 1.
 (/opt/local/share/texmf-texlive/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
 LaTeX Font Info:    Font shape `TS1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `TS1/pcr/b/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 340.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 633.
 
-Underfull \hbox (badness 10000) in paragraph at lines 404--406
+Underfull \hbox (badness 10000) in paragraph at lines 697--699
 []\T1/ptm/m/n/10 raise Run-timeEr-ror(`Caught
  []
 
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 424--424
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 717--717
 []\T1/ptm/m/it/10 command_id\T1/ptm/m/n/10 , \T1/ptm/m/it/10 ch=None\T1/ptm/m/n
 /10 , \T1/ptm/m/it/10 BCAST=0\T1/ptm/m/n/10 , \T1/ptm/m/it/10 ALLCH=0\T1/ptm/m/
 n/10 , \T1/ptm/m/it/10 ADDM=0\T1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 424--424
+Underfull \hbox (badness 10000) in paragraph at lines 717--717
 \T1/ptm/m/it/10 RW=0\T1/ptm/m/n/10 , \T1/ptm/m/it/10 ACT=0\T1/ptm/m/n/10 , \T1/
 ptm/m/it/10 DEXT=0\T1/ptm/m/n/10 , \T1/ptm/m/it/10 value_int=0\T1/ptm/m/n/10 , 
 \T1/ptm/m/it/10 addr_id_num=0\T1/ptm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 424--424
+Underfull \hbox (badness 10000) in paragraph at lines 717--717
 \T1/ptm/m/it/10 n_lines_requested=2147483648\T1/ptm/m/n/10 , \T1/ptm/m/it/10 ta
 r-get_errors=None\T1/ptm/m/n/10 , \T1/ptm/m/it/10 out-
  []
 
-[10]
-Chapter 3.
-[11
+[26]
+Chapter 10.
+[27
 
-] [12
+] [28
 
-] [13
-
-
-] (./QontrolDoc.ind [14
+] [29
 
 
-] [15
+] (./QontrolDoc.ind [30
+
+
+] [31
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 550.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 550.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 843.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 843.
  (./QontrolDoc.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 550.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 550.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 843.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 843.
 Package rerunfilecheck Info: File `QontrolDoc.out' has not changed.
-(rerunfilecheck)             Checksum: 95A54235D0D1B2BFFBE5F0D67D4B5285;1698.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 550.
+(rerunfilecheck)             Checksum: 5F302AB35F06BF326CA12F2813C28D63;2889.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 843.
  ) 
 Here is how much of TeX's memory you used:
- 13404 strings out of 494590
- 188068 string characters out of 6177730
- 278051 words of memory out of 5000000
- 16677 multiletter control sequences out of 15000+600000
- 49158 words of font info for 69 fonts, out of 8000000 for 9000
+ 13469 strings out of 494590
+ 188841 string characters out of 6177730
+ 281507 words of memory out of 5000000
+ 16711 multiletter control sequences out of 15000+600000
+ 52366 words of font info for 75 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 37i,12n,45p,516b,556s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,11n,45p,516b,558s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/opt/local/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</opt/local/share
 /texmf-texlive/fonts/type1/urw/courier/ucrb8a.pfb></opt/local/share/texmf-texli
 ve/fonts/type1/urw/courier/ucrr8a.pfb></opt/local/share/texmf-texlive/fonts/typ
@@ -978,10 +1007,10 @@ a.pfb></opt/local/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></opt
 /local/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></opt/local/share/t
 exmf-texlive/fonts/type1/urw/times/utmr8a.pfb></opt/local/share/texmf-texlive/f
 onts/type1/urw/times/utmri8a.pfb>
-Output written on QontrolDoc.pdf (19 pages, 1039808 bytes).
+Output written on QontrolDoc.pdf (35 pages, 1062951 bytes).
 PDF statistics:
- 261 PDF objects out of 1000 (max. 8388607)
- 211 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 149 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 382 PDF objects out of 1000 (max. 8388607)
+ 315 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
