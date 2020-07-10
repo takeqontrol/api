@@ -10,25 +10,28 @@ print ("Qontroller '{:}' initialised with firmware {:} and {:} channels".format(
 
 
 
-print("\n\n WARNING!!! \n\n This test is going to set voltages on the driver different from 0 V. \n Please disconnect any sensitive Hardware from controller.\n\n")
-print("type Y and press Enter if you agree in setting voltages to values different thatn 0 V:")
+print("\n\n WARNING!!! \n\n This example will cause non-zero voltages to be set on the driver outputs. \n Do not proceed if a sensitive device is connected.\n\n")
+print("Would you like to proceed? (y/n)")
 
 value_in = input()
 
-print(value_in)
-if (value_in == "n") or (value_in == "N"):
-	q.close()
-	sys.exit("You have chosen not to set the voltage. Exiting test.")
-elif (value_in == "y") or (value_in == "Y"):
-	# Set voltage on each channel to its index in volts, read voltage, current
+if (value_in.upper() == "Y"):
+
+	# Set voltage on each channel to its index in volts mod 8, read voltage, current
 	for channel in range(q.n_chs):
-		set_voltage = channel
+		
+		# Voltage should be set to index modulo 8 (e.g. ch 11 -> 3V)
+		set_voltage = channel % 8
+		
 		# Set voltage
 		q.v[channel] = set_voltage
-		# Measure voltage (Q8iv)
+		
+		# Measure voltage
 		measured_voltage = q.v[channel]
-		# Measure current (Q8iv, Q8b, Q8)
+		
+		# Measure current
 		measured_current = q.i[channel]
+		
 		print ("Channel {:} set to {:} V, measured {:} V and {:} mA".format(channel, set_voltage, measured_voltage, measured_current) )
 
 
@@ -38,7 +41,7 @@ elif (value_in == "y") or (value_in == "Y"):
 	q.close()
 else:
 	q.close()
-	sys.exit("Invalid input. Admitted values: y or n Exiting test.")
+	sys.exit("Example complete.")
 
 	
 
