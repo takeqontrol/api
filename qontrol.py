@@ -1,12 +1,17 @@
-##############################################################################
-##
-##  (c) 2020 Qontrol Systems LLP
-##
-##  Qontrol Python API for interfacing devices with firmware > 2.0
-##
-##  Revision 2020-04-A
-##
-##############################################################################
+"""
+Hardware interfacing for Qontrol modules.
+
+This module allows you to control Qontrol hardware modules, using natural Python
+language. It provides a main Qontroller class which handles enumeration,
+low-level communications, sequencing, error-handling, and log maintenance.
+Subclasses of Qontroller implement module-specific features (e.g. DC current or
+voltage interfaces, positional interfaces).
+
+Learn more, at www.qontrol.co.uk/support, or get in touch with us at
+support@qontrol.co.uk. Contribute at github.com/takeqontrol/qontrol_api.
+
+(c) 2020 Qontrol Ltd.
+"""
 
 
 
@@ -41,7 +46,7 @@ Q8x_ERRORS = {0:'Unknown error.',
 
 CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0x05, 'VERR':0x06, 'IERR':0x07, 'VIP':0x0A, 'SR':0x0B, 'PDI':0x0C, 'PDP':0x0D, 'PDR':0x0E, 'VFULL':0x20, 'IFULL':0x21, 'NCHAN':0x22, 'FIRMWARE':0x23, 'ID':0x24, 'LIFETIME':0x25, 'NVM':0x26, 'LOG':0x27, 'QUIET':0x28, 'LED':0x31, 'NUP':0x32, 'ADCT':0x33, 'ADCN':0x34, 'CCFN':0x35, 'INTEST':0x36, 'OK':0x37, 'DIGSUP':0x38, 'HELP':0x41, 'SAFE':0x42, 'ROCOM':0x43}
 
-DEVICE_PROPERTIES = {'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 'Q8b':{'VFULL':12.0,'IFULL':83.333333}}
+DEVICE_PROPERTIES = {'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 'Q8b':{'VFULL':12.0,'IFULL':83.333333}, 'M2':{'VFULL':8458.0,'IFULL':1375.0,'XFULL':8388352.0}}
 
 	
 RESPONSE_OK = 'OK\n'
@@ -50,31 +55,33 @@ ERROR_FORMAT = '[A-Za-z]{1,3}(\d+):(\d+)'
 
 class Qontroller(object):
 	"""
-	Super class which handles serial communication, device identification, and logging.
+	Superclass which handles communication, enumeration, and logging.
 	
-		device_id = None					Device ID
-		serial_port = None					Serial port object
-		serial_port_name = None				Name of serial port, eg 'COM1' or '/dev/tty1'
-		error_desc_dict = Q8x_ERRORS			Error code descriptions
-		log = fifo(maxlen = 256)			Log FIFO of sent commands and received errors
-		log_handler = None					Function which catches log dictionaries
-		log_to_stdout = True				Copy new log entries to stdout
-		response_timeout = 0.050			Timeout for response or error to commands
-		inter_response_timeout = 0.020		Timeout for response or error to get commands
+	 device_id = None                    Device ID
+	 serial_port = None                  Serial port object
+	 serial_port_name = None             Name of port, (eg 'COM1', '/dev/tty1')
+	 error_desc_dict = Q8x_ERRORS        Error code descriptions
+	 log = fifo(maxlen = 256)            Log FIFO of communications
+	 log_handler = None                  Function which catches log dictionaries
+	 log_to_stdout = True                Copy new log entries to stdout
+	 response_timeout = 0.050            Timeout for response to commands
+	 inter_response_timeout = 0.020      Timeout for response to get commands
 	
 	Log handler:
-	The log handler may be used to catch and dynamically handle certain errors, as they arise. In the following example, it is set up to raise a RuntimeError upon reception of errors E01, E02, and E03:
+	 The log handler may be used to catch and dynamically handle certain errors, 
+	 as they arise. In the following example, it is set up to raise a 
+	 RuntimeError upon reception of errors E01, E02, and E03:
 	
-		q = Qontroller()
+	 q = Qontroller()
 	
-		fatal_errors = [1, 2, 3]
+	 fatal_errors = [1, 2, 3]
 	
-		def my_log_handler(err_dict):
-			if err_dict['type'] is 'err' and err_dict['id'] in fatal_errors:
-				raise RuntimeError('Caught Qontrol error "{1}" at {0} ms'.format(1000*err_dict['proctime'], err_dict['desc']))
+	 def my_log_handler(err_dict):
+	 	if err_dict['type'] is 'err' and err_dict['id'] in fatal_errors:
+	 		raise RuntimeError('Caught Qontrol error "{1}" at {0}
+	 			ms'.format(1000*err_dict['proctime'], err_dict['desc']))
 
-		q.log_handler = my_log_handler
-	
+	 q.log_handler = my_log_handler
 	"""
 
 
@@ -235,7 +242,7 @@ class Qontroller(object):
 				except UnicodeDecodeError:
 					response = ""
 				# Parse it
-				ob = re.match('.*((?:'+ERROR_FORMAT+')|(?:Q\w+-[0-9a-fA-F\*]+)).*', response)
+				ob = re.match('.*((?:'+ERROR_FORMAT+')|(?:\w+\d\w*-[0-9a-fA-F\*]+)).*', response)
 				# Check whether it's valid
 				if ob is not None:
 					# Flag that we have broken out correctly
@@ -258,6 +265,9 @@ class Qontroller(object):
 		
 		# Establish contents of daisy chain
 		try:
+			# Force a reset of the daisy chain
+			self.issue_command('nup', operator = '=', value = 0)
+			
 			# Ask for number of upstream devices, parse it
 			try:
 				chain = self.issue_command('nupall', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = '(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
@@ -318,7 +328,9 @@ class Qontroller(object):
 	
 	def transmit (self, command_string, binary_mode = False):
 		"""
-		Low-level transmit data method. command_string can be of type str or bytearray
+		Low-level transmit data method.
+		
+		 command_string -- str or bytearray
 		"""
 		# Ensure serial port is open
 		if not self.serial_port.is_open:
@@ -383,7 +395,7 @@ class Qontroller(object):
 	
 	def log_append (self, type='err', id='', ch=0, value=0, desc='', raw=''):
 		"""
-		Append an event to the log, adding both a calendar- and a process-timestamp."
+		Log an event; add both a calendar- and process-timestamp.
 		"""
 		# Append to log fifo
 		self.log.append({'timestamp':time.asctime(), 'proctime':round(time.time()-self.init_time,3), 'type':type, 'id':id, 'ch':ch, 'value':value, 'desc':desc, 'raw':raw})
@@ -408,7 +420,7 @@ class Qontroller(object):
 	
 	def parse_error (self, error_str):
 		"""
-		Parse an encoded error (e.g. E02:07) into its code, channel, and human-readable description.
+		Parse an error into its code, channel, and human-readable description.
 		"""
 		# Regex out the error and channel indices from the string
 		ob = re.match(ERROR_FORMAT, error_str)
@@ -439,15 +451,17 @@ class Qontroller(object):
 	
 	def issue_command (self, command_id, ch=None, operator='', value=None, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
 		"""
-		Transmit command ([command_id][ch][operator][value]) to device, collect response.
+		Transmit command to device, get response.
 		
-			command_id			Command header (e.g. 'v' in 'v7=1.0')
-			ch					Channel index to apply command to (e.g. '7' in 'v7=1.0')
-			operator			Type of command in {?, =} (e.g. '=' in 'v7=1.0')
-			value				Value of set command (e.g. '1.0' in 'v7=1.0')
-			n_lines_requested	Lines of data (not error) to stop after receiving, or timeout
-			target_errors		Error numbers which will be raised as RuntimeError
-			special_timeout		Timeout to use for this command only (!= self.response_timeout)
+		Command format is [command_id][ch][operator][value].
+		
+		 command_id          Command header
+		 ch                  Channel index to apply command to
+		 operator            Type of command in {?, =}
+		 value               Value of set command
+		 n_lines_requested   Lines of data (not error) to wait for, or timeout
+		 target_errors       Error numbers which will be raised as RuntimeError
+		 special_timeout     Timeout to use for this command only
 		"""
 		# Check for previous errors
 		lines,errs = self.receive()
@@ -477,6 +491,7 @@ class Qontroller(object):
 		
 		# Wait for response
 		if operator=='?' or ((operator=='=' or operator=='') and self.wait_for_responses):
+			result = []
 			try:
 				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
 				return result
@@ -492,20 +507,20 @@ class Qontroller(object):
 	
 	def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
 		"""
-		Transmit command ([command_id][ch][operator][value]) to device, collect response.
+		Transmit command to device, get response.
 		
-			command_id:		Command descriptor, either int (command index) or str (command name).
-			ch: 			Channel address (0x0000..0xFFFF for ADDM=0, 0x00..0xFF for ADDM=1).
-			BCAST,
-			 ALLCH,
-			 ADDM,
-			 RW,
-			 ACT,
-			 DEXT: 			Header byte bits. See Programming Manual for full description.
-			value_int: 		Data, either int (DEXT=0) or list of int (DEXT=1).
-			addr_id_num: 	For device-wise addressing mode (ADDM=1) only, hex device ID code.
+		 command_id:   Command ID, either int (command index) or str (command name)
+		 ch:           Channel address (max 0xFFFF for ADDM=0, 0xFF for ADDM=1)
+		 BCAST,
+		 ALLCH,
+		 ADDM,
+		 RW,
+		 ACT,
+		 DEXT: 		   Header bits. See Programming Manual for full description
+		 value_int:    Data, either int (DEXT=0) or list of int (DEXT=1)
+		 addr_id_num   Device ID code (ADDM=1 only)
 		
-		All other arguments same as those for issue_command()
+		Other arguments are as described for issue_command().
 		"""
 		
 		
@@ -612,7 +627,7 @@ class Qontroller(object):
 	
 	def _issue_command_receive_response (self, retry_function, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
 		"""
-		Internal method to handle waiting for response from issue_command and issue_binary_command.
+		Internal method to handle waiting for response.
 		"""
 		
 		# Receive response
@@ -686,9 +701,9 @@ class Qontroller(object):
 
 
 
-class ChannelVector(object):
+class _ChannelVector(object):
 	"""
-	Custom list class which has a fixed length but mutable (typed) elements, and which phones home when its elements are read or modified.
+	List class with fixed length but mutable (typed) elements, with hooks.
 	"""
 	
 	set_handle = None
@@ -750,7 +765,14 @@ class ChannelVector(object):
 
 
 class QXOutput(Qontroller):
-
+	"""
+	Output module class. Provides channel vectors for voltage (v), current (i), 
+	maximum voltage (vmax), and maximum current (imax).
+	
+	Compatible modules:
+	- Q8iv
+	- Q8b
+	"""
 
 	def __init__(self, *args, **kwargs):
 		super(type(self), self).__init__(*args, **kwargs)
@@ -814,20 +836,20 @@ class QXOutput(Qontroller):
 		# These initialise themselves when they are first used (i.e. the 0 init is OK)
 		
 		# Voltage
-		self.v = ChannelVector([0] * self.n_chs)
+		self.v = _ChannelVector([0] * self.n_chs)
 		self.v.set_handle = lambda ch,val: self.set_value(ch,'V',val)
 		self.v.get_handle = lambda ch,val: self.get_value(ch,'V')
 		
-		self.vmax = ChannelVector([0] * self.n_chs)
+		self.vmax = _ChannelVector([0] * self.n_chs)
 		self.vmax.set_handle = lambda ch,val: self.set_value(ch,'VMAX',val)
 		self.vmax.get_handle = lambda ch,val: self.get_value(ch,'VMAX')
 		
 		# Current
-		self.i = ChannelVector([0] * self.n_chs)
+		self.i = _ChannelVector([0] * self.n_chs)
 		self.i.set_handle = lambda ch,val: self.set_value(ch,'I',val)
 		self.i.get_handle = lambda ch,val: self.get_value(ch,'I')
 		
-		self.imax = ChannelVector([0] * self.n_chs)
+		self.imax = _ChannelVector([0] * self.n_chs)
 		self.imax.set_handle = lambda ch,val: self.set_value(ch,'IMAX',val)
 		self.imax.get_handle = lambda ch,val: self.get_value(ch,'IMAX')
 		
@@ -873,10 +895,10 @@ class QXOutput(Qontroller):
 	
 	def set_all_values (self, para='V', values=0):
 		"""
-		Convenience function for slicing up set commands into vectors for each module and transmitting.
+		Slice up set commands into vectors for each module, and transmit.
 		
-		 para:		Parameter to set {'V' or 'I'}
-		 values:	Either float/int or list of float/int of length n_chs
+		 para:      Parameter to set {'V' or 'I'}
+		 values:    Either float/int or list of float/int of length n_chs
 		"""
 		
 		if isinstance(values,list):
@@ -929,7 +951,281 @@ class QXOutput(Qontroller):
 
 
 
-def run_interactive_shell():
+class MXMotor(Qontroller):
+	"""
+	Motor controller module class. Provides channel vectors for speed (v), 
+	maximum speed (vmax), maximum winding current (imax), position (x) and 
+	associated minimum (xmin) and maximum (xmax), and power-of-two microsteps 
+	(ustep).
+	
+	Compatible modules:
+	- M2
+	"""
+	
+	def __init__(self, *args, **kwargs):
+		super(type(self), self).__init__(*args, **kwargs)
+
+		self.n_chs = 0
+		self.v_full = 0
+		self.i_full = 0
+		self.x_full = 0
+		self.v = None				# Channel voltages (direct access)
+		self.x = None				# Channel positions (direct access)
+		self.vmax = None			# Channel voltages (direct access)
+		self.imax = None			# Channel currents (direct access)
+		self.xmin = None			# Channel minimum positions (direct access)
+		self.xmax = None			# Channel maximum positions (direct access)
+		self.ustep = None			# Channel microstep (direct access)
+		self.binary_mode = False	# Communicate in binary
+		
+		
+		# Populate parameters, if provided
+		for para in ['binary_mode']:
+			try:
+				self.__setattr__(para, kwargs[para])
+			except KeyError:
+				continue
+		
+		
+		# Get our full-scale voltage and current (VFULL, IFULL)
+		try:
+			self.v_full = float(self.issue_command('vfull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+).*')[0][0])
+		except Exception as e:
+			raise RuntimeError("Unable to obtain VFULL from qontroller on port {:}. Error was {:}.".format(self.serial_port_name, e))
+		try:
+			self.i_full = float(self.issue_command('ifull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+) mA')[0][0])
+		except:
+			raise RuntimeError("Unable to obtain IFULL from qontroller on port {:}.".format(self.serial_port_name))
+		try:
+			self.x_full = float(self.issue_command('xfull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+)')[0][0])
+		except:
+			print("MX.__init__: Warning: Unable to obtain XFULL from qontroller on port {:}.".format(self.serial_port_name))
+			self.x_full = DEVICE_PROPERTIES['M2']['XFULL']
+		
+		# Get our number of channels
+		try:
+			# See if its in the list of kwargs
+			self.n_chs = kwargs['n_chs']
+			if self.n_chs <= 0 or self.n_chs == None:
+				raise KeyError()
+		except KeyError:
+			# If not in kwargs, try to get it from the chain
+			try:
+				self.n_chs = sum([device['n_chs'] for device in self.chain])
+			except KeyError:
+				# If not, just ask the top device how many ports its got
+				try:
+					self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = '(\d+)\n')[0][0])
+				except:
+					# If not, just take some random value
+					self.n_chs = 2
+					print ("MX.__init__: Warning: Failed to obtain number of daisy-chained channels automatically. Include this as n_chs argument on initialisation to workaround.")
+		
+		# Generate lists of VFULL and IFULL values, for binary command scaling
+		self.v_fulls = []
+		self.i_fulls = []
+		self.x_fulls = []
+		for d in self.chain:
+			for ch in range(d['n_chs']):
+				self.v_fulls.append(DEVICE_PROPERTIES[d['device_type']]['VFULL'])
+				self.i_fulls.append(DEVICE_PROPERTIES[d['device_type']]['IFULL'])
+				self.x_fulls.append(DEVICE_PROPERTIES[d['device_type']]['XFULL'])
+		
+		# Set up output direct access
+		# These initialise themselves when they are first used (i.e. the 0 init is OK)
+		
+		# Voltage
+		self.v = _ChannelVector([0] * self.n_chs)
+		self.v.set_handle = lambda ch,val: self.set_value(ch,'V',val)
+		self.v.get_handle = lambda ch,val: self.get_value(ch,'V')
+		
+		self.vmax = _ChannelVector([0] * self.n_chs)
+		self.vmax.set_handle = lambda ch,val: self.set_value(ch,'VMAX',val)
+		self.vmax.get_handle = lambda ch,val: self.get_value(ch,'VMAX')
+		
+		# Current
+		self.imax = _ChannelVector([0] * self.n_chs)
+		self.imax.set_handle = lambda ch,val: self.set_value(ch,'IMAX',val)
+		self.imax.get_handle = lambda ch,val: self.get_value(ch,'IMAX')
+		
+		# Position
+		self.x = _ChannelVector([0] * self.n_chs)
+		self.x.set_handle = lambda ch,val: self.set_value(ch,'X',val)
+		self.x.get_handle = lambda ch,val: self.get_value(ch,'X')
+		
+		self.xmin = _ChannelVector([0] * self.n_chs)
+		self.xmin.set_handle = lambda ch,val: self.set_value(ch,'XMIN',val)
+		self.xmin.get_handle = lambda ch,val: self.get_value(ch,'XMIN')
+		
+		self.xmax = _ChannelVector([0] * self.n_chs)
+		self.xmax.set_handle = lambda ch,val: self.set_value(ch,'XMAX',val)
+		self.xmax.get_handle = lambda ch,val: self.get_value(ch,'XMAX')
+		
+		# Microsteps
+		self.ustep = _ChannelVector([0] * self.n_chs)
+		self.ustep.set_handle = lambda ch,val: self.set_value(ch,'USTEP',val)
+		self.ustep.get_handle = lambda ch,val: self.get_value(ch,'USTEP')
+		
+		self.initialised = True
+	
+	def set_value (self, ch, para='X', new=0):
+		"""
+		Single-channel value setter.
+		"""
+	
+		para = para.upper()
+		
+		if self.binary_mode:
+			if para in ['V','VMAX']:
+				full = self.v_fulls[ch]
+			elif para in ['I','IMAX']:
+				full = self.i_fulls[ch]
+			elif para in ['X','XMIN','XMAX']:
+				full = self.x_fulls[ch]
+				# TODO: A 32-b version of issue_binary_command is not yet implemented
+				raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
+			self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=0, value_int=int((new/full)*0xFFFF) )
+		else:
+			self.issue_command(para, ch=ch, operator='=', value=new)
+	
+	def get_value (self, ch, para='X'):
+		"""
+		Single-channel value getter.
+		"""
+	
+		para = para.upper()
+	
+		if self.binary_mode:
+			# TODO: A 32-b version of issue_binary_command is not yet implemented
+			raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
+			result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+		else:
+			result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+		if len(result) > 0:
+			if len(result[0]) > 0:
+				return float(result[0][0])
+		return None
+	
+	def get_all_values (self, para='V'):
+		"""
+		All-channel value getter.
+		"""
+		
+		para = para.upper()
+		
+		if self.binary_mode:
+			result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+		else:
+			result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+		if len(result) > 0:
+			if len(result[0]) > 0:
+				out = [None]*len(result)
+				for i in range(len(result)):
+					try:
+						out[i] = float(result[i][0])
+					except IndexError as e:
+						print ("Warning: get_all_values: Failed to index result (length {:}) with error {:}.".format(len(result), e))
+				return out
+		return None
+	
+	def set_all_values (self, para='V', values=0):
+		"""
+		Slice up set commands into vectors for each module, and transmit.
+		
+		 para:      Parameter to set {'X','XMIN','XMAX','VMAX','IMAX'}
+		 values:    Either float/int or list of float/int of length n_chs
+		"""
+		
+		para = para.upper()
+		
+		if isinstance(values,list):
+			# Check length
+			if len(values) != self.n_chs:
+				raise AttributeError("Length of values list ({:}) must match total number of channels ({:}).".format(len(values), self.n_chs))
+		else:
+			# If input is atomic, then set each channel to that
+			values = [values] * self.n_chs
+		
+		if self.binary_mode:
+			if para in ['V','VMAX']:
+				fulls = self.v_fulls
+			elif para in ['I','IMAX']:
+				fulls = self.i_fulls
+			elif para in ['X','XMIN','XMAX']:
+				fulls = self.x_fulls
+			
+			if para in ['X','XMIN','XMAX']:
+				# TODO: A 32-b version of issue_binary_command is not yet implemented
+				raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
+			
+			# Convert input to ints
+			for i in range(self.n_chs):
+				values[i] = int((values[i]/fulls[i])*0xFFFF)
+			
+			# Map command name to code
+			cmd_code = CMD_CODES[para.upper()]
+			
+			# Send vectorised outputs to each module
+			i = 0
+			for d in self.chain:
+				n = d['n_chs']
+				self.issue_binary_command(cmd_code, ch=i, RW=0, DEXT=1, value_int = values[i:i+n])
+				i += n
+		else:
+			# Send vectorised outputs to each module
+			i = 0
+			for d in self.chain:
+				n = d['n_chs']
+				self.issue_command(para+'VEC', ch=i, operator='=', value = values[i:i+n])
+				i += n
+		
+	def __setattr__(self, attr, val):
+		# Prevent overwrite of internal variables
+		try:
+			if (self.initialised is True and attr in ['v', 'vmax', 'imax', 'x', 'xmin', 'xmax', 'v_full', 'i_full', 'x_full', 'n_chs']):
+				print ("MX.__setattr__: Warning: Overwriting of '{:}' is forbidden.".format(attr) )
+				return
+		except AttributeError:
+			# If we are still initialising, carry on setting variable
+			pass
+		
+		object.__setattr__(self, attr, val)
+	
+	def wait_until_stopped(self, channels = None, timeout = float("inf")):
+		"""
+		Block execution until all motors are not in motion.
+		"""
+		# In case movement was just started, ensure motion can begin before we wait
+		time.sleep(0.01)
+		
+		# If channels is not set, wait for all channels
+		if channels is None:
+			channels = range(self.n_chs)
+		
+		t_start = time.time()
+
+		for ch in channels:
+			
+			while(True):
+				
+				try:
+					v = self.v[ch]
+				except RuntimeError:
+					print ("MX.wait_until_stopped: Warning: Caught v-get error while waiting.")
+					v = 1
+				
+				if ( abs(v) < 1E-3 ):
+					break
+				
+				if ( time.time() - t_start > timeout ):
+					print ("MX.wait_until_stopped: Warning: Timed out after {:} seconds waiting for channel {:} to stop.".format(timeout, ch))
+					break
+				
+				time.sleep(0.01)
+	
+
+
+def run_interactive_shell(serial_port_name = None):
 	"""Interactive shell for interacting directly with Qontrol hardware."""
 	
 	print ("- "*14)
@@ -973,19 +1269,25 @@ def run_interactive_shell():
 		print (" #{:2} - {:15}".format(i, str(port)))
 	
 	# Ask user which port to target
-	for i in range(3):
-		requested_port_str = input("\nWhich would you like to communicate with? #")
-		try:
-			requested_port_index = int(requested_port_str)
-			if requested_port_index > n_ports:
-				raise RuntimeError()
-			break
-		except:
-			print ("Port index '{:}' not recognised.".format(requested_port_str))
+	if serial_port_name is None:
+		for i in range(3):
+			requested_port_str = input("\nWhich would you like to communicate with? #")
+			try:
+				requested_port_index = int(requested_port_str)
+				if requested_port_index > n_ports:
+					raise RuntimeError()
+				break
+			except:
+				print ("Port index '{:}' not recognised.".format(requested_port_str))
+		
+		for i,port in enumerate(ports):
+			if i == requested_port_index:
+				break
+	else:
+		for port in ports:
+			if port.device == serial_port_name:
+				break
 	
-	for i,port in enumerate(ports):
-		if i == requested_port_index:
-			break
 	
 	port = serial.Serial(port.device, baudrate, timeout = 0)
 	
