@@ -4,7 +4,7 @@ import qontrol
 import time, sys, random
 
 serial_port_name = "/dev/tty.usbserial-FT3JOAAG"
-q = qontrol.MX(serial_port_name = serial_port_name)
+q = qontrol.MXMotor(serial_port_name = serial_port_name)
 
 
 sys.stdout.write ("\nQontroller '{:}' initialised with firmware {:} and {:} channels\n".format(q.device_id, q.firmware, q.n_chs) )
