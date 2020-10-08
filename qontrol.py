@@ -502,7 +502,7 @@ class Qontroller(object):
 				else:
 					# If we are setting something, just warn the user
 					print('Qontroller.issue_command: Warning: Response to write command {0} timed out.'.format(tx_str))
-					return result
+					return None
 		
 	
 	def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
