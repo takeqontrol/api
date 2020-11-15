@@ -482,7 +482,7 @@ class Qontroller(object):
 		self.transmit(tx_str+'\n')
 		
 		# Log it
-		self.log_append(type= 'set' if operator is '=' else 'get', value=value, id=command_id, ch=ch, desc='Command: "'+tx_str+'".')
+		self.log_append(type= 'set' if operator == '=' else 'get', value=value, id=command_id, ch=ch, desc='Command: "'+tx_str+'".')
 		
 		
 		# Function to retry this command (in case of comms error)
@@ -874,7 +874,14 @@ class QXOutput(Qontroller):
 			result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
 		if len(result) > 0:
 			if len(result[0]) > 0:
-				return float(result[0][0])
+				s = result[0][0]
+				if '.' in s:
+					return float(s)
+				else:
+					try:
+						return int(s)
+					except:
+						return s
 		return None
 	
 	def get_all_values (self, para='V'):
@@ -1103,7 +1110,14 @@ class MXMotor(Qontroller):
 			result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
 		if len(result) > 0:
 			if len(result[0]) > 0:
-				return float(result[0][0])
+				s = result[0][0]
+				if '.' in s:
+					return float(s)
+				else:
+					try:
+						return int(s)
+					except:
+						return s
 		return None
 	
 	def get_all_values (self, para='V'):
