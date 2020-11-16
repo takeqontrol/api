@@ -97,7 +97,7 @@ class Qontroller(object):
 		self.serial_port_name = None		# Name of serial port, eg 'COM1' or '/dev/tty1'
 		self.baudrate = 115200				# Serial port baud rate (signalling frequency, Hz)
 		self.error_desc_dict = Q8x_ERRORS	# Error code descriptions
-		self.log = fifo(maxlen = 512)		# Log FIFO of sent commands and received errors
+		self.log = fifo(maxlen = 4096)		# Log FIFO of sent commands and received errors
 		self.log_handler = None				# Function which catches log dictionaries
 	
 		self.log_to_stdout = False			# Copy new log entries to stdout
@@ -449,7 +449,9 @@ class Qontroller(object):
 			self.receive()
 	
 	
-	def issue_command (self, command_id, ch=None, operator='', value=None, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
+	def issue_command (self, command_id, ch=None, operator='', 
+		value=None, n_lines_requested=2**31, target_errors=None, 
+		output_regex='(.*)', special_timeout = None):
 		"""
 		Transmit command to device, get response.
 		
@@ -962,8 +964,8 @@ class MXMotor(Qontroller):
 	"""
 	Motor controller module class. Provides channel vectors for speed (v), 
 	maximum speed (vmax), maximum winding current (imax), position (x) and 
-	associated minimum (xmin) and maximum (xmax), and power-of-two microsteps 
-	(ustep).
+	associated minimum (xmin) and maximum (xmax), power-of-two microsteps 
+	(ustep), and motor mode (mode).
 	
 	Compatible modules:
 	- M2
@@ -983,6 +985,7 @@ class MXMotor(Qontroller):
 		self.xmin = None			# Channel minimum positions (direct access)
 		self.xmax = None			# Channel maximum positions (direct access)
 		self.ustep = None			# Channel microstep (direct access)
+		self.mode = None			# Channel mode (direct access)
 		self.binary_mode = False	# Communicate in binary
 		
 		
@@ -1073,6 +1076,11 @@ class MXMotor(Qontroller):
 		self.ustep.set_handle = lambda ch,val: self.set_value(ch,'USTEP',val)
 		self.ustep.get_handle = lambda ch,val: self.get_value(ch,'USTEP')
 		
+		# Modes
+		self.mode = _ChannelVector([0] * self.n_chs)
+		self.mode.set_handle = lambda ch,val: self.set_value(ch,'MODE',val)
+		self.mode.get_handle = lambda ch,val: self.get_value(ch,'MODE')
+		
 		self.initialised = True
 	
 	def set_value (self, ch, para='X', new=0):
@@ -1146,7 +1154,7 @@ class MXMotor(Qontroller):
 		"""
 		Slice up set commands into vectors for each module, and transmit.
 		
-		 para:      Parameter to set {'X','XMIN','XMAX','VMAX','IMAX'}
+		 para:      Parameter to set {'X','XMIN','XMAX','VMAX','IMAX','MODE'}
 		 values:    Either float/int or list of float/int of length n_chs
 		"""
 		
@@ -1168,7 +1176,7 @@ class MXMotor(Qontroller):
 			elif para in ['X','XMIN','XMAX']:
 				fulls = self.x_fulls
 			
-			if para in ['X','XMIN','XMAX']:
+			if para in ['X','XMIN','XMAX','MODE']:
 				# TODO: A 32-b version of issue_binary_command is not yet implemented
 				raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
 			
@@ -1196,7 +1204,7 @@ class MXMotor(Qontroller):
 	def __setattr__(self, attr, val):
 		# Prevent overwrite of internal variables
 		try:
-			if (self.initialised is True and attr in ['v', 'vmax', 'imax', 'x', 'xmin', 'xmax', 'v_full', 'i_full', 'x_full', 'n_chs']):
+			if (self.initialised is True and attr in ['v', 'vmax', 'imax', 'x', 'xmin', 'xmax', 'mode', 'v_full', 'i_full', 'x_full', 'n_chs']):
 				print ("MX.__setattr__: Warning: Overwriting of '{:}' is forbidden.".format(attr) )
 				return
 		except AttributeError:
