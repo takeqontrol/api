@@ -497,13 +497,13 @@ class Qontroller(object):
 			try:
 				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
 				return result
-			except RuntimeError:
+			except RuntimeError as e:
 				if operator == '?':
-					# If we are looking for a return value, raise an error
-					raise RuntimeError ('Response to read command {0} timed out.'.format(tx_str))
+					# If we want a return value, raise an error
+					raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
 				else:
 					# If we are setting something, just warn the user
-					print('Qontroller.issue_command: Warning: Response to write command {0} timed out.'.format(tx_str))
+					print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
 					return None
 		
 	
@@ -615,14 +615,14 @@ class Qontroller(object):
 			try:
 				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
 				return result
-			except RuntimeError:
+			except RuntimeError as e:
 				if RW == 1:
-					# If we are looking for a return value, raise an error
-					raise RuntimeError ('Response to read command {0} timed out.'.format(tx_str))
+					# If we want a return value, raise an error
+					raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
 				else:
 					# If we are setting something, just warn the user
-					print('Qontroller.issue_binary_command: Warning: Response to write command {0} timed out.'.format(tx_str))
-					return result
+					print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
+					return None
 				
 	
 	
@@ -675,7 +675,7 @@ class Qontroller(object):
 				
 				# Check whether we have received a fatal error
 				if any([err['id'] in target_errors for err in errs]):
-					raise RuntimeError('Received targetted error code {0}, "{1}". Log is: \n{2}.'.format(err['id'], err['desc'], self.log))
+					raise RuntimeError('Received target error code {0}, "{1}". Last 5 log items were: \n{2}.'.format(errs[-1]['id'], errs[-1]['desc'], '\n'.join([str(self.log[l]) for l in range(-6,-1)])))
 		
 		# We timed out.
 		if len(lines) == 0 and len(errs) == 0:
