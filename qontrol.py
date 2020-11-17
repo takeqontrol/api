@@ -1223,9 +1223,13 @@ class MXMotor(Qontroller):
 		
 		object.__setattr__(self, attr, val)
 	
-	def wait_until_stopped(self, channels = None, timeout = float("inf")):
+	def wait_until_stopped(self, channels=None, timeout=float("inf"), t_poll=0.05):
 		"""
 		Block execution until all motors are not in motion.
+		
+		  channels   Wait for channels in this list to stop. None for all channels.
+		  timeout    Max time before breaking.
+		  t_poll     Motor state polling time, seconds. Larger numbers give less polling.
 		"""
 		# In case movement was just started, ensure motion can begin before we wait
 		time.sleep(0.01)
@@ -1253,7 +1257,7 @@ class MXMotor(Qontroller):
 					print ("MX.wait_until_stopped: Warning: Timed out after {:} seconds waiting for channel {:} to stop.".format(timeout, ch))
 					break
 				
-				time.sleep(0.01)
+				time.sleep(t_poll)
 	
 
 
