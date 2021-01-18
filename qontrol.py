@@ -12,6 +12,9 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 (c) 2020 Qontrol Ltd.
 """
 
+__version__ = "1.1.0"
+
+
 from __future__ import print_function
 import serial, re, time
 from collections import deque as fifo
@@ -1436,6 +1439,8 @@ def run_interactive_shell(serial_port_name = None):
 
 
 if __name__ == '__main__':
+	
+	import sys, getopt
 	
 	run_interactive_shell()
 	
