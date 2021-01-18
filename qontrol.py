@@ -1,19 +1,16 @@
 """
 Hardware interfacing for Qontrol modules.
 
-This module allows you to control Qontrol hardware modules, using natural Python
-language. It provides a main Qontroller class which handles enumeration,
-low-level communications, sequencing, error-handling, and log maintenance.
-Subclasses of Qontroller implement module-specific features (e.g. DC current or
-voltage interfaces, positional interfaces).
+This module lets you control Qontrol hardware modules, natively in Python. It provides 
+a main Qontroller class which handles enumeration, low-level communications, sequencing, 
+error-handling, and log maintenance. Subclasses of Qontroller implement module-specific 
+features (e.g. DC current or voltage interfaces, positional interfaces).
 
 Learn more, at www.qontrol.co.uk/support, or get in touch with us at
-support@qontrol.co.uk. Contribute at github.com/takeqontrol/qontrol_api.
+support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 
 (c) 2020 Qontrol Ltd.
 """
-
-
 
 from __future__ import print_function
 import serial, re, time
@@ -23,9 +20,8 @@ from serial.tools import list_ports
 import sys
 import os
 
-Q8x_ERRORS = {0:'Unknown error.',
-	1:'Over-voltage error on channel {ch}.',
-	2:'Over-current error on channel {ch}.',
+COMMON_ERRORS = {
+	0:'Unknown error.',
 	3:'Power error.',
 	4:'Calibration error.',
 	5:'Output error.',
@@ -42,6 +38,14 @@ Q8x_ERRORS = {0:'Unknown error.',
 	30:'Too many errors, some have been suppressed.',
 	31:'Firmware trap.',
 	90:'Powered up.'}
+
+Qx_ERRORS = {
+	1:'Over-voltage error on channel {ch}.',
+	2:'Over-current error on channel {ch}.'}
+
+Mx_ERRORS = {0:'Unknown error.',
+	1:'Out-of-range error on channel {ch}.',
+	20:'Interlock triggered on channel {ch}.'}
 
 
 CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0x05, 'VERR':0x06, 'IERR':0x07, 'VIP':0x0A, 'SR':0x0B, 'PDI':0x0C, 'PDP':0x0D, 'PDR':0x0E, 'VFULL':0x20, 'IFULL':0x21, 'NCHAN':0x22, 'FIRMWARE':0x23, 'ID':0x24, 'LIFETIME':0x25, 'NVM':0x26, 'LOG':0x27, 'QUIET':0x28, 'LED':0x31, 'NUP':0x32, 'ADCT':0x33, 'ADCN':0x34, 'CCFN':0x35, 'INTEST':0x36, 'OK':0x37, 'DIGSUP':0x38, 'HELP':0x41, 'SAFE':0x42, 'ROCOM':0x43}
@@ -84,6 +88,7 @@ class Qontroller(object):
 	 q.log_handler = my_log_handler
 	"""
 
+	error_desc_dict = COMMON_ERRORS
 
 	def __init__(self, *args, **kwargs):
 		"""
@@ -96,8 +101,7 @@ class Qontroller(object):
 		self.serial_port = None				# Serial port object
 		self.serial_port_name = None		# Name of serial port, eg 'COM1' or '/dev/tty1'
 		self.baudrate = 115200				# Serial port baud rate (signalling frequency, Hz)
-		self.error_desc_dict = Q8x_ERRORS	# Error code descriptions
-		self.log = fifo(maxlen = 512)		# Log FIFO of sent commands and received errors
+		self.log = fifo(maxlen = 4096)		# Log FIFO of sent commands and received errors
 		self.log_handler = None				# Function which catches log dictionaries
 	
 		self.log_to_stdout = False			# Copy new log entries to stdout
@@ -111,7 +115,7 @@ class Qontroller(object):
 		# Get arguments from init
 		
 		# Populate parameters, if provided
-		for para in ['device_id', 'serial_port_name', 'error_desc_dict', 'log_handler', 'log_to_stdout', 'response_timeout', 'inter_response_timeout', 'baudrate', 'wait_for_responses']:
+		for para in ['device_id', 'serial_port_name', 'log_handler', 'log_to_stdout', 'response_timeout', 'inter_response_timeout', 'baudrate', 'wait_for_responses']:
 			try:
 				self.__setattr__(para, kwargs[para])
 			except KeyError:
@@ -445,7 +449,9 @@ class Qontroller(object):
 			self.receive()
 	
 	
-	def issue_command (self, command_id, ch=None, operator='', value=None, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
+	def issue_command (self, command_id, ch=None, operator='', 
+		value=None, n_lines_requested=2**31, target_errors=None, 
+		output_regex='(.*)', special_timeout = None):
 		"""
 		Transmit command to device, get response.
 		
@@ -491,13 +497,13 @@ class Qontroller(object):
 			try:
 				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
 				return result
-			except RuntimeError:
+			except RuntimeError as e:
 				if operator == '?':
-					# If we are looking for a return value, raise an error
-					raise RuntimeError ('Response to read command {0} timed out.'.format(tx_str))
+					# If we want a return value, raise an error
+					raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
 				else:
 					# If we are setting something, just warn the user
-					print('Qontroller.issue_command: Warning: Response to write command {0} timed out.'.format(tx_str))
+					print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
 					return None
 		
 	
@@ -609,14 +615,14 @@ class Qontroller(object):
 			try:
 				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
 				return result
-			except RuntimeError:
+			except RuntimeError as e:
 				if RW == 1:
-					# If we are looking for a return value, raise an error
-					raise RuntimeError ('Response to read command {0} timed out.'.format(tx_str))
+					# If we want a return value, raise an error
+					raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
 				else:
 					# If we are setting something, just warn the user
-					print('Qontroller.issue_binary_command: Warning: Response to write command {0} timed out.'.format(tx_str))
-					return result
+					print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
+					return None
 				
 	
 	
@@ -669,7 +675,7 @@ class Qontroller(object):
 				
 				# Check whether we have received a fatal error
 				if any([err['id'] in target_errors for err in errs]):
-					raise RuntimeError('Received targetted error code {0}, "{1}". Log is: \n{2}.'.format(err['id'], err['desc'], self.log))
+					raise RuntimeError('Received target error code {0}, "{1}". Last 5 log items were: \n{2}.'.format(errs[-1]['id'], errs[-1]['desc'], '\n'.join([str(self.log[l]) for l in range(-6,-1)])))
 		
 		# We timed out.
 		if len(lines) == 0 and len(errs) == 0:
@@ -702,12 +708,15 @@ class _ChannelVector(object):
 	List class with fixed length but mutable (typed) elements, with hooks.
 	"""
 	
-	set_handle = None
-	get_handle = None
-	valid_types = (int,float)
-	
-	def __init__(self, base_list):
+	def __init__(self, base_list, valid_types=(int,float), set_handle=None, get_handle=None):
 		self.list = base_list
+		self.valid_types = valid_types
+		try:
+			len(self.valid_types)
+		except:
+			raise AttributeError("valid_types must be iterable.")
+		self.set_handle = set_handle
+		self.get_handle = get_handle
 
 	
 	def __len__(self):
@@ -769,10 +778,12 @@ class QXOutput(Qontroller):
 	- Q8iv
 	- Q8b
 	"""
+	
+	error_desc_dict = {**COMMON_ERRORS, **Qx_ERRORS}
 
 	def __init__(self, *args, **kwargs):
 		super(type(self), self).__init__(*args, **kwargs)
-
+		
 		self.n_chs = 0
 		self.v_full = 0
 		self.i_full = 0
@@ -958,12 +969,14 @@ class MXMotor(Qontroller):
 	"""
 	Motor controller module class. Provides channel vectors for speed (v), 
 	maximum speed (vmax), maximum winding current (imax), position (x) and 
-	associated minimum (xmin) and maximum (xmax), and power-of-two microsteps 
-	(ustep).
+	associated minimum (xmin) and maximum (xmax), power-of-two microsteps 
+	(ustep), and motor mode (mode).
 	
 	Compatible modules:
 	- M2
 	"""
+	
+	error_desc_dict = {**COMMON_ERRORS, **Mx_ERRORS}
 	
 	def __init__(self, *args, **kwargs):
 		super(type(self), self).__init__(*args, **kwargs)
@@ -979,6 +992,10 @@ class MXMotor(Qontroller):
 		self.xmin = None			# Channel minimum positions (direct access)
 		self.xmax = None			# Channel maximum positions (direct access)
 		self.ustep = None			# Channel microstep (direct access)
+		self.mode = None			# Channel mode (direct access)
+		
+		# Defaults
+		
 		self.binary_mode = False	# Communicate in binary
 		
 		
@@ -1022,9 +1039,9 @@ class MXMotor(Qontroller):
 				except:
 					# If not, just take some random value
 					self.n_chs = 2
-					print ("MX.__init__: Warning: Failed to obtain number of daisy-chained channels automatically. Include this as n_chs argument on initialisation to workaround.")
+					print ("MX.__init__: Warning: Failed to obtain number of daisy-chained channels automatically. Include this as n_chs argument on initialisation to workaround. This may indicate an underlying issue in (1) communications from the PC, (2) seating of the modules in the backplane, or (3) the hardware itself.")
 		
-		# Generate lists of VFULL and IFULL values, for binary command scaling
+		# Generate lists of *FULL values, for binary command scaling
 		self.v_fulls = []
 		self.i_fulls = []
 		self.x_fulls = []
@@ -1068,6 +1085,11 @@ class MXMotor(Qontroller):
 		self.ustep = _ChannelVector([0] * self.n_chs)
 		self.ustep.set_handle = lambda ch,val: self.set_value(ch,'USTEP',val)
 		self.ustep.get_handle = lambda ch,val: self.get_value(ch,'USTEP')
+		
+		# Modes
+		self.mode = _ChannelVector([0] * self.n_chs, valid_types=(int,))
+		self.mode.set_handle = lambda ch,val: self.set_value(ch,'MODE',val)
+		self.mode.get_handle = lambda ch,val: self.get_value(ch,'MODE')
 		
 		self.initialised = True
 	
@@ -1142,7 +1164,7 @@ class MXMotor(Qontroller):
 		"""
 		Slice up set commands into vectors for each module, and transmit.
 		
-		 para:      Parameter to set {'X','XMIN','XMAX','VMAX','IMAX'}
+		 para:      Parameter to set {'X','XMIN','XMAX','VMAX','IMAX','MODE'}
 		 values:    Either float/int or list of float/int of length n_chs
 		"""
 		
@@ -1164,7 +1186,7 @@ class MXMotor(Qontroller):
 			elif para in ['X','XMIN','XMAX']:
 				fulls = self.x_fulls
 			
-			if para in ['X','XMIN','XMAX']:
+			if para in ['X','XMIN','XMAX','MODE']:
 				# TODO: A 32-b version of issue_binary_command is not yet implemented
 				raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
 			
@@ -1192,7 +1214,7 @@ class MXMotor(Qontroller):
 	def __setattr__(self, attr, val):
 		# Prevent overwrite of internal variables
 		try:
-			if (self.initialised is True and attr in ['v', 'vmax', 'imax', 'x', 'xmin', 'xmax', 'v_full', 'i_full', 'x_full', 'n_chs']):
+			if (self.initialised is True and attr in ['v', 'vmax', 'imax', 'x', 'xmin', 'xmax', 'mode', 'v_full', 'i_full', 'x_full', 'n_chs']):
 				print ("MX.__setattr__: Warning: Overwriting of '{:}' is forbidden.".format(attr) )
 				return
 		except AttributeError:
@@ -1201,9 +1223,13 @@ class MXMotor(Qontroller):
 		
 		object.__setattr__(self, attr, val)
 	
-	def wait_until_stopped(self, channels = None, timeout = float("inf")):
+	def wait_until_stopped(self, channels=None, timeout=float("inf"), t_poll=0.05):
 		"""
 		Block execution until all motors are not in motion.
+		
+		  channels   Wait for channels in this list to stop. None for all channels.
+		  timeout    Max time before breaking.
+		  t_poll     Motor state polling time, seconds. Larger numbers give less polling.
 		"""
 		# In case movement was just started, ensure motion can begin before we wait
 		time.sleep(0.01)
@@ -1231,12 +1257,12 @@ class MXMotor(Qontroller):
 					print ("MX.wait_until_stopped: Warning: Timed out after {:} seconds waiting for channel {:} to stop.".format(timeout, ch))
 					break
 				
-				time.sleep(0.01)
+				time.sleep(t_poll)
 	
 
 
 def run_interactive_shell(serial_port_name = None):
-	"""Interactive shell for interacting directly with Qontrol hardware."""
+	"""Shell for interacting directly with Qontrol hardware."""
 	
 	print ("- "*14)
 	print (" Qontrol Interactive Shell")
@@ -1266,17 +1292,28 @@ def run_interactive_shell(serial_port_name = None):
 		normal_text = "\033[0m"
 		in_text = "\033[33;1m"
 		out_text = "\033[36;1m"
+		emph_text = "\033[97;1m"
 	else:
 		normal_text = ""
 		in_text = ""
 		out_text = ""
+		emph_text = ""
 	
 	# List available serial ports
-	ports = list(list_ports.grep('.*'))
+	#  Separate ports that are probably Qontrol devices from those that are probably not
+	ports_of_interest = list(list_ports.grep('.*usbserial-FT[A-Z0-9].*'))
+	ports_other = [port for port in list(list_ports.grep('.*')) 
+									if port not in ports_of_interest]
+	ports = ports_of_interest + ports_other
 	n_ports = len(ports)
 	print ("Available ports:")
-	for i,port in enumerate(ports):
+	i = 0
+	for port in ports_of_interest:
+		print (" {:}#{:2} - {:15}{:}".format(emph_text, i, str(port), normal_text))
+		i += 1
+	for port in ports_other:
 		print (" #{:2} - {:15}".format(i, str(port)))
+		i += 1
 	
 	# Ask user which port to target
 	if serial_port_name is None:
