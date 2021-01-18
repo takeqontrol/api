@@ -105,10 +105,6 @@ class Qontroller(object):
 		self.inter_response_timeout = 0.050	# Timeout between received messages
 		self.wait_for_responses = True		# Should we wait for responses to set commands
 		
-		# Setup Rx and Tx logs
-		self.total_rx_str = ''
-		self.total_tx_str = ''
-		
 		# Set a time benchmark
 		self.init_time = time.time()
 		
