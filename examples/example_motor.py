@@ -23,11 +23,11 @@ for i in range(20):
 	
 	# Go
 	for ch in chs:
-		v = random.uniform(100.0,300.0)
-		if (v < 200):
-			q.ustep[ch] = 8
-		else:
+		v = random.uniform(50.0,200.0)
+		if (v < 100):
 			q.ustep[ch] = 7
+		else:
+			q.ustep[ch] = 6
 		q.vmax[ch] = v
 		q.x[ch] = random.uniform(0,3000);
 
@@ -37,9 +37,9 @@ for i in range(20):
 
 
 # Go back
-q.ustep[:] = 8
+q.ustep[:] = 5
 q.vmax[:] = 200.0
-q.x[:] = 0;
+q.x[:] = 0
 
 # Wait for motion to stop
 sys.stdout.write ("Waiting for motion to stop...")
