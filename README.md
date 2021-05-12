@@ -22,7 +22,7 @@ With python>3.6 installed at the command prompt type:
 
 
 ## Usage
-See help and documentation at https://takeqontrol.github.io/qontrol_api/
+See help and documentation at https://takeqontrol.github.io/api/
 
 ## Contributing
 
