@@ -15,6 +15,7 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 __version__ = "1.1.1pd-dev"
 
 
+
 import serial, re, time
 from collections import deque as fifo
 from random import shuffle
@@ -78,8 +79,10 @@ class Qontroller(object):
 	
 	Log handler:
 	 The log handler may be used to catch and dynamically handle certain errors, 
-	 as they arise. In the following example, it is set up to raise a 
-	 RuntimeError upon reception of errors E01, E02, and E03:
+	 as they arise. It is a function with a single dict argument. The dict contains
+	 details of the log entry, with keys 'timestamp', 'proctime', 'type', 'id', 'ch', 
+	 'value', 'desc', 'raw'. In the following example, the handler is set to raise a
+	  RuntimeError upon reception of errors E01, E02, and E03:
 	
 	 q = Qontroller()
 	
@@ -91,6 +94,10 @@ class Qontroller(object):
 	 			ms'.format(1000*err_dict['proctime'], err_dict['desc']))
 
 	 q.log_handler = my_log_handler
+	 
+	 or more simply
+	 
+	 q.log_handler = generic_log_handler(fatal_errors)
 	"""
 
 	error_desc_dict = COMMON_ERRORS
@@ -427,6 +434,9 @@ class Qontroller(object):
 		"""
 		Parse an error into its code, channel, and human-readable description.
 		"""
+		# Strip whitespace
+		error_str = error_str.strip()
+		
 		# Regex out the error and channel indices from the string
 		ob = re.match(ERROR_FORMAT, error_str)
 		
@@ -456,7 +466,7 @@ class Qontroller(object):
 	
 	def issue_command (self, command_id, ch=None, operator='', 
 		value=None, n_lines_requested=2**31, target_errors=None, 
-		output_regex='(.*)', special_timeout = None):
+		output_regex='(.*)', special_timeout=None):
 		"""
 		Transmit command to device, get response.
 		
@@ -498,18 +508,8 @@ class Qontroller(object):
 		
 		# Wait for response
 		if operator=='?' or ((operator=='=' or operator=='') and self.wait_for_responses):
-			result = []
-			try:
-				result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
-				return result
-			except RuntimeError as e:
-				if operator == '?':
-					# If we want a return value, raise an error
-					raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
-				else:
-					# If we are setting something, just warn the user
-					print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
-					return None
+			result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
+			return result
 		
 	
 	def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
@@ -685,7 +685,7 @@ class Qontroller(object):
 		# We timed out.
 		if len(lines) == 0 and len(errs) == 0:
 			# If we are looking for a return value, raise an error
-			raise RuntimeError ('Timed out')
+			raise RuntimeError ('Timed out waiting for response to command.')
 		
 		# Parse the output
 		values = []
@@ -705,6 +705,28 @@ class Qontroller(object):
 		"""
 		if (attr in ['firmware', 'vfull', 'ifull', 'lifetime']):
 			return self.issue_command (command_id=attr, ch=None, operator='?', n_lines_requested=1)[0][0]
+
+
+def generic_log_handler(fatal_errors='all'):
+	"""
+	A generic log handler which can be passed to Qontroller instances to
+	generate a RuntimeError every time an error in the list fatal_errors
+	is reported by the hardware.
+	
+	 fatal_errors    List of errors that should be raised.
+	                 'all' will raise every error encountered (default).
+	"""
+	
+	if fatal_errors == 'all':
+		def _generic_log_handler(err_dict):
+			if err_dict['type'] == 'err':
+				raise RuntimeError('Caught Qontrol error {:} "{:}" at {:} ms'.format(err_dict['raw'], err_dict['desc'], 1000*err_dict['proctime']))
+	else:
+		def _generic_log_handler(err_dict):
+			if err_dict['type'] == 'err' and err_dict['id'] in fatal_errors:
+				raise RuntimeError('Caught Qontrol error {:} "{:}" at {:} ms'.format(err_dict['raw'], err_dict['desc'], 1000*err_dict['proctime']))
+	
+	return _generic_log_handler
 
 
 class _ChannelVector(object):
