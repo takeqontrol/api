@@ -74,8 +74,8 @@ class Qontroller(object):
 	 log = fifo(maxlen = 256)            Log FIFO of communications
 	 log_handler = None                  Function which catches log dictionaries
 	 log_to_stdout = True                Copy new log entries to stdout
-	 response_timeout = 0.050            Timeout for response to commands
-	 inter_response_timeout = 0.020      Timeout for response to get commands
+	 response_timeout = 0.100            Timeout for response to commands
+	 inter_response_timeout = 0.050      Timeout for response to get commands
 	
 	Log handler:
 	 The log handler may be used to catch and dynamically handle certain errors, 
