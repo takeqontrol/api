@@ -12,7 +12,7 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 (c) 2020 Qontrol Ltd.
 """
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 from __future__ import print_function
