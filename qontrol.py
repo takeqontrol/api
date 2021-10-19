@@ -15,7 +15,6 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 __version__ = "1.1.1"
 
 
-from __future__ import print_function
 import serial, re, time
 from collections import deque as fifo
 from random import shuffle
@@ -130,7 +129,7 @@ class Qontroller(object):
 		# Find serial port by asking it for its device id
 		if 'device_id' in kwargs:
 			# Search for port with matching device ID
-			ob = re.match('(Q\w+)-([0-9a-fA-F\*]+)', self.device_id)
+			ob = re.match('([QS]\w+)-([0-9a-fA-F\*]+)', self.device_id)
 			targ_dev_type,targ_dev_num = ob.groups()
 			if ob is None:
 				raise AttributeException('Entered device ID ({0}) must be of form "[device type]-[device number]" where [device number] can be hexadecimal'.format(self.device_id))
@@ -708,7 +707,6 @@ class Qontroller(object):
 			return self.issue_command (command_id=attr, ch=None, operator='?', n_lines_requested=1)[0][0]
 
 
-
 class _ChannelVector(object):
 	"""
 	List class with fixed length but mutable (typed) elements, with hooks.
@@ -881,10 +879,12 @@ class QXOutput(Qontroller):
 	
 	def get_value (self, ch, para='V'):
 	
+		regex = '((?:\+|-){0,1}[\d\.]+)'
 		if self.binary_mode:
-			result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+			result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = regex)
 		else:
-			result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+			result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = regex)
+		
 		if len(result) > 0:
 			if len(result[0]) > 0:
 				s = result[0][0]
@@ -1304,7 +1304,6 @@ class SXInput(Qontroller):
 			except KeyError:
 				continue
 		
-		
 		# Get our number of channels
 		try:
 			# See if its in the list of kwargs
@@ -1355,31 +1354,49 @@ class SXInput(Qontroller):
 	def set_value (self, ch, para='V', new=0):
 		self.issue_command(para, ch=ch, operator='=', value=new)
 	
-	def get_value (self, ch, para='V'):
+	
+	def get_value (self, ch, para='I'):
 		
-		result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch,
-					RW=1, n_lines_requested = 1, 
-					output_regex = '((?:\+|-){0,1}[\d\.]+)\s*([munpf]?)[VA]')
+		# Normalise parameter case
+		para = para.upper()
 		
-		print('result =',result)
+		# Define regular expression to parse, based on parameter
+		if para in ['I','V']:
+			regex = '([\+-]?[\d\.]+)\s*([munpf]?)[VA]'
+		else:
+			regex = '([\+-]?[\d\.]+)'
+		
+		# Issue the command, wait for response
+		if self.binary_mode:
+			result = self.issue_binary_command(CMD_CODES[para],
+							ch=ch, RW=1, n_lines_requested = 1,
+							output_regex = regex)
+		else:
+			result = self.issue_command(para, ch = ch, operator = '?',
+							n_lines_requested = 1, output_regex = regex)
+		
+		
 		if len(result) > 0:
-			if len(result) > 1:
-				# Decode SI unit scale
-				print('result[1][0] =',result[1][0])
-				scale = 10**(-1*{'':3,'m':0,'u':3,'n':6,'p':9,'f':12}[result[1][0]])
-			else:
-				scale = 1
-			
 			if len(result[0]) > 0:
+				# If there is a regex match
+				
+				if len(result[0]) > 1:
+					# Decode SI unit scale
+					scale = 10**(-1*{'':3,'m':0,'u':3,'n':6,'p':9,'f':12}[result[0][1]])
+				else:
+					scale = 1
+				
 				s = result[0][0]
 				if '.' in s:
-					return float(result)*scale
+					return float(s)*scale
 				else:
 					try:
 						return int(s)*scale
 					except:
 						return s
-		return None
+		else:
+			return None
+	
 	
 	def get_all_values (self, para='V'):
 		if self.binary_mode:
