@@ -12,7 +12,7 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 (c) 2020 Qontrol Ltd.
 """
 
-__version__ = "1.1.1"
+__version__ = "1.1.1pd-dev"
 
 
 import serial, re, time
