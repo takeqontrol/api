@@ -89,6 +89,10 @@ class Qontroller(object):
 	 			ms'.format(1000*err_dict['proctime'], err_dict['desc']))
 
 	 q.log_handler = my_log_handler
+	 
+	 or more simply
+	 
+	 q.log_handler = generic_log_handler(fatal_errors)
 	"""
 
 	error_desc_dict = COMMON_ERRORS
@@ -704,6 +708,29 @@ class Qontroller(object):
 		if (attr in ['firmware', 'vfull', 'ifull', 'lifetime']):
 			return self.issue_command (command_id=attr, ch=None, operator='?', n_lines_requested=1)[0][0]
 
+
+def generic_log_handler(fatal_errors='all'):
+	"""
+	A generic log handler which can be passed to Qontroller instances to
+	generate a RuntimeError every time an error in the list fatal_errors
+	is reported by the hardware.
+	
+	 fatal_errors    List of errors that should be raised.
+	                 'all' will raise every error encountered (default).
+	"""
+	
+	if fatal_errors == 'all':
+		def _generic_log_handler(err_dict):
+			if err_dict['type'] is 'err':
+				raise RuntimeError('Caught Qontrol error "{1}" at {0}
+					ms'.format(1000*err_dict['proctime'], err_dict['desc']))
+	else:
+		def _generic_log_handler(err_dict):
+			if err_dict['type'] is 'err' and err_dict['id'] in fatal_errors:
+				raise RuntimeError('Caught Qontrol error "{1}" at {0}
+					ms'.format(1000*err_dict['proctime'], err_dict['desc']))
+	
+	return _generic_log_handler
 
 
 class _ChannelVector(object):
