@@ -12,7 +12,7 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 (c) 2020 Qontrol Ltd.
 """
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 from __future__ import print_function
@@ -51,9 +51,12 @@ Mx_ERRORS = {0:'Unknown error.',
 	20:'Interlock triggered on channel {ch}.'}
 
 
-CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0x05, 'VERR':0x06, 'IERR':0x07, 'VIP':0x0A, 'SR':0x0B, 'PDI':0x0C, 'PDP':0x0D, 'PDR':0x0E, 'VFULL':0x20, 'IFULL':0x21, 'NCHAN':0x22, 'FIRMWARE':0x23, 'ID':0x24, 'LIFETIME':0x25, 'NVM':0x26, 'LOG':0x27, 'QUIET':0x28, 'LED':0x31, 'NUP':0x32, 'ADCT':0x33, 'ADCN':0x34, 'CCFN':0x35, 'INTEST':0x36, 'OK':0x37, 'DIGSUP':0x38, 'HELP':0x41, 'SAFE':0x42, 'ROCOM':0x43}
+CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0x05, 'VERR':0x06, 'IERR':0x07, 'VIP':0x0A, 'SR':0x0B, 'PDI':0x0C, 'PDP':0x0D, 'PDR':0x0E, 'GAIN':0x0F, 'VFULL':0x20, 'IFULL':0x21, 'NCHAN':0x22, 'FIRMWARE':0x23, 'ID':0x24, 'LIFETIME':0x25, 'NVM':0x26, 'LOG':0x27, 'QUIET':0x28, 'LED':0x31, 'NUP':0x32, 'ADCT':0x33, 'ADCN':0x34, 'CCFN':0x35, 'INTEST':0x36, 'OK':0x37, 'DIGSUP':0x38, 'HELP':0x41, 'SAFE':0x42, 'ROCOM':0x43}
 
-DEVICE_PROPERTIES = {'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 'Q8b':{'VFULL':12.0,'IFULL':83.333333}, 'M2':{'VFULL':8458.0,'IFULL':1375.0,'XFULL':8388352.0}}
+DEVICE_PROPERTIES = {
+		'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 
+		'Q8b':{'VFULL':12.0,'IFULL':83.333333}, 
+		'M2':{'VFULL':8458.0,'IFULL':1375.0,'XFULL':8388352.0}}
 
 	
 RESPONSE_OK = 'OK\n'
@@ -1261,7 +1264,194 @@ class MXMotor(Qontroller):
 					break
 				
 				time.sleep(t_poll)
+
+
+class SXInput(Qontroller):
+	"""
+	Input module class. Provides channel vectors for current (i).
 	
+	Arguments inherited from Qontroller:
+	 device_id = None                    Device ID
+	 serial_port = None                  Serial port object
+	 serial_port_name = None             Name of port, (eg 'COM1', '/dev/tty1')
+	 error_desc_dict                     Error code descriptions
+	 log = fifo(maxlen = 256)            Log FIFO of communications
+	 log_handler = None                  Function which catches log dictionaries
+	 log_to_stdout = True                Copy new log entries to stdout
+	 response_timeout = 0.050            Timeout for response to commands
+	 inter_response_timeout = 0.020      Timeout for response to get commands
+	
+	Compatible modules:
+	- S8i
+	"""
+	
+	error_desc_dict = {**COMMON_ERRORS, **Qx_ERRORS}
+
+	def __init__(self, *args, **kwargs):
+		super(type(self), self).__init__(*args, **kwargs)
+		
+		self.n_chs = 0
+		self.i_full = 0
+		self.i = None				# Channel currents (direct access)
+		self.gain = None			# Channel gain settings (direct access)
+		self.binary_mode = False	# Communicate in binary
+		
+		
+		# Populate parameters, if provided
+		for para in ['binary_mode']:
+			try:
+				self.__setattr__(para, kwargs[para])
+			except KeyError:
+				continue
+		
+		
+		# Get our number of channels
+		try:
+			# See if its in the list of kwargs
+			self.n_chs = kwargs['n_chs']
+			if self.n_chs <= 0 or self.n_chs == None:
+				raise KeyError()
+		except KeyError:
+			# If not in kwargs, try to get it from the chain
+			try:
+				self.n_chs = sum([device['n_chs'] for device in self.chain])
+			except KeyError:
+				# If not, just ask the top device how many ports its got
+				try:
+					self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = '(\d+)\n')[0][0])
+				except:
+					# If not, just take some random value
+					self.n_chs = 8
+					print ("SXInput.__init__: Warning: Failed to obtain number of daisy-chained channels automatically. Include this as n_chs argument on initialisation to workaround.")
+		
+		# Set up direct access
+		# These initialise themselves when they are first used (i.e. the 0 init is OK)
+		
+		# Current
+		self.i = _ChannelVector([0] * self.n_chs)
+		self.i.set_handle = lambda ch,val: self.set_value(ch,'I',val)
+		self.i.get_handle = lambda ch,val: self.get_value(ch,'I')
+		
+		self.imax = _ChannelVector([0] * self.n_chs)
+		self.imax.set_handle = lambda ch,val: self.set_value(ch,'IMAX',val)
+		self.imax.get_handle = lambda ch,val: self.get_value(ch,'IMAX')
+		
+		self.temp = _ChannelVector([0] * self.n_chs)
+		self.temp.get_handle = lambda ch,val: self.get_value(ch,'TEMP')
+
+		self.adcn = _ChannelVector([0] * self.n_chs)
+		self.adcn.get_handle = lambda ch,val: self.get_value('ADCN')
+
+		self.adct = _ChannelVector([0] * self.n_chs)
+		self.adct.get_handle = lambda ch,val: self.get_value('ADCT')
+
+		self.gain = _ChannelVector([0] * self.n_chs)
+		self.gain.set_handle = lambda ch,val: self.set_value(ch,'GAIN',val)
+		self.gain.get_handle = lambda ch,val: self.get_value(ch,'GAIN')
+		
+		self.initialised = True
+	
+	
+	def set_value (self, ch, para='V', new=0):
+		self.issue_command(para, ch=ch, operator='=', value=new)
+	
+	def get_value (self, ch, para='V'):
+		
+		result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch,
+					RW=1, n_lines_requested = 1, 
+					output_regex = '((?:\+|-){0,1}[\d\.]+)\s*([munpf]?)[VA]')
+		
+		print('result =',result)
+		if len(result) > 0:
+			if len(result) > 1:
+				# Decode SI unit scale
+				print('result[1][0] =',result[1][0])
+				scale = 10**(-1*{'':3,'m':0,'u':3,'n':6,'p':9,'f':12}[result[1][0]])
+			else:
+				scale = 1
+			
+			if len(result[0]) > 0:
+				s = result[0][0]
+				if '.' in s:
+					return float(result)*scale
+				else:
+					try:
+						return int(s)*scale
+					except:
+						return s
+		return None
+	
+	def get_all_values (self, para='V'):
+		if self.binary_mode:
+			result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+		else:
+			result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+		if len(result) > 0:
+			if len(result[0]) > 0:
+				out = [None]*len(result)
+				for i in range(len(result)):
+					try:
+						out[i] = float(result[i][0])
+					except IndexError as e:
+						print ("Warning: get_all_values: Failed to index result (length {:}) with error {:}.".format(len(result), e))
+				return out
+		return None
+	
+	def set_all_values (self, para='V', values=0):
+		"""
+		Slice up set commands into vectors for each module, and transmit.
+		
+		 para:      Parameter to set {'V' or 'I'}
+		 values:    Either float/int or list of float/int of length n_chs
+		"""
+		
+		if isinstance(values,list):
+			# Check length
+			if len(values) != self.n_chs:
+				raise AttributeError("Length of values list ({:}) must match total number of channels ({:}).".format(len(values), self.n_chs))
+		else:
+			# If input is atomic, then set each channel to that
+			values = [values] * self.n_chs
+		
+		if self.binary_mode:
+			if para in ['V','VMAX']:
+				fulls = self.v_fulls
+			elif para in ['I','IMAX']:
+				fulls = self.i_fulls
+			
+			# Convert input to ints
+			for i in range(self.n_chs):
+				values[i] = int((values[i]/fulls[i])*0xFFFF)
+			
+			# Map command name to code
+			cmd_code = CMD_CODES[para.upper()]
+			
+			# Send vectorised outputs to each module
+			i = 0
+			for d in self.chain:
+				n = d['n_chs']
+				self.issue_binary_command(cmd_code, ch=i, RW=0, DEXT=1, value_int = values[i:i+n])
+				i += n
+		else:
+			# Send vectorised outputs to each module
+			i = 0
+			for d in self.chain:
+				n = d['n_chs']
+				self.issue_command(para+'VEC', ch=i, operator='=', value = values[i:i+n])
+				i += n
+		
+	
+	def __setattr__(self, attr, val):
+		# Prevent overwrite of internal variables
+		try:
+			if (self.initialised is True and attr in ['v', 'i', 'vmax', 'imax', 'v_full', 'n_chs']):
+				print ("QXOutput.__setattr__: Warning: Overwriting of '{:}' is forbidden.".format(attr) )
+				return
+		except AttributeError:
+			# If we are still initialising, carry on setting variable
+			pass
+		
+		object.__setattr__(self, attr, val)
 
 
 def run_interactive_shell(serial_port_name = None):
