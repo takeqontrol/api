@@ -1,4 +1,4 @@
-# qontrol_api
+# Qontrol API
 Python Library for interfacing with **Qontrol** integrated optics control hardware. See [our website](https://qontrol.co.uk/) for more details!
 
 This library lets you control your Qontrol controller from Python, via a serial interface.
@@ -17,22 +17,21 @@ With python>3.6 installed at the command prompt type:
 `pip install qontrol`
 
 ### The following libraries will also be installed:
-    - serial
-    - collections
+    - pyserial
 
 
 ## Usage
 See help and documentation at https://takeqontrol.github.io/api/
 
 ## Contributing
-
-If you want to contribute to this library contact hello@qontrol.co.uk
+If you want to contribute to this library contact support@qontrol.co.uk
 
 ## Credits
 List of contributors and authors:
 Qontrol
 Joshua W. Silverstone
 Raffaele Santagati
+Dario Quintero
 
 
 ## License

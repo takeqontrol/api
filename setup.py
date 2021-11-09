@@ -16,19 +16,11 @@ setuptools.setup(
     author="Qontrol",
     author_email="support@qontrol.co.uk",
     py_modules=["qontrol"],
-    # packages=setuptools.find_packages(),
-    # install_requires=[
-    #     "ipython",
-    #     "numpy",
-    #     "pandas",
-    #     "sympy",
-    #     # "scipy",
-    #     "cython",
-    #     "tabulate",
-    # ],
-
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        "pyserial",
     ],
 )
