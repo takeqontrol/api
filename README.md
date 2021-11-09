@@ -1,39 +1,81 @@
-# qontrol_api
-Python Library for interfacing with **Qontrol** integrated optics control hardware. See [our website](https://qontrol.co.uk/) for more details!
+# Qontrol API
 
-This library lets you control your Qontrol controller from Python, via a serial interface.
+Integrated photonic devices need large-scale, precise electronic control. We can provide the precision and power you need, at a scale only limited by your ambition. Let’s take photonics into the future.
+ See [our website](https://qontrol.co.uk/) for more details!
+
+Python Library for interfacing with **Qontrol** integrated optics control hardware. This module lets you control Qontrol hardware modules, natively in Python. It provides 
+a main Qontroller class which handles enumeration, low-level communications, sequencing, 
+error-handling, and log maintenance. Subclasses of Qontroller implement module-specific 
+features (e.g. DC current or voltage interfaces, positional interfaces).
+
+Learn more, at www.qontrol.co.uk/support, or get in touch with us at
+support@qontrol.co.uk. Contribute at www.github.com/takeqontrol/api .
 
 ## Table of contents
-    - Installation
-    - Usage
-    - Contributing
-    - Credits
-    - License
+- Installation
+- Usage
+- Credits
+- License
 
 
 ## Installation
-With python>3.6 installed at the command prompt type:
 
-`pip install qontrol`
+Requirements:
+- A Python 3.6 or greater interpreter.
 
-### The following libraries will also be installed:
-    - serial
-    - collections
+Dependencies
+- `pyserial` to enable the Serial interface communications with the Qontrollers. 
+
+### PyPi Installation
+
+The most stable Qontrol Python API is available through the Python Package Index PyPI. Using a bash terminal or similar, this can be installed as follows:
+```bash
+pip install qontrol
+```
+
+A check that the installation has been successfully performed is:
+
+```python
+>>> import qontrol
+>>> qontrol.run_interactive_shell()
+
+- - - - - - - - - - - - - -
+ Qontrol Interactive Shell
+- - - - - - - - - - - - - -
+```
+
+
+
+### Local Development - Github Installation
+
+The latest development version is available through Github as instructed below.
+
+```bash
+git clone https://github.com/takeqontrol/api.git
+cd api/
+```
+
+Local installation can be performed using the `setup.py` installation script.
+
+```bash
+python setup.py develop
+```
+
+
 
 
 ## Usage
 See help and documentation at https://takeqontrol.github.io/api/
 
-## Contributing
-
-If you want to contribute to this library contact hello@qontrol.co.uk
-
 ## Credits
 List of contributors and authors:
 Qontrol
-Joshua W. Silverstone
-Raffaele Santagati
+- Joshua W. Silverstone
+- Raffaele Santagati
+- Dario Quintero
 
+### Contributions
+If you want to contribute to this library contact support@qontrol.co.uk
 
 ## License
 Copyright  &copy; 2020 Qontrol Ltd. 2020

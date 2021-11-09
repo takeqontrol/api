@@ -9,12 +9,8 @@ features (e.g. DC current or voltage interfaces, positional interfaces).
 Learn more, at www.qontrol.co.uk/support, or get in touch with us at
 support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 
-(c) 2020 Qontrol Ltd.
+(c) 2021 Qontrol Ltd.
 """
-
-__version__ = "1.1.0"
-
-
 from __future__ import print_function
 import serial, re, time
 from collections import deque as fifo
@@ -22,6 +18,8 @@ from random import shuffle
 from serial.tools import list_ports
 import sys
 import os
+
+__version__ = "1.1.1"
 
 COMMON_ERRORS = {
 	0:'Unknown error.',
