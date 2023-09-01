@@ -72,6 +72,7 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+build/ # On the main directory, so build and source files do not get confused.
 
 # PyBuilder
 .pybuilder/
@@ -138,3 +139,4 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+

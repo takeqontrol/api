@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'QontrolDoc'
-copyright = '2020, Qontrol'
+copyright = '2023, Qontrol'
 author = 'Qontrol'
 
 # The short X.Y version
