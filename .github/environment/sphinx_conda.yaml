@@ -9,10 +9,19 @@ dependencies:
 
   # Write here all dependencies to compile the sphinx documentation.
   # This list is just an example
+
   - python=3.9
-  - sphinx
-  - sphinx_book_theme
+  - sphinx>=4,<7
   - sphinxcontrib-bibtex
   - nbsphinx
   - recommonmark
   - sphinx-markdown-tables
+  - pip:
+    - sphinx_book_theme
+    - pydata-sphinx-theme>=0.13.3
+    - sphinx-autoapi
+    - sphinx-autobuild
+    - sphinx_autodoc_typehints
+    - sphinx-gallery
+    - sphinx-pydantic
+    - sphinx_rtd_theme
