@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'QontrolDoc'
+project = 'TakeQontrol Documentation'
 copyright = '2023, Qontrol'
 author = 'Qontrol'
 
@@ -62,7 +62,8 @@ master_doc = 'index'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_logo = "_static/logo.png"
+html_theme = 'sphinx_book_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -74,7 +75,7 @@ html_theme = 'sphinx_rtd_theme'
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'QontrolDocdoc'
+htmlhelp_basename = 'TakeQontrol Documentation'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -101,7 +102,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'QontrolDoc.tex', 'QontrolDoc Documentation',
+    (master_doc, 'TakeQontrol.tex', 'TakeQontrol Documentation',
      'Qontrol', 'manual'),
 ]
 
@@ -111,7 +112,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'qontroldoc', 'QontrolDoc Documentation',
+    (master_doc, 'takeqontroldocumentation', 'TakeQontrol Documentation',
      [author], 1)
 ]
 
@@ -122,7 +123,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'QontrolDoc', 'QontrolDoc Documentation',
-     author, 'QontrolDoc', 'One line description of project.',
+    (master_doc, 'TakeQontrol', 'TakeQontrol Documentation',
+     author, 'TakeQontrol', 'One line description of project.',
      'Miscellaneous'),
 ]

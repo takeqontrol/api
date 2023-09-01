@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Qontrol's documentation!
+.. include:: README.rst
 
-This documentation describes teh functionality of the main commands for the python **Qontrol** code. 
+This documentation describes the functionality of the main commands for the python **Qontrol** code. 
 See 'https://qontrol.co.uk/'
 
 

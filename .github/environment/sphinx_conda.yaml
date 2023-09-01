@@ -11,7 +11,7 @@ dependencies:
   # This list is just an example
   - python=3.9
   - sphinx
-  - sphinx_rtd_theme
+  - sphinx_book_theme
   - sphinxcontrib-bibtex
   - nbsphinx
   - recommonmark
