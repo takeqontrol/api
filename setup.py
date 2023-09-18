@@ -5,7 +5,14 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
+<<<<<<< HEAD
 __version__ = "1.1.7"
+=======
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
+__version__ = "1.1.8"
+>>>>>>> 9b3be205d7f8bbc68d45b75b2881e669310d1083
 
 setuptools.setup(
     name="qontrol",
