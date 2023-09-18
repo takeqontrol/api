@@ -5,9 +5,6 @@ from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 __version__ = "1.1.7"
 
 setuptools.setup(
@@ -24,5 +21,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    install_requires=requirements,
+    install_requires=["pyserial"],
 )
