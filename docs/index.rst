@@ -5,9 +5,10 @@
 
 .. include:: README.rst
 
+
+.. include:: intro.rst
 This documentation describes the functionality of the main commands for the python **Qontrol** code. 
 See 'https://qontrol.co.uk/'
-
 
 ===================================
 
@@ -15,9 +16,6 @@ See 'https://qontrol.co.uk/'
    :maxdepth: 2
    :caption: Contents:
 
-   includeme
-   
-   intro
    guide/getting_started
    modules
 
