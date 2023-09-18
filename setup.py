@@ -11,7 +11,7 @@ __version__ = "1.1.7"
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-__version__ = "1.1.8"
+__version__ = "1.1.9"
 >>>>>>> 9b3be205d7f8bbc68d45b75b2881e669310d1083
 
 setuptools.setup(
