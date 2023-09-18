@@ -8,7 +8,7 @@ long_description = (this_directory / "README.md").read_text()
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-__version__ = "1.1.7"
+__version__ = "1.1.8"
 
 setuptools.setup(
     name="qontrol",
