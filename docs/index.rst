@@ -18,6 +18,8 @@ See 'https://qontrol.co.uk/'
 
    guide/getting_started
    modules
+   manuals/index
+   deploy
 
 
 Indices and tables
