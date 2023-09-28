@@ -1,6 +1,6 @@
 The BP8 is a backplane which can host up to eight Qontrol modules, providing power, serial communications, and providing a shielded analog output. Up to 64 analog channels are presented to a shielded connector compatible with the `CAB8 <https://qontrol.co.uk/product/cab8>`_ cable.
 
-.. pdf-include:: ../../_static/manuals/bp8/img/hero3.pdf
+.. pdf-include:: ../../_static/manuals/bp8/img/hero3.pdf#view=Fit
     :toolbar: 0
 
 Description
@@ -54,7 +54,7 @@ CAB8 parallel connection
 
 The `CAB8 <https://qontrol.co.uk/product/cab8>`_ cable provides a shielded parallel connection for 64 analog signals. It comprises 68 conductors, with four conductors reserved. If designing a custom interposer for your own application, leave these four pins floating. A pinout diagram of the CAB8 connector (BP8 side) is shown below.
 
-.. pdf-include::  ../../_static/manuals/bp8/img/cab8.pdf
+.. pdf-include::  ../../_static/manuals/bp8/img/cab8.pdf#view=Fit
     :toolbar: 0
 
 Communications
@@ -80,7 +80,7 @@ The chain interface allows the user to connect multiple backplanes together to m
 
 **Warning**: When chaining multiple backplanes together, pay attention to the maximum current handling limits of the power connectors in the chain, particularly the first one.
 
-.. pdf-include::  ../../_static/manuals/bp8/img/cabchn.pdf
+.. pdf-include::  ../../_static/manuals/bp8/img/cabchn.pdf#view=Fit
     :toolbar: 0
 
 Indicator LED
@@ -98,5 +98,5 @@ Insert the first module into Slot 0 of the backplane. The inserted modules must 
 Mechanical
 ==========
 
-.. pdf-include::  ../../_static/manuals/bp8/img/mech.pdf
+.. pdf-include::  ../../_static/manuals/bp8/img/mech.pdf#view=Fit
     :toolbar: 0
