@@ -808,7 +808,7 @@ class QXOutput(Qontroller):
 	error_desc_dict = {**COMMON_ERRORS, **Qx_ERRORS}
 
 	def __init__(self, *args, **kwargs):
-		super(type(self), self).__init__(*args, **kwargs)
+		super().__init__(*args, **kwargs)
 		
 		self.n_chs = 0
 		self.v_full = 0
@@ -1007,7 +1007,7 @@ class MXMotor(Qontroller):
 	error_desc_dict = {**COMMON_ERRORS, **Mx_ERRORS}
 	
 	def __init__(self, *args, **kwargs):
-		super(type(self), self).__init__(*args, **kwargs)
+		super().__init__(*args, **kwargs)
 
 		self.n_chs = 0
 		self.v_full = 0
@@ -1310,7 +1310,7 @@ class SXInput(Qontroller):
 	error_desc_dict = {**COMMON_ERRORS, **Qx_ERRORS}
 
 	def __init__(self, *args, **kwargs):
-		super(type(self), self).__init__(*args, **kwargs)
+		super().__init__(*args, **kwargs)
 		
 		self.n_chs = 0
 		self.i_full = 0
