@@ -1,0 +1,27 @@
+{
+    "name": "Default VirtualModule Program",
+    "data": {
+        
+        "nup=0\n": {
+            "action": "QUEUE_OUT",
+            "data": "OK\n"
+        },
+        
+        "nupall?\n": {
+            "action": "QUEUE_OUT",
+            "data": "Q8iv-0000: 0\n"
+        },
+        
+        "id?\n": {
+            "action": "QUEUE_OUT",
+            "data": "Q8iv-0000"
+        }
+    },
+    
+    "default": {
+        "action": "NOP",
+        "data": ""
+    },
+
+    "initial_out": ["OK\n"]
+}
