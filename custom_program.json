@@ -18,9 +18,9 @@
         }
     },
     
-    "default": {
-        "action": "NOP",
-        "data": ""
+    "*": {
+        "action": "RUN_CUSTOM",
+        "func": "handle_wildcard"
     },
 
     "initial_out": ["OK\n"]
