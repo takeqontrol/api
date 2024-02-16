@@ -321,7 +321,11 @@ class VirtualModule:
         self._inc_cmd_cnt(cmd)
         
         responses = self.program.lookup(cmd)
-        response = responses[self._read_cmd_cnt(cmd)-1]
+
+        try:
+            response = responses[self._read_cmd_cnt(cmd)-1]
+        except KeyError:
+            return
         
         
         match response['action']:
