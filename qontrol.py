@@ -485,7 +485,7 @@ class Qontroller(object):
         
         def issue_command (self, command_id, ch=None, operator='', 
                 value=None, n_lines_requested=2**31, target_errors=None, 
-                output_regex='(.*)', special_timeout=None):
+                output_regex='(.*)', special_timeout=None, return_cmd=False):
                 """
                 Transmit command to device, get response.
                 
@@ -514,7 +514,7 @@ class Qontroller(object):
                 else:
                         tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator, value)
                 
-                self.transmit(tx_str+'\n')
+                self.transmit(tx_str+'\n')                    
                 
                 # Log it
                 self.log_append(type= 'set' if operator == '=' else 'get', value=value, id=command_id, ch=ch, desc='Command: "'+tx_str+'".')

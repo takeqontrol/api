@@ -11,9 +11,9 @@ def cmd(id, ch='', val=''):
     op = '=' if val != '' else '?'
 
     
-    print(f'> {id}{ch}{op}{val}')
+    #print(f'> {id}{ch}{op}{val}')
     res = q.issue_command(command_id=id, ch=ch, operator=op, value=val)
-    print(f'< {res}')
+    #print(f'< {res}')
             
 #########################################################
 # Program
@@ -33,7 +33,7 @@ def handle_wildcard(cmd, cnt, vm):
     return vm._queue_out(f'idk how to handle {cmd}')
 
 
-p = Program.from_json_file('test.json', custom=c)
+p = Program.from_json_file('./progs/test.json', custom=c)
 vm = VirtualModule(program=p)
 
 q = qontrol.Qontroller(virtual_port=vm.port)
@@ -43,25 +43,27 @@ q = qontrol.Qontroller(virtual_port=vm.port)
 #########################################################
 
 cmd('id')
-
 cmd('lifetime')
-cmd('id')
-cmd('id')
-cmd('id')
-
 cmd('firmware')
-
-
-cmd('log')
-
-
-for i in range(N_CH):
-     cmd('v', ch=i)
-
-for i in range(N_CH):
-     cmd('i', ch=i)
-
-cmd('v', ch=1, val=0.2)
+cmd('vall')
+cmd('iall')
 cmd('vall')
 
+
+def print_log(log):
+    t = 0
+    for item in log:
+        time_ms = 1000*item['proctime']
+        type = item['type']
+        desc = item['desc']
+
+        if isinstance(desc, str):
+            desc = desc.strip()
+
+        print(f'{time_ms} {type} {desc} ')
+
+
+print_log(q.log)
+
 #pprint(vm.cmd_cnt, indent=4)
+

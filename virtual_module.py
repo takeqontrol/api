@@ -1,15 +1,26 @@
 import os, pty, serial
 import time
-from enum import Enum
+from enum import Enum, auto
 from collections import deque
 from dataclasses import dataclass, field
 from copy import deepcopy
 import json
-
+from pprint import pprint
+from threading import Thread
 
 # Actions the program requests the VM to perform
 Action = Enum('Action', ['QUEUE_OUT', 'QUEUE_OUT_MANY', 'RUN_CUSTOM','NOP'])
 
+class Action(Enum):
+    QUEUE_OUT = auto()
+    QUEUE_OUT_MANY = auto()
+    RUN_CUSTOM = auto()
+    NOP = auto()
+
+    def __str__(self):
+        return self.name
+
+print(Action.QUEUE_OUT)
 
 class VirtualPort:
     """Virtual Serial Port. Provides a bridge between the API and the virtual module."""
@@ -102,7 +113,123 @@ class Program:
         
         return entry
         
+
+
+
+@dataclass
+class Response:
+    delay: float
+    data: list[str]
+
+@dataclass
+class LogEntry:
+    cmd: str
+    responses: list[Response] = field(default_factory= lambda: [])
+
+class ProgramGenerator:
+
+    def __init__(self, name, q, default=None):
+        self.q = q
+
+        self.prog = {}
+        self.prog['name'] = name
+        self.prog['data'] = {}
+        self.prog['*'] = {
+                'action': 'NOP',
+                'data': ''
+        } if default is None else default
+
         
+        self.prog['initial_out'] = ['OK\n']
+
+    def cmd(self, id, ch='', val=''):
+        op = '=' if val != '' else '?'
+
+        cs = f'{id}{ch}{op}{val}\n'
+        res = self.q.issue_command(command_id=id, ch=ch, operator=op, value=val)
+
+        action = str(Action.QUEUE_OUT)
+        if len(res) == 1:
+            res = res[0][0]
+        else:
+            action = str(Action.QUEUE_OUT_MANY)
+            res = list(map(lambda x: x[0], res))
+        
+        
+        self.prog['data'][cs] = {
+            'action': action,
+            'data': res
+        }
+
+    def _write_prog_entry(self, log_entry):
+        data = []
+        frames = []
+        delays = []
+        
+        for res in log_entry.responses:
+            action = Action.QUEUE_OUT_MANY
+            data.extend(res.data)
+            frames.append(len(res.data))
+            delays.append(res.delay)
+
+        if len(frames) == 1:
+            self.prog['data'][log_entry.cmd] = {
+                'action': str(Action.QUEUE_OUT),
+                'data': data[0],
+                'delay': delays[0]
+            }
+        else:
+            self.prog['data'][log_entry.cmd] = {
+                'action': str(Action.QUEUE_OUT_MANY),
+                'data': data,
+                'divide': {
+                    'frames': frames,
+                    'delays': delays
+                }
+            }
+        
+    def parse_log(self, log):
+        prev_time = 0
+        parsed_log = deque()
+        cmd_sent = 0
+        
+        for item in log:
+            time_ms = 1000*item['proctime']
+            type = item['type']
+            desc = item['desc']
+
+            if time_ms == prev_time:
+                continue
+
+    
+            match type:
+                case 'tx':
+                    parsed_log.append(LogEntry(desc))
+                    cmd_sent = time_ms
+                case 'rcv':
+                    cmd = parsed_log.pop()
+                    cmd.responses.append(Response(time_ms - cmd_sent,
+                                                  desc))
+                    parsed_log.append(cmd)
+                    cmd_sent = time_ms
+                    
+            prev_time = time_ms
+
+        return parsed_log
+      
+        
+    def from_log(self, log):
+        parsed_log = self.parse_log(log)
+        
+        for i in parsed_log:
+            self._write_prog_entry(i)
+            
+        
+
+    def write_prog(self, filename):
+        with open(filename, 'w') as f:
+            json.dump(self.prog, f, indent=4)
+
 
 
 class VirtualModule:
@@ -114,14 +241,18 @@ class VirtualModule:
     def __init__(self, program=default_program):
         self.program = program
         self.port = VirtualPort(self)
-        self.out = deepcopy(self.program.initial_out)
+        self.out = deque()
         self.port.in_waiting = len(self.out)
         self.cmd_cnt = {'all': 0}
+        self.outstanding = deque()
         
     
     def _get_next_out(self):
-        res = self.out.pop()
-        self.port.in_waiting -= 1
+        res = self.out.popleft()
+        self.port.in_waiting = len(self.out)
+        
+        if res is None:
+            res = ' '            
 
         if isinstance(res, str):
             res =  res.encode('ascii')
@@ -131,7 +262,7 @@ class VirtualModule:
 
     def _queue_out(self, i):
         self.out.append(i)
-        self.port.in_waiting += 1
+        self.port.in_waiting = len(self.out)
 
 
     def _inc_cmd_cnt(self, cmd):
@@ -156,12 +287,15 @@ class VirtualModule:
             
             case VirtualPort.Cmd.WRITE:
                 self._inc_cmd_cnt(VirtualPort.Cmd.WRITE)
-                return self.handle_write(args, kwargs)
+                t = Thread(target=self.handle_write, args=(args, kwargs))
+                t.start()
+                #return self.handle_write(args, kwargs)
             
             case VirtualPort.Cmd.CLOSE:
                 self._inc_cmd_cnt(VirtualPort.Cmd.CLOSE)
                 # TODO: implement
-                
+
+             
 
     def handle_write(self, args, kwargs):
         cmd = args[0].decode('ascii')
@@ -170,12 +304,44 @@ class VirtualModule:
         
         match response['action']:
             case Action.QUEUE_OUT:
+                delay = response['delay']
+                time.sleep(delay / 1000)
                 self._queue_out(response['data'])
 
             case Action.QUEUE_OUT_MANY:
-                for i in reversed(response['data']):
-                    self._queue_out(i)
+                if 'divide' in response:
+                    parts = partition(response['data'],
+                                      response['divide']['frames'])
+                    delays = response['divide']['delays']
+
+                    for d, p in zip(delays, parts):
+                        time.sleep(d / 1000)
+                        for i in p:
+                            self._queue_out(i)
+
+                else:
+                    time.sleep(d / 1000)
+                    for i in response['data']:
+                        self._queue_out(i)
                 
                 
             case Action.RUN_CUSTOM:
                 return response['func'](cmd, self._read_cmd_cnt(cmd), self)
+
+
+
+def partition(xs, frames):
+    chunks = []
+    current_idx = 0
+    for i in frames:
+        chunks.append(xs[current_idx:current_idx+i])
+        current_idx = current_idx+i
+    
+    return chunks          
+
+def sleep(ms):
+    now = time.clock_gettime_ns(time.CLOCK_THREAD_CPUTIME_ID)
+    end =  now + (ms * 1e+6)
+    while now < end:
+        now = time.clock_gettime_ns(time.CLOCK_THREAD_CPUTIME_ID)
+    
