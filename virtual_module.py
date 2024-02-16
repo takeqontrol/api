@@ -20,7 +20,6 @@ class Action(Enum):
     def __str__(self):
         return self.name
 
-print(Action.QUEUE_OUT)
 
 class VirtualPort:
     """Virtual Serial Port. Provides a bridge between the API and the virtual module."""
@@ -107,7 +106,6 @@ class Program:
 
     @classmethod
     def _build_entry(cls, entry, custom=None):
-        print(f'---> {entry}')
         entry['action'] = Action[entry['action']]
 
         match entry['action']:
@@ -324,7 +322,6 @@ class VirtualModule:
         
         responses = self.program.lookup(cmd)
         response = responses[self._read_cmd_cnt(cmd)-1]
-        print(f'===> {response}')
         
         
         match response['action']:
