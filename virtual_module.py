@@ -97,12 +97,17 @@ class Program:
     @classmethod
     def _build_data(cls, data, custom=None):
         for v in data.values():
+            if isinstance(v, list):
+                for i in v:
+                    cls._build_entry(i, custom)
+                continue
             cls._build_entry(v, custom)
 
         return data
 
     @classmethod
     def _build_entry(cls, entry, custom=None):
+        print(f'---> {entry}')
         entry['action'] = Action[entry['action']]
 
         match entry['action']:
@@ -172,21 +177,37 @@ class ProgramGenerator:
             frames.append(len(res.data))
             delays.append(res.delay)
 
-        if len(frames) == 1:
-            self.prog['data'][log_entry.cmd] = {
+
+        if not log_entry.cmd in self.prog['data']:
+                self.prog['data'][log_entry.cmd] = []
+
+
+        # TODO: FIx this
+        if len(data) == 1:
+            self.prog['data'][log_entry.cmd].append({
                 'action': str(Action.QUEUE_OUT),
                 'data': data[0],
                 'delay': delays[0]
-            }
+            })
         else:
-            self.prog['data'][log_entry.cmd] = {
+            if len(frames) == 1:
+            
+                self.prog['data'][log_entry.cmd].append({
+                    'action': str(Action.QUEUE_OUT_MANY),
+                    'data': data,
+                    'delay': delays[0]
+                })
+            else:
+
+                self.prog['data'][log_entry.cmd].append({
                 'action': str(Action.QUEUE_OUT_MANY),
                 'data': data,
                 'divide': {
                     'frames': frames,
                     'delays': delays
                 }
-            }
+            })
+                
         
     def parse_log(self, log):
         prev_time = 0
@@ -299,13 +320,18 @@ class VirtualModule:
 
     def handle_write(self, args, kwargs):
         cmd = args[0].decode('ascii')
-        response = self.program.lookup(cmd)
         self._inc_cmd_cnt(cmd)
+        
+        responses = self.program.lookup(cmd)
+        response = responses[self._read_cmd_cnt(cmd)-1]
+        print(f'===> {response}')
+        
         
         match response['action']:
             case Action.QUEUE_OUT:
                 delay = response['delay']
-                time.sleep(delay / 1000)
+                #time.sleep(delay / 1000)
+                sleep(delay)
                 self._queue_out(response['data'])
 
             case Action.QUEUE_OUT_MANY:
@@ -315,12 +341,14 @@ class VirtualModule:
                     delays = response['divide']['delays']
 
                     for d, p in zip(delays, parts):
-                        time.sleep(d / 1000)
+                        #time.sleep(d / 1000)
+                        sleep(d)
                         for i in p:
                             self._queue_out(i)
 
                 else:
-                    time.sleep(d / 1000)
+                    #time.sleep(d / 1000)
+                    sleep(response['delay'])
                     for i in response['data']:
                         self._queue_out(i)
                 
@@ -340,8 +368,9 @@ def partition(xs, frames):
     return chunks          
 
 def sleep(ms):
-    now = time.clock_gettime_ns(time.CLOCK_THREAD_CPUTIME_ID)
-    end =  now + (ms * 1e+6)
+    now = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID) / 1e+6
+    end =  now + ms
+    #print(f'now = {now} end = {end} diff = {end - now}')
     while now < end:
-        now = time.clock_gettime_ns(time.CLOCK_THREAD_CPUTIME_ID)
-    
+        now = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID)  / 1e+6
+    #print(f'>>> {now}  {now - end}')

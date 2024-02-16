@@ -66,6 +66,23 @@ def pc_2():
     
     pc.from_log(q.log)
     pc.write_prog(sys.argv[1])
+    print_log(q.log)
+
+
+def print_log(log):
+    t = 0
+    
+    for item in log:
+        time_ms = 1000*item['proctime']
+        type = item['type']
+        desc = item['desc']
+
+        if isinstance(desc, str):
+            desc = desc.strip()
+
+        print(f'{time_ms} {type} {desc} ')
+
+
 
 
 

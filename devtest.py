@@ -52,6 +52,7 @@ cmd('vall')
 
 def print_log(log):
     t = 0
+    
     for item in log:
         time_ms = 1000*item['proctime']
         type = item['type']
