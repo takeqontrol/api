@@ -1,0 +1,52 @@
+{
+    "name": "Example Program",
+    "data": {
+        "nup=0\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "\u0006OK\n",
+                "delay": 5.0
+            }
+        ],
+        
+        "nupall?\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****: 0\n",
+                "delay": 16.0
+            }
+        ],
+        
+        "id?\n": [
+            {
+                "action": "RUN_CUSTOM",
+                "func": "id_handler"
+            }
+        ],
+        
+        "test?\n": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "one",
+                    "two",
+                    "three",
+                    "four"
+                ],
+                "divide": {
+                    "frames": [2, 2],
+                    "delays": [1.0, 10.0]
+                }
+            }
+        ]
+    },
+    
+    "*": {
+        "action": "QUEUE_OUT",
+        "data": "idk\n",
+        "delay": 0.0
+    } ,
+    "initial_out": [
+        "OK\n"
+    ]
+}

@@ -125,7 +125,7 @@ class Action(Enum):
 class VirtualModule:
     """Emulates a real device.
 
-
+x
     The qontroller interacts with the virtual module (VM) through a virtual port. 
     The VM is configured by programs (see Program class) which tell it
     how to behave when it sees a certain command.
@@ -266,7 +266,6 @@ class VirtualModule:
             
             case VirtualPort.Event.WRITE:
                 self._inc_cmd_cnt(VirtualPort.Event.WRITE)
-
                 # Start the write handler in a new thread
                 t = Thread(target=self.handle_write_event, args=(args, kwargs))
                 t.start()
@@ -297,6 +296,11 @@ class VirtualModule:
         # Get responses from program
         responses = self.program[cmd]
 
+        # TODO: TEMP fix for default
+        # I need to figure out what is wrong
+        if not isinstance(responses, list):
+            responses = [responses]
+        
         # If there no responses there is nothing to do
         if not responses:
             return 
@@ -305,6 +309,7 @@ class VirtualModule:
         # if we can, choose the one that corresponds
         # to the current command count
         index = (self._read_cmd_cnt(cmd) - 1) % len(responses)
+        print(index, responses)
         response = responses[index]
 
         match response['action']:
