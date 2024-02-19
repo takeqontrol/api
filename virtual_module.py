@@ -1,31 +1,71 @@
-import os, pty, serial
 import time
+import json
+import logging
+import pdb
+import inspect
 from enum import Enum, auto
 from collections import deque
 from dataclasses import dataclass, field
-from copy import deepcopy
-import json
-from pprint import pprint
 from threading import Thread
 
-# Actions the program requests the VM to perform
-Action = Enum('Action', ['QUEUE_OUT', 'QUEUE_OUT_MANY', 'RUN_CUSTOM','NOP'])
 
-class Action(Enum):
-    QUEUE_OUT = auto()
-    QUEUE_OUT_MANY = auto()
-    RUN_CUSTOM = auto()
-    NOP = auto()
 
-    def __str__(self):
-        return self.name
+formatter = logging.Formatter('%(levelname)s: %(message)s')
+log = logging.getLogger('virtual_module')
+
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+ch.setFormatter(formatter)
+log.addHandler(ch)
+
+
+def error(msg):
+    log.error(msg)
+    exit(1)
+    
+
+
+class CustomHandler:
+    """Custom behaviour for programs.
+
+    Allows the program to specify handlers to run for different commands.
+    All handlers must be registered with this module before they can be ran.
+    """
+    def register(self, func):
+        """Registers a custom command handler.
+
+        Handlers must accept 3 parameters:
+          cmd - The command string
+          cnt - How many times the command was called
+          vm  - A reference to the virtual module
+
+        Note that this can be used as a decorator.
+        E.g.:
+
+          c = CustomHandler()
+
+          @c.register
+          def foo(cmd, cnt, vm):
+              pass
+        """
+        args = inspect.getfullargspec(func).args
+
+        if len(args) != 3:
+            error('Custom functions must accept 3 arguments!')
+        
+        setattr(self, func.__name__, func)
 
 
 class VirtualPort:
-    """Virtual Serial Port. Provides a bridge between the API and the virtual module."""
+    """Provides a bridge between a Qontroller and a virtual device.
 
-    # Different commands
-    Cmd = Enum('Cmd', ['READ', 'WRITE', 'CLOSE', 'READLINE']) 
+    The interface of this class mimics Serial from pyserial.
+    When a method is called it simply notifies the virtual module
+    by passing a command and lets it handle everything. 
+    """
+
+    # Events passed to the virtual module
+    Event = Enum('Event', ['READ', 'WRITE', 'CLOSE', 'READLINE']) 
 
     def __init__(self, device):
         # Virtual module
@@ -33,89 +73,413 @@ class VirtualPort:
 
         # Port is always open. Maybe we want to change it in the future
         self.is_open = True
+
+        # Number of items ready to be read
+        # This is updated by the virtual module
         self.in_waiting = 0
 
     def read(self, *args, **kwargs):
-        return self.device.handle_cmd(VirtualPort.Cmd.READ, args, kwargs)
-
-    def write(self, *args, **kwargs):
-        return self.device.handle_cmd(VirtualPort.Cmd.WRITE, args, kwargs)
-
-    def close(self, *args, **kwargs):
-        return self.device.handle_cmd(VirtualPort.Cmd.CLOSE, args, kwargs)
+        """Notify the VM that a READ event occured."""
+        return self.device.handle_event(VirtualPort.Event.READ, args, kwargs)
 
     def readline(self, *args, **kwargs):
-        return self.device.handle_cmd(VirtualPort.Cmd.READLINE, args, kwargs)
+        """Notify the VM that a READLINE event occured."""
+        return self.device.handle_event(VirtualPort.Event.READLINE, args, kwargs)
 
+    def write(self, *args, **kwargs):
+        """Notify the VM that a WRITE event occured."""
+        return self.device.handle_event(VirtualPort.Event.WRITE, args, kwargs)
 
+    def close(self, *args, **kwargs):
+        """Notify the VM that a CLOSE event occured."""
+        return self.device.handle_event(VirtualPort.Event.CLOSE, args, kwargs)
 
-class CustomBehaviour:
+    
+class Action(Enum):
     """
-    Custom behaviour for programs.
-
-    Allows the program to specify hooks to run for different commands.
-    All hooks must be registered with this module before they can be ran.
+    Represents actions the virtual module needs to perform. 
     """
-    def register(self, func):
-        setattr(self, func.__name__, func)
+
+    # Write a single message to the output queue
+    QUEUE_OUT = auto()
+
+    # Write a list of messages to the output queue
+    QUEUE_OUT_MANY = auto()
+
+    # Run a custom function
+    # The function must be registered in a custom behaviour
+    RUN_CUSTOM = auto()
+
+    # No operation
+    NOP = auto()
+
+    def __str__(self):
+        """Returns the enum name as a str"""
+        return self.name
+
+    @classmethod
+    def list(cls):
+        """Returns a list of all enums"""
+        return list(map(lambda c: str(c), cls))
+
+class VirtualModule:
+    """Emulates a real device.
+
+
+    The qontroller interacts with the virtual module (VM) through a virtual port. 
+    The VM is configured by programs (see Program class) which tell it
+    how to behave when it sees a certain command.
+
+                                ┌─────────────────┐
+                                │  VirtualModule  │
+                                │                 │
+     ┌────────────┐             │  ┌───────────┐  │
+     │ Qontroller │◄────────────┼─►│VirtualPort│  │
+     └────────────┘             │  └───────────┘  │
+                                │                 │
+                                │  ┌───────────┐  │
+                                │  │  Program  │  │
+                                │  └───────────┘  │
+                                │                 │
+                                └─────────────────┘
+
+    The module is a simple state machine. It receives an event
+    from the port (currently only READLINE and WRITE are handled)
+    and then responds accordingly.
+
+    It keeps a queue of out messages which are ready to be sent
+    to the qontroller when a READLINE event is raised.
+
+    When it receives a WRITE event it checks if the command that was sent
+    is in the current program. If it is then it carries out the specified action
+    (see Action Enum). Note that if the program contains a delay, the module
+    will need to sleep before carrying out its action. If the Qontroller and the VM
+    run on the same thread it won't be possible to emulate the delay, as the
+    qontroller needs to run while the module is sleeping. Because of that the WRITE
+    handler runs on a separate thread. 
+
+    Possible actions are:
+    
+         - QUEUE_OUT : Put on the out queue the data specified in the program.
+         
+         - QUEUE_OUT_MANY: This is the same as QUEUE_OUT but the data  
+           is a list, not a single item.
+
+           Sometimes the device might respond to a command in chunks.
+           To emulate this the program can specify a 'divide' component
+           which lets the module know how it needs to divide its response .
+           Note that each chunk will also come with its own delay.
+
+        - RUN_CUSTOM: Run a custom handler.
+
+        - NOP: Do nothing. 
+    """
+
+    def __init__(self, program):
+        """Create a VirtualModule instance.
+
+        Args:
+            program (Program): virtual module program
+ 
+        """
+        # Current program
+        self.program = program
+
+        # Virtual port 
+        self.port = VirtualPort(self)
+
+        # Queue of messages which are ready to be sent
+        # Note: Thread safe when reading/writing to/from opposite ends
+        self.out = deque()
+
+        # Initialise port's in_waiting count
+        self.port.in_waiting = len(self.out)
+
+        # To keep track of how many times each command was called
+        self.cmd_cnt = {'all': 0}
+        
+        
+    
+    def _get_next_out(self):
+        """Return the next item from the out queue."""
+        res = self.out.popleft()
+        self.port.in_waiting -= 1
+
+        # If the response is a string
+        # we need to encode it
+        if isinstance(res, str):
+            res = res.encode('ascii')
+            
+        return res
+
+    def _queue_out(self, msg):
+        """Put a message in the out queue.
+
+        Args:
+           msg - message
+           
+        """
+        self.out.append(msg)
+        self.port.in_waiting += 1
+
+
+    def _inc_cmd_cnt(self, cmd):
+        """Increment the command counter.
+
+        Args:
+           cmd (str) - Command to increment the counter for
+           
+        """
+        # If the cmd hasn't been seen before
+        if not cmd in self.cmd_cnt:
+            self.cmd_cnt[cmd] = 0
+
+        self.cmd_cnt[cmd] += 1
+
+        # Also keep track of the total
+        # number of commands
+        self.cmd_cnt['all'] += 1
+        
+    def _read_cmd_cnt(self, cmd):
+        """Return the count for a command.
+
+        Args:
+            cmd - Command
+            
+        """
+        return self.cmd_cnt.get(cmd, 0)
+
+    def handle_event(self, event, args, kwargs):
+        """Handle a port event.
+
+        Args:
+            event  - The event that occured
+            args   - args passed from the qontroller
+            kwargs - kwargs passed from the qontroller
+        """
+        match event:
+            case VirtualPort.Event.READLINE:
+                self._inc_cmd_cnt(VirtualPort.Event.READLINE)
+
+                # Send a message from the out queue
+                return self._get_next_out()
+            
+            case VirtualPort.Event.WRITE:
+                self._inc_cmd_cnt(VirtualPort.Event.WRITE)
+
+                # Start the write handler in a new thread
+                t = Thread(target=self.handle_write_event, args=(args, kwargs))
+                t.start()
+            
+            case VirtualPort.Event.CLOSE:
+                self._inc_cmd_cnt(VirtualPort.Event.CLOSE)
+                # TODO: implement
+
+            case VirtualPort.Event.READ:
+                self._inc_cmd_cnt(VirtualPort.Event.READ)
+                # TODO: implement
+
+             
+
+    def handle_write_event(self, args, kwargs):
+        """Handle write event from port.
+
+         Args:
+            args   - args passed from the qontroller
+            kwargs - kwargs passed from the qontroller
+        """
+
+        # Decode the command that came from the qontroller
+        # Assume ASCII commands for now ...
+        cmd = args[0].decode('ascii')
+        self._inc_cmd_cnt(cmd)
+
+        # Get responses from program
+        responses = self.program[cmd]
+
+        # If there no responses there is nothing to do
+        if not responses:
+            return 
+        
+        # Every command can have multiple responses
+        # if we can, choose the one that corresponds
+        # to the current command count
+        index = (self._read_cmd_cnt(cmd) - 1) % len(responses)
+        response = responses[index]
+
+        match response['action']:
+            
+            case Action.QUEUE_OUT:
+                delay = response['delay']
+                data = response['data']
+                
+                sleep(delay)
+                self._queue_out(data)
+
+            case Action.QUEUE_OUT_MANY:
+                # Check if we need to segment the response
+                if 'divide' in response:
+
+                    # We do, so partition the data into chunks
+                    parts = partition(response['data'],
+                                      response['divide']['frames'])
+                    
+                    delays = response['divide']['delays']
+
+                    # For every partition
+                    for d, p in zip(delays, parts):
+                        # Sleep and the queue responses
+                        sleep(d)
+                        for i in p:
+                            self._queue_out(i)
+
+                else:
+                    # We don't need to partition
+                    sleep(response['delay'])
+                    for i in response['data']:
+                        self._queue_out(i)
+                
+                
+            case Action.RUN_CUSTOM:
+                # Run the custom handler
+                return response['func'](cmd, self._read_cmd_cnt(cmd), self)
+
 
     
 
 
 @dataclass
 class Program:
-    """VirtualModule programs."""
-    name: str = ""
-    data: dict = field(default_factory= lambda: {})
-    default: dict = field(default_factory= lambda: {})
-    initial_out: list = field(default_factory= lambda: [])
-    custom: CustomBehaviour = None
+    """Virtual Module Program.
 
-    def lookup(self, cmd):
+    Programs are dictionaries that map commands to responses.
+
+    They can be written as python dicts or json files.
+
+    Program structure:
+
+      name        - Program name
+      data        - Command to entry map
+      *           - Default entry. Used for unknown commands
+      initial_out - Initial contents of output queue
+
+
+    Entry structure:
+      action - Action for the VM.
+               Determines other entry attributes
+
+      QUEUE_OUT:
+        data  - single message
+        delay - Delay in ms (float
+
+      QUEUE_OUT_MANY:
+        data - list of messages
+
+        divide [optional] - Specifies segmentation layout
+          frames - Partition lengths (list[int])
+          delays - Partition delays  (list[float])
+
+        delay [if divide not specified] - Delay in ms (float)
+
+      RUN_CUSTOM:
+        func - Handler function
+
+      NOP:
+        data - Ignored
+    """
+
+    # Program name
+    name: str = ""
+
+    # The dictionary data
+    data: dict = field(default_factory= lambda: {})
+
+    # Default entry, the one under *
+    default: dict = field(default_factory= lambda: {})
+
+    # Initial output queue
+    initial_out: list = field(default_factory= lambda: [])
+
+    # Custom handlers
+    custom: CustomHandler = None
+
+    
+
+    def __getitem__(self, cmd):
         """Look up the response for a command."""
-        return self.data.get(cmd, self.default)
+        return  self.data.get(cmd, self.default)
 
     #########################################################
     # JSON Format 
     #########################################################
     @classmethod
     def from_json_file(cls, filename, custom=None):
-        with open(filename) as f:
-            program = json.load(f)
-            return cls.from_json(program, custom)
+        """Create a program from a json file.
+
+        Args:
+            filename (str)    - Filename
+            custom (CustomHandler, optional) - custom handlers
+        """
+        with open(filename, 'r') as f:
+            try: 
+                program = json.load(f)
+            except Exception as e:
+                log.exception(f'Loading {filename}')
+                exit(1)
+                
+            return cls.from_dict(program, custom)
             
     @classmethod
-    def from_json(cls, json, custom=None):
-        name = json['name']
-        data = cls._build_data(json['data'], custom)
-        default = cls._build_entry(json['*'], custom)
-        initial_out = json['initial_out']
+    def from_dict(cls, prog, custom=None):
+        """Create a program from a dictionary .
+
+        Args:
+            prog (dict) - Program dict
+            custom (CustomHandler, optional) - custom handlers
+        """
+        try:
+            name = prog['name']
+            data = cls._parse_data(prog['data'], custom)
+            default = cls._parse_entry(prog['*'], custom)
+            initial_out = prog['initial_out']
+            
+        except Exception:
+            log.exception('Creating program from json data')
+  
 
         return cls(name, data, default, initial_out, custom)
-        
+
+
     @classmethod
-    def _build_data(cls, data, custom=None):
-        for v in data.values():
-            if isinstance(v, list):
-                for i in v:
-                    cls._build_entry(i, custom)
-                continue
-            cls._build_entry(v, custom)
+    def _parse_data(cls, data, custom=None):
+        """Parse the program data"""
+
+        for entries in data.values():
+            for entry in entries:
+                cls._parse_entry(entry, custom)
 
         return data
 
     @classmethod
-    def _build_entry(cls, entry, custom=None):
-        entry['action'] = Action[entry['action']]
+    def _parse_entry(cls, entry, custom=None):
+        """Parse a single command entry.
+        """
 
-        match entry['action']:
-            case Action.RUN_CUSTOM:
-                if custom is None:
-                    raise ValueError("Program contains custom behaviour which was not provided!")
-                entry['func'] = getattr(custom, entry['func'])
-        
+        # Convert the action to its enum
+        action = Action[entry['action']]
+        entry['action'] = action
+
+        # In case of RUN_CUSTOM
+        # load the appropriate handler
+        if action == Action.RUN_CUSTOM:
+            func = getattr(custom, entry['func'], None)
+
+            if func is None:
+                error(f"Can't find custom behaviour {entry['func']}!")
+                    
+            entry['func'] = func
+                
         return entry
-        
 
 
 
@@ -128,238 +492,142 @@ class Response:
 class LogEntry:
     cmd: str
     responses: list[Response] = field(default_factory= lambda: [])
+        
 
 class ProgramGenerator:
+    """Generates a Program from a Qontroller log"""
 
-    def __init__(self, name, q, default=None):
-        self.q = q
 
+    def __init__(self, name, log):
         self.prog = {}
         self.prog['name'] = name
         self.prog['data'] = {}
         self.prog['*'] = {
                 'action': 'NOP',
                 'data': ''
-        } if default is None else default
-
-        
+        }
         self.prog['initial_out'] = ['OK\n']
 
-    def cmd(self, id, ch='', val=''):
-        op = '=' if val != '' else '?'
 
-        cs = f'{id}{ch}{op}{val}\n'
-        res = self.q.issue_command(command_id=id, ch=ch, operator=op, value=val)
+        self.parsed_log = self._parse_log(log)
 
-        action = str(Action.QUEUE_OUT)
-        if len(res) == 1:
-            res = res[0][0]
-        else:
-            action = str(Action.QUEUE_OUT_MANY)
-            res = list(map(lambda x: x[0], res))
-        
-        
-        self.prog['data'][cs] = {
-            'action': action,
-            'data': res
-        }
-
-    def _write_prog_entry(self, log_entry):
-        data = []
-        frames = []
-        delays = []
-        
-        for res in log_entry.responses:
-            action = Action.QUEUE_OUT_MANY
-            data.extend(res.data)
-            frames.append(len(res.data))
-            delays.append(res.delay)
+        for i in self.parsed_log:
+            self._gen_entry(i)
 
 
-        if not log_entry.cmd in self.prog['data']:
-                self.prog['data'][log_entry.cmd] = []
 
+    def _parse_log(self, log):
+        """Parse a Qontroller log.
 
-        # TODO: FIx this
-        if len(data) == 1:
-            self.prog['data'][log_entry.cmd].append({
-                'action': str(Action.QUEUE_OUT),
-                'data': data[0],
-                'delay': delays[0]
-            })
-        else:
-            if len(frames) == 1:
+        Args:
+            log - Qontroller log
             
-                self.prog['data'][log_entry.cmd].append({
-                    'action': str(Action.QUEUE_OUT_MANY),
-                    'data': data,
-                    'delay': delays[0]
-                })
-            else:
-
-                self.prog['data'][log_entry.cmd].append({
-                'action': str(Action.QUEUE_OUT_MANY),
-                'data': data,
-                'divide': {
-                    'frames': frames,
-                    'delays': delays
-                }
-            })
-                
-        
-    def parse_log(self, log):
-        prev_time = 0
+        Returns:
+            Parsed log (deque of LogEntry objects)
+        """
         parsed_log = deque()
-        cmd_sent = 0
-        
+        # Time of previous command
+        # Used for calculating delays
+        prev_time = 0
+
         for item in log:
             time_ms = 1000*item['proctime']
             type = item['type']
             desc = item['desc']
 
-            if time_ms == prev_time:
-                continue
-
-    
             match type:
                 case 'tx':
+                    # If cmd was tx append a new log entry
                     parsed_log.append(LogEntry(desc))
-                    cmd_sent = time_ms
+                    
                 case 'rcv':
+                    # If cmd was rcv update the last entry
                     cmd = parsed_log.pop()
-                    cmd.responses.append(Response(time_ms - cmd_sent,
+                    cmd.responses.append(Response(time_ms - prev_time,
                                                   desc))
                     parsed_log.append(cmd)
-                    cmd_sent = time_ms
                     
             prev_time = time_ms
 
         return parsed_log
-      
-        
-    def from_log(self, log):
-        parsed_log = self.parse_log(log)
-        
-        for i in parsed_log:
-            self._write_prog_entry(i)
-            
-        
 
-    def write_prog(self, filename):
+
+
+    def _gen_entry(self, log_entry):
+        """Generate a program entry
+
+        args:
+            log_entry - LogEntry object
+        """
+        data = []
+        frames = []
+        delays = []
+
+        # Collect the reponse data
+        for res in log_entry.responses:
+            data.extend(res.data)
+            frames.append(len(res.data))
+            delays.append(res.delay)
+
+        # Initialise cmd entry
+        if not log_entry.cmd in self.prog['data']:
+                self.prog['data'][log_entry.cmd] = []
+
+
+        # Determine action and data type
+        action = str(Action.QUEUE_OUT) if len(data) == 1 else str(Action.QUEUE_OUT_MANY)
+        data = data[0] if len(data) == 1 else data
+        
+        # Add common attributes
+        self.prog['data'][log_entry.cmd].append({
+            'action': action,
+            'data': data,
+        })
+
+        if len(frames) == 1:
+            # If we have only one frame we don't segment
+            # So we have a single delay
+            self.prog['data'][log_entry.cmd][-1]['delay'] = delays[0]
+         
+        else:
+            # We need to segment, so add divide component
+            self.prog['data'][log_entry.cmd][-1]['divide'] = {
+                'frames': frames,
+                'delays': delays
+            }
+        
+    def write(self, filename):
+        """Write a program to a json file.
+
+        args:
+             filename - File to write
+        """
         with open(filename, 'w') as f:
             json.dump(self.prog, f, indent=4)
 
+    def gen(self):
+        """Generate a program.
+
+        returns:
+             Program object
+        """
+        return Program.from_dict(self.prog)
 
 
-class VirtualModule:
+############################################################################
+# Utility functions
+############################################################################
 
-
-    default_program = Program.from_json_file('default_program.json')
-    
-
-    def __init__(self, program=default_program):
-        self.program = program
-        self.port = VirtualPort(self)
-        self.out = deque()
-        self.port.in_waiting = len(self.out)
-        self.cmd_cnt = {'all': 0}
-        self.outstanding = deque()
-        
-    
-    def _get_next_out(self):
-        res = self.out.popleft()
-        self.port.in_waiting = len(self.out)
-        
-        if res is None:
-            res = ' '            
-
-        if isinstance(res, str):
-            res =  res.encode('ascii')
-            
-
-        return res
-
-    def _queue_out(self, i):
-        self.out.append(i)
-        self.port.in_waiting = len(self.out)
-
-
-    def _inc_cmd_cnt(self, cmd):
-        if not cmd in self.cmd_cnt:
-            self.cmd_cnt[cmd] = 0
-
-        self.cmd_cnt[cmd] += 1
-        self.cmd_cnt['all'] += 1
-        
-    def _read_cmd_cnt(self, cmd):
-        return self.cmd_cnt.get(cmd, 0)
-
-    def handle_cmd(self, cmd, args, kwargs):
-        match cmd:
-            case VirtualPort.Cmd.READ:
-                self._inc_cmd_cnt(VirtualPort.Cmd.READ)
-                # TODO: implement
-                
-            case VirtualPort.Cmd.READLINE:
-                self._inc_cmd_cnt(VirtualPort.Cmd.READLINE)
-                return self._get_next_out()
-            
-            case VirtualPort.Cmd.WRITE:
-                self._inc_cmd_cnt(VirtualPort.Cmd.WRITE)
-                t = Thread(target=self.handle_write, args=(args, kwargs))
-                t.start()
-                #return self.handle_write(args, kwargs)
-            
-            case VirtualPort.Cmd.CLOSE:
-                self._inc_cmd_cnt(VirtualPort.Cmd.CLOSE)
-                # TODO: implement
-
-             
-
-    def handle_write(self, args, kwargs):
-        cmd = args[0].decode('ascii')
-        self._inc_cmd_cnt(cmd)
-        
-        responses = self.program.lookup(cmd)
-
-        try:
-            response = responses[self._read_cmd_cnt(cmd)-1]
-        except KeyError:
-            return
-        
-        
-        match response['action']:
-            case Action.QUEUE_OUT:
-                delay = response['delay']
-                #time.sleep(delay / 1000)
-                sleep(delay)
-                self._queue_out(response['data'])
-
-            case Action.QUEUE_OUT_MANY:
-                if 'divide' in response:
-                    parts = partition(response['data'],
-                                      response['divide']['frames'])
-                    delays = response['divide']['delays']
-
-                    for d, p in zip(delays, parts):
-                        #time.sleep(d / 1000)
-                        sleep(d)
-                        for i in p:
-                            self._queue_out(i)
-
-                else:
-                    #time.sleep(d / 1000)
-                    sleep(response['delay'])
-                    for i in response['data']:
-                        self._queue_out(i)
-                
-                
-            case Action.RUN_CUSTOM:
-                return response['func'](cmd, self._read_cmd_cnt(cmd), self)
 
 
 
 def partition(xs, frames):
+    """Partition a list into frames.
+
+    args:
+        xs (list) - list to partition
+        frames    - chunks to partition it into
+    """
     chunks = []
     current_idx = 0
     for i in frames:
@@ -369,9 +637,14 @@ def partition(xs, frames):
     return chunks          
 
 def sleep(ms):
+    """Busy sleep.
+
+    args:
+        ms - Milliseconds to sleep
+    """
     now = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID) / 1e+6
     end =  now + ms
-    #print(f'now = {now} end = {end} diff = {end - now}')
+
     while now < end:
         now = time.clock_gettime_ns(time.CLOCK_PROCESS_CPUTIME_ID)  / 1e+6
-    #print(f'>>> {now}  {now - end}')
+
