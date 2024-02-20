@@ -1,12 +1,10 @@
 import qontrol
-import serial
-import serial.tools.list_ports
 from virtual_module import *
 from pprint import pprint
 
 N_CH = 8
 
-def cmd(id, ch='', val=''):
+def cmd(q, id, ch='', val=''):
     
     op = '=' if val != '' else '?'
 
@@ -18,7 +16,7 @@ def cmd(id, ch='', val=''):
 #########################################################
 # Program
 #########################################################
-c = CustomBehaviour()
+c = CustomHandler()
 
 @c.register
 def id_custom(cmd, cnt, vm):
@@ -33,21 +31,41 @@ def handle_wildcard(cmd, cnt, vm):
     return vm._queue_out(f'idk how to handle {cmd}')
 
 
+
 p = Program.from_json_file('./progs/test.json', custom=c)
+
 vm = VirtualModule(program=p)
 
-q = qontrol.Qontroller(virtual_port=vm.port)
 
-#########################################################
-# Commands
-#########################################################
+q = qontrol.Qontroller(virtual_port=vm.port, response_timeout=0.200)
 
-cmd('id')
-cmd('lifetime')
-cmd('firmware')
-cmd('vall')
-cmd('iall')
-cmd('vall')
+
+# #########################################################
+# # Commands
+# #########################################################
+
+# cmd(q, 'id')
+# cmd(q, 'lifetime')
+# cmd(q, 'firmware')
+# cmd(q, 'vall')
+# cmd(q, 'iall')
+# cmd(q, 'vall')
+# cmd(q, 'iall')
+
+# for ch in range(N_CH):
+#     cmd(q, f'v{ch}=0.1')
+#     cmd(q, f'v{ch}?')
+#     cmd(q, f'vcal{ch}?')
+
+
+#     cmd(q, f'i{ch}=0')
+#     cmd(q, f'i{ch}')
+#     cmd(q, f'ical{ch}')
+    
+# cmd(q, 'nchan')
+# cmd(q, 'nvmall')
+
+cmd(q, 'log')
 
 
 def print_log(log):

@@ -50,23 +50,38 @@ def pc_1():
 
     
 def pc_2():
-    vm = VirtualModule()
-    q = qontrol.Qontroller(serial_port_name=dev_port)
-    pc = ProgramGenerator('Device Program', q)
-
-
-
-    cmd(q, 'id')
-    cmd(q, 'lifetime')
-    cmd(q, 'firmware')
-    cmd(q, 'vall')
-    cmd(q, 'iall')
-    cmd(q, 'vall')
-
     
-    pc.from_log(q.log)
-    pc.write_prog(sys.argv[1])
+    q = qontrol.Qontroller(serial_port_name=dev_port)
+    
+
+
+    # cmd(q, 'id')
+    # cmd(q, 'lifetime')
+    # cmd(q, 'firmware')
+    # cmd(q, 'vall')
+    # cmd(q, 'iall')
+    # cmd(q, 'vall')
+    # cmd(q, 'iall')
+
+    # for ch in range(N_CH):
+    #     cmd(q, f'v{ch}=0.1')
+    #     cmd(q, f'v{ch}?')
+    #     cmd(q, f'vcal{ch}?')
+
+
+    #     cmd(q, f'i{ch}=0')
+    #     cmd(q, f'i{ch}')
+    #     cmd(q, f'ical{ch}')
+    
+    # cmd(q, 'nchan')
+    # cmd(q, 'nvmall')
+    # cmd(q, 'log')
+    
+   
+    pc = ProgramGenerator('Device Program', q.log)
+    pc.write(sys.argv[1])
     print_log(q.log)
+
 
 
 def print_log(log):
