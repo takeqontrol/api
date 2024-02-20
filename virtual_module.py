@@ -309,7 +309,6 @@ x
         # if we can, choose the one that corresponds
         # to the current command count
         index = (self._read_cmd_cnt(cmd) - 1) % len(responses)
-        print(index, responses)
         response = responses[index]
 
         match response['action']:
@@ -413,6 +412,11 @@ class Program:
     def __getitem__(self, cmd):
         """Look up the response for a command."""
         return  self.data.get(cmd, self.default)
+
+    def commands(self):
+        return list(self.data.keys())
+
+        
 
     #########################################################
     # JSON Format 
