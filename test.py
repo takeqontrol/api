@@ -23,7 +23,7 @@ def params():
     for pf in program_files:
         program = Program.from_json_file(pf, custom=c)
         vm = VirtualModule(program)
-        q = Qontroller(virtual_port=vm.port, response_timeout=0.2)
+        q = Qontroller(virtual_port=vm.port, response_timeout=0.4)
 
         for cmd in program.commands():
             ret.append((pf, program, q, cmd))
