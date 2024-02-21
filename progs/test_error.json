@@ -1,0 +1,33 @@
+{
+    "name": "Device Program",
+    "data": {
+        "nup=0\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "\u0006OK\n",
+                "delay": 6.0
+            }
+        ],
+        "nupall?\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****: 0\n",
+                "delay": 17.0
+            }
+        ],
+        "val?\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E10:02",
+                "delay": 13.0
+            }
+        ]
+    },
+    "*": {
+        "action": "QUEUE_OUT",
+        "data": "E10:02"
+    },
+    "initial_out": [
+        "OK\n"
+    ]
+}

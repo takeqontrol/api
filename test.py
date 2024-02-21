@@ -1,6 +1,6 @@
 import pytest
 import re
-from qontrol import Qontroller
+from qontrol import Qontroller, generic_log_handler
 from virtual_module import *
 from glob import glob
 
@@ -15,6 +15,20 @@ def id_handler(cmd, cnt, vm):
     return vm._queue_out('Q8iv-0000')
 
 
+def log_handler():
+    """
+    Log handler that raises an exception
+    when the Qontroller encounters an error.
+    """
+    def _generic_log_handler(err_dict):
+        if err_dict['type'] == 'err':
+            raise RuntimeError(err_dict['raw'])
+
+        
+    return _generic_log_handler
+
+
+
 def params():
     """Generate test parameters from all programs"""
     program_files= glob('progs/*.json')
@@ -24,6 +38,7 @@ def params():
         program = Program.from_json_file(pf, custom=c)
         vm = VirtualModule(program)
         q = Qontroller(virtual_port=vm.port, response_timeout=0.4)
+        q.log_handler = log_handler()
 
         for cmd in program.commands():
             ret.append((pf, program, q, cmd))
@@ -40,18 +55,46 @@ class TestCommandFromProgram:
         # Parse the command
         c, op, val = cmd_re.search(cmd.strip()).groups()
 
-        # Run the command 
-        res = q.issue_command(c, operator=op, value=val)
-        
-        
-        match p[cmd][0]['action']:
+        action, expected = self.parse_command(p[cmd][0])
+
+        try:
+            res = q.issue_command(c, operator=op, value=val)
+            
+        except RuntimeError as e:
+            # The log_handler will raise an exception
+            # when the qontrollers encounters an error
+            # Pass test if thats expected
+            assert str(e) == expected['data']
+            return
+
+        match action:
             case Action.QUEUE_OUT:
                 # result is 1 element
-                assert res[0] == (p[cmd][0]['data'].strip(),)
+                assert res[0] == (expected['data'],)
                 
             case Action.QUEUE_OUT_MANY:
                 # Result is an array
-                expected = list(map(lambda x: (x.strip(),), p[cmd][0]['data']))
-                assert res == expected
+                exp = list(map(lambda x: (x,), expected['data']))
+                assert res == exp
+                
     
+
+    def parse_command(self, cmd):
+        action = cmd['action']
+
+        res = {}
+        match action:
+
+            case Action.QUEUE_OUT | Action.NOP:
+                res['data'] = cmd['data'].strip()
+                
+            case Action.QUEUE_OUT_MANY:
+                res['data'] = list(map(lambda x: x.strip(), cmd['data']))
+
+            case Action.RUN_CUSTOM:
+                res['func'] = cmd['func']
+                res['data'] = ''
+        
+        return action, res
+
 
