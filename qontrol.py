@@ -15,6 +15,7 @@ support@qontrol.co.uk. Contribute at github.com/takeqontrol/api.
 from __future__ import print_function
 import serial, re, time
 from collections import deque as fifo
+from collections import namedtuple
 from random import shuffle
 from serial.tools import list_ports
 import sys
@@ -22,6 +23,10 @@ import os
 import time
 import random
 import pdb
+from enum import Enum
+from dataclasses import dataclass, field
+import struct
+from functools import reduce
 
 __version__ = "1.1.16"
 
@@ -55,6 +60,7 @@ Mx_ERRORS = {0:'Unknown error.',
 
 CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0x05, 'VERR':0x06, 'IERR':0x07, 'VIP':0x0A, 'SR':0x0B, 'PDI':0x0C, 'PDP':0x0D, 'PDR':0x0E, 'GAIN':0x0F, 'VFULL':0x20, 'IFULL':0x21, 'NCHAN':0x22, 'FIRMWARE':0x23, 'ID':0x24, 'LIFETIME':0x25, 'NVM':0x26, 'LOG':0x27, 'QUIET':0x28, 'LED':0x31, 'NUP':0x32, 'ADCT':0x33, 'ADCN':0x34, 'CCFN':0x35, 'INTEST':0x36, 'OK':0x37, 'DIGSUP':0x38, 'HELP':0x41, 'SAFE':0x42, 'ROCOM':0x43}
 
+
 DEVICE_PROPERTIES = {
                 'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 
                 'Q8b':{'VFULL':12.0,'IFULL':83.333333}, 
@@ -66,6 +72,132 @@ RESPONSE_OK = 'OK\n'
 ERROR_FORMAT = '[A-Za-z]{1,3}(\d+):(\d+)'
 
 
+# class Type(Enum):
+#     GET = auto()
+#     SET = auto()
+    
+
+# IdData = namedtuple('IdData', 'type')
+
+class ExtendedEnum(Enum):
+    def __str__(self):
+        """Returns the enum name as a str"""
+        return self.name
+
+    @classmethod
+    def list(cls):
+        """Returns a list of all enum strings"""
+        return list(map(lambda c: str(c), cls))
+
+    @classmethod
+    def export_to(cls, namespace):
+        namespace.update(cls.__members__)
+
+    
+
+
+class Type(ExtendedEnum):
+    GET = '?'
+    SET = '='
+    
+class HeaderId(ExtendedEnum):
+    BIN   = 0x80
+    BCAST = 0x40
+    ALLCH = 0x20
+    ADDM  = 0x10
+    RW    = 0x08
+    ACT   = 0x04
+    DEXT  = 0x02
+    PBIT  = 0x01
+    
+
+class Index(ExtendedEnum):
+    V        = 0x00
+    I        = 0x01
+    VMAX     = 0x02
+    IMAX     = 0x03
+    VCAL     = 0x04
+    ICAL     = 0x05
+    VERR     = 0x06
+    IERR     = 0x07
+    VIP      = 0x0A
+    SR       = 0x0B
+    PDI      = 0x0C
+    PDP      = 0x0D
+    PDR      = 0x0E
+    GAIN     = 0x0F
+    VFULL    = 0x20
+    IFULL    = 0x21
+    NCHAN    = 0x22
+    FIRMWARE = 0x23
+    ID       = 0x24
+    LIFETIME = 0x25
+    NVM      = 0x26
+    LOG      = 0x27
+    QUIET    = 0x28
+    LED      = 0x31
+    NUP      = 0x32
+    ADCT     = 0x33
+    ADCN     = 0x34
+    CCFN     = 0x35
+    INTEST   = 0x36
+    OK       = 0x37
+    DIGSUP   = 0x38
+    HELP     = 0x41
+    SAFE     = 0x42
+    ROCOM    = 0x43
+    
+
+class AddrMode(Enum):
+    CHANNEL = 0
+    DEVICE  = 1
+
+
+# Export enums to global namespace
+Type.export_to(globals())
+HeaderId.export_to(globals())
+Index.export_to(globals())
+
+def parity_odd(x):
+    """Function to compute whether a byte's parity is odd."""
+    x = x ^ (x >> 4)
+    x = x ^ (x >> 2)
+    x = x ^ (x >> 1)
+    return x & 1
+
+
+@dataclass
+class Command:
+    type: Type
+    idx: Index
+    addr: int = 0
+    header: set[HeaderId] = field(default_factory= lambda: set())
+    data: any = 0
+
+
+    def ascii(self):
+        self.addr = 'all' if ALLCH in self.header else self.addr
+        
+        return f'{self.idx}{self.addr}{self.type.value}{self.data}'
+
+    def binary(self):
+        # Compute header byte
+        header = sum(map(lambda x: x.value, self.header), BIN.value)
+        header += parity_odd(header)
+
+        p1 = struct.pack('<cc', bytes([header]), bytes([self.idx.value]))
+
+        payload_fmt = '>xhh'
+        
+        if DEXT in self.header:
+            p2 = struct.pack(payload_fmt + 'h' * len(self.data),
+                             self.addr, len(self.data), *self.data)
+        else:
+            p2 = struct.pack(payload_fmt, self.addr, self.data)
+
+        return p1 + p2
+
+    
 class Qontroller(object):
         """
         Superclass which handles communication, enumeration, and logging.
@@ -626,12 +758,13 @@ class Qontroller(object):
                 
                 # Compose command byte string
                 tx_str = bytearray()
-                tx_str.append(header_byte)                              # Header byte
+                tx_str.append(header_byte)                # Header byte
                 tx_str.append(command_byte)                             # Command byte
                 tx_str.extend(address_bytes)                    # Three bytes of channel address
                 tx_str.extend(data_bytes)                               # 2 (DEXT=0) or 2*N+1 (DEXT=1) bytes of data
                 
                 # Transmit it
+                return tx_str
                 self.transmit(tx_str, binary_mode = True)
                 
                 
@@ -1698,6 +1831,6 @@ if __name__ == '__main__':
         
         import sys, getopt
         
-        run_interactive_shell()
+        #run_interactive_shell()
         
         
