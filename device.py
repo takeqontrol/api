@@ -55,7 +55,7 @@ def pc_2():
     
 
 
-    # cmd(q, 'id')
+    # Cmd(q, 'id')
     # cmd(q, 'lifetime')
     # cmd(q, 'firmware')
     # cmd(q, 'vall')
@@ -83,7 +83,6 @@ def pc_2():
     print_log(q.log)
 
 
-
 def print_log(log):
     t = 0
     
@@ -97,9 +96,18 @@ def print_log(log):
 
         print(f'{time_ms} {type} {desc} ')
 
+        if type == 'err':
+            print(f'{item["raw"]}')
 
 
 
+def  pc_3():
+    q = qontrol.Qontroller(serial_port_name=dev_port)
+    res = q.issue_command('val', operator='?')
+
+    pc = ProgramGenerator('Device Program', q.log)
+    pc.write(sys.argv[1])
+    print_log(q.log)
 
 if __name__ == '__main__':
-    pc_2()
+    pc_3()

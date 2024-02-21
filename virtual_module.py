@@ -512,8 +512,8 @@ class ProgramGenerator:
         self.prog['name'] = name
         self.prog['data'] = {}
         self.prog['*'] = {
-                'action': 'NOP',
-                'data': ''
+                'action': 'QUEUE_OUT',
+                'data': 'E10:02'
         }
         self.prog['initial_out'] = ['OK\n']
 
@@ -554,6 +554,13 @@ class ProgramGenerator:
                     cmd = parsed_log.pop()
                     cmd.responses.append(Response(time_ms - prev_time,
                                                   desc))
+                    parsed_log.append(cmd)
+
+                case 'err':
+                    # If response was an error add the raw data
+                    cmd = parsed_log.pop()
+                    cmd.responses.append(Response(time_ms - prev_time,
+                                                  [item['raw']]))
                     parsed_log.append(cmd)
                     
             prev_time = time_ms
