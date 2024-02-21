@@ -103,7 +103,12 @@ def print_log(log):
 
 def  pc_3():
     q = qontrol.Qontroller(serial_port_name=dev_port)
-    res = q.issue_command('val', operator='?')
+    q.issue_command('val', operator='?')
+    q.issue_command('', operator='?')
+    q.issue_command('vall', operator='=')
+    q.issue_command('vall', operator='=', value='hello')
+    q.issue_command('vall2', operator='=', value='hello')
+    q.issue_command('v', operator='=', value=0.1)
 
     pc = ProgramGenerator('Device Program', q.log)
     pc.write(sys.argv[1])

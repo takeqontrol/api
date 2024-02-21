@@ -4,7 +4,7 @@ from qontrol import Qontroller, generic_log_handler
 from virtual_module import *
 from glob import glob
 
-cmd_re = re.compile(r'([a-zA-Z0-9]+)(\?|=)(.*)')
+cmd_re = re.compile(r'([a-zA-Z0-9]*)(\?|=)(.*)')
 
 
 
