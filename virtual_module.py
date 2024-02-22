@@ -290,7 +290,11 @@ x
 
         # Decode the command that came from the qontroller
         # Assume ASCII commands for now ...
-        cmd = args[0].decode('ascii')
+        try: 
+            cmd = args[0].decode('ascii')
+        except:
+            cmd = args[0]
+            
         self._inc_cmd_cnt(cmd)
 
         # Get responses from program

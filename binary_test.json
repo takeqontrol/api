@@ -1,0 +1,770 @@
+{
+    "name": "Binary Program",
+    "data": {
+        "nup=0\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "\u0006OK\n",
+                "delay": 5.0
+            }
+        ],
+        "nupall?\n": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****: 0\n",
+                "delay": 16.0
+            }
+        ],
+        "b'\\x88\\x00\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+3.0041 V\n",
+                "delay": 28.0
+            }
+        ],
+        "b'\\xa9\\x00\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "+3.0042 V\n",
+                    "+3.0065 V\n",
+                    "+3.0010 V\n",
+                    "+3.0039 V\n",
+                    "+3.0030 V\n",
+                    "+3.0045 V\n",
+                    "+3.0015 V\n",
+                    "+3.0046 V\n"
+                ],
+                "divide": {
+                    "frames": [
+                        3,
+                        1,
+                        2,
+                        1,
+                        1
+                    ],
+                    "delays": [
+                        40.0,
+                        15.0,
+                        16.0,
+                        16.0,
+                        16.0
+                    ]
+                }
+            }
+        ],
+        "b'\\x88\\x01\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+0.0161 mA\n",
+                "delay": 14.0
+            }
+        ],
+        "b'\\xa9\\x01\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "+0.0164 mA\n",
+                    "+0.0177 mA\n",
+                    "+0.0123 mA\n",
+                    "+0.0184 mA\n",
+                    "+0.0172 mA\n",
+                    "+0.0162 mA\n",
+                    "+0.0105 mA\n",
+                    "+0.0139 mA\n"
+                ],
+                "delay": 23.0
+            }
+        ],
+        "b'\\x88\\x02\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+12.0000 V\n",
+                "delay": 18.0
+            }
+        ],
+        "b'\\xa9\\x02\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n",
+                    "+12.0000 V\n"
+                ],
+                "delay": 22.999999999999886
+            }
+        ],
+        "b'\\x88\\x03\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+24.0000 mA\n",
+                "delay": 19.0
+            }
+        ],
+        "b'\\xa9\\x03\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n",
+                    "+24.0000 mA\n"
+                ],
+                "delay": 22.0
+            }
+        ],
+        "b'\\x88\\x04\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+1152,-4448,-75,-6\n",
+                "delay": 17.0
+            }
+        ],
+        "b'\\xa9\\x04\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "+1152,-4448,-75,-6\n",
+                    "+1280,-4401,-68,-15\n",
+                    "+1408,-4403,-66,-16\n",
+                    "+1280,-4394,-69,-9\n",
+                    "+1280,-4444,-64,-13\n",
+                    "+1152,-4412,-63,-14\n",
+                    "+1280,-4418,-67,+4\n",
+                    "+1280,-4445,-70,-25\n"
+                ],
+                "delay": 28.0
+            }
+        ],
+        "b'\\x88\\x05\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "-489,-11,+0,+0\n",
+                "delay": 7.0
+            }
+        ],
+        "b'\\xa9\\x05\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "-489,-11,+0,+0\n",
+                    "-391,-22,+0,+0\n",
+                    "-501,-6,+0,+0\n",
+                    "-620,+7,+0,+0\n",
+                    "-347,-14,+0,+0\n",
+                    "-281,-20,+0,+0\n",
+                    "-267,+0,+0,+0\n",
+                    "-842,-20,+0,+0\n"
+                ],
+                "delay": 24.0
+            }
+        ],
+        "b'\\x88\\x06\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 19.0
+            }
+        ],
+        "b'\\xa9\\x06\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 15.0
+            }
+        ],
+        "b'\\x88\\x07\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 11.0
+            }
+        ],
+        "b'\\xa9\\x07\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 6.0
+            }
+        ],
+        "b'\\xa9\\n\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "0,0: +3.0042 V, +0.0163 mA\n",
+                    "0,1: +3.0065 V, +0.0181 mA\n",
+                    "0,2: +3.0010 V, +0.0122 mA\n",
+                    "0,3: +3.0039 V, +0.0183 mA\n",
+                    "0,4: +3.0030 V, +0.0173 mA\n",
+                    "0,5: +3.0045 V, +0.0166 mA\n",
+                    "0,6: +3.0015 V, +0.0104 mA\n",
+                    "0,7: +3.0046 V, +0.0140 mA\n"
+                ],
+                "divide": {
+                    "frames": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "delays": [
+                        34.0,
+                        16.0,
+                        32.0,
+                        16.0,
+                        16.0,
+                        32.0,
+                        15.0,
+                        32.0
+                    ]
+                }
+            }
+        ],
+        "b'\\xa9 \\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+12.0000 V\n",
+                "delay": 14.0
+            }
+        ],
+        "b'\\xa9!\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "+24.0000 mA\n",
+                "delay": 10.0
+            }
+        ],
+        "b'\\xa9\"\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "8\n",
+                "delay": 5.0
+            }
+        ],
+        "b'\\x88#\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "v2.4.1\n",
+                "delay": 17.0
+            }
+        ],
+        "b'\\xa9#\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "v2.4.1\n",
+                "delay": 12.0
+            }
+        ],
+        "b'\\x88$\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****\n",
+                "delay": 7.0
+            }
+        ],
+        "b'\\xa9$\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****\n",
+                "delay": 3.0
+            }
+        ],
+        "b'\\x88%\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "134963 s\n",
+                "delay": 15.0
+            }
+        ],
+        "b'\\xa9%\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "134963 s\n",
+                "delay": 10.0
+            }
+        ],
+        "b'\\xa9&\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "00 : 0x0000,  01 : 0xFF79\n",
+                    "02 : 0x0002,  03 : 0xBFDB\n",
+                    "04 : 0x00A6,  05 : 0xFFFF\n",
+                    "06 : 0x0005,  07 : 0x0001\n",
+                    "08 : 0xFFFF,  09 : 0xFFFF\n",
+                    "0A : 0xFFFF,  0B : 0xFFFF\n",
+                    "0C : 0xFFFF,  0D : 0xFFFF\n",
+                    "0E : 0xFFFF,  0F : 0xFFFF\n",
+                    "10 : 0xFFFF,  11 : 0xFFFF\n",
+                    "12 : 0xFFFF,  13 : 0xFFFF\n",
+                    "14 : 0xFFFF,  15 : 0xFFFF\n",
+                    "16 : 0xFFFF,  17 : 0xFFFF\n",
+                    "18 : 0xFFFF,  19 : 0xFFFF\n",
+                    "1A : 0xFFFF,  1B : 0xFFFF\n",
+                    "1C : 0xFFFF,  1D : 0xFFFF\n",
+                    "1E : 0xFFFF,  1F : 0xFFFF\n",
+                    "20 : 0xFFFF,  21 : 0xFFFF\n",
+                    "22 : 0xFFFF,  23 : 0xFFFF\n",
+                    "24 : 0xFFFF,  25 : 0xFFFF\n",
+                    "26 : 0xFFFF,  27 : 0xFFFF\n",
+                    "28 : 0xFFFF,  29 : 0xFFFF\n",
+                    "2A : 0xFFFF,  2B : 0xFFFF\n",
+                    "2C : 0xFFFF,  2D : 0xFFFF\n",
+                    "2E : 0xFFFF,  2F : 0xFFFF\n",
+                    "30 : 0xFFFF,  31 : 0xFFFF\n",
+                    "32 : 0xFFFF,  33 : 0xFFFF\n",
+                    "34 : 0xFFFF,  35 : 0xFFFF\n",
+                    "36 : 0xFFFF,  37 : 0xFFFF\n",
+                    "38 : 0xFFFF,  39 : 0xFFFF\n",
+                    "3A : 0xFFFF,  3B : 0xFFFF\n",
+                    "3C : 0xFFFF,  3D : 0xFFFF\n",
+                    "3E : 0xFFFF,  3F : 0xFFFF\n",
+                    "40 : 0x0480,  41 : 0x0500\n",
+                    "42 : 0x0580,  43 : 0x0500\n",
+                    "44 : 0x0500,  45 : 0x0480\n",
+                    "46 : 0x0500,  47 : 0x0500\n",
+                    "48 : 0xEEA0,  49 : 0xEECF\n",
+                    "4A : 0xEECD,  4B : 0xEED6\n",
+                    "4C : 0xEEA4,  4D : 0xEEC4\n",
+                    "4E : 0xEEBE,  4F : 0xEEA3\n",
+                    "50 : 0xFFB5,  51 : 0xFFBC\n",
+                    "52 : 0xFFBE,  53 : 0xFFBB\n",
+                    "54 : 0xFFC0,  55 : 0xFFC1\n",
+                    "56 : 0xFFBD,  57 : 0xFFBA\n",
+                    "58 : 0xFFFA,  59 : 0xFFF1\n",
+                    "5A : 0xFFF0,  5B : 0xFFF7\n",
+                    "5C : 0xFFF3,  5D : 0xFFF2\n",
+                    "5E : 0x0004,  5F : 0xFFE7\n",
+                    "60 : 0xFE17,  61 : 0xFE79\n",
+                    "62 : 0xFE0B,  63 : 0xFD94\n",
+                    "64 : 0xFEA5,  65 : 0xFEE7\n",
+                    "66 : 0xFEF5,  67 : 0xFCB6\n",
+                    "68 : 0xFFF5,  69 : 0xFFEA\n",
+                    "6A : 0xFFFA,  6B : 0x0007\n",
+                    "6C : 0xFFF2,  6D : 0xFFEC\n",
+                    "6E : 0x0000,  6F : 0xFFEC\n",
+                    "70 : 0x0000,  71 : 0x0000\n",
+                    "72 : 0x0000,  73 : 0x0000\n",
+                    "74 : 0x0000,  75 : 0x0000\n",
+                    "76 : 0x0000,  77 : 0x0000\n",
+                    "78 : 0x0000,  79 : 0x0000\n",
+                    "7A : 0x0000,  7B : 0x0000\n",
+                    "7C : 0x0000,  7D : 0x0000\n",
+                    "7E : 0x0000,  7F : 0x0000\n",
+                    "80 : 0x0001,  81 : 0x0F00\n",
+                    "82 : 0x0001,  83 : 0x0F00\n",
+                    "84 : 0x0A00,  85 : 0x0F02\n",
+                    "86 : 0x0A00,  87 : 0x0F03\n",
+                    "88 : 0x0001,  89 : 0x0F03\n",
+                    "8A : 0x0001,  8B : 0x0F03\n",
+                    "8C : 0x0001,  8D : 0x0F31\n",
+                    "8E : 0x0001,  8F : 0x0F31\n",
+                    "90 : 0x0001,  91 : 0x0F32\n",
+                    "92 : 0x0001,  93 : 0x0F32\n",
+                    "94 : 0x1E00,  95 : 0x8955\n",
+                    "96 : 0x0A02,  97 : 0x896A\n",
+                    "98 : 0x0A01,  99 : 0x896A\n",
+                    "9A : 0x0B03,  9B : 0x896A\n",
+                    "9C : 0x0B03,  9D : 0x896A\n",
+                    "9E : 0x0B03,  9F : 0x896B\n",
+                    "A0 : 0x0C00,  A1 : 0x896B\n",
+                    "A2 : 0x0C00,  A3 : 0x896B\n",
+                    "A4 : 0x0300,  A5 : 0xBFDB\n",
+                    "A6 : 0x5A03,  A7 : 0xBFDB\n",
+                    "A8 : 0x0C00,  A9 : 0xC2F6\n",
+                    "AA : 0x0001,  AB : 0x0868\n",
+                    "AC : 0x0001,  AD : 0x0876\n",
+                    "AE : 0x0001,  AF : 0x0878\n",
+                    "B0 : 0x0A00,  B1 : 0x08F7\n",
+                    "B2 : 0x0A00,  B3 : 0x08F9\n",
+                    "B4 : 0x0001,  B5 : 0x09CC\n",
+                    "B6 : 0x0001,  B7 : 0x09CC\n",
+                    "B8 : 0x0A00,  B9 : 0x09CD\n",
+                    "BA : 0x0001,  BB : 0x09CE\n",
+                    "BC : 0x0001,  BD : 0x09E4\n",
+                    "BE : 0x0001,  BF : 0x09E5\n",
+                    "C0 : 0x0A00,  C1 : 0x09E6\n",
+                    "C2 : 0x0001,  C3 : 0x09E6\n",
+                    "C4 : 0x0001,  C5 : 0x09F7\n",
+                    "C6 : 0x0001,  C7 : 0x09F7\n",
+                    "C8 : 0x0A00,  C9 : 0x09F8\n",
+                    "CA : 0x0001,  CB : 0x09F9\n",
+                    "CC : 0x0001,  CD : 0x0A25\n",
+                    "CE : 0x0001,  CF : 0x0A26\n",
+                    "D0 : 0x0001,  D1 : 0x0A26\n",
+                    "D2 : 0x0001,  D3 : 0x0A26\n",
+                    "D4 : 0x0A00,  D5 : 0x0A28\n",
+                    "D6 : 0x0A00,  D7 : 0x0A29\n",
+                    "D8 : 0x0001,  D9 : 0x0A29\n",
+                    "DA : 0x0001,  DB : 0x0A29\n",
+                    "DC : 0x0001,  DD : 0x0A52\n",
+                    "DE : 0x0001,  DF : 0x0A52\n",
+                    "E0 : 0x0001,  E1 : 0x0A52\n",
+                    "E2 : 0x0001,  E3 : 0x0A52\n",
+                    "E4 : 0x0A00,  E5 : 0x0A55\n",
+                    "E6 : 0x0A00,  E7 : 0x0A55\n",
+                    "E8 : 0x0001,  E9 : 0x0A55\n",
+                    "EA : 0x0001,  EB : 0x0A55\n",
+                    "EC : 0x0001,  ED : 0x0ED2\n",
+                    "EE : 0x0001,  EF : 0x0ED2\n",
+                    "F0 : 0x0001,  F1 : 0x0ED2\n",
+                    "F2 : 0x0001,  F3 : 0x0ED2\n",
+                    "F4 : 0x0A00,  F5 : 0x0ED5\n",
+                    "F6 : 0x0A00,  F7 : 0x0ED5\n",
+                    "F8 : 0x0001,  F9 : 0x0ED5\n",
+                    "FA : 0x0001,  FB : 0x0ED5\n",
+                    "FC : 0x0001,  FD : 0x0F00\n",
+                    "FE : 0x0001,  FF : 0x0F00\n"
+                ],
+                "divide": {
+                    "frames": [
+                        7,
+                        31,
+                        31,
+                        31,
+                        28
+                    ],
+                    "delays": [
+                        17.0,
+                        70.0,
+                        71.0,
+                        71.0,
+                        75.0
+                    ]
+                }
+            }
+        ],
+        "b\"\\x88'\\x00\\x00\\x00\\x00\\x00\"": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "#  0, E30:00, 9 h ago\n",
+                    "#  1, E00:01, 1 s ago\n",
+                    "#  2, E00:01, 1 s ago\n",
+                    "#  3, E00:01, 2 s ago\n",
+                    "#  4, E00:01, 2 s ago\n",
+                    "#  5, E00:01, 48 s ago\n",
+                    "#  6, E00:01, 48 s ago\n",
+                    "#  7, E10:00, 48 s ago\n",
+                    "#  8, E10:00, 49 s ago\n",
+                    "#  9, E00:01, 51 s ago\n",
+                    "# 10, E00:01, 51 s ago\n",
+                    "# 11, E00:01, 51 s ago\n",
+                    "# 12, E00:01, 51 s ago\n",
+                    "# 13, E00:01, 94 s ago\n",
+                    "# 14, E00:01, 94 s ago\n",
+                    "# 15, E10:00, 94 s ago\n",
+                    "# 16, E10:00, 94 s ago\n",
+                    "# 17, E00:01, 97 s ago\n",
+                    "# 18, E00:01, 97 s ago\n",
+                    "# 19, E00:01, 97 s ago\n",
+                    "# 20, E00:01, 97 s ago\n",
+                    "# 21, E00:01, 20 m ago\n",
+                    "# 22, E00:01, 20 m ago\n",
+                    "# 23, E10:00, 20 m ago\n",
+                    "# 24, E10:00, 20 m ago\n",
+                    "# 25, E00:01, 20 m ago\n",
+                    "# 26, E00:01, 20 m ago\n",
+                    "# 27, E00:01, 20 m ago\n",
+                    "# 28, E00:01, 20 m ago\n",
+                    "# 29, E00:01, 21 m ago\n",
+                    "# 30, E00:01, 21 m ago\n",
+                    "# 31, E10:00, 21 m ago\n",
+                    "# 32, E10:00, 21 m ago\n",
+                    "# 33, E00:01, 21 m ago\n",
+                    "# 34, E00:01, 21 m ago\n",
+                    "# 35, E00:01, 21 m ago\n",
+                    "# 36, E00:01, 21 m ago\n",
+                    "# 37, E00:01, 22 m ago\n",
+                    "# 38, E10:00, 22 m ago\n",
+                    "# 39, E00:01, 22 m ago\n",
+                    "# 40, E00:01, 22 m ago\n",
+                    "# 41, E00:01, 22 m ago\n",
+                    "# 42, E10:00, 22 m ago\n",
+                    "# 43, E00:01, 22 m ago\n",
+                    "# 44, E00:01, 22 m ago\n",
+                    "# 45, E00:01, 23 m ago\n",
+                    "# 46, E10:00, 23 m ago\n",
+                    "# 47, E00:01, 23 m ago\n",
+                    "# 48, E00:01, 23 m ago\n",
+                    "# 49, E10:00, 26 m ago\n",
+                    "# 50, E10:00, 26 m ago\n",
+                    "# 51, E00:01, 28 m ago\n",
+                    "# 52, E00:01, 28 m ago\n",
+                    "# 53, E00:01, 28 m ago\n",
+                    "# 54, E12:00, 5 h ago\n",
+                    "# 55, E90:03, 5 h ago\n",
+                    "# 56, E03:00, 5 h ago\n",
+                    "# 57, E12:00, 9 h ago\n",
+                    "# 58, E12:00, 9 h ago\n",
+                    "# 59, E11:03, 9 h ago\n",
+                    "# 60, E11:03, 9 h ago\n",
+                    "# 61, E11:03, 9 h ago\n",
+                    "# 62, E10:01, 9 h ago\n",
+                    "# 63, E10:02, 9 h ago\n"
+                ],
+                "divide": {
+                    "frames": [
+                        11,
+                        53
+                    ],
+                    "delays": [
+                        23.0,
+                        118.0
+                    ]
+                }
+            }
+        ],
+        "b\"\\xa9'\\x00\\x00\\x00\\x00\\x00\"": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "#  0, E30:00, 9 h ago\n",
+                    "#  1, E00:01, 1 s ago\n",
+                    "#  2, E00:01, 1 s ago\n",
+                    "#  3, E00:01, 2 s ago\n",
+                    "#  4, E00:01, 2 s ago\n",
+                    "#  5, E00:01, 48 s ago\n",
+                    "#  6, E00:01, 48 s ago\n",
+                    "#  7, E10:00, 48 s ago\n",
+                    "#  8, E10:00, 49 s ago\n",
+                    "#  9, E00:01, 51 s ago\n",
+                    "# 10, E00:01, 51 s ago\n",
+                    "# 11, E00:01, 51 s ago\n",
+                    "# 12, E00:01, 51 s ago\n",
+                    "# 13, E00:01, 94 s ago\n",
+                    "# 14, E00:01, 94 s ago\n",
+                    "# 15, E10:00, 94 s ago\n",
+                    "# 16, E10:00, 94 s ago\n",
+                    "# 17, E00:01, 97 s ago\n",
+                    "# 18, E00:01, 97 s ago\n",
+                    "# 19, E00:01, 97 s ago\n",
+                    "# 20, E00:01, 97 s ago\n",
+                    "# 21, E00:01, 20 m ago\n",
+                    "# 22, E00:01, 20 m ago\n",
+                    "# 23, E10:00, 20 m ago\n",
+                    "# 24, E10:00, 20 m ago\n",
+                    "# 25, E00:01, 20 m ago\n",
+                    "# 26, E00:01, 20 m ago\n",
+                    "# 27, E00:01, 20 m ago\n",
+                    "# 28, E00:01, 20 m ago\n",
+                    "# 29, E00:01, 21 m ago\n",
+                    "# 30, E00:01, 21 m ago\n",
+                    "# 31, E10:00, 21 m ago\n",
+                    "# 32, E10:00, 21 m ago\n",
+                    "# 33, E00:01, 21 m ago\n",
+                    "# 34, E00:01, 21 m ago\n",
+                    "# 35, E00:01, 21 m ago\n",
+                    "# 36, E00:01, 21 m ago\n",
+                    "# 37, E00:01, 22 m ago\n",
+                    "# 38, E10:00, 22 m ago\n",
+                    "# 39, E00:01, 22 m ago\n",
+                    "# 40, E00:01, 22 m ago\n",
+                    "# 41, E00:01, 22 m ago\n",
+                    "# 42, E10:00, 22 m ago\n",
+                    "# 43, E00:01, 22 m ago\n",
+                    "# 44, E00:01, 22 m ago\n",
+                    "# 45, E00:01, 23 m ago\n",
+                    "# 46, E10:00, 23 m ago\n",
+                    "# 47, E00:01, 23 m ago\n",
+                    "# 48, E00:01, 23 m ago\n",
+                    "# 49, E10:00, 26 m ago\n",
+                    "# 50, E10:00, 26 m ago\n",
+                    "# 51, E00:01, 28 m ago\n",
+                    "# 52, E00:01, 28 m ago\n",
+                    "# 53, E00:01, 28 m ago\n",
+                    "# 54, E12:00, 5 h ago\n",
+                    "# 55, E90:03, 5 h ago\n",
+                    "# 56, E03:00, 5 h ago\n",
+                    "# 57, E12:00, 9 h ago\n",
+                    "# 58, E12:00, 9 h ago\n",
+                    "# 59, E11:03, 9 h ago\n",
+                    "# 60, E11:03, 9 h ago\n",
+                    "# 61, E11:03, 9 h ago\n",
+                    "# 62, E10:01, 9 h ago\n",
+                    "# 63, E10:02, 9 h ago\n"
+                ],
+                "divide": {
+                    "frames": [
+                        11,
+                        53
+                    ],
+                    "delays": [
+                        23.0,
+                        119.0
+                    ]
+                }
+            }
+        ],
+        "b'\\x881\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 13.0
+            }
+        ],
+        "b'\\xa91\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 9.000000000000455
+            }
+        ],
+        "b'\\x882\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "Q8iv-****: 0\n",
+                "delay": 4.0
+            }
+        ],
+        "b'\\x883\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "5\n",
+                "delay": 16.0
+            }
+        ],
+        "b'\\xa93\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "5\n",
+                "delay": 12.0
+            }
+        ],
+        "b'\\x884\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "2\n",
+                "delay": 7.0
+            }
+        ],
+        "b'\\xa94\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "2\n",
+                "delay": 3.0
+            }
+        ],
+        "b'\\x885\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E10:00",
+                "delay": 15.0
+            }
+        ],
+        "b'\\xa95\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E10:00",
+                "delay": 10.0
+            }
+        ],
+        "b'\\x887\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 6.0
+            }
+        ],
+        "b'\\xa97\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 1.0
+            }
+        ],
+        "b'\\x88A\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT_MANY",
+                "data": [
+                    "\n",
+                    "CORE COMMAND SET.\n",
+                    " See manual for full listing.\n",
+                    " v[port]=[value]   \tSet voltage (V)\n",
+                    " i[port]=[value]   \tSet current (mA)\n",
+                    " v[port]?          \tQuery voltage\n",
+                    " i[port]?          \tQuery current\n",
+                    " vipall?           \tQuery all values\n",
+                    " vmax[port]=[value]\tSet voltage limit (V)\n",
+                    " imax[port]=[value]\tSet current limit (mA)\n",
+                    "\n",
+                    "ERROR CODES.\n",
+                    " 00   \t\tUnknown error\n",
+                    " 01   \t\tOvervoltage\n",
+                    " 02   \t\tOvercurrent\n",
+                    " 03   \t\tPower error\n",
+                    " 04   \t\tCalibration error\n",
+                    " 10   \t\tUnrecognised command\n",
+                    " 11   \t\tUnrecognised parameter\n",
+                    " 12   \t\tUnrecognised port\n",
+                    " 13   \t\tOperation forbidden\n",
+                    " 14:00\t\tInstruction buffer overflow\n",
+                    " 14:01\t\tSingle instruction overflow\n",
+                    " 15:X0\t\tSerial overflow detected\n",
+                    " 15:X1\t\tSerial framing error detected\n",
+                    " 16   \t\tInternal software error\n"
+                ],
+                "divide": {
+                    "frames": [
+                        17,
+                        6,
+                        3
+                    ],
+                    "delays": [
+                        40.0,
+                        16.0,
+                        20.0
+                    ]
+                }
+            }
+        ],
+        "b'\\x88B\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 14.0
+            }
+        ],
+        "b'\\xa9B\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "1\n",
+                "delay": 9.0
+            }
+        ],
+        "b'\\x88C\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 5.0
+            }
+        ],
+        "b'\\xa9C\\x00\\x00\\x00\\x00\\x00'": [
+            {
+                "action": "QUEUE_OUT",
+                "data": "E00:01",
+                "delay": 17.0
+            }
+        ]
+    },
+    "*": {
+        "action": "QUEUE_OUT",
+        "data": "E10:02"
+    },
+    "initial_out": [
+        "OK\n"
+    ]
+}

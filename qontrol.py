@@ -94,12 +94,6 @@ class ExtendedEnum(Enum):
         namespace.update(cls.__members__)
 
     
-
-
-class Type(ExtendedEnum):
-    GET = '?'
-    SET = '='
-    
 class HeaderId(ExtendedEnum):
     BIN   = 0x80
     BCAST = 0x40
@@ -109,54 +103,15 @@ class HeaderId(ExtendedEnum):
     ACT   = 0x04
     DEXT  = 0x02
     PBIT  = 0x01
-    
 
-class Index(ExtendedEnum):
-    V        = 0x00
-    I        = 0x01
-    VMAX     = 0x02
-    IMAX     = 0x03
-    VCAL     = 0x04
-    ICAL     = 0x05
-    VERR     = 0x06
-    IERR     = 0x07
-    VIP      = 0x0A
-    SR       = 0x0B
-    PDI      = 0x0C
-    PDP      = 0x0D
-    PDR      = 0x0E
-    GAIN     = 0x0F
-    VFULL    = 0x20
-    IFULL    = 0x21
-    NCHAN    = 0x22
-    FIRMWARE = 0x23
-    ID       = 0x24
-    LIFETIME = 0x25
-    NVM      = 0x26
-    LOG      = 0x27
-    QUIET    = 0x28
-    LED      = 0x31
-    NUP      = 0x32
-    ADCT     = 0x33
-    ADCN     = 0x34
-    CCFN     = 0x35
-    INTEST   = 0x36
-    OK       = 0x37
-    DIGSUP   = 0x38
-    HELP     = 0x41
-    SAFE     = 0x42
-    ROCOM    = 0x43
-    
-
-class AddrMode(Enum):
-    CHANNEL = 0
-    DEVICE  = 1
-
-
-# Export enums to global namespace
-Type.export_to(globals())
 HeaderId.export_to(globals())
-Index.export_to(globals())
+
+class Type(ExtendedEnum):
+    GET = ('?', {RW})
+    SET = ('=', set())
+
+Type.export_to(globals())
+
 
 def parity_odd(x):
     """Function to compute whether a byte's parity is odd."""
@@ -166,6 +121,77 @@ def parity_odd(x):
     return x & 1
 
 
+def compute_header_byte(header_set=None):
+     if header_set is None:
+         header_set = set()
+         
+     header = sum(map(lambda x: x.value, header_set), BIN.value)
+     header += parity_odd(header)
+
+     return header
+
+
+class HeaderMode(ExtendedEnum):
+    WRITE = set()             # 0x81
+    WRITE_DEXT = {DEXT}       # 0x82
+    WRITE_ALLCH = {ALLCH}     # 0xA0
+    
+    READ = {RW}                # 0x88
+    READ_ALLCH = {RW, ALLCH}  # 0xA9
+
+    ACT = {ACT}               # 0x84
+
+HeaderMode.export_to(globals())
+
+
+
+class Index(ExtendedEnum):
+   # command   |code  |supported header modes
+    V        = (0x00, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    I        = (0x01, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    VMAX     = (0x02, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    IMAX     = (0x03, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    VCAL     = (0x04, {WRITE, ACT, WRITE_ALLCH, READ, READ_ALLCH})
+    ICAL     = (0x05, {WRITE, ACT, WRITE_ALLCH, READ, READ_ALLCH})
+    VERR     = (0x06, {READ, READ_ALLCH})
+    IERR     = (0x07, {READ, READ_ALLCH})
+    VIP      = (0x0A, {READ_ALLCH})
+    SR       = (0x0B, set()) # Not in Programming Manual
+    PDI      = (0x0C, set()) # Not in Programming Manual
+    PDP      = (0x0D, set()) # Not in Programming Manual
+    PDR      = (0x0E, set()) # Not in Programming Manual
+    GAIN     = (0x0F, set()) # Not in Programming Manual
+    VFULL    = (0x20, {READ_ALLCH})
+    IFULL    = (0x21, {READ_ALLCH})
+    NCHAN    = (0x22, {READ_ALLCH})
+    FIRMWARE = (0x23, {READ, READ_ALLCH})
+    ID       = (0x24, {READ, READ_ALLCH})
+    LIFETIME = (0x25, {READ, READ_ALLCH})
+    NVM      = (0x26, {WRITE_ALLCH, READ_ALLCH})
+    LOG      = (0x27, {READ, READ_ALLCH})
+    QUIET    = (0x28, set()) # Not in Programming Manual
+    LED      = (0x31, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    NUP      = (0x32, {WRITE, READ})
+    ADCT     = (0x33, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    ADCN     = (0x34, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    CCFN     = (0x35, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    INTEST   = (0x36, {ACT})
+    OK       = (0x37, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    DIGSUP   = (0x38, set()) # Not in Programming Manual
+    HELP     = (0x41, {READ})
+    SAFE     = (0x42, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    ROCOM    = (0x43, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+
+    def code(self):
+        return self.value[0]
+
+    def header_modes(self):
+        return self.value[1]
+    
+    
+Index.export_to(globals())
+
+
 @dataclass
 class Command:
     type: Type
@@ -173,8 +199,11 @@ class Command:
     addr: int = 0
     addr_id: int = 0
     header: set[HeaderId] = field(default_factory= lambda: set())
-    data: any = 0
+    data: int | list[int] = 0
 
+    def __post_init__(self):
+        # Add type info to header
+        self.header |= self.type.value[1]
 
     def ascii(self):
         self.addr = 'all' if ALLCH in self.header else self.addr
@@ -183,36 +212,39 @@ class Command:
 
     def binary(self):
         # Compute header byte
-        header = sum(map(lambda x: x.value, self.header), BIN.value)
-        header += parity_odd(header)
+        header = compute_header_byte(self.header)
         
         # Handle addressing modes
         # If ADDM = 1
         if ADDM in self.header:
             # addr = 2B for device id, 1BN for CH
-            addr_fmt = '>hc'
+            addr_fmt = '>Hc'
             addr = (self.addr_id, bytes([self.addr]))
         else:
             # addr = 1B padding, 2B for CH
-            addr_fmt = '>xh'
+            addr_fmt = '>xH'
             addr =(self.addr,)
 
         # Handle data extension
         # If DEXT = 1
         if DEXT in self.header:
             # data = 2B for # words (N), N * 2B for data words
-            data_fmt = 'h' * (len(self.data) + 1)
+            data_fmt = 'H' * (len(self.data) + 1)
             data = (len(self.data), *self.data)
         else:
             # data = 2B
-            data_fmt = 'h'
+            data_fmt = 'H'
             data = (self.data,)
 
         # Pack data into bytes
-        h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value]))
+        h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value[0]]))
         payload_bytes = struct.pack(addr_fmt + data_fmt, *addr, *data)
 
         return h_idx_bytes + payload_bytes
+
+    def allowed(self):
+        header_modes = map(lambda x: x.value, self.idx.header_modes())
+        return self.header in header_modes
 
     
 class Qontroller(object):
@@ -761,6 +793,9 @@ class Qontroller(object):
                         data_bytes.extend(get_val(n_dext_words))
                 
                 if isinstance(value_int, int):
+                        v = get_val(value_int)
+                        
+                        print(f'v={v}, {int.from_bytes(v)}')
                         data_bytes.extend(get_val(value_int))
                 
                 elif isinstance(value_int, list) and all([isinstance(e ,int) for e in value_int]):
@@ -803,7 +838,34 @@ class Qontroller(object):
                                         print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
                                         return None
                                 
-        
+
+        def send_binary(self, cmd):
+                self.transmit(cmd.binary(), binary_mode = True)
+
+                n_lines_requested = 2**31
+                target_errors=None
+                output_regex='(.*)'
+                special_timeout = None
+            
+             # Function to retry this command (in case of comms error)
+                def retry_function():
+                        return self.issue_binary_command (command_id, ch, BCAST, ALLCH, ADDM, RW, ACT, DEXT, value_int, addr_id_num, n_lines_requested, target_errors, output_regex, special_timeout)
+                
+                # Wait for response
+                if RW==1 or ((RW==0 or ACT) and self.wait_for_responses):
+                        try:
+                                result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
+                                return result
+                        except RuntimeError as e:
+                                if RW == 1:
+                                        # If we want a return value, raise an error
+                                        raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
+                                else:
+                                        # If we are setting something, just warn the user
+                                        print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
+                                        return None
+            
+            
         
         
         def _issue_command_receive_response (self, retry_function, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
