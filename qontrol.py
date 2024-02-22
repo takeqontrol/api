@@ -171,6 +171,7 @@ class Command:
     type: Type
     idx: Index
     addr: int = 0
+    addr_id: int = 0
     header: set[HeaderId] = field(default_factory= lambda: set())
     data: any = 0
 
@@ -184,18 +185,34 @@ class Command:
         # Compute header byte
         header = sum(map(lambda x: x.value, self.header), BIN.value)
         header += parity_odd(header)
-
-        p1 = struct.pack('<cc', bytes([header]), bytes([self.idx.value]))
-
-        payload_fmt = '>xhh'
         
-        if DEXT in self.header:
-            p2 = struct.pack(payload_fmt + 'h' * len(self.data),
-                             self.addr, len(self.data), *self.data)
+        # Handle addressing modes
+        # If ADDM = 1
+        if ADDM in self.header:
+            # addr = 2B for device id, 1BN for CH
+            addr_fmt = '>hc'
+            addr = (self.addr_id, bytes([self.addr]))
         else:
-            p2 = struct.pack(payload_fmt, self.addr, self.data)
+            # addr = 1B padding, 2B for CH
+            addr_fmt = '>xh'
+            addr =(self.addr,)
 
-        return p1 + p2
+        # Handle data extension
+        # If DEXT = 1
+        if DEXT in self.header:
+            # data = 2B for # words (N), N * 2B for data words
+            data_fmt = 'h' * (len(self.data) + 1)
+            data = (len(self.data), *self.data)
+        else:
+            # data = 2B
+            data_fmt = 'h'
+            data = (self.data,)
+
+        # Pack data into bytes
+        h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value]))
+        payload_bytes = struct.pack(addr_fmt + data_fmt, *addr, *data)
+
+        return h_idx_bytes + payload_bytes
 
     
 class Qontroller(object):

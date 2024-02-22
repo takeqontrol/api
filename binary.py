@@ -23,6 +23,7 @@ def compare(cmd):
             args[str(i)] = 0
 
     args['value_int'] = cmd.data
+    args['addr_id_num'] = cmd.addr_id
     expected = q.issue_binary_command(cmd.idx.value,
                                       ch=cmd.addr,
                                       **args)
@@ -53,7 +54,15 @@ for cmd in Index:
     compare(Command(GET, cmd))
     compare(Command(GET, cmd, header={ALLCH}))
 
+
+compare(Command(GET, V, i, addr_id=5, header={ADDM}))
+    
 print(f'all_pass = {all_pass}')
+
+
+
+
+
 
 def test():
     q.issue_binary_command(V.value, ch=0)
