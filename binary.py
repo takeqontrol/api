@@ -4,10 +4,14 @@ import timeit
 from random import randint
 import math
 
-dev_port='/dev/cu.usbserial-FT677TKA'
-p = Program.from_json_file('binary_test.json')
+
+p = Program.from_json_file('progs/binary_test.json')
 vm = VirtualModule(p)
-q = Qontroller(serial_port_name=dev_port)
+q = Qontroller(virtual_port=vm.port, response_timeout=0.5)
+
+# dev_port='/dev/cu.usbserial-FT677TKA'
+# q = Qontroller(serial_port_name=dev_port)
+
 
 
 
@@ -155,6 +159,9 @@ if __name__ == '__main__':
         if READ_ALLCH in cmd.header_modes():
             res = q.send_binary(Command(GET, cmd, header={ALLCH}))
             print(f'{cmd}_ALL  {res}')
+
+
+        
 
     # q.print_log()
     # p = ProgramGenerator("Binary Program", q.log)

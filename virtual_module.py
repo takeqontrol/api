@@ -9,7 +9,6 @@ from dataclasses import dataclass, field
 from threading import Thread
 
 
-
 formatter = logging.Formatter('%(levelname)s: %(message)s')
 log = logging.getLogger('virtual_module')
 
@@ -288,22 +287,25 @@ x
             kwargs - kwargs passed from the qontroller
         """
 
-        # Decode the command that came from the qontroller
-        # Assume ASCII commands for now ...
-        try: 
+        # If command is binary
+        if args[0][0] > 0x80:
+            cmd = args[0].hex()
+        else:
             cmd = args[0].decode('ascii')
-        except:
-            cmd = args[0]
-            
-        self._inc_cmd_cnt(cmd)
 
         # Get responses from program
-        responses = self.program[cmd]
+        cmd_data = self.program[cmd]
 
-        # TODO: TEMP fix for default
-        # I need to figure out what is wrong
-        if not isinstance(responses, list):
-            responses = [responses]
+            
+        self._inc_cmd_cnt(cmd)
+        
+        
+        responses = cmd_data['entries']
+        
+        # # TODO: TEMP fix for default
+        # # I need to figure out what is wrong
+        # if not isinstance(responses, list):
+        #     responses = [responses]
         
         # If there no responses there is nothing to do
         if not responses:
@@ -411,14 +413,22 @@ class Program:
     # Custom handlers
     custom: CustomHandler = None
 
-    
+    # Mapping commands to indices for quick lookup
+    cmd2idx: dict = field(default_factory= lambda: {})
+
+
+    def __post_init__(self):
+        self.data.append(self.default)
 
     def __getitem__(self, cmd):
         """Look up the response for a command."""
-        return  self.data.get(cmd, self.default)
+
+        i = self.cmd2idx.get(cmd, -1)
+        
+        return  self.data[i]
 
     def commands(self):
-        return list(self.data.keys())
+        return list(self.cmd2idx.keys())
 
         
 
@@ -452,26 +462,34 @@ class Program:
         """
         try:
             name = prog['name']
-            data = cls._parse_data(prog['data'], custom)
+            data, cmd2idx = cls._parse_data(prog['data'], custom)
             default = cls._parse_entry(prog['*'], custom)
             initial_out = prog['initial_out']
+            
             
         except Exception:
             log.exception('Creating program from json data')
   
 
-        return cls(name, data, default, initial_out, custom)
+        return cls(name, data, default, initial_out, custom, cmd2idx)
 
 
     @classmethod
     def _parse_data(cls, data, custom=None):
         """Parse the program data"""
 
-        for entries in data.values():
-            for entry in entries:
+        cmd2idx = {}
+
+        for i, cmd_entry in enumerate(data):
+
+            # Save the command index
+            cmd2idx[cmd_entry['cmd']] = i
+
+            
+            for entry in cmd_entry['entries']:
                 cls._parse_entry(entry, custom)
 
-        return data
+        return data, cmd2idx
 
     @classmethod
     def _parse_entry(cls, entry, custom=None):
@@ -504,6 +522,7 @@ class Response:
 @dataclass
 class LogEntry:
     cmd: str
+    encoding: str
     responses: list[Response] = field(default_factory= lambda: [])
         
 
@@ -514,13 +533,15 @@ class ProgramGenerator:
     def __init__(self, name, log):
         self.prog = {}
         self.prog['name'] = name
-        self.prog['data'] = {}
+        self.prog['data'] = []
         self.prog['*'] = {
                 'action': 'QUEUE_OUT',
-                'data': 'E10:02'
+                'data': 'E10:02',
+                'delay': 0.0
         }
         self.prog['initial_out'] = ['OK\n']
 
+        self.seen_cmds = set()
 
         self.parsed_log = self._parse_log(log)
 
@@ -545,13 +566,18 @@ class ProgramGenerator:
 
         for item in log:
             time_ms = 1000*item['proctime']
-            type = item['type']
+            cmd_type = item['type']
             desc = item['desc']
 
-            match type:
+            encoding = 'ascii'
+
+            match cmd_type:
                 case 'tx':
                     # If cmd was tx append a new log entry
-                    parsed_log.append(LogEntry(desc))
+                    if isinstance(item['raw'], bytes):
+                        encoding = 'binary'
+                    
+                    parsed_log.append(LogEntry(desc, encoding))
                     
                 case 'rcv':
                     # If cmd was rcv update the last entry
@@ -571,6 +597,12 @@ class ProgramGenerator:
 
         return parsed_log
 
+    def find_cmd_data(self, cmd):
+        for entry in self.prog['data']:
+            if cmd == entry['cmd']:
+                return entry['entries']
+
+        return None
 
 
     def _gen_entry(self, log_entry):
@@ -589,17 +621,28 @@ class ProgramGenerator:
             frames.append(len(res.data))
             delays.append(res.delay)
 
+        
+        
         # Initialise cmd entry
-        if not log_entry.cmd in self.prog['data']:
-                self.prog['data'][log_entry.cmd] = []
+        if not log_entry.cmd in self.seen_cmds:
+            self.prog['data'].append({
+                "cmd": log_entry.cmd,
+                "encoding": log_entry.encoding,
+                "entries": []
+            })
 
+            cmd_data = self.prog['data'][-1]['entries']
+            self.seen_cmds.add(log_entry.cmd)
+        else:
+            cmd_data = self.find_cmd_data(log_entry.cmd)
+                
 
         # Determine action and data type
         action = str(Action.QUEUE_OUT) if len(data) == 1 else str(Action.QUEUE_OUT_MANY)
         data = data[0] if len(data) == 1 else data
         
         # Add common attributes
-        self.prog['data'][log_entry.cmd].append({
+        cmd_data.append({
             'action': action,
             'data': data,
         })
@@ -607,11 +650,11 @@ class ProgramGenerator:
         if len(frames) == 1:
             # If we have only one frame we don't segment
             # So we have a single delay
-            self.prog['data'][log_entry.cmd][-1]['delay'] = delays[0]
+            cmd_data[-1]['delay'] = delays[0]
          
         else:
             # We need to segment, so add divide component
-            self.prog['data'][log_entry.cmd][-1]['divide'] = {
+            cmd_data[-1]['divide'] = {
                 'frames': frames,
                 'delays': delays
             }

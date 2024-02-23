@@ -22,6 +22,7 @@ def log_handler():
     """
     def _generic_log_handler(err_dict):
         if err_dict['type'] == 'err':
+            print('raised an error')
             raise RuntimeError(err_dict['raw'])
 
         
@@ -52,13 +53,18 @@ class TestCommandFromProgram:
 
     @pytest.mark.parametrize("f, p, q, cmd", params())
     def test_cmd(self, f, p, q, cmd):
-        # Parse the command
-        c, op, val = cmd_re.search(cmd.strip()).groups()
 
-        action, expected = self.parse_command(p[cmd][0])
+        # Parse the command
+        action, expected = self.parse_command(p[cmd]['entries'][0])
 
         try:
-            res = q.issue_command(c, operator=op, value=val)
+            if p[cmd]['encoding'] == 'binary':
+                res = q.send_binary(bytes.fromhex(cmd), raw=True)
+                print(res)
+            else:
+            
+                c, op, val = cmd_re.search(cmd.strip()).groups()
+                res = q.issue_command(c, operator=op, value=val)
             
         except RuntimeError as e:
             # The log_handler will raise an exception
@@ -86,10 +92,10 @@ class TestCommandFromProgram:
         match action:
 
             case Action.QUEUE_OUT | Action.NOP:
-                res['data'] = cmd['data'].strip()
+                res['data'] = cmd['data'].strip('\n')
                 
             case Action.QUEUE_OUT_MANY:
-                res['data'] = list(map(lambda x: x.strip(), cmd['data']))
+                res['data'] = list(map(lambda x: x.strip('\n'), cmd['data']))
 
             case Action.RUN_CUSTOM:
                 res['func'] = cmd['func']

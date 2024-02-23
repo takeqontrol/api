@@ -69,7 +69,7 @@ DEVICE_PROPERTIES = {
 
         
 RESPONSE_OK = 'OK\n'
-ERROR_FORMAT = '[A-Za-z]{1,3}(\d+):(\d+)'
+ERROR_FORMAT = r'[A-Za-z]{1,3}(\d+):(\d+)'
 
 
 # class Type(Enum):
@@ -320,7 +320,7 @@ class Qontroller(object):
                 # Find serial port by asking it for its device id
                 if 'device_id' in kwargs:
                         # Search for port with matching device ID
-                        ob = re.match('([QS]\w+)-([0-9a-fA-F\*]+)', self.device_id)
+                        ob = re.match(r'([QS]\w+)-([0-9a-fA-F\*]+)', self.device_id)
                         targ_dev_type,targ_dev_num = ob.groups()
                         if ob is None:
                                 raise AttributeException('Entered device ID ({0}) must be of form "[device type]-[device number]" where [device number] can be hexadecimal'.format(self.device_id))
@@ -354,9 +354,9 @@ class Qontroller(object):
                                                 sys.stdout.write('No response\n')
                                                 continue
                                         # Match the device ID
-                                        ob = re.match('.*((?:'+ERROR_FORMAT+')|(?:Q\w+-[0-9a-fA-F\*]+)).*', response)
+                                        ob = re.match(r'.*((?:'+ERROR_FORMAT+r')|(?:Q\w+-[0-9a-fA-F\*]+)).*', response)
                                         if ob is not None:
-                                                ob = re.match('(Q\w+)-([0-9a-fA-F\*]+)\n', response)
+                                                ob = re.match(r'(Q\w+)-([0-9a-fA-F\*]+)\n', response)
                                                 if ob is not None:
                                                         sys.stdout.write('{:}\n'.format(response))
                                                         sys.stdout.flush()
@@ -440,7 +440,7 @@ class Qontroller(object):
                                 except UnicodeDecodeError:
                                         response = ""
                                 # Parse it
-                                ob = re.match('.*((?:'+ERROR_FORMAT+')|(?:\w+\d\w*-[0-9a-fA-F\*]+)).*', response)
+                                ob = re.match(r'.*((?:'+ERROR_FORMAT+r')|(?:\w+\d\w*-[0-9a-fA-F\*]+)).*', response)
                                 # Check whether it's valid
                                 if ob is not None:
                                         # Flag that we have broken out correctly
@@ -451,7 +451,7 @@ class Qontroller(object):
                         if not timed_out:
                                 self.device_id = ob.groups()[0]
                                 # Check if it was an error, in which case clear the stored value but proceed
-                                ob = re.match('((?:'+ERROR_FORMAT+')|(?:Q\w+-\*+))', self.device_id)
+                                ob = re.match(r'((?:'+ERROR_FORMAT+r')|(?:Q\w+-\*+))', self.device_id)
                                 if ob is not None:
                                         # It was an error (no ID assigned yet)
                                         self.device_id = None
@@ -471,12 +471,12 @@ class Qontroller(object):
                         
                         # Ask for number of upstream devices, parse it
                         try:
-                                chain = self.issue_command('nupall', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = '(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
+                                chain = self.issue_command('nupall', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
                         except:
-                                chain = self.issue_command('nup', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = '(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
+                                chain = self.issue_command('nup', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
                         # Further parse each found device into a dictionary
                         for i in range(len(chain)):
-                                ob = re.match('\x00*([^-\x00]+)-([0-9a-fA-F\*]+)', chain[i][0])
+                                ob = re.match(r'\x00*([^-\x00]+)-([0-9a-fA-F\*]+)', chain[i][0])
                         
                                 device_id = chain[i][0]
                                 device_type = ob.groups()[0]
@@ -489,7 +489,7 @@ class Qontroller(object):
                                         print ('Qontroller.__init__: Warning: Unable to determine daisy chain index of device with ID {:}.'.format(device_id))
                         
                                 # Scan out number of channels from device type
-                                ob = re.match('[^\d]+(\d*)[^\d]*', device_type)
+                                ob = re.match(r'[^\d]+(\d*)[^\d]*', device_type)
                         
                         
                                 try:
@@ -541,7 +541,7 @@ class Qontroller(object):
                 # Write to port
                 if binary_mode:
                         self.serial_port.write(command_string)
-                        self.log_append(type='tx', id='', ch='', desc=repr(command_string), raw=command_string)
+                        self.log_append(type='tx', id='', ch='', desc=command_string.hex(), raw=command_string)
                 else:
                         self.serial_port.write(command_string.encode('ascii'))
                         self.log_append(type='tx', id='', ch='', desc=command_string, raw='')
@@ -666,7 +666,7 @@ class Qontroller(object):
         
         def issue_command (self, command_id, ch=None, operator='', 
                 value=None, n_lines_requested=2**31, target_errors=None, 
-                output_regex='(.*)', special_timeout=None, return_cmd=False):
+                output_regex=r'(.*)', special_timeout=None, return_cmd=False):
                 """
                 Transmit command to device, get response.
                 
@@ -717,7 +717,7 @@ class Qontroller(object):
                 
                 
         
-        def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
+        def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex=r'(.*)', special_timeout = None):
                 """
                 Transmit command to device, get response.
                 
@@ -839,12 +839,14 @@ class Qontroller(object):
                                         return None
                                 
 
-        def send_binary(self, cmd):
-                self.transmit(cmd.binary(), binary_mode = True)
+        def send_binary(self, cmd, raw=False):
+
+                tx_str = cmd.binary() if not raw else cmd
+                self.transmit(tx_str, binary_mode = True)
 
                 n_lines_requested = 2**31
                 target_errors=None
-                output_regex='(.*)'
+                output_regex=r'(.*)'
                 special_timeout = None
             
              # Function to retry this command (in case of comms error)
@@ -853,22 +855,13 @@ class Qontroller(object):
                 
                 # Wait for response
                 if RW==1 or ((RW==0 or ACT) and self.wait_for_responses):
-                        try:
-                                result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
-                                return result
-                        except RuntimeError as e:
-                                if RW == 1:
-                                        # If we want a return value, raise an error
-                                        raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
-                                else:
-                                        # If we are setting something, just warn the user
-                                        print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
-                                        return None
+                    result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
+                    return result
             
             
         
         
-        def _issue_command_receive_response (self, retry_function, n_lines_requested=2**31, target_errors=None, output_regex='(.*)', special_timeout = None):
+        def _issue_command_receive_response (self, retry_function, n_lines_requested=2**31, target_errors=None, output_regex=r'(.*)', special_timeout = None):
                 """
                 Internal method to handle waiting for response.
                 """
@@ -1069,11 +1062,11 @@ class QXOutput(Qontroller):
                 
                 # Get our full-scale voltage and current (VFULL, IFULL)
                 try:
-                        self.v_full = float(self.issue_command('vfull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+) V')[0][0])
+                        self.v_full = float(self.issue_command('vfull', operator = '?', n_lines_requested = 1, output_regex=r'(?:\+|-|)([\d\.]+) V')[0][0])
                 except Exception as e:
                         raise RuntimeError("Unable to obtain VFULL from qontroller on port {:}. Error was {:}.".format(self.serial_port_name, e))
                 try:
-                        self.i_full = float(self.issue_command('ifull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+) mA')[0][0])
+                        self.i_full = float(self.issue_command('ifull', operator = '?', n_lines_requested = 1, output_regex=r'(?:\+|-|)([\d\.]+) mA')[0][0])
                 except:
                         raise RuntimeError("Unable to obtain IFULL from qontroller on port {:}.".format(self.serial_port_name))
                 
@@ -1090,7 +1083,7 @@ class QXOutput(Qontroller):
                         except KeyError:
                                 # If not, just ask the top device how many ports its got
                                 try:
-                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = '(\d+)\n')[0][0])
+                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = r'(\d+)\n')[0][0])
                                 except:
                                         # If not, just take some random value
                                         self.n_chs = 8
@@ -1140,7 +1133,7 @@ class QXOutput(Qontroller):
         
         def get_value (self, ch, para='V'):
         
-                regex = '((?:\+|-){0,1}[\d\.]+)'
+                regex = r'((?:\+|-){0,1}[\d\.]+)'
                 if self.binary_mode:
                         result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = regex)
                 else:
@@ -1160,9 +1153,9 @@ class QXOutput(Qontroller):
         
         def get_all_values (self, para='V'):
                 if self.binary_mode:
-                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = r'(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 else:
-                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = r'(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 if len(result) > 0:
                         if len(result[0]) > 0:
                                 out = [None]*len(result)
@@ -1276,15 +1269,15 @@ class MXMotor(Qontroller):
                 
                 # Get our full-scale voltage and current (VFULL, IFULL)
                 try:
-                        self.v_full = float(self.issue_command('vfull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+).*')[0][0])
+                        self.v_full = float(self.issue_command('vfull', operator = '?', n_lines_requested = 1, output_regex=r'(?:\+|-|)([\d\.]+).*')[0][0])
                 except Exception as e:
                         raise RuntimeError("Unable to obtain VFULL from qontroller on port {:}. Error was {:}.".format(self.serial_port_name, e))
                 try:
-                        self.i_full = float(self.issue_command('ifull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+) mA')[0][0])
+                        self.i_full = float(self.issue_command('ifull', operator = '?', n_lines_requested = 1, output_regex=r'(?:\+|-|)([\d\.]+) mA')[0][0])
                 except:
                         raise RuntimeError("Unable to obtain IFULL from qontroller on port {:}.".format(self.serial_port_name))
                 try:
-                        self.x_full = float(self.issue_command('xfull', operator = '?', n_lines_requested = 1, output_regex='(?:\+|-|)([\d\.]+)')[0][0])
+                        self.x_full = float(self.issue_command('xfull', operator = '?', n_lines_requested = 1, output_regex=r'(?:\+|-|)([\d\.]+)')[0][0])
                 except:
                         print("MX.__init__: Warning: Unable to obtain XFULL from qontroller on port {:}.".format(self.serial_port_name))
                         self.x_full = DEVICE_PROPERTIES['M2']['XFULL']
@@ -1302,7 +1295,7 @@ class MXMotor(Qontroller):
                         except KeyError:
                                 # If not, just ask the top device how many ports its got
                                 try:
-                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = '(\d+)\n')[0][0])
+                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = r'(\d+)\n')[0][0])
                                 except:
                                         # If not, just take some random value
                                         self.n_chs = 2
@@ -1390,9 +1383,9 @@ class MXMotor(Qontroller):
                 if self.binary_mode:
                         # TODO: A 32-b version of issue_binary_command is not yet implemented
                         raise RuntimeError("Binary mode X commands not implemented yet. Use binary_mode = False to workaround.")
-                        result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+                        result = self.issue_binary_command(CMD_CODES[para.upper()], ch=ch, RW=1, n_lines_requested = 1, output_regex = r'((?:\+|-){0,1}[\d\.]+)')
                 else:
-                        result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = '((?:\+|-){0,1}[\d\.]+)')
+                        result = self.issue_command(para, ch = ch, operator = '?', n_lines_requested = 1, output_regex = r'((?:\+|-){0,1}[\d\.]+)')
                 if len(result) > 0:
                         if len(result[0]) > 0:
                                 s = result[0][0]
@@ -1413,9 +1406,9 @@ class MXMotor(Qontroller):
                 para = para.upper()
                 
                 if self.binary_mode:
-                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = r'(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 else:
-                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = r'(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 if len(result) > 0:
                         if len(result[0]) > 0:
                                 out = [None]*len(result)
@@ -1578,7 +1571,7 @@ class SXInput(Qontroller):
                         except KeyError:
                                 # If not, just ask the top device how many ports its got
                                 try:
-                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = '(\d+)\n')[0][0])
+                                        self.n_chs = int(self.issue_command('nchan', operator = '?', n_lines_requested = 1, target_errors = [10], output_regex = r'(\d+)\n')[0][0])
                                 except:
                                         # If not, just take some random value
                                         self.n_chs = 8
@@ -1623,9 +1616,9 @@ class SXInput(Qontroller):
                 
                 # Define regular expression to parse, based on parameter
                 if para in ['I','V']:
-                        regex = '([\+-]?[\d\.]+)\s*([munpf]?)[VA]'
+                        regex = r'([\+-]?[\d\.]+)\s*([munpf]?)[VA]'
                 else:
-                        regex = '([\+-]?[\d\.]+)'
+                        regex = r'([\+-]?[\d\.]+)'
                 
                 # Issue the command, wait for response
                 if self.binary_mode:
@@ -1661,9 +1654,9 @@ class SXInput(Qontroller):
         
         def get_all_values (self, para='V'):
                 if self.binary_mode:
-                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_binary_command(CMD_CODES[para.upper()], RW=1, ALLCH=1, BCAST=0, n_lines_requested = self.n_chs, output_regex = r'(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 else:
-                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = '(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
+                        result = self.issue_command(para+'all', operator = '?', n_lines_requested = self.n_chs, output_regex = r'x(?:\+|-|)([\d\.]+)', special_timeout = 2*self.response_timeout)
                 if len(result) > 0:
                         if len(result[0]) > 0:
                                 out = [None]*len(result)
@@ -1910,6 +1903,6 @@ if __name__ == '__main__':
         
         import sys, getopt
         
-        #run_interactive_shell()
+        run_interactive_shell()
         
         
