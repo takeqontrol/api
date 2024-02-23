@@ -1,0 +1,5731 @@
+{
+    "name": "Binary Program",
+    "data": [
+        {
+            "cmd": "nup=0\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "\u0006OK\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "nupall?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "V0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+8.2702 V\n",
+                    "delay": 21.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+8.2702 V\n",
+                    "delay": 19.000000000000227
+                }
+            ]
+        },
+        {
+            "cmd": "V1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+2.0994 V\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+2.0994 V\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+11.8553 V\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+11.8553 V\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "V3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+10.0830 V\n",
+                    "delay": 27.999999999999545
+                }
+            ]
+        },
+        {
+            "cmd": "88000000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+10.0830 V\n",
+                    "delay": 25.0
+                }
+            ]
+        },
+        {
+            "cmd": "V4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+5.3558 V\n",
+                    "delay": 24.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+5.3558 V\n",
+                    "delay": 23.0
+                }
+            ]
+        },
+        {
+            "cmd": "V5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+6.4382 V\n",
+                    "delay": 21.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+6.4381 V\n",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "V6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+9.7053 V\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+9.7053 V\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "V7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+5.3334 V\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+5.3334 V\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "I0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0204 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0202 mA\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "I1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0019 mA\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0014 mA\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "I2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0181 mA\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0183 mA\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "I3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0382 mA\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0381 mA\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "I4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0200 mA\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0205 mA\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "I5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0179 mA\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0187 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "I6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0050 mA\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0049 mA\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "I7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0156 mA\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0152 mA\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "VMAX7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "IMAX7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "VCAL7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "ICAL7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "VERR7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "IERR7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "FIRMWARE7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 13.000000000007276
+                }
+            ]
+        },
+        {
+            "cmd": "88240000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "ID7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 10.000000000007276
+                }
+            ]
+        },
+        {
+            "cmd": "88240000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156607 s\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156607 s\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156608 s\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156608 s\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156609 s\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156609 s\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156609 s\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156610 s\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156610 s\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156611 s\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156611 s\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156611 s\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156612 s\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156612 s\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "LIFETIME7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156613 s\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "156613 s\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "LOG0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 19 s ago\n",
+                        "#  2, E00:01, 19 s ago\n",
+                        "#  3, E00:01, 20 s ago\n",
+                        "#  4, E00:01, 20 s ago\n",
+                        "#  5, E00:01, 21 s ago\n",
+                        "#  6, E00:01, 21 s ago\n",
+                        "#  7, E00:01, 21 s ago\n",
+                        "#  8, E00:01, 22 s ago\n",
+                        "#  9, E00:01, 22 s ago\n",
+                        "# 10, E00:01, 23 s ago\n",
+                        "# 11, E00:01, 23 s ago\n",
+                        "# 12, E00:01, 23 s ago\n",
+                        "# 13, E00:01, 24 s ago\n",
+                        "# 14, E00:01, 24 s ago\n",
+                        "# 15, E00:01, 25 s ago\n",
+                        "# 16, E00:01, 25 s ago\n",
+                        "# 17, E00:01, 25 s ago\n",
+                        "# 18, E00:01, 26 s ago\n",
+                        "# 19, E00:01, 26 s ago\n",
+                        "# 20, E00:01, 27 s ago\n",
+                        "# 21, E00:01, 27 s ago\n",
+                        "# 22, E00:01, 27 s ago\n",
+                        "# 23, E00:01, 28 s ago\n",
+                        "# 24, E00:01, 28 s ago\n",
+                        "# 25, E00:01, 29 s ago\n",
+                        "# 26, E00:01, 29 s ago\n",
+                        "# 27, E00:01, 29 s ago\n",
+                        "# 28, E00:01, 30 s ago\n",
+                        "# 29, E00:01, 30 s ago\n",
+                        "# 30, E00:01, 31 s ago\n",
+                        "# 31, E00:01, 31 s ago\n",
+                        "# 32, E00:01, 31 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            55.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 20 s ago\n",
+                        "#  2, E00:01, 20 s ago\n",
+                        "#  3, E00:01, 21 s ago\n",
+                        "#  4, E00:01, 21 s ago\n",
+                        "#  5, E00:01, 22 s ago\n",
+                        "#  6, E00:01, 22 s ago\n",
+                        "#  7, E00:01, 22 s ago\n",
+                        "#  8, E00:01, 23 s ago\n",
+                        "#  9, E00:01, 23 s ago\n",
+                        "# 10, E00:01, 24 s ago\n",
+                        "# 11, E00:01, 24 s ago\n",
+                        "# 12, E00:01, 24 s ago\n",
+                        "# 13, E00:01, 25 s ago\n",
+                        "# 14, E00:01, 25 s ago\n",
+                        "# 15, E00:01, 26 s ago\n",
+                        "# 16, E00:01, 26 s ago\n",
+                        "# 17, E00:01, 26 s ago\n",
+                        "# 18, E00:01, 27 s ago\n",
+                        "# 19, E00:01, 27 s ago\n",
+                        "# 20, E00:01, 28 s ago\n",
+                        "# 21, E00:01, 28 s ago\n",
+                        "# 22, E00:01, 28 s ago\n",
+                        "# 23, E00:01, 29 s ago\n",
+                        "# 24, E00:01, 29 s ago\n",
+                        "# 25, E00:01, 30 s ago\n",
+                        "# 26, E00:01, 30 s ago\n",
+                        "# 27, E00:01, 30 s ago\n",
+                        "# 28, E00:01, 31 s ago\n",
+                        "# 29, E00:01, 31 s ago\n",
+                        "# 30, E00:01, 32 s ago\n",
+                        "# 31, E00:01, 32 s ago\n",
+                        "# 32, E00:01, 32 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            55.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 20 s ago\n",
+                        "#  2, E00:01, 20 s ago\n",
+                        "#  3, E00:01, 21 s ago\n",
+                        "#  4, E00:01, 21 s ago\n",
+                        "#  5, E00:01, 22 s ago\n",
+                        "#  6, E00:01, 22 s ago\n",
+                        "#  7, E00:01, 22 s ago\n",
+                        "#  8, E00:01, 23 s ago\n",
+                        "#  9, E00:01, 23 s ago\n",
+                        "# 10, E00:01, 24 s ago\n",
+                        "# 11, E00:01, 24 s ago\n",
+                        "# 12, E00:01, 24 s ago\n",
+                        "# 13, E00:01, 25 s ago\n",
+                        "# 14, E00:01, 25 s ago\n",
+                        "# 15, E00:01, 26 s ago\n",
+                        "# 16, E00:01, 26 s ago\n",
+                        "# 17, E00:01, 26 s ago\n",
+                        "# 18, E00:01, 27 s ago\n",
+                        "# 19, E00:01, 27 s ago\n",
+                        "# 20, E00:01, 28 s ago\n",
+                        "# 21, E00:01, 28 s ago\n",
+                        "# 22, E00:01, 28 s ago\n",
+                        "# 23, E00:01, 29 s ago\n",
+                        "# 24, E00:01, 29 s ago\n",
+                        "# 25, E00:01, 30 s ago\n",
+                        "# 26, E00:01, 30 s ago\n",
+                        "# 27, E00:01, 30 s ago\n",
+                        "# 28, E00:01, 31 s ago\n",
+                        "# 29, E00:01, 31 s ago\n",
+                        "# 30, E00:01, 32 s ago\n",
+                        "# 31, E00:01, 32 s ago\n",
+                        "# 32, E00:01, 32 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            55.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 21 s ago\n",
+                        "#  2, E00:01, 21 s ago\n",
+                        "#  3, E00:01, 22 s ago\n",
+                        "#  4, E00:01, 22 s ago\n",
+                        "#  5, E00:01, 23 s ago\n",
+                        "#  6, E00:01, 23 s ago\n",
+                        "#  7, E00:01, 23 s ago\n",
+                        "#  8, E00:01, 24 s ago\n",
+                        "#  9, E00:01, 24 s ago\n",
+                        "# 10, E00:01, 25 s ago\n",
+                        "# 11, E00:01, 25 s ago\n",
+                        "# 12, E00:01, 25 s ago\n",
+                        "# 13, E00:01, 26 s ago\n",
+                        "# 14, E00:01, 26 s ago\n",
+                        "# 15, E00:01, 27 s ago\n",
+                        "# 16, E00:01, 27 s ago\n",
+                        "# 17, E00:01, 27 s ago\n",
+                        "# 18, E00:01, 28 s ago\n",
+                        "# 19, E00:01, 28 s ago\n",
+                        "# 20, E00:01, 29 s ago\n",
+                        "# 21, E00:01, 29 s ago\n",
+                        "# 22, E00:01, 29 s ago\n",
+                        "# 23, E00:01, 30 s ago\n",
+                        "# 24, E00:01, 30 s ago\n",
+                        "# 25, E00:01, 31 s ago\n",
+                        "# 26, E00:01, 31 s ago\n",
+                        "# 27, E00:01, 31 s ago\n",
+                        "# 28, E00:01, 32 s ago\n",
+                        "# 29, E00:01, 32 s ago\n",
+                        "# 30, E00:01, 33 s ago\n",
+                        "# 31, E00:01, 33 s ago\n",
+                        "# 32, E00:01, 33 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            65.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 21 s ago\n",
+                        "#  2, E00:01, 21 s ago\n",
+                        "#  3, E00:01, 22 s ago\n",
+                        "#  4, E00:01, 22 s ago\n",
+                        "#  5, E00:01, 23 s ago\n",
+                        "#  6, E00:01, 23 s ago\n",
+                        "#  7, E00:01, 23 s ago\n",
+                        "#  8, E00:01, 24 s ago\n",
+                        "#  9, E00:01, 24 s ago\n",
+                        "# 10, E00:01, 25 s ago\n",
+                        "# 11, E00:01, 25 s ago\n",
+                        "# 12, E00:01, 25 s ago\n",
+                        "# 13, E00:01, 26 s ago\n",
+                        "# 14, E00:01, 26 s ago\n",
+                        "# 15, E00:01, 27 s ago\n",
+                        "# 16, E00:01, 27 s ago\n",
+                        "# 17, E00:01, 27 s ago\n",
+                        "# 18, E00:01, 28 s ago\n",
+                        "# 19, E00:01, 28 s ago\n",
+                        "# 20, E00:01, 29 s ago\n",
+                        "# 21, E00:01, 29 s ago\n",
+                        "# 22, E00:01, 29 s ago\n",
+                        "# 23, E00:01, 30 s ago\n",
+                        "# 24, E00:01, 30 s ago\n",
+                        "# 25, E00:01, 31 s ago\n",
+                        "# 26, E00:01, 31 s ago\n",
+                        "# 27, E00:01, 31 s ago\n",
+                        "# 28, E00:01, 32 s ago\n",
+                        "# 29, E00:01, 32 s ago\n",
+                        "# 30, E00:01, 33 s ago\n",
+                        "# 31, E00:01, 33 s ago\n",
+                        "# 32, E00:01, 33 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 21 s ago\n",
+                        "#  2, E00:01, 21 s ago\n",
+                        "#  3, E00:01, 22 s ago\n",
+                        "#  4, E00:01, 22 s ago\n",
+                        "#  5, E00:01, 23 s ago\n",
+                        "#  6, E00:01, 23 s ago\n",
+                        "#  7, E00:01, 23 s ago\n",
+                        "#  8, E00:01, 24 s ago\n",
+                        "#  9, E00:01, 24 s ago\n",
+                        "# 10, E00:01, 25 s ago\n",
+                        "# 11, E00:01, 25 s ago\n",
+                        "# 12, E00:01, 25 s ago\n",
+                        "# 13, E00:01, 26 s ago\n",
+                        "# 14, E00:01, 26 s ago\n",
+                        "# 15, E00:01, 27 s ago\n",
+                        "# 16, E00:01, 27 s ago\n",
+                        "# 17, E00:01, 27 s ago\n",
+                        "# 18, E00:01, 28 s ago\n",
+                        "# 19, E00:01, 28 s ago\n",
+                        "# 20, E00:01, 29 s ago\n",
+                        "# 21, E00:01, 29 s ago\n",
+                        "# 22, E00:01, 29 s ago\n",
+                        "# 23, E00:01, 30 s ago\n",
+                        "# 24, E00:01, 30 s ago\n",
+                        "# 25, E00:01, 31 s ago\n",
+                        "# 26, E00:01, 31 s ago\n",
+                        "# 27, E00:01, 31 s ago\n",
+                        "# 28, E00:01, 32 s ago\n",
+                        "# 29, E00:01, 32 s ago\n",
+                        "# 30, E00:01, 33 s ago\n",
+                        "# 31, E00:01, 33 s ago\n",
+                        "# 32, E00:01, 33 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            65.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 22 s ago\n",
+                        "#  2, E00:01, 22 s ago\n",
+                        "#  3, E00:01, 23 s ago\n",
+                        "#  4, E00:01, 23 s ago\n",
+                        "#  5, E00:01, 24 s ago\n",
+                        "#  6, E00:01, 24 s ago\n",
+                        "#  7, E00:01, 24 s ago\n",
+                        "#  8, E00:01, 25 s ago\n",
+                        "#  9, E00:01, 25 s ago\n",
+                        "# 10, E00:01, 26 s ago\n",
+                        "# 11, E00:01, 26 s ago\n",
+                        "# 12, E00:01, 26 s ago\n",
+                        "# 13, E00:01, 27 s ago\n",
+                        "# 14, E00:01, 27 s ago\n",
+                        "# 15, E00:01, 28 s ago\n",
+                        "# 16, E00:01, 28 s ago\n",
+                        "# 17, E00:01, 28 s ago\n",
+                        "# 18, E00:01, 29 s ago\n",
+                        "# 19, E00:01, 29 s ago\n",
+                        "# 20, E00:01, 30 s ago\n",
+                        "# 21, E00:01, 30 s ago\n",
+                        "# 22, E00:01, 30 s ago\n",
+                        "# 23, E00:01, 31 s ago\n",
+                        "# 24, E00:01, 31 s ago\n",
+                        "# 25, E00:01, 32 s ago\n",
+                        "# 26, E00:01, 32 s ago\n",
+                        "# 27, E00:01, 32 s ago\n",
+                        "# 28, E00:01, 33 s ago\n",
+                        "# 29, E00:01, 33 s ago\n",
+                        "# 30, E00:01, 34 s ago\n",
+                        "# 31, E00:01, 34 s ago\n",
+                        "# 32, E00:01, 34 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 22 s ago\n",
+                        "#  2, E00:01, 22 s ago\n",
+                        "#  3, E00:01, 23 s ago\n",
+                        "#  4, E00:01, 23 s ago\n",
+                        "#  5, E00:01, 24 s ago\n",
+                        "#  6, E00:01, 24 s ago\n",
+                        "#  7, E00:01, 24 s ago\n",
+                        "#  8, E00:01, 25 s ago\n",
+                        "#  9, E00:01, 25 s ago\n",
+                        "# 10, E00:01, 26 s ago\n",
+                        "# 11, E00:01, 26 s ago\n",
+                        "# 12, E00:01, 26 s ago\n",
+                        "# 13, E00:01, 27 s ago\n",
+                        "# 14, E00:01, 27 s ago\n",
+                        "# 15, E00:01, 28 s ago\n",
+                        "# 16, E00:01, 28 s ago\n",
+                        "# 17, E00:01, 28 s ago\n",
+                        "# 18, E00:01, 29 s ago\n",
+                        "# 19, E00:01, 29 s ago\n",
+                        "# 20, E00:01, 30 s ago\n",
+                        "# 21, E00:01, 30 s ago\n",
+                        "# 22, E00:01, 30 s ago\n",
+                        "# 23, E00:01, 31 s ago\n",
+                        "# 24, E00:01, 31 s ago\n",
+                        "# 25, E00:01, 32 s ago\n",
+                        "# 26, E00:01, 32 s ago\n",
+                        "# 27, E00:01, 32 s ago\n",
+                        "# 28, E00:01, 33 s ago\n",
+                        "# 29, E00:01, 33 s ago\n",
+                        "# 30, E00:01, 34 s ago\n",
+                        "# 31, E00:01, 34 s ago\n",
+                        "# 32, E00:01, 34 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            65.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 23 s ago\n",
+                        "#  2, E00:01, 23 s ago\n",
+                        "#  3, E00:01, 24 s ago\n",
+                        "#  4, E00:01, 24 s ago\n",
+                        "#  5, E00:01, 25 s ago\n",
+                        "#  6, E00:01, 25 s ago\n",
+                        "#  7, E00:01, 25 s ago\n",
+                        "#  8, E00:01, 26 s ago\n",
+                        "#  9, E00:01, 26 s ago\n",
+                        "# 10, E00:01, 27 s ago\n",
+                        "# 11, E00:01, 27 s ago\n",
+                        "# 12, E00:01, 27 s ago\n",
+                        "# 13, E00:01, 28 s ago\n",
+                        "# 14, E00:01, 28 s ago\n",
+                        "# 15, E00:01, 29 s ago\n",
+                        "# 16, E00:01, 29 s ago\n",
+                        "# 17, E00:01, 29 s ago\n",
+                        "# 18, E00:01, 30 s ago\n",
+                        "# 19, E00:01, 30 s ago\n",
+                        "# 20, E00:01, 31 s ago\n",
+                        "# 21, E00:01, 31 s ago\n",
+                        "# 22, E00:01, 31 s ago\n",
+                        "# 23, E00:01, 32 s ago\n",
+                        "# 24, E00:01, 32 s ago\n",
+                        "# 25, E00:01, 33 s ago\n",
+                        "# 26, E00:01, 33 s ago\n",
+                        "# 27, E00:01, 33 s ago\n",
+                        "# 28, E00:01, 34 s ago\n",
+                        "# 29, E00:01, 34 s ago\n",
+                        "# 30, E00:01, 35 s ago\n",
+                        "# 31, E00:01, 35 s ago\n",
+                        "# 32, E00:01, 35 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            21.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 23 s ago\n",
+                        "#  2, E00:01, 23 s ago\n",
+                        "#  3, E00:01, 24 s ago\n",
+                        "#  4, E00:01, 24 s ago\n",
+                        "#  5, E00:01, 25 s ago\n",
+                        "#  6, E00:01, 25 s ago\n",
+                        "#  7, E00:01, 25 s ago\n",
+                        "#  8, E00:01, 26 s ago\n",
+                        "#  9, E00:01, 26 s ago\n",
+                        "# 10, E00:01, 27 s ago\n",
+                        "# 11, E00:01, 27 s ago\n",
+                        "# 12, E00:01, 27 s ago\n",
+                        "# 13, E00:01, 28 s ago\n",
+                        "# 14, E00:01, 28 s ago\n",
+                        "# 15, E00:01, 29 s ago\n",
+                        "# 16, E00:01, 29 s ago\n",
+                        "# 17, E00:01, 29 s ago\n",
+                        "# 18, E00:01, 30 s ago\n",
+                        "# 19, E00:01, 30 s ago\n",
+                        "# 20, E00:01, 31 s ago\n",
+                        "# 21, E00:01, 31 s ago\n",
+                        "# 22, E00:01, 31 s ago\n",
+                        "# 23, E00:01, 32 s ago\n",
+                        "# 24, E00:01, 32 s ago\n",
+                        "# 25, E00:01, 33 s ago\n",
+                        "# 26, E00:01, 33 s ago\n",
+                        "# 27, E00:01, 33 s ago\n",
+                        "# 28, E00:01, 34 s ago\n",
+                        "# 29, E00:01, 34 s ago\n",
+                        "# 30, E00:01, 35 s ago\n",
+                        "# 31, E00:01, 35 s ago\n",
+                        "# 32, E00:01, 35 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 23 s ago\n",
+                        "#  2, E00:01, 23 s ago\n",
+                        "#  3, E00:01, 24 s ago\n",
+                        "#  4, E00:01, 24 s ago\n",
+                        "#  5, E00:01, 25 s ago\n",
+                        "#  6, E00:01, 25 s ago\n",
+                        "#  7, E00:01, 25 s ago\n",
+                        "#  8, E00:01, 26 s ago\n",
+                        "#  9, E00:01, 26 s ago\n",
+                        "# 10, E00:01, 27 s ago\n",
+                        "# 11, E00:01, 27 s ago\n",
+                        "# 12, E00:01, 27 s ago\n",
+                        "# 13, E00:01, 28 s ago\n",
+                        "# 14, E00:01, 28 s ago\n",
+                        "# 15, E00:01, 29 s ago\n",
+                        "# 16, E00:01, 29 s ago\n",
+                        "# 17, E00:01, 29 s ago\n",
+                        "# 18, E00:01, 30 s ago\n",
+                        "# 19, E00:01, 30 s ago\n",
+                        "# 20, E00:01, 31 s ago\n",
+                        "# 21, E00:01, 31 s ago\n",
+                        "# 22, E00:01, 31 s ago\n",
+                        "# 23, E00:01, 32 s ago\n",
+                        "# 24, E00:01, 32 s ago\n",
+                        "# 25, E00:01, 33 s ago\n",
+                        "# 26, E00:01, 33 s ago\n",
+                        "# 27, E00:01, 33 s ago\n",
+                        "# 28, E00:01, 34 s ago\n",
+                        "# 29, E00:01, 34 s ago\n",
+                        "# 30, E00:01, 35 s ago\n",
+                        "# 31, E00:01, 35 s ago\n",
+                        "# 32, E00:01, 35 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 24 s ago\n",
+                        "#  2, E00:01, 24 s ago\n",
+                        "#  3, E00:01, 25 s ago\n",
+                        "#  4, E00:01, 25 s ago\n",
+                        "#  5, E00:01, 26 s ago\n",
+                        "#  6, E00:01, 26 s ago\n",
+                        "#  7, E00:01, 26 s ago\n",
+                        "#  8, E00:01, 27 s ago\n",
+                        "#  9, E00:01, 27 s ago\n",
+                        "# 10, E00:01, 28 s ago\n",
+                        "# 11, E00:01, 28 s ago\n",
+                        "# 12, E00:01, 28 s ago\n",
+                        "# 13, E00:01, 29 s ago\n",
+                        "# 14, E00:01, 29 s ago\n",
+                        "# 15, E00:01, 30 s ago\n",
+                        "# 16, E00:01, 30 s ago\n",
+                        "# 17, E00:01, 30 s ago\n",
+                        "# 18, E00:01, 31 s ago\n",
+                        "# 19, E00:01, 31 s ago\n",
+                        "# 20, E00:01, 32 s ago\n",
+                        "# 21, E00:01, 32 s ago\n",
+                        "# 22, E00:01, 32 s ago\n",
+                        "# 23, E00:01, 33 s ago\n",
+                        "# 24, E00:01, 33 s ago\n",
+                        "# 25, E00:01, 34 s ago\n",
+                        "# 26, E00:01, 34 s ago\n",
+                        "# 27, E00:01, 34 s ago\n",
+                        "# 28, E00:01, 35 s ago\n",
+                        "# 29, E00:01, 35 s ago\n",
+                        "# 30, E00:01, 36 s ago\n",
+                        "# 31, E00:01, 36 s ago\n",
+                        "# 32, E00:01, 36 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 24 s ago\n",
+                        "#  2, E00:01, 24 s ago\n",
+                        "#  3, E00:01, 25 s ago\n",
+                        "#  4, E00:01, 25 s ago\n",
+                        "#  5, E00:01, 26 s ago\n",
+                        "#  6, E00:01, 26 s ago\n",
+                        "#  7, E00:01, 26 s ago\n",
+                        "#  8, E00:01, 27 s ago\n",
+                        "#  9, E00:01, 27 s ago\n",
+                        "# 10, E00:01, 28 s ago\n",
+                        "# 11, E00:01, 28 s ago\n",
+                        "# 12, E00:01, 28 s ago\n",
+                        "# 13, E00:01, 29 s ago\n",
+                        "# 14, E00:01, 29 s ago\n",
+                        "# 15, E00:01, 30 s ago\n",
+                        "# 16, E00:01, 30 s ago\n",
+                        "# 17, E00:01, 30 s ago\n",
+                        "# 18, E00:01, 31 s ago\n",
+                        "# 19, E00:01, 31 s ago\n",
+                        "# 20, E00:01, 32 s ago\n",
+                        "# 21, E00:01, 32 s ago\n",
+                        "# 22, E00:01, 32 s ago\n",
+                        "# 23, E00:01, 33 s ago\n",
+                        "# 24, E00:01, 33 s ago\n",
+                        "# 25, E00:01, 34 s ago\n",
+                        "# 26, E00:01, 34 s ago\n",
+                        "# 27, E00:01, 34 s ago\n",
+                        "# 28, E00:01, 35 s ago\n",
+                        "# 29, E00:01, 35 s ago\n",
+                        "# 30, E00:01, 36 s ago\n",
+                        "# 31, E00:01, 36 s ago\n",
+                        "# 32, E00:01, 36 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 25 s ago\n",
+                        "#  2, E00:01, 25 s ago\n",
+                        "#  3, E00:01, 26 s ago\n",
+                        "#  4, E00:01, 26 s ago\n",
+                        "#  5, E00:01, 27 s ago\n",
+                        "#  6, E00:01, 27 s ago\n",
+                        "#  7, E00:01, 27 s ago\n",
+                        "#  8, E00:01, 28 s ago\n",
+                        "#  9, E00:01, 28 s ago\n",
+                        "# 10, E00:01, 29 s ago\n",
+                        "# 11, E00:01, 29 s ago\n",
+                        "# 12, E00:01, 29 s ago\n",
+                        "# 13, E00:01, 30 s ago\n",
+                        "# 14, E00:01, 30 s ago\n",
+                        "# 15, E00:01, 31 s ago\n",
+                        "# 16, E00:01, 31 s ago\n",
+                        "# 17, E00:01, 31 s ago\n",
+                        "# 18, E00:01, 32 s ago\n",
+                        "# 19, E00:01, 32 s ago\n",
+                        "# 20, E00:01, 33 s ago\n",
+                        "# 21, E00:01, 33 s ago\n",
+                        "# 22, E00:01, 33 s ago\n",
+                        "# 23, E00:01, 34 s ago\n",
+                        "# 24, E00:01, 34 s ago\n",
+                        "# 25, E00:01, 35 s ago\n",
+                        "# 26, E00:01, 35 s ago\n",
+                        "# 27, E00:01, 35 s ago\n",
+                        "# 28, E00:01, 36 s ago\n",
+                        "# 29, E00:01, 36 s ago\n",
+                        "# 30, E00:01, 37 s ago\n",
+                        "# 31, E00:01, 37 s ago\n",
+                        "# 32, E00:01, 37 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LOG7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 25 s ago\n",
+                        "#  2, E00:01, 25 s ago\n",
+                        "#  3, E00:01, 26 s ago\n",
+                        "#  4, E00:01, 26 s ago\n",
+                        "#  5, E00:01, 27 s ago\n",
+                        "#  6, E00:01, 27 s ago\n",
+                        "#  7, E00:01, 27 s ago\n",
+                        "#  8, E00:01, 28 s ago\n",
+                        "#  9, E00:01, 28 s ago\n",
+                        "# 10, E00:01, 29 s ago\n",
+                        "# 11, E00:01, 29 s ago\n",
+                        "# 12, E00:01, 29 s ago\n",
+                        "# 13, E00:01, 30 s ago\n",
+                        "# 14, E00:01, 30 s ago\n",
+                        "# 15, E00:01, 31 s ago\n",
+                        "# 16, E00:01, 31 s ago\n",
+                        "# 17, E00:01, 31 s ago\n",
+                        "# 18, E00:01, 32 s ago\n",
+                        "# 19, E00:01, 32 s ago\n",
+                        "# 20, E00:01, 33 s ago\n",
+                        "# 21, E00:01, 33 s ago\n",
+                        "# 22, E00:01, 33 s ago\n",
+                        "# 23, E00:01, 34 s ago\n",
+                        "# 24, E00:01, 34 s ago\n",
+                        "# 25, E00:01, 35 s ago\n",
+                        "# 26, E00:01, 35 s ago\n",
+                        "# 27, E00:01, 35 s ago\n",
+                        "# 28, E00:01, 36 s ago\n",
+                        "# 29, E00:01, 36 s ago\n",
+                        "# 30, E00:01, 37 s ago\n",
+                        "# 31, E00:01, 37 s ago\n",
+                        "# 32, E00:01, 37 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 2 m ago\n",
+                        "#  1, E00:01, 25 s ago\n",
+                        "#  2, E00:01, 25 s ago\n",
+                        "#  3, E00:01, 26 s ago\n",
+                        "#  4, E00:01, 26 s ago\n",
+                        "#  5, E00:01, 27 s ago\n",
+                        "#  6, E00:01, 27 s ago\n",
+                        "#  7, E00:01, 27 s ago\n",
+                        "#  8, E00:01, 28 s ago\n",
+                        "#  9, E00:01, 28 s ago\n",
+                        "# 10, E00:01, 29 s ago\n",
+                        "# 11, E00:01, 29 s ago\n",
+                        "# 12, E00:01, 29 s ago\n",
+                        "# 13, E00:01, 30 s ago\n",
+                        "# 14, E00:01, 30 s ago\n",
+                        "# 15, E00:01, 31 s ago\n",
+                        "# 16, E00:01, 31 s ago\n",
+                        "# 17, E00:01, 31 s ago\n",
+                        "# 18, E00:01, 32 s ago\n",
+                        "# 19, E00:01, 32 s ago\n",
+                        "# 20, E00:01, 33 s ago\n",
+                        "# 21, E00:01, 33 s ago\n",
+                        "# 22, E00:01, 33 s ago\n",
+                        "# 23, E00:01, 34 s ago\n",
+                        "# 24, E00:01, 34 s ago\n",
+                        "# 25, E00:01, 35 s ago\n",
+                        "# 26, E00:01, 35 s ago\n",
+                        "# 27, E00:01, 35 s ago\n",
+                        "# 28, E00:01, 36 s ago\n",
+                        "# 29, E00:01, 36 s ago\n",
+                        "# 30, E00:01, 37 s ago\n",
+                        "# 31, E00:01, 37 s ago\n",
+                        "# 32, E00:01, 37 s ago\n",
+                        "# 33, E10:00, 2 m ago\n",
+                        "# 34, E00:01, 2 m ago\n",
+                        "# 35, E00:01, 2 m ago\n",
+                        "# 36, E00:01, 2 m ago\n",
+                        "# 37, E00:01, 2 m ago\n",
+                        "# 38, E00:01, 2 m ago\n",
+                        "# 39, E00:01, 2 m ago\n",
+                        "# 40, E00:01, 2 m ago\n",
+                        "# 41, E00:01, 2 m ago\n",
+                        "# 42, E00:01, 2 m ago\n",
+                        "# 43, E00:01, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 2 m ago\n",
+                        "# 63, E00:01, 2 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            27,
+                            11,
+                            26
+                        ],
+                        "delays": [
+                            56.0,
+                            22.0,
+                            64.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "LED0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "LED7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "NUP7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCT7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "ADCN7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "CCFN7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "OK7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "HELP0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            20.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            17.0,
+                            20.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            22.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "HELP7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            17.0,
+                            20.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            17.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 9.999999999985448
+                }
+            ]
+        },
+        {
+            "cmd": "88420000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 9.000000000014552
+                }
+            ]
+        },
+        {
+            "cmd": "SAFE7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM0?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 19.999999999985448
+                }
+            ]
+        },
+        {
+            "cmd": "88430000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.999999999970896
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM1?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.000000000029104
+                }
+            ]
+        },
+        {
+            "cmd": "88430000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 16.000000000014552
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM2?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM3?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM4?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM5?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM6?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "ROCOM7?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "V0=0.83\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "810000000011ae",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V1=7.12\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "810000000197cf",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V2=5.65\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000027891",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V3=1.49\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000031fdb",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V4=1.82\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "810000000426b9",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V5=3.68\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000054e81",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V6=4.19\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "8100000006597b",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "V7=2.36\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000073264",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        }
+    ],
+    "*": {
+        "action": "QUEUE_OUT",
+        "data": "E10:02",
+        "delay": 0.0
+    },
+    "initial_out": [
+        "OK\n"
+    ]
+}
