@@ -1,16 +1,16 @@
 from qontrol import *
 from virtual_module import *
 import timeit
-from random import randint
+from random import randint, uniform
 import math
 
 
-p = Program.from_json_file('progs/binary_test.json')
-vm = VirtualModule(p)
-q = Qontroller(virtual_port=vm.port, response_timeout=0.5)
+# p = Program.from_json_file('progs/binary_test.json')
+# vm = VirtualModule(p)
+# q = Qontroller(virtual_port=vm.port, response_timeout=0.5)
 
-# dev_port='/dev/cu.usbserial-FT677TKA'
-# q = Qontroller(serial_port_name=dev_port)
+dev_port='/dev/cu.usbserial-FT677TKA'
+q = Qontroller(serial_port_name=dev_port, response_timeout=0.2)
 
 
 
@@ -129,7 +129,7 @@ if __name__ == '__main__':
     #test_binary()
     # v = 3.01
     # d = math.floor(v * (2**16 / 12))
-    # c = Command(SET, V, 1, data=d, header={ALLCH})
+    # C = Command(SET, V, 1, data=d, header={ALLCH})
     # exp = expected(c)
     # print(exp)
     # print(c.binary())
@@ -152,17 +152,41 @@ if __name__ == '__main__':
 
     for cmd in Index:
         if READ in cmd.header_modes():
-            res = q.send_binary(Command(GET, cmd, 0))
-            print(f'{cmd}  {res}')
+
+            for ch in range(8):
+                res = q.send_binary(Command(GET, cmd, ch))
+                #print(f'{cmd}{ch}  {res}')
 
 
         if READ_ALLCH in cmd.header_modes():
             res = q.send_binary(Command(GET, cmd, header={ALLCH}))
-            print(f'{cmd}_ALL  {res}')
+            #print(f'{cmd}_ALL  {res}')
 
 
+    
+    for ch in range(8):
+        v = uniform(0.0, 12.0)
+        dv = math.floor(v * (2**16 / 12))
+
+        res = q.send_binary(Command(SET, V, ch, data=dv))
+        #print(f'V{ch}={v}   {res}')
         
+        i = uniform(0.0, 24.0)
+        di = math.floor(v * (2**16 / 24))
+
+        res = q.send_binary(Command(SET, I, ch, data=di))
+        #print(f'I{ch}={i}   {res}')
+            
+
+    for ch in range(8):
+        res = q.send_binary(Command(GET, V, ch))
+        #print(f'{cmd}{ch}  {res}')
+
+        es = q.send_binary(Command(GET, I, ch))
+        #print(f'{cmd}{ch}  {res}')
+
+    
 
     # q.print_log()
-    # p = ProgramGenerator("Binary Program", q.log)
-    # p.write('binary_test.json')
+    p = ProgramGenerator("Binary Program", q.log)
+    p.write('progs/binary_test_2.json')

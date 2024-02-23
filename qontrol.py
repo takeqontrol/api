@@ -136,7 +136,7 @@ class HeaderMode(ExtendedEnum):
     WRITE_DEXT = {DEXT}       # 0x82
     WRITE_ALLCH = {ALLCH}     # 0xA0
     
-    READ = {RW}                # 0x88
+    READ = {RW}               # 0x88
     READ_ALLCH = {RW, ALLCH}  # 0xA9
 
     ACT = {ACT}               # 0x84

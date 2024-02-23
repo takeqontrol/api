@@ -70,7 +70,7 @@ class TestCommandFromProgram:
             # The log_handler will raise an exception
             # when the qontrollers encounters an error
             # Pass test if thats expected
-            assert str(e) == expected['data']
+            assert (str(e) == expected['data']) or (str(e) in expected['data'])
             return
 
         match action:

@@ -1,0 +1,3594 @@
+{
+    "name": "Binary Program",
+    "data": [
+        {
+            "cmd": "nup=0\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "\u0006OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "nupall?\n",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+2.0066 V\n",
+                    "delay": 14.0
+                },
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+2.0063 V\n",
+                        "E01:07",
+                        "E01:06"
+                    ],
+                    "divide": {
+                        "frames": [
+                            1,
+                            1,
+                            1
+                        ],
+                        "delays": [
+                            16.0,
+                            0.0,
+                            0.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88000000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9789 V\n",
+                    "delay": 22.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9783 V\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9685 V\n",
+                    "delay": 13.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9671 V\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9793 V\n",
+                    "delay": 20.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9774 V\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9811 V\n",
+                    "delay": 27.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9807 V\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9961 V\n",
+                    "delay": 3.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9957 V\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9950 V\n",
+                    "delay": 10.000000000000227
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9947 V\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88000000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9934 V\n",
+                    "delay": 17.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1.9933 V\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9000000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+2.0066 V\n",
+                        "+1.9789 V\n",
+                        "+1.9685 V\n",
+                        "+1.9792 V\n",
+                        "+1.9810 V\n",
+                        "+1.9961 V\n",
+                        "+1.9950 V\n",
+                        "+1.9934 V\n"
+                    ],
+                    "delay": 23.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0000 mA\n",
+                    "delay": 14.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0000 mA\n",
+                    "delay": 23.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0017 mA\n",
+                    "delay": 21.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+0.0018 mA\n",
+                    "delay": 22.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0039 mA\n",
+                    "delay": 29.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0040 mA\n",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0033 mA\n",
+                    "delay": 20.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0026 mA\n",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0004 mA\n",
+                    "delay": 27.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0005 mA\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0002 mA\n",
+                    "delay": 18.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0005 mA\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0052 mA\n",
+                    "delay": 26.0
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0052 mA\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88010000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0007 mA\n",
+                    "delay": 16.999999999999545
+                },
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "-0.0005 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9010000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+0.0000 mA\n",
+                        "+0.0015 mA\n",
+                        "-0.0041 mA\n",
+                        "-0.0034 mA\n",
+                        "-0.0006 mA\n",
+                        "-0.0004 mA\n",
+                        "-0.0055 mA\n",
+                        "-0.0011 mA\n"
+                    ],
+                    "delay": 22.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88020000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9020000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n",
+                        "+12.0000 V\n"
+                    ],
+                    "delay": 22.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88030000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9030000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n",
+                        "+24.0000 mA\n"
+                    ],
+                    "delay": 22.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 13.99999999999909
+                }
+            ]
+        },
+        {
+            "cmd": "88040000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88040000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9040000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n"
+                    ],
+                    "delay": 22.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88050000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+1,+0,+0,+0\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9050000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n",
+                        "+1,+0,+0,+0\n"
+                    ],
+                    "delay": 23.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88060000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9060000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88070000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9070000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "a90a0000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "0,0: +2.0066 V, -0.0003 mA\n",
+                        "0,1: +1.9788 V, +0.0012 mA\n",
+                        "0,2: +1.9683 V, -0.0040 mA\n",
+                        "0,3: +1.9789 V, -0.0033 mA\n",
+                        "0,4: +1.9810 V, -0.0003 mA\n",
+                        "0,5: +1.9960 V, -0.0007 mA\n",
+                        "0,6: +1.9950 V, -0.0050 mA\n",
+                        "0,7: +1.9934 V, -0.0006 mA\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1
+                        ],
+                        "delays": [
+                            33.0,
+                            16.0,
+                            32.0,
+                            15.0,
+                            32.0,
+                            16.0,
+                            16.0,
+                            32.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "a9200000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+12.0000 V\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9210000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "+24.0000 mA\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9220000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "8\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 3.999999999998181
+                }
+            ]
+        },
+        {
+            "cmd": "88230000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 10.999999999998181
+                }
+            ]
+        },
+        {
+            "cmd": "88230000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88230000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9230000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "v2.4.1\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88240000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9240000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153200 s\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153200 s\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153200 s\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153200 s\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153200 s\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153201 s\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153201 s\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88250000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153201 s\n",
+                    "delay": 9.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9250000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "153201 s\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9260000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "00 : 0x0001,  01 : 0xFF78\n",
+                        "02 : 0x0002,  03 : 0x4DE8\n",
+                        "04 : 0x0098,  05 : 0xFFFF\n",
+                        "06 : 0x0005,  07 : 0x0001\n",
+                        "08 : 0xFFFF,  09 : 0xFFFF\n",
+                        "0A : 0xFFFF,  0B : 0xFFFF\n",
+                        "0C : 0xFFFF,  0D : 0xFFFF\n",
+                        "0E : 0xFFFF,  0F : 0xFFFF\n",
+                        "10 : 0xFFFF,  11 : 0xFFFF\n",
+                        "12 : 0xFFFF,  13 : 0xFFFF\n",
+                        "14 : 0xFFFF,  15 : 0xFFFF\n",
+                        "16 : 0xFFFF,  17 : 0xFFFF\n",
+                        "18 : 0xFFFF,  19 : 0xFFFF\n",
+                        "1A : 0xFFFF,  1B : 0xFFFF\n",
+                        "1C : 0xFFFF,  1D : 0xFFFF\n",
+                        "1E : 0xFFFF,  1F : 0xFFFF\n",
+                        "20 : 0xFFFF,  21 : 0xFFFF\n",
+                        "22 : 0xFFFF,  23 : 0xFFFF\n",
+                        "24 : 0xFFFF,  25 : 0xFFFF\n",
+                        "26 : 0xFFFF,  27 : 0xFFFF\n",
+                        "28 : 0xFFFF,  29 : 0xFFFF\n",
+                        "2A : 0xFFFF,  2B : 0xFFFF\n",
+                        "2C : 0xFFFF,  2D : 0xFFFF\n",
+                        "2E : 0xFFFF,  2F : 0xFFFF\n",
+                        "30 : 0xFFFF,  31 : 0xFFFF\n",
+                        "32 : 0xFFFF,  33 : 0xFFFF\n",
+                        "34 : 0xFFFF,  35 : 0xFFFF\n",
+                        "36 : 0xFFFF,  37 : 0xFFFF\n",
+                        "38 : 0xFFFF,  39 : 0xFFFF\n",
+                        "3A : 0xFFFF,  3B : 0xFFFF\n",
+                        "3C : 0xFFFF,  3D : 0xFFFF\n",
+                        "3E : 0xFFFF,  3F : 0xFFFF\n",
+                        "40 : 0x0001,  41 : 0x0001\n",
+                        "42 : 0x0001,  43 : 0x0001\n",
+                        "44 : 0x0001,  45 : 0x0001\n",
+                        "46 : 0x0001,  47 : 0x0001\n",
+                        "48 : 0x0000,  49 : 0x0000\n",
+                        "4A : 0x0000,  4B : 0x0000\n",
+                        "4C : 0x0000,  4D : 0x0000\n",
+                        "4E : 0x0000,  4F : 0x0000\n",
+                        "50 : 0x0000,  51 : 0x0000\n",
+                        "52 : 0x0000,  53 : 0x0000\n",
+                        "54 : 0x0000,  55 : 0x0000\n",
+                        "56 : 0x0000,  57 : 0x0000\n",
+                        "58 : 0x0000,  59 : 0x0000\n",
+                        "5A : 0x0000,  5B : 0x0000\n",
+                        "5C : 0x0000,  5D : 0x0000\n",
+                        "5E : 0x0000,  5F : 0x0000\n",
+                        "60 : 0x0001,  61 : 0x0001\n",
+                        "62 : 0x0001,  63 : 0x0001\n",
+                        "64 : 0x0001,  65 : 0x0001\n",
+                        "66 : 0x0001,  67 : 0x0001\n",
+                        "68 : 0x0000,  69 : 0x0000\n",
+                        "6A : 0x0000,  6B : 0x0000\n",
+                        "6C : 0x0000,  6D : 0x0000\n",
+                        "6E : 0x0000,  6F : 0x0000\n",
+                        "70 : 0x0000,  71 : 0x0000\n",
+                        "72 : 0x0000,  73 : 0x0000\n",
+                        "74 : 0x0000,  75 : 0x0000\n",
+                        "76 : 0x0000,  77 : 0x0000\n",
+                        "78 : 0x0000,  79 : 0x0000\n",
+                        "7A : 0x0000,  7B : 0x0000\n",
+                        "7C : 0x0000,  7D : 0x0000\n",
+                        "7E : 0x0000,  7F : 0x0000\n",
+                        "80 : 0x0001,  81 : 0x566B\n",
+                        "82 : 0x0001,  83 : 0x566B\n",
+                        "84 : 0x0001,  85 : 0x5359\n",
+                        "86 : 0x0001,  87 : 0x5359\n",
+                        "88 : 0x0001,  89 : 0x535A\n",
+                        "8A : 0x0001,  8B : 0x55CC\n",
+                        "8C : 0x0001,  8D : 0x55CC\n",
+                        "8E : 0x0001,  8F : 0x55CD\n",
+                        "90 : 0x0001,  91 : 0x55CD\n",
+                        "92 : 0x0001,  93 : 0x55CE\n",
+                        "94 : 0x0001,  95 : 0x55CE\n",
+                        "96 : 0x0001,  97 : 0x55CF\n",
+                        "98 : 0x0001,  99 : 0x55CF\n",
+                        "9A : 0x0001,  9B : 0x55D0\n",
+                        "9C : 0x0001,  9D : 0x55D0\n",
+                        "9E : 0x0001,  9F : 0x55D1\n",
+                        "A0 : 0x0001,  A1 : 0x55D1\n",
+                        "A2 : 0x0001,  A3 : 0x55D2\n",
+                        "A4 : 0x0001,  A5 : 0x55D2\n",
+                        "A6 : 0x0001,  A7 : 0x55D3\n",
+                        "A8 : 0x0001,  A9 : 0x55D3\n",
+                        "AA : 0x0001,  AB : 0x55D4\n",
+                        "AC : 0x0001,  AD : 0x55D4\n",
+                        "AE : 0x0A00,  AF : 0x55FA\n",
+                        "B0 : 0x0A00,  B1 : 0x55FB\n",
+                        "B2 : 0x0A00,  B3 : 0x55FB\n",
+                        "B4 : 0x0A00,  B5 : 0x55FC\n",
+                        "B6 : 0x0A00,  B7 : 0x55FC\n",
+                        "B8 : 0x0A00,  B9 : 0x55FD\n",
+                        "BA : 0x0A00,  BB : 0x55FD\n",
+                        "BC : 0x0A00,  BD : 0x55FE\n",
+                        "BE : 0x0A00,  BF : 0x55FE\n",
+                        "C0 : 0x0001,  C1 : 0x560C\n",
+                        "C2 : 0x0001,  C3 : 0x560C\n",
+                        "C4 : 0x0001,  C5 : 0x560D\n",
+                        "C6 : 0x0001,  C7 : 0x560D\n",
+                        "C8 : 0x0001,  C9 : 0x560E\n",
+                        "CA : 0x0001,  CB : 0x560E\n",
+                        "CC : 0x0001,  CD : 0x560F\n",
+                        "CE : 0x0001,  CF : 0x560F\n",
+                        "D0 : 0x0001,  D1 : 0x5610\n",
+                        "D2 : 0x0100,  D3 : 0x5610\n",
+                        "D4 : 0x0101,  D5 : 0x5610\n",
+                        "D6 : 0x0102,  D7 : 0x5610\n",
+                        "D8 : 0x0103,  D9 : 0x5610\n",
+                        "DA : 0x1E00,  DB : 0x5610\n",
+                        "DC : 0x0107,  DD : 0x5611\n",
+                        "DE : 0x0106,  DF : 0x5611\n",
+                        "E0 : 0x0001,  E1 : 0x5668\n",
+                        "E2 : 0x0001,  E3 : 0x5668\n",
+                        "E4 : 0x0001,  E5 : 0x5668\n",
+                        "E6 : 0x0001,  E7 : 0x5668\n",
+                        "E8 : 0x0001,  E9 : 0x5668\n",
+                        "EA : 0x0001,  EB : 0x5669\n",
+                        "EC : 0x0001,  ED : 0x5669\n",
+                        "EE : 0x0001,  EF : 0x5669\n",
+                        "F0 : 0x0001,  F1 : 0x5669\n",
+                        "F2 : 0x0001,  F3 : 0x5669\n",
+                        "F4 : 0x0001,  F5 : 0x566A\n",
+                        "F6 : 0x0001,  F7 : 0x566A\n",
+                        "F8 : 0x0001,  F9 : 0x566A\n",
+                        "FA : 0x0001,  FB : 0x566A\n",
+                        "FC : 0x0001,  FD : 0x566A\n",
+                        "FE : 0x0001,  FF : 0x566B\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            31,
+                            31,
+                            31,
+                            31,
+                            4
+                        ],
+                        "delays": [
+                            72.0,
+                            70.0,
+                            71.0,
+                            71.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 7 s ago\n",
+                        "#  2, E00:01, 7 s ago\n",
+                        "#  3, E00:01, 7 s ago\n",
+                        "#  4, E00:01, 8 s ago\n",
+                        "#  5, E00:01, 8 s ago\n",
+                        "#  6, E00:01, 8 s ago\n",
+                        "#  7, E00:01, 8 s ago\n",
+                        "#  8, E00:01, 8 s ago\n",
+                        "#  9, E00:01, 9 s ago\n",
+                        "# 10, E00:01, 9 s ago\n",
+                        "# 11, E00:01, 9 s ago\n",
+                        "# 12, E00:01, 9 s ago\n",
+                        "# 13, E00:01, 9 s ago\n",
+                        "# 14, E00:01, 10 s ago\n",
+                        "# 15, E00:01, 10 s ago\n",
+                        "# 16, E00:01, 10 s ago\n",
+                        "# 17, E00:01, 10 s ago\n",
+                        "# 18, E00:01, 10 s ago\n",
+                        "# 19, E01:06, 97 s ago\n",
+                        "# 20, E01:07, 97 s ago\n",
+                        "# 21, E30:00, 98 s ago\n",
+                        "# 22, E01:03, 98 s ago\n",
+                        "# 23, E01:02, 98 s ago\n",
+                        "# 24, E01:01, 98 s ago\n",
+                        "# 25, E01:00, 98 s ago\n",
+                        "# 26, E00:01, 98 s ago\n",
+                        "# 27, E00:01, 99 s ago\n",
+                        "# 28, E00:01, 99 s ago\n",
+                        "# 29, E00:01, 100 s ago\n",
+                        "# 30, E00:01, 100 s ago\n",
+                        "# 31, E00:01, 101 s ago\n",
+                        "# 32, E00:01, 101 s ago\n",
+                        "# 33, E00:01, 102 s ago\n",
+                        "# 34, E00:01, 102 s ago\n",
+                        "# 35, E10:00, 116 s ago\n",
+                        "# 36, E10:00, 116 s ago\n",
+                        "# 37, E10:00, 117 s ago\n",
+                        "# 38, E10:00, 117 s ago\n",
+                        "# 39, E10:00, 118 s ago\n",
+                        "# 40, E10:00, 118 s ago\n",
+                        "# 41, E10:00, 119 s ago\n",
+                        "# 42, E10:00, 119 s ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            60,
+                            4
+                        ],
+                        "delays": [
+                            121.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 7 s ago\n",
+                        "#  2, E00:01, 7 s ago\n",
+                        "#  3, E00:01, 7 s ago\n",
+                        "#  4, E00:01, 8 s ago\n",
+                        "#  5, E00:01, 8 s ago\n",
+                        "#  6, E00:01, 8 s ago\n",
+                        "#  7, E00:01, 8 s ago\n",
+                        "#  8, E00:01, 8 s ago\n",
+                        "#  9, E00:01, 9 s ago\n",
+                        "# 10, E00:01, 9 s ago\n",
+                        "# 11, E00:01, 9 s ago\n",
+                        "# 12, E00:01, 9 s ago\n",
+                        "# 13, E00:01, 9 s ago\n",
+                        "# 14, E00:01, 10 s ago\n",
+                        "# 15, E00:01, 10 s ago\n",
+                        "# 16, E00:01, 10 s ago\n",
+                        "# 17, E00:01, 10 s ago\n",
+                        "# 18, E00:01, 10 s ago\n",
+                        "# 19, E01:06, 97 s ago\n",
+                        "# 20, E01:07, 97 s ago\n",
+                        "# 21, E30:00, 98 s ago\n",
+                        "# 22, E01:03, 98 s ago\n",
+                        "# 23, E01:02, 98 s ago\n",
+                        "# 24, E01:01, 98 s ago\n",
+                        "# 25, E01:00, 98 s ago\n",
+                        "# 26, E00:01, 98 s ago\n",
+                        "# 27, E00:01, 99 s ago\n",
+                        "# 28, E00:01, 99 s ago\n",
+                        "# 29, E00:01, 100 s ago\n",
+                        "# 30, E00:01, 100 s ago\n",
+                        "# 31, E00:01, 101 s ago\n",
+                        "# 32, E00:01, 101 s ago\n",
+                        "# 33, E00:01, 102 s ago\n",
+                        "# 34, E00:01, 102 s ago\n",
+                        "# 35, E10:00, 116 s ago\n",
+                        "# 36, E10:00, 116 s ago\n",
+                        "# 37, E10:00, 117 s ago\n",
+                        "# 38, E10:00, 117 s ago\n",
+                        "# 39, E10:00, 118 s ago\n",
+                        "# 40, E10:00, 118 s ago\n",
+                        "# 41, E10:00, 119 s ago\n",
+                        "# 42, E10:00, 119 s ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            2,
+                            14,
+                            48
+                        ],
+                        "delays": [
+                            5.0,
+                            28.0,
+                            107.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 7 s ago\n",
+                        "#  2, E00:01, 7 s ago\n",
+                        "#  3, E00:01, 7 s ago\n",
+                        "#  4, E00:01, 8 s ago\n",
+                        "#  5, E00:01, 8 s ago\n",
+                        "#  6, E00:01, 8 s ago\n",
+                        "#  7, E00:01, 8 s ago\n",
+                        "#  8, E00:01, 8 s ago\n",
+                        "#  9, E00:01, 9 s ago\n",
+                        "# 10, E00:01, 9 s ago\n",
+                        "# 11, E00:01, 9 s ago\n",
+                        "# 12, E00:01, 9 s ago\n",
+                        "# 13, E00:01, 9 s ago\n",
+                        "# 14, E00:01, 10 s ago\n",
+                        "# 15, E00:01, 10 s ago\n",
+                        "# 16, E00:01, 10 s ago\n",
+                        "# 17, E00:01, 10 s ago\n",
+                        "# 18, E00:01, 10 s ago\n",
+                        "# 19, E01:06, 97 s ago\n",
+                        "# 20, E01:07, 97 s ago\n",
+                        "# 21, E30:00, 98 s ago\n",
+                        "# 22, E01:03, 98 s ago\n",
+                        "# 23, E01:02, 98 s ago\n",
+                        "# 24, E01:01, 98 s ago\n",
+                        "# 25, E01:00, 98 s ago\n",
+                        "# 26, E00:01, 98 s ago\n",
+                        "# 27, E00:01, 99 s ago\n",
+                        "# 28, E00:01, 99 s ago\n",
+                        "# 29, E00:01, 100 s ago\n",
+                        "# 30, E00:01, 100 s ago\n",
+                        "# 31, E00:01, 101 s ago\n",
+                        "# 32, E00:01, 101 s ago\n",
+                        "# 33, E00:01, 102 s ago\n",
+                        "# 34, E00:01, 102 s ago\n",
+                        "# 35, E10:00, 116 s ago\n",
+                        "# 36, E10:00, 116 s ago\n",
+                        "# 37, E10:00, 117 s ago\n",
+                        "# 38, E10:00, 117 s ago\n",
+                        "# 39, E10:00, 118 s ago\n",
+                        "# 40, E10:00, 118 s ago\n",
+                        "# 41, E10:00, 119 s ago\n",
+                        "# 42, E10:00, 119 s ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "delay": 144.0
+                }
+            ]
+        },
+        {
+            "cmd": "88270000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 7 s ago\n",
+                        "#  2, E00:01, 7 s ago\n",
+                        "#  3, E00:01, 7 s ago\n",
+                        "#  4, E00:01, 8 s ago\n",
+                        "#  5, E00:01, 8 s ago\n",
+                        "#  6, E00:01, 8 s ago\n",
+                        "#  7, E00:01, 8 s ago\n",
+                        "#  8, E00:01, 8 s ago\n",
+                        "#  9, E00:01, 9 s ago\n",
+                        "# 10, E00:01, 9 s ago\n",
+                        "# 11, E00:01, 9 s ago\n",
+                        "# 12, E00:01, 9 s ago\n",
+                        "# 13, E00:01, 9 s ago\n",
+                        "# 14, E00:01, 10 s ago\n",
+                        "# 15, E00:01, 10 s ago\n",
+                        "# 16, E00:01, 10 s ago\n",
+                        "# 17, E00:01, 10 s ago\n",
+                        "# 18, E00:01, 10 s ago\n",
+                        "# 19, E01:06, 97 s ago\n",
+                        "# 20, E01:07, 97 s ago\n",
+                        "# 21, E30:00, 98 s ago\n",
+                        "# 22, E01:03, 98 s ago\n",
+                        "# 23, E01:02, 98 s ago\n",
+                        "# 24, E01:01, 98 s ago\n",
+                        "# 25, E01:00, 98 s ago\n",
+                        "# 26, E00:01, 98 s ago\n",
+                        "# 27, E00:01, 99 s ago\n",
+                        "# 28, E00:01, 99 s ago\n",
+                        "# 29, E00:01, 100 s ago\n",
+                        "# 30, E00:01, 100 s ago\n",
+                        "# 31, E00:01, 101 s ago\n",
+                        "# 32, E00:01, 101 s ago\n",
+                        "# 33, E00:01, 102 s ago\n",
+                        "# 34, E00:01, 102 s ago\n",
+                        "# 35, E10:00, 116 s ago\n",
+                        "# 36, E10:00, 116 s ago\n",
+                        "# 37, E10:00, 117 s ago\n",
+                        "# 38, E10:00, 117 s ago\n",
+                        "# 39, E10:00, 118 s ago\n",
+                        "# 40, E10:00, 118 s ago\n",
+                        "# 41, E10:00, 119 s ago\n",
+                        "# 42, E10:00, 119 s ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            60,
+                            4
+                        ],
+                        "delays": [
+                            121.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 8 s ago\n",
+                        "#  2, E00:01, 8 s ago\n",
+                        "#  3, E00:01, 8 s ago\n",
+                        "#  4, E00:01, 9 s ago\n",
+                        "#  5, E00:01, 9 s ago\n",
+                        "#  6, E00:01, 9 s ago\n",
+                        "#  7, E00:01, 9 s ago\n",
+                        "#  8, E00:01, 9 s ago\n",
+                        "#  9, E00:01, 10 s ago\n",
+                        "# 10, E00:01, 10 s ago\n",
+                        "# 11, E00:01, 10 s ago\n",
+                        "# 12, E00:01, 10 s ago\n",
+                        "# 13, E00:01, 10 s ago\n",
+                        "# 14, E00:01, 11 s ago\n",
+                        "# 15, E00:01, 11 s ago\n",
+                        "# 16, E00:01, 11 s ago\n",
+                        "# 17, E00:01, 11 s ago\n",
+                        "# 18, E00:01, 11 s ago\n",
+                        "# 19, E01:06, 98 s ago\n",
+                        "# 20, E01:07, 98 s ago\n",
+                        "# 21, E30:00, 99 s ago\n",
+                        "# 22, E01:03, 99 s ago\n",
+                        "# 23, E01:02, 99 s ago\n",
+                        "# 24, E01:01, 99 s ago\n",
+                        "# 25, E01:00, 99 s ago\n",
+                        "# 26, E00:01, 99 s ago\n",
+                        "# 27, E00:01, 100 s ago\n",
+                        "# 28, E00:01, 100 s ago\n",
+                        "# 29, E00:01, 101 s ago\n",
+                        "# 30, E00:01, 101 s ago\n",
+                        "# 31, E00:01, 102 s ago\n",
+                        "# 32, E00:01, 102 s ago\n",
+                        "# 33, E00:01, 103 s ago\n",
+                        "# 34, E00:01, 103 s ago\n",
+                        "# 35, E10:00, 117 s ago\n",
+                        "# 36, E10:00, 117 s ago\n",
+                        "# 37, E10:00, 118 s ago\n",
+                        "# 38, E10:00, 118 s ago\n",
+                        "# 39, E10:00, 119 s ago\n",
+                        "# 40, E10:00, 119 s ago\n",
+                        "# 41, E10:00, 2 m ago\n",
+                        "# 42, E10:00, 2 m ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            21,
+                            8,
+                            13,
+                            22
+                        ],
+                        "delays": [
+                            43.0,
+                            16.0,
+                            28.0,
+                            53.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 8 s ago\n",
+                        "#  2, E00:01, 8 s ago\n",
+                        "#  3, E00:01, 8 s ago\n",
+                        "#  4, E00:01, 9 s ago\n",
+                        "#  5, E00:01, 9 s ago\n",
+                        "#  6, E00:01, 9 s ago\n",
+                        "#  7, E00:01, 9 s ago\n",
+                        "#  8, E00:01, 9 s ago\n",
+                        "#  9, E00:01, 10 s ago\n",
+                        "# 10, E00:01, 10 s ago\n",
+                        "# 11, E00:01, 10 s ago\n",
+                        "# 12, E00:01, 10 s ago\n",
+                        "# 13, E00:01, 10 s ago\n",
+                        "# 14, E00:01, 11 s ago\n",
+                        "# 15, E00:01, 11 s ago\n",
+                        "# 16, E00:01, 11 s ago\n",
+                        "# 17, E00:01, 11 s ago\n",
+                        "# 18, E00:01, 11 s ago\n",
+                        "# 19, E01:06, 98 s ago\n",
+                        "# 20, E01:07, 98 s ago\n",
+                        "# 21, E30:00, 99 s ago\n",
+                        "# 22, E01:03, 99 s ago\n",
+                        "# 23, E01:02, 99 s ago\n",
+                        "# 24, E01:01, 99 s ago\n",
+                        "# 25, E01:00, 99 s ago\n",
+                        "# 26, E00:01, 99 s ago\n",
+                        "# 27, E00:01, 100 s ago\n",
+                        "# 28, E00:01, 100 s ago\n",
+                        "# 29, E00:01, 101 s ago\n",
+                        "# 30, E00:01, 101 s ago\n",
+                        "# 31, E00:01, 102 s ago\n",
+                        "# 32, E00:01, 102 s ago\n",
+                        "# 33, E00:01, 103 s ago\n",
+                        "# 34, E00:01, 103 s ago\n",
+                        "# 35, E10:00, 117 s ago\n",
+                        "# 36, E10:00, 117 s ago\n",
+                        "# 37, E10:00, 118 s ago\n",
+                        "# 38, E10:00, 118 s ago\n",
+                        "# 39, E10:00, 119 s ago\n",
+                        "# 40, E10:00, 119 s ago\n",
+                        "# 41, E10:00, 2 m ago\n",
+                        "# 42, E10:00, 2 m ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            58,
+                            6
+                        ],
+                        "delays": [
+                            117.0,
+                            26.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88270000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 8 s ago\n",
+                        "#  2, E00:01, 8 s ago\n",
+                        "#  3, E00:01, 8 s ago\n",
+                        "#  4, E00:01, 9 s ago\n",
+                        "#  5, E00:01, 9 s ago\n",
+                        "#  6, E00:01, 9 s ago\n",
+                        "#  7, E00:01, 9 s ago\n",
+                        "#  8, E00:01, 9 s ago\n",
+                        "#  9, E00:01, 10 s ago\n",
+                        "# 10, E00:01, 10 s ago\n",
+                        "# 11, E00:01, 10 s ago\n",
+                        "# 12, E00:01, 10 s ago\n",
+                        "# 13, E00:01, 10 s ago\n",
+                        "# 14, E00:01, 11 s ago\n",
+                        "# 15, E00:01, 11 s ago\n",
+                        "# 16, E00:01, 11 s ago\n",
+                        "# 17, E00:01, 11 s ago\n",
+                        "# 18, E00:01, 11 s ago\n",
+                        "# 19, E01:06, 98 s ago\n",
+                        "# 20, E01:07, 98 s ago\n",
+                        "# 21, E30:00, 99 s ago\n",
+                        "# 22, E01:03, 99 s ago\n",
+                        "# 23, E01:02, 99 s ago\n",
+                        "# 24, E01:01, 99 s ago\n",
+                        "# 25, E01:00, 99 s ago\n",
+                        "# 26, E00:01, 99 s ago\n",
+                        "# 27, E00:01, 100 s ago\n",
+                        "# 28, E00:01, 100 s ago\n",
+                        "# 29, E00:01, 101 s ago\n",
+                        "# 30, E00:01, 101 s ago\n",
+                        "# 31, E00:01, 102 s ago\n",
+                        "# 32, E00:01, 102 s ago\n",
+                        "# 33, E00:01, 103 s ago\n",
+                        "# 34, E00:01, 103 s ago\n",
+                        "# 35, E10:00, 117 s ago\n",
+                        "# 36, E10:00, 117 s ago\n",
+                        "# 37, E10:00, 118 s ago\n",
+                        "# 38, E10:00, 118 s ago\n",
+                        "# 39, E10:00, 119 s ago\n",
+                        "# 40, E10:00, 119 s ago\n",
+                        "# 41, E10:00, 2 m ago\n",
+                        "# 42, E10:00, 2 m ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "delay": 142.0
+                }
+            ]
+        },
+        {
+            "cmd": "88270000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 8 s ago\n",
+                        "#  2, E00:01, 8 s ago\n",
+                        "#  3, E00:01, 8 s ago\n",
+                        "#  4, E00:01, 9 s ago\n",
+                        "#  5, E00:01, 9 s ago\n",
+                        "#  6, E00:01, 9 s ago\n",
+                        "#  7, E00:01, 9 s ago\n",
+                        "#  8, E00:01, 9 s ago\n",
+                        "#  9, E00:01, 10 s ago\n",
+                        "# 10, E00:01, 10 s ago\n",
+                        "# 11, E00:01, 10 s ago\n",
+                        "# 12, E00:01, 10 s ago\n",
+                        "# 13, E00:01, 10 s ago\n",
+                        "# 14, E00:01, 11 s ago\n",
+                        "# 15, E00:01, 11 s ago\n",
+                        "# 16, E00:01, 11 s ago\n",
+                        "# 17, E00:01, 11 s ago\n",
+                        "# 18, E00:01, 11 s ago\n",
+                        "# 19, E01:06, 98 s ago\n",
+                        "# 20, E01:07, 98 s ago\n",
+                        "# 21, E30:00, 99 s ago\n",
+                        "# 22, E01:03, 99 s ago\n",
+                        "# 23, E01:02, 99 s ago\n",
+                        "# 24, E01:01, 99 s ago\n",
+                        "# 25, E01:00, 99 s ago\n",
+                        "# 26, E00:01, 99 s ago\n",
+                        "# 27, E00:01, 100 s ago\n",
+                        "# 28, E00:01, 100 s ago\n",
+                        "# 29, E00:01, 101 s ago\n",
+                        "# 30, E00:01, 101 s ago\n",
+                        "# 31, E00:01, 102 s ago\n",
+                        "# 32, E00:01, 102 s ago\n",
+                        "# 33, E00:01, 103 s ago\n",
+                        "# 34, E00:01, 103 s ago\n",
+                        "# 35, E10:00, 117 s ago\n",
+                        "# 36, E10:00, 117 s ago\n",
+                        "# 37, E10:00, 118 s ago\n",
+                        "# 38, E10:00, 118 s ago\n",
+                        "# 39, E10:00, 119 s ago\n",
+                        "# 40, E10:00, 119 s ago\n",
+                        "# 41, E10:00, 2 m ago\n",
+                        "# 42, E10:00, 2 m ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            34,
+                            30
+                        ],
+                        "delays": [
+                            70.0,
+                            70.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "a9270000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "#  0, E00:01, 13 m ago\n",
+                        "#  1, E00:01, 8 s ago\n",
+                        "#  2, E00:01, 8 s ago\n",
+                        "#  3, E00:01, 8 s ago\n",
+                        "#  4, E00:01, 9 s ago\n",
+                        "#  5, E00:01, 9 s ago\n",
+                        "#  6, E00:01, 9 s ago\n",
+                        "#  7, E00:01, 9 s ago\n",
+                        "#  8, E00:01, 9 s ago\n",
+                        "#  9, E00:01, 10 s ago\n",
+                        "# 10, E00:01, 10 s ago\n",
+                        "# 11, E00:01, 10 s ago\n",
+                        "# 12, E00:01, 10 s ago\n",
+                        "# 13, E00:01, 10 s ago\n",
+                        "# 14, E00:01, 11 s ago\n",
+                        "# 15, E00:01, 11 s ago\n",
+                        "# 16, E00:01, 11 s ago\n",
+                        "# 17, E00:01, 11 s ago\n",
+                        "# 18, E00:01, 11 s ago\n",
+                        "# 19, E01:06, 98 s ago\n",
+                        "# 20, E01:07, 98 s ago\n",
+                        "# 21, E30:00, 99 s ago\n",
+                        "# 22, E01:03, 99 s ago\n",
+                        "# 23, E01:02, 99 s ago\n",
+                        "# 24, E01:01, 99 s ago\n",
+                        "# 25, E01:00, 99 s ago\n",
+                        "# 26, E00:01, 99 s ago\n",
+                        "# 27, E00:01, 100 s ago\n",
+                        "# 28, E00:01, 100 s ago\n",
+                        "# 29, E00:01, 101 s ago\n",
+                        "# 30, E00:01, 101 s ago\n",
+                        "# 31, E00:01, 102 s ago\n",
+                        "# 32, E00:01, 102 s ago\n",
+                        "# 33, E00:01, 103 s ago\n",
+                        "# 34, E00:01, 103 s ago\n",
+                        "# 35, E10:00, 117 s ago\n",
+                        "# 36, E10:00, 117 s ago\n",
+                        "# 37, E10:00, 118 s ago\n",
+                        "# 38, E10:00, 118 s ago\n",
+                        "# 39, E10:00, 119 s ago\n",
+                        "# 40, E10:00, 119 s ago\n",
+                        "# 41, E10:00, 2 m ago\n",
+                        "# 42, E10:00, 2 m ago\n",
+                        "# 43, E10:00, 2 m ago\n",
+                        "# 44, E00:01, 2 m ago\n",
+                        "# 45, E00:01, 2 m ago\n",
+                        "# 46, E00:01, 2 m ago\n",
+                        "# 47, E00:01, 2 m ago\n",
+                        "# 48, E00:01, 2 m ago\n",
+                        "# 49, E00:01, 2 m ago\n",
+                        "# 50, E00:01, 2 m ago\n",
+                        "# 51, E00:01, 2 m ago\n",
+                        "# 52, E00:01, 2 m ago\n",
+                        "# 53, E00:01, 2 m ago\n",
+                        "# 54, E00:01, 2 m ago\n",
+                        "# 55, E00:01, 2 m ago\n",
+                        "# 56, E00:01, 2 m ago\n",
+                        "# 57, E00:01, 2 m ago\n",
+                        "# 58, E00:01, 2 m ago\n",
+                        "# 59, E00:01, 2 m ago\n",
+                        "# 60, E00:01, 2 m ago\n",
+                        "# 61, E00:01, 2 m ago\n",
+                        "# 62, E00:01, 13 m ago\n",
+                        "# 63, E00:01, 13 m ago\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            28,
+                            27,
+                            9
+                        ],
+                        "delays": [
+                            58.0,
+                            54.0,
+                            32.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88310000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88310000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9310000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 1.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 12.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88320000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "Q8iv-0001: 0\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88330000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9330000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "5\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "88340000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9340000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "2\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 19.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88350000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 7.999999999996362
+                }
+            ]
+        },
+        {
+            "cmd": "a9350000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 16.000000000007276
+                }
+            ]
+        },
+        {
+            "cmd": "88370000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.999999999996362
+                }
+            ]
+        },
+        {
+            "cmd": "88370000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.999999999996362
+                }
+            ]
+        },
+        {
+            "cmd": "88370000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 6.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 3.0
+                }
+            ]
+        },
+        {
+            "cmd": "88370000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9370000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88410000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            40.0,
+                            16.0,
+                            21.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            20,
+                            6
+                        ],
+                        "delays": [
+                            47.0,
+                            32.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "delay": 76.0
+                }
+            ]
+        },
+        {
+            "cmd": "88410000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            2,
+                            24
+                        ],
+                        "delays": [
+                            3.0,
+                            75.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88410000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "delay": 76.0
+                }
+            ]
+        },
+        {
+            "cmd": "88410000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "delay": 78.0
+                }
+            ]
+        },
+        {
+            "cmd": "88410000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "delay": 79.0
+                }
+            ]
+        },
+        {
+            "cmd": "88410000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "\n",
+                        "CORE COMMAND SET.\n",
+                        " See manual for full listing.\n",
+                        " v[port]=[value]   \tSet voltage (V)\n",
+                        " i[port]=[value]   \tSet current (mA)\n",
+                        " v[port]?          \tQuery voltage\n",
+                        " i[port]?          \tQuery current\n",
+                        " vipall?           \tQuery all values\n",
+                        " vmax[port]=[value]\tSet voltage limit (V)\n",
+                        " imax[port]=[value]\tSet current limit (mA)\n",
+                        "\n",
+                        "ERROR CODES.\n",
+                        " 00   \t\tUnknown error\n",
+                        " 01   \t\tOvervoltage\n",
+                        " 02   \t\tOvercurrent\n",
+                        " 03   \t\tPower error\n",
+                        " 04   \t\tCalibration error\n",
+                        " 10   \t\tUnrecognised command\n",
+                        " 11   \t\tUnrecognised parameter\n",
+                        " 12   \t\tUnrecognised port\n",
+                        " 13   \t\tOperation forbidden\n",
+                        " 14:00\t\tInstruction buffer overflow\n",
+                        " 14:01\t\tSingle instruction overflow\n",
+                        " 15:X0\t\tSerial overflow detected\n",
+                        " 15:X1\t\tSerial framing error detected\n",
+                        " 16   \t\tInternal software error\n"
+                    ],
+                    "divide": {
+                        "frames": [
+                            17,
+                            6,
+                            3
+                        ],
+                        "delays": [
+                            39.0,
+                            16.0,
+                            22.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "88420000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 4.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 2.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 1.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "88420000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9420000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "1\n",
+                    "delay": 14.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 5.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000010000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 13.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000020000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 20.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000030000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 11.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000040000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 18.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000050000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 10.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000060000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 17.0
+                }
+            ]
+        },
+        {
+            "cmd": "88430000070000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 8.0
+                }
+            ]
+        },
+        {
+            "cmd": "a9430000000000",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E00:01",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000005970",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 7.0
+                }
+            ]
+        },
+        {
+            "cmd": "81010000002cb8",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000017f5d",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81010000013fae",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "OK\n",
+                        "E01:00"
+                    ],
+                    "divide": {
+                        "frames": [
+                            1,
+                            1
+                        ],
+                        "delays": [
+                            16.0,
+                            0.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "8100000002800a",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81010000024005",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000030a73",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 15.0
+                }
+            ]
+        },
+        {
+            "cmd": "81010000030539",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "810000000435fb",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "OK\n",
+                        "E01:01"
+                    ],
+                    "divide": {
+                        "frames": [
+                            1,
+                            1
+                        ],
+                        "delays": [
+                            16.0,
+                            0.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "81010000041afd",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT_MANY",
+                    "data": [
+                        "OK\n",
+                        "E30:00"
+                    ],
+                    "divide": {
+                        "frames": [
+                            1,
+                            1
+                        ],
+                        "delays": [
+                            16.0,
+                            0.0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "cmd": "8100000005e559",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "810100000572ac",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81000000069c71",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "81010000064e38",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "8100000007f357",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        },
+        {
+            "cmd": "810100000779ab",
+            "encoding": "binary",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "OK\n",
+                    "delay": 16.0
+                }
+            ]
+        }
+    ],
+    "*": {
+        "action": "QUEUE_OUT",
+        "data": "E10:02",
+        "delay": 0.0
+    },
+    "initial_out": [
+        "OK\n"
+    ]
+}
