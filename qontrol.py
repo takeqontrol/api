@@ -199,20 +199,28 @@ class Command:
     addr: int = 0
     addr_id: int = 0
     header: set[HeaderId] = field(default_factory= lambda: set())
-    data: int | list[int] = 0
+    data: int | list[int] = None
 
     def __post_init__(self):
         # Add type info to header
         self.header |= self.type.value[1]
 
     def ascii(self):
-        self.addr = 'all' if ALLCH in self.header else self.addr
+        self.addr = 'ALL' if ALLCH in self.header else self.addr
+        data = '' if self.data is None else self.data
+
+        if data != '':
+            data /= (2**16 / 12)
+            data = round(data, 2)
         
-        return f'{self.idx}{self.addr}{self.type.value}{self.data}'
+        return f'{self.idx}{self.addr}{self.type.value[0]}{data}'
 
     def binary(self):
         # Compute header byte
         header = compute_header_byte(self.header)
+
+        if self.data is None:
+            self.data = 0
         
         # Handle addressing modes
         # If ADDM = 1

@@ -10,7 +10,7 @@ import math
 # q = Qontroller(virtual_port=vm.port, response_timeout=0.5)
 
 dev_port='/dev/cu.usbserial-FT677TKA'
-q = Qontroller(serial_port_name=dev_port, response_timeout=0.2)
+q = Qontroller(serial_port_name=dev_port, response_timeout=0.4)
 
 
 
@@ -124,6 +124,17 @@ def perf_test():
     print(t2)
 
 
+def send_ascii(cmd):
+    data = cmd.data
+    if data:
+        data /= (2**16 / 12)
+        data = round(data, 2)
+  
+    return q.issue_command(str(cmd.idx),
+                           ch=cmd.addr,
+                           operator=cmd.type.value[0],
+                           value=data)
+
 
 if __name__ == '__main__':
     #test_binary()
@@ -151,16 +162,26 @@ if __name__ == '__main__':
         
 
     for cmd in Index:
+
         if READ in cmd.header_modes():
 
+            if cmd in {NVM}:
+                continue
+
             for ch in range(8):
-                res = q.send_binary(Command(GET, cmd, ch))
-                #print(f'{cmd}{ch}  {res}')
+                c = Command(GET, cmd, ch)
+   
+                send_ascii(c)
+                q.send_binary(c)
 
 
-        if READ_ALLCH in cmd.header_modes():
-            res = q.send_binary(Command(GET, cmd, header={ALLCH}))
-            #print(f'{cmd}_ALL  {res}')
+
+        # if READ_ALLCH in cmd.header_modes():
+        #     c = Command(GET, cmd, header={ALLCH})
+            
+        #     send_ascii(c)
+        #     q.send_binary(c)
+   
 
 
     
@@ -168,25 +189,31 @@ if __name__ == '__main__':
         v = uniform(0.0, 12.0)
         dv = math.floor(v * (2**16 / 12))
 
-        res = q.send_binary(Command(SET, V, ch, data=dv))
+        c = Command(SET, V, ch, data=dv)
+
+        send_ascii(c)
+        q.send_binary(c)
+        
         #print(f'V{ch}={v}   {res}')
         
-        i = uniform(0.0, 24.0)
-        di = math.floor(v * (2**16 / 24))
+    #     i = uniform(0.0, 24.0)
+    #     di = math.floor(v * (2**16 / 24))
 
-        res = q.send_binary(Command(SET, I, ch, data=di))
-        #print(f'I{ch}={i}   {res}')
+    #     res = q.send_binary(Command(SET, I, ch, data=di))
+    #     #print(f'I{ch}={i}   {res}')
             
 
-    for ch in range(8):
-        res = q.send_binary(Command(GET, V, ch))
+    # for ch in range(8):
+    #     res = q.send_binary(Command(GET, V, ch))
+    #     #print(f'{cmd}{ch}  {res}')
+
+    #     es = q.send_binary(Command(GET, I, ch))
         #print(f'{cmd}{ch}  {res}')
 
-        es = q.send_binary(Command(GET, I, ch))
-        #print(f'{cmd}{ch}  {res}')
 
     
+    
 
-    # q.print_log()
+    q.print_log()
     p = ProgramGenerator("Binary Program", q.log)
-    p.write('progs/binary_test_2.json')
+    p.write('progs/binary_test_3.json')
