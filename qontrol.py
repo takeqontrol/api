@@ -70,6 +70,7 @@ DEVICE_PROPERTIES = {
         
 RESPONSE_OK = 'OK\n'
 ERROR_FORMAT = r'[A-Za-z]{1,3}(\d+):(\d+)'
+DEV_ID_REGEX = re.compile(r'(Q\w+)-([0-9a-fA-F]+)')
 
 
 # class Type(Enum):
@@ -327,94 +328,19 @@ class Qontroller(object):
                 
                 # Find serial port by asking it for its device id
                 if 'device_id' in kwargs:
-                        # Search for port with matching device ID
-                        ob = re.match(r'([QS]\w+)-([0-9a-fA-F\*]+)', self.device_id)
-                        targ_dev_type,targ_dev_num = ob.groups()
-                        if ob is None:
-                                raise AttributeException('Entered device ID ({0}) must be of form "[device type]-[device number]" where [device number] can be hexadecimal'.format(self.device_id))
-                        
-                        # Find serial port based on provided device ID (randomise their order)
-                        candidates = []
-                        possible_ports = list(list_ports.comports())
-                        shuffle(possible_ports)
-                        tries = 0
-                        for port in possible_ports:
-                                for i in range(60):
-                                        sys.stdout.write(' ')
-                                sys.stdout.write('\r')
-                                sys.stdout.write('Querying port {:}... '.format(port.device))
-                                sys.stdout.flush()
-                                
-                                try:
-                                        # Instantiate the serial port
-                                        self.serial_port = serial.Serial(port.device, self.baudrate, timeout=0.5)
-                                        self.serial_port.close()
-                                        self.serial_port.open()
-                                        # Clear buffer
-                                        self.serial_port.reset_input_buffer()
-                                        self.serial_port.reset_output_buffer()
-                                        # Transmit our challenge string
-                                        self.serial_port.write("id?\n".encode('ascii'))
-                                        # Receive response
-                                        response = self.serial_port.read(size=64).decode("ascii") 
-                                        # Check if we received a response
-                                        if response == '':
-                                                sys.stdout.write('No response\n')
-                                                continue
-                                        # Match the device ID
-                                        ob = re.match(r'.*((?:'+ERROR_FORMAT+r')|(?:Q\w+-[0-9a-fA-F\*]+)).*', response)
-                                        if ob is not None:
-                                                ob = re.match(r'(Q\w+)-([0-9a-fA-F\*]+)\n', response)
-                                                if ob is not None:
-                                                        sys.stdout.write('{:}\n'.format(response))
-                                                        sys.stdout.flush()
-                                                        dev_type,dev_num = ob.groups()
-                                                        candidates.append({'dev_type':dev_type, 'dev_num':dev_num, 'port':port.device})
-                                                        if dev_type == targ_dev_type and dev_num == targ_dev_num:
-                                                                self.serial_port_name = port.device
-                                                                break
-                                                else:
-                                                        ob = re.match(ERROR_FORMAT, response)
-                                                        if ob is not None:
-                                                                sys.stdout.write('Error')
-                                                                # Try this port again later
-                                                                if tries < 3:
-                                                                        sys.stdout.write('. Will try again...')
-                                                                        possible_ports.append(port)
-                                                                        tries += 1
-                                                                else:
-                                                                        sys.stdout.write('\n')
-                                                                sys.stdout.flush()
-                                        else:
-                                                sys.stdout.write('Not a valid device\n'.format(response))
-                                                sys.stdout.flush()
-                                                        
-                                        
-                                        # Close port
-                                        self.serial_port.close()
-                                        
-                                except serial.serialutil.SerialException:
-                                        sys.stdout.write('Busy\n')
-                                        sys.stdout.flush()
-                                        continue
-                        
-                        # If the target device is not found
-                        if not self.serial_port.is_open:
-                                # Check whether we found another possibility
-                                for candidate in candidates:
-                                        if candidate['dev_type'] == targ_dev_type:
-                                                self.device_id = candidate['dev_type']+'-'+candidate['dev_num']
-                                                self.serial_port_name = candidate['port']
-                                                print ('Qontroller.__init__: Warning: Specified device ID ({0}) could not be found. Using device with matching type ({2}) on port {1}.'.format(kwargs['device_id'], self.serial_port_name, self.device_id))
-                                                break
-                                # If no similar device exists, abort
-                                if all([candidate['dev_type'] != targ_dev_type for candidate in candidates]):
-                                        raise AttributeError('Specified device ID ({0}) could not be found.'.format(kwargs['device_id']))
-                        
-                        print ('Using serial port {0}'.format(self.serial_port_name))
-                        # If serial_port_name was also specified, check that it matches the one we found.
-                        if ('serial_port_name' in kwargs) and (self.serial_port_name != kwargs['serial_port_name']):
-                                print ('Qontroller.__init__: Warning: Specified serial port ({0}) does not match the one found based on the specified device ID ({1}, {2}). Using serial port {2}.'.format(kwargs['serial_port_name'], self.device_id, self.serial_port_name))
+                        self._connect_to_device(kwargs['device_id'])
+
+                        # If serial_port_name was also specified,
+                        # check that it matches the one# we found.
+                        if ('serial_port_name' in kwargs) and (self.serial_port_name !=
+                                                               kwargs['serial_port_name']):
+
+                            print(('Qontroller.__init__: Warning: '
+                              f'Specified serial port ({kwargs["serial_port_name"]}) does not match '
+                              f'the one found based on the specified device ID ({self.device_id}). '
+                              f'Using serial port {self.serial_port_name}'))
+                            
+                            
                 
                 # Open serial port directly, get device id
                 elif 'serial_port_name' in kwargs:
@@ -533,7 +459,161 @@ class Qontroller(object):
                 if self.serial_port is not None and self.serial_port.is_open:
                         # Close serial port
                         self.serial_port.close()
-        
+
+        def _parse_device_id(self, device_id):    
+            # Search for port with matching device ID
+            device_id_match = DEV_ID_REGEX.fullmatch(device_id)
+           
+            if not device_id_match:
+                return None, None
+            
+            dev_type, dev_num = device_id_match.groups()
+
+            return dev_type, dev_num
+
+        def _connect_to_device(self, device_id):
+            connected, candidates = self._connect_to_port_for_device(device_id)
+
+            # Found the device, nothing else to do
+            if connected:
+                print(f'Using serial port {self.serial_port_name}')
+                return True
+
+            # The device was not found
+            # Try to see if there are any suitable candidates
+
+            # Parse device id
+            targ_dev_type, targ_dev_num = self._parse_device_id(device_id)
+            
+           
+            found_suitable_device = False
+            # If a candidate exists 
+            for candidate in candidates:
+
+                # If we have already found a suitable device
+                # close the port on this candidate
+                if found_suitable_device:
+                    candidates['port'].close()
+
+                # Check whether we found another possibility
+                if candidate['dev_type'] == targ_dev_type:
+                    # We did
+                    found_suitable_device = True
+                    
+                    self.device_id = f"{candidate['dev_type']}-{candidate['dev_num']}"
+                    self.serial_port_name = candidate['port_name']
+                    self.serial_port = candidate['port']
+
+                    print((f'Qontroller.__init__: Warning: '
+                               f'Specified device ID ({device_id}) could not be found. '
+                               f'Using device with matching type ({self.device_id})'
+                               f' on port {self.serial_port_name}.'))
+
+                    
+            
+            if not found_suitable_device:
+                # If no similar device exists, abort
+                raise AttributeError((f'Specified device ID ({device_id}) '
+                                      'could not be found'))
+            
+
+
+           
+
+        def _connect_to_port_for_device(self, device_id):
+
+            targ_dev_type, targ_dev_num = self._parse_device_id(device_id)
+
+            if not targ_dev_type:
+                raise AttributeError((f'Entered device ID ({device_id}) must be of form'
+                                      ' "[devicetype]-[device number]" where '
+                                      '[device number] can be hexadecimal'))
+
+            
+            
+                        
+            # Find serial port based on provided device ID (randomise their order)
+            possible_ports = list(list_ports.comports())
+            shuffle(possible_ports)
+            
+            tries = 0
+
+            # Keep candidate devices
+            candidates = []
+            
+            
+            for port in possible_ports:
+                print(f'Querying port {port.device}... ', end='')
+                                
+                try:
+                    # Instantiate the serial port
+                    serial_port_cand = serial.Serial(port.device, self.baudrate, timeout=0.5)
+                    
+                    # Transmit our challenge string
+                    serial_port_cand.write("id?\n".encode('ascii'))
+                    
+                    # Receive response
+                    response = serial_port_cand.read(size=64).decode("ascii")
+
+                except serial.serialutil.SerialException:
+                    print('Busy')
+                    continue
+                    
+                # Check if we received a response
+                if not response:
+                    print('No response')
+                    serial_port_cand.close()
+                    continue
+                        
+                # Match the device ID
+                res_match = DEV_ID_REGEX.match(response)
+                if res_match:
+                    print(f'{response}')
+                            
+                    dev_type, dev_num = res_match.groups()
+                            
+                    if dev_type == targ_dev_type and dev_num == targ_dev_num:
+                        self.serial_port_name = port.device
+                        self.serial_port = serial_port_cand
+                        return True, candidates
+                    
+                    else:
+                        res = response.strip('\n')
+                        print((f'Found {res} but it is not'
+                               f' the device we are looking for.'))
+                            
+                        candidates.append({'dev_type':dev_type,
+                                           'dev_num':dev_num,
+                                           'port_name':port.device,
+                                           'port': serial_port_cand})
+                        continue
+                        
+                        
+                # If the response wasn't an id, try to match it as an error
+                if re.match(ERROR_FORMAT, response):
+                    print('Error', end='')
+                        
+                    # Try this port again later
+                    if tries < 3:
+                        print('. Will try again...', end='')
+                        possible_ports.append(port)
+                        tries += 1
+                    else:
+                        print('')
+
+                        serial_port_cand.close()
+                        continue
+           
+                
+                # Port isn't the one we need
+                serial_port_cand.close()
+
+
+            return False, candidates
+                            
+                
+                
+
         
         def transmit (self, command_string, binary_mode = False):
                 """
