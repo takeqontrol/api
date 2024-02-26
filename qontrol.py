@@ -69,7 +69,7 @@ DEVICE_PROPERTIES = {
 
         
 RESPONSE_OK = 'OK\n'
-ERROR_FORMAT = r'[A-Za-z]{1,3}(\d+):(\d+)'
+
 
 DEV_ID_PARTS_REGEX = re.compile(r'(Q\w+)-([0-9a-fA-F]+)')
 DEV_ID_REGEX = re.compile(r'\w+\d\w*-[0-9a-fA-F\*]+')
@@ -256,6 +256,70 @@ class Command:
         header_modes = map(lambda x: x.value, self.idx.header_modes())
         return self.header in header_modes
 
+@dataclass
+class Response:
+    raw_data: list[bytes] = None
+    
+
+
+class ErrorType(ExtendedEnum):
+    UNKNOWN             = (0, 'Unknown error.')
+    POWER               = (3, 'Power error.')
+    CAL                 = (4, 'Calibration error.')
+    OUTPUT              = (5, 'Output error.')
+    UNREC_CMD           = (10, 'Unrecognised command.')
+    UNREC_INPUT         = (11, 'Unrecognised input parameter.')
+    UNREC_CH            = (12, 'Unrecognised channel, {ch}.')
+    FORBIDDEN           = (13, 'Operation forbidden.')
+    SERIAL_BUF_OVERFLOW = (14, 'Serial buffer overflow.')
+    SERIAL_COMM         = (15, 'Serial communication error.')
+    CMD_TIMED_OUT       = (16, 'Command timed out.')
+    SPI                 = (17, 'SPI error.')
+    ADC                 = (18, 'ADC error.')
+    I2C                 = (19, 'I2C error.')
+    TOO_MANY            = (30, 'Too many errors, some have been suppressed.')
+    FIRMWARE_TRAP       = (31, 'Firmware trap.')
+    POWERED_UP          = (90, 'Powered up.')
+
+    def code(self):
+        return self.value[0]
+
+    def desc(self):
+        return self.value[1]
+
+
+    @classmethod
+    def from_code(cls, code):
+        for c in cls:
+            if c.value[0] == code:
+                return c
+
+        return cls.UNKNOWN
+            
+@dataclass
+class Error:
+    type: ErrorType
+    ch: int
+    raw: str
+
+    ERROR_FORMAT = r'[A-Za-z]{1,3}(\d+):(\d+)'
+    
+    @classmethod
+    def from_str(cls, s):
+        s = s.strip()
+        e_match = re.match(cls.ERROR_FORMAT, s)
+
+        if not e_match:
+            return None
+
+        errno = int(e_match.group(1))
+        ch = int(e_match.group(2))
+
+        return cls(ErrorType.from_code(errno), ch, s)
+
+    def to_dict(self):
+        return {'type': 'err', 'id': self.type.code(), 'ch': self.ch,
+                'desc': self.type.desc(), 'raw': self.raw}
     
 class Qontroller(object):
         """
@@ -338,7 +402,9 @@ class Qontroller(object):
                 
                 # Set a time benchmark
                 self.init_time = time.time()
-                
+
+                # Virtual port
+                self.virtual_port = virtual_port
 
                 # Connect to device over serial port
                 self._connect_to_device(device_id, serial_port_name)
@@ -399,8 +465,7 @@ class Qontroller(object):
                                         f' (received response "{res}").'))
 
             elif self.virtual_port:
-                self.serial_port = self.virtual_port
-                    
+                self.serial_port = self.virtual_port 
             else:
                 avail_ports = ''.join([f'serial_port_name = {port.device}\n'
                     for port in list(list_ports.comports())])
@@ -657,7 +722,7 @@ class Qontroller(object):
 
             return dev_type, dev_num
         
-        def transmit (self, command_string, binary_mode = False):
+        def transmit(self, command_string, binary_mode = False):
             """
             Low-level transmit data method.
 
@@ -680,7 +745,7 @@ class Qontroller(object):
                         
         
         
-        def receive (self):
+        def receive(self):
             """
             Low-level receive data method which also checks for errors.
             """
@@ -764,25 +829,10 @@ class Qontroller(object):
             """
             Parse an error into its code, channel, and human-readable description.
             """
-            # Strip whitespace
-            error_str = error_str.strip()
+            error = Error.from_str(error_str)
 
-            # Regex out the error and channel indices from the string
-            ob = re.match(ERROR_FORMAT, error_str)
-
-            # If error_str doesn't match an error, return None
-            if ob is None:
-                    return None
-
-            # Extract the two matched groups (i.e. the error and channel indices)
-            errno,chno = ob.groups()
-            errno = int(errno)
-            chno = int(chno)
-
-            # Get the error description; if none is defined, mark as unrecognised
-            errdesc = self.error_desc_dict.get(errno, 'Unrecognised error code.').format(ch=chno)
-
-            return {'type':'err', 'id':errno, 'ch':chno, 'desc':errdesc, 'raw':error_str}
+            if error:
+                return error.to_dict()
         
         
         def wait (self, seconds=0.0):
@@ -812,37 +862,39 @@ class Qontroller(object):
                 """
                 # Check for previous errors
                 lines,errs = self.receive()
+                
                 # Transmit command
-
                 if ch is None:
-                        ch = ''
+                    ch = ''
                 if value is None:
-                        value = ''
+                    value = ''
                 if isinstance(value,list):
-                        tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator,value[0])
-                        for v in value[1:]:
-                                tx_str += ',{:}'.format(v)
+                    tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator,value[0])
+                    for v in value[1:]:
+                        tx_str += ',{:}'.format(v)
                 else:
-                        tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator, value)
+                    tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator, value)
                 
                 self.transmit(tx_str+'\n')                    
                 
                 # Log it
-                self.log_append(type= 'set' if operator == '=' else 'get', value=value, id=command_id, ch=ch, desc='Command: "'+tx_str+'".')
+                self.log_append(type= 'set' if operator == '=' else 'get', value=value,
+                                id=command_id, ch=ch, desc='Command: "'+tx_str+'".')
 
-                
-                
                 
                 # Function to retry this command (in case of comms error)
                 def retry_function():
-                        return self.issue_command (command_id, ch, operator, value, n_lines_requested, target_errors, output_regex)
+                        return self.issue_command(command_id, ch, operator, value,
+                                                  n_lines_requested, target_errors, output_regex)
 
                 
                 
                 # Wait for response
                 if operator=='?' or ((operator=='=' or operator=='') and self.wait_for_responses):
-                        result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
-                        return result
+                    result = self._issue_command_receive_response(retry_function,
+                        n_lines_requested, target_errors, output_regex, special_timeout)
+                    
+                    return result
 
                 
                 
@@ -981,11 +1033,17 @@ class Qontroller(object):
             
              # Function to retry this command (in case of comms error)
                 def retry_function():
-                        return self.issue_binary_command (command_id, ch, BCAST, ALLCH, ADDM, RW, ACT, DEXT, value_int, addr_id_num, n_lines_requested, target_errors, output_regex, special_timeout)
+                    return self.issue_binary_command(command_id, ch, BCAST, ALLCH, ADDM, RW,
+                                                     ACT, DEXT, value_int, addr_id_num,
+                                                     n_lines_requested, target_errors,
+                                                     utput_regex, special_timeout)
                 
                 # Wait for response
                 if RW==1 or ((RW==0 or ACT) and self.wait_for_responses):
-                    result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
+                    result = self._issue_command_receive_response(retry_function,
+                        n_lines_requested, target_errors,
+                        output_regex, special_timeout)
+                    
                     return result
             
             
@@ -999,8 +1057,10 @@ class Qontroller(object):
                 # Receive response
                 lines = []
                 errs = []
+                
                 if target_errors is None:
                         target_errors = []
+                        
                 start_time = time.time()
                 last_message_time = start_time
                 
@@ -1008,41 +1068,44 @@ class Qontroller(object):
                 
                 i = 0
                 while (True):
-                                i += 1
-                                # Break conditions
-                                if (RESPONSE_OK in lines):
-                                        break
-                                elif (len(lines) >= n_lines_requested):
-                                        break
-                                elif not all([err['id'] not in target_errors for err in errs]):
-                                        break
-                                elif (time.time() - start_time > timeout):
-                                        if (time.time() - last_message_time > self.inter_response_timeout):
-                                                break
+                    i += 1
+                    
+                    # Break conditions
+                    if (RESPONSE_OK in lines):
+                        break
+                    elif (len(lines) >= n_lines_requested):
+                        break
+                    elif not all([err['id'] not in target_errors for err in errs]):
+                        break
+                    elif (time.time() - start_time > timeout):
+                        if (time.time() - last_message_time >
+                            self.inter_response_timeout):
+                            break
                                 
-                                # Receive data
-                                # if (random.randint(0, 100) % 2 == 0):
-                                #       print(f"sleep, {self.device_id}", i)
-                                #       time.sleep(1)
-                                rec_lines,rec_errs = self.receive()
+                    # Receive data
+                    # if (random.randint(0, 100) % 2 == 0):
+                    #       print(f"sleep, {self.device_id}", i)
+                    #       time.sleep(1)
+                    rec_lines,rec_errs = self.receive()
                                 
-                                # Update the last time a message was received
-                                # We won't proceed now until self.inter_response_timeout has elapsed
-                                if len(rec_lines) + len(rec_errs) > 0:
-                                        last_message_time = time.time()
+                    # Update the last time a message was received
+                    # We won't proceed now until self.inter_response_timeout has elapsed
+                    if len(rec_lines) + len(rec_errs) > 0:
+                        last_message_time = time.time()
                                         
-                                # Integrate received lines and errors
-                                lines.extend(rec_lines)
-                                errs.extend(rec_errs)
+                    # Integrate received lines and errors
+                    lines.extend(rec_lines)
+                    errs.extend(rec_errs)
                                 
-                                # Check whether we have received a serial comms error (E15)
-                                if any([err['id'] == 15 for err in errs]):
-                                        # If we did, we should try issuing the command again, recursively
-                                        return retry_function()
+                    # Check whether we have received a serial comms error (E15)
+                    if any([err['id'] == 15 for err in errs]):
+                        # If we did, we should try issuing the command again, recursively
+                        return retry_function()
                                 
-                                # Check whether we have received a fatal error
-                                if any([err['id'] in target_errors for err in errs]):
-                                        raise RuntimeError('Received target error code {0}, "{1}". Last 5 log items were: \n{2}.'.format(errs[-1]['id'], errs[-1]['desc'], '\n'.join([str(self.log[l]) for l in range(-6,-1)])))
+                    # Check whether we have received a fatal error
+                    if any([err['id'] in target_errors for err in errs]):
+                                    
+                        raise RuntimeError('Received target error code {0}, "{1}". Last 5 log items were: \n{2}.'.format(errs[-1]['id'], errs[-1]['desc'], '\n'.join([str(self.log[l]) for l in range(-6,-1)])))
 
                 # We timed out.
                 if len(lines) == 0 and len(errs) == 0:
