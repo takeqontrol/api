@@ -296,123 +296,53 @@ class Qontroller(object):
 
         error_desc_dict = COMMON_ERRORS
 
-        def __init__(self, *args, **kwargs):
+        def __init__(self, device_id=None, serial_port_name=None,
+                     response_timeout=0.100, inter_response_timeout=0.050,
+                     wait_for_responses=True, baudrate=115200,
+                     log_handler=None, log_to_stdout=False,
+                     virtual_port=None):
                 """
                 Initialiser.
                 """
                 
-                # Defaults
+
+                # Device ID (i.e. [device type]-[device number])
+                self.device_id = device_id
                 
-                self.device_id = None                           # Device ID (i.e. [device type]-[device number])
-                self.serial_port = None                         # Serial port object
-                self.serial_port_name = None            # Name of serial port, eg 'COM1' or '/dev/tty1'
-                self.baudrate = 115200                          # Serial port baud rate (signalling frequency, Hz)
-                self.log = fifo(maxlen = 4096)          # Log FIFO of sent commands and received errors
-                self.log_handler = None                         # Function which catches log dictionaries
-        
-                self.log_to_stdout = False                      # Copy new log entries to stdout
-                self.response_timeout = 0.100           # Timeout for RESPONSE_OK or error to set commands
-                self.inter_response_timeout = 0.050     # Timeout between received messages
-                self.wait_for_responses = True          # Should we wait for responses to set commands
+                # Serial port object
+                self.serial_port = None
+
+                # Name of serial port, eg 'COM1' or '/dev/tty1'
+                self.serial_port_name = serial_port_name
+
+                # Serial port baud rate (signalling frequency, Hz)
+                self.baudrate = baudrate
+                
+                # Log FIFO of sent commands and received errors
+                self.log = fifo(maxlen = 4096)
+
+                # Function which catches log dictionaries
+                self.log_handler = log_handler
+
+                # Copy new log entries to stdout
+                self.log_to_stdout = log_to_stdout
+
+                # Timeout for RESPONSE_OK or error to set commands
+                self.response_timeout = response_timeout
+
+                # Timeout between received messages
+                self.inter_response_timeout = inter_response_timeout
+
+                # Should we wait for responses to set commands
+                self.wait_for_responses = wait_for_responses 
                 
                 # Set a time benchmark
                 self.init_time = time.time()
                 
-                # Get arguments from init
-                
-                # Populate parameters, if provided
-                for para in ['device_id', 'serial_port_name', 'log_handler', 'log_to_stdout', 'response_timeout', 'inter_response_timeout', 'baudrate', 'wait_for_responses']:
-                        try:
-                                self.__setattr__(para, kwargs[para])
-                        except KeyError:
-                                continue
-                
-                # Find serial port by asking it for its device id
-                if 'device_id' in kwargs:
-                        self._connect_to_device(kwargs['device_id'])
 
-                        # If serial_port_name was also specified,
-                        # check that it matches the one# we found.
-                        if ('serial_port_name' in kwargs) and (self.serial_port_name !=
-                                                               kwargs['serial_port_name']):
-
-                            print(('Qontroller.__init__: Warning: '
-                              f'Specified serial port ({kwargs["serial_port_name"]}) does not match '
-                              f'the one found based on the specified device ID ({self.device_id}). '
-                              f'Using serial port {self.serial_port_name}'))
-                            
-                            
-                
-                # Open serial port directly, get device id
-                elif 'serial_port_name' in kwargs:
-                    connected, res, port = self._connect_to_serial_port(self.serial_port_name)
-
-                    if connected:
-                        self.serial_port = port
-                        self.device_id = res
-                    else: 
-                        raise RuntimeError(('Qontroller.__init__: Error: '
-                                           'Unable to communicate with '
-                                           f'device on port {self.serial_port_name}'
-                                           f' (received response "{res}").'))
-
-                elif 'virtual_port' in kwargs:
-                    self.serial_port = kwargs['virtual_port']
-                    
-                else:
-                    avail_ports = ''.join([f'serial_port_name = {port.device}\n'
-                        for port in list(list_ports.comports())])
-                    
-                    raise AttributeError(('At least one of serial_port_name or device_id must be'
-                                          ' specified on Qontroller initialisation. '
-                                          f'Available serial ports are:\n{avail_ports}'))
-                
-                
-                # Establish contents of daisy chain
-                try:
-                        # Force a reset of the daisy chain
-                        self.issue_command('nup', operator = '=', value = 0)
-                        
-                        # Ask for number of upstream devices, parse it
-                        try:
-                                chain = self.issue_command('nupall', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
-                        except:
-                                chain = self.issue_command('nup', operator = '?', target_errors = [0,10,11,12,13,14,15,16], output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
-                        # Further parse each found device into a dictionary
-                        for i in range(len(chain)):
-                                ob = re.match(r'\x00*([^-\x00]+)-([0-9a-fA-F\*]+)', chain[i][0])
-                        
-                                device_id = chain[i][0]
-                                device_type = ob.groups()[0]
-                                device_serial = ob.groups()[1]
-                        
-                                try:
-                                        index = int(chain[i][1])
-                                except ValueError:
-                                        index = -1
-                                        print ('Qontroller.__init__: Warning: Unable to determine daisy chain index of device with ID {:}.'.format(device_id))
-                        
-                                # Scan out number of channels from device type
-                                ob = re.match(r'[^\d]+(\d*)[^\d]*', device_type)
-                        
-                        
-                                try:
-                                        n_chs = int(ob.groups()[0])
-                                except ValueError:
-                                        n_chs = -1
-                                        print ('Qontroller.__init__: Warning: Unable to determine number of channels of device at daisy chain index {:}.'.format(index))
-                        
-                                chain[i] = {
-                                        'device_id':device_id,
-                                        'device_type':device_type,
-                                        'device_serial':device_serial,
-                                        'n_chs':n_chs,
-                                        'index':index}
-                except:
-                        chain = []
-                        print ('Qontroller.__init__: Warning: Unable to determine daisy chain configuration.')
-                
-                self.chain = chain
+                # Connect to device over serial port
+                self._connect_to_device(device_id, serial_port_name)
+                self._establish_daisy_chain()
         
         
         def __del__(self):
@@ -420,6 +350,10 @@ class Qontroller(object):
                 Destructor.
                 """
                 self.close()
+
+        ##########################################################################################
+        # Public API
+        ##########################################################################################
         
         
         def close(self):
@@ -430,18 +364,52 @@ class Qontroller(object):
                         # Close serial port
                         self.serial_port.close()
 
-        def _parse_device_id(self, device_id):    
-            # Search for port with matching device ID
-            device_id_match = DEV_ID_PARTS_REGEX.fullmatch(device_id)
-           
-            if not device_id_match:
-                return None, None
+
+        ##########################################################################################
+        # Device Connection Functions
+        ##########################################################################################
+
+        
+        def _connect_to_device(self, device_id, serial_port_name):
+            # Find serial port by asking it for its device id
+            if device_id:
+                self._connect_via_device_id(device_id)
+
+                # If serial_port_name was also specified,
+                # check that it matches the one# we found.
+                if serial_port_name and (self.serial_port_name != serial_port_name):
+                    print(('Qontroller.__init__: Warning: '
+                           f'Specified serial port ({kwargs["serial_port_name"]}) does not match '
+                           f'the one found based on the specified device ID ({self.device_id}). '
+                           f'Using serial port {self.serial_port_name}'))
+                            
+                            
+                
+            # Open serial port directly, get device id
+            elif serial_port_name:
+                connected, res, port = self._connect_to_serial_port(serial_port_name)
+
+                if connected:
+                    self.serial_port = port
+                    self.device_id = res
+                else: 
+                    raise RuntimeError(('Qontroller.__init__: Error: '
+                                        'Unable to communicate with '
+                                        f'device on port {self.serial_port_name}'
+                                        f' (received response "{res}").'))
+
+            elif self.virtual_port:
+                self.serial_port = self.virtual_port
+                    
+            else:
+                avail_ports = ''.join([f'serial_port_name = {port.device}\n'
+                    for port in list(list_ports.comports())])
+                    
+                raise AttributeError(('At least one of serial_port_name or device_id must be'
+                                      ' specified on Qontroller initialisation. '
+                                      f'Available serial ports are:\n{avail_ports}'))
             
-            dev_type, dev_num = device_id_match.groups()
-
-            return dev_type, dev_num
-
-        def _connect_to_device(self, device_id):
+        def _connect_via_device_id(self, device_id):
             connected, candidates = self._connect_to_port_for_device(device_id)
 
             # Found the device, nothing else to do
@@ -499,9 +467,6 @@ class Qontroller(object):
                                       ' "[devicetype]-[device number]" where '
                                       '[device number] can be hexadecimal'))
 
-            
-            
-                        
             # Find serial port based on provided device ID (randomise their order)
             possible_ports = list(list_ports.comports())
             shuffle(possible_ports)
@@ -516,14 +481,6 @@ class Qontroller(object):
                 print(f'Querying port {port.device}... ', end='')
                                 
                 try:
-                    # Instantiate the serial port
-                    # serial_port_cand = serial.Serial(port.device, self.baudrate, timeout=0.5)
-                    
-                    # # Transmit our challenge string
-                    # serial_port_cand.write("id?\n".encode('ascii'))
-                    
-                    # # Receive response
-                    # response = serial_port_cand.read(size=64).decode("ascii")
                     connected, res, serial_port_cand = self._connect_to_serial_port(port.device)
 
                 except serial.serialutil.SerialException:
@@ -548,7 +505,7 @@ class Qontroller(object):
                         return True, candidates
                     
                     else:
-                        res = response.strip('\n')
+                        res = res.strip('\n')
                         print((f'Found {res} but it is not'
                                f' the device we are looking for.'))
                             
@@ -557,7 +514,6 @@ class Qontroller(object):
                                            'port_name':port.device,
                                            'port': serial_port_cand})
                         continue
-                        
                         
                 # If the response wasn't an id, try to match it as an error
                 if not dev_id:
@@ -627,6 +583,79 @@ class Qontroller(object):
                         break
 
             return (not timed_out), response, serial_port
+
+    
+        def _establish_daisy_chain(self):
+             # Establish contents of daisy chain
+             try:
+                 
+                # Force a reset of the daisy chain
+                self.issue_command('nup', operator = '=', value = 0)
+                        
+                # Ask for number of upstream devices, parse it
+                try:
+                    chain = self.issue_command('nupall', operator = '?',
+                        target_errors = [0,10,11,12,13,14,15,16],
+                        output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
+                except:
+                    chain = self.issue_command('nup', operator = '?',
+                        target_errors = [0,10,11,12,13,14,15,16],
+                        output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
+                    
+                # Further parse each found device into a dictionary
+                for i in range(len(chain)):
+                    ob = re.match(r'\x00*([^-\x00]+)-([0-9a-fA-F\*]+)', chain[i][0])
+                        
+                    device_id = chain[i][0]
+                    device_type = ob.groups()[0]
+                    device_serial = ob.groups()[1]
+                        
+                    try:
+                        index = int(chain[i][1])
+                    except ValueError:
+                        index = -1
+                        print(('Qontroller.__init__: Warning: Unable to determine'
+                               f' daisy chain index of device with ID {device_id}.'))
+                        
+                # Scan out number of channels from device type
+                ob = re.match(r'[^\d]+(\d*)[^\d]*', device_type)
+                        
+                        
+                try:
+                    n_chs = int(ob.groups()[0])
+                except ValueError:
+                    n_chs = -1
+                    print(('Qontroller.__init__: Warning: Unable to determine'
+                           f' number of channels of device at daisy chain index {index}.'))
+                        
+                chain[i] = {
+                    'device_id':device_id,
+                    'device_type':device_type,
+                    'device_serial':device_serial,
+                    'n_chs':n_chs,
+                    'index':index}
+                
+             except:
+                chain = []
+                print(('Qontroller.__init__: Warning: Unable to determine '
+                       'daisy chain configuration.'))
+                
+             self.chain = chain
+
+        ##########################################################################################
+        # Utilities
+        ##########################################################################################
+
+        def _parse_device_id(self, device_id):    
+            # Search for port with matching device ID
+            device_id_match = DEV_ID_PARTS_REGEX.fullmatch(device_id)
+           
+            if not device_id_match:
+                return None, None
+            
+            dev_type, dev_num = device_id_match.groups()
+
+            return dev_type, dev_num
         
         def transmit (self, command_string, binary_mode = False):
                 """
