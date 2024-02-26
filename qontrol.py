@@ -70,8 +70,9 @@ DEVICE_PROPERTIES = {
         
 RESPONSE_OK = 'OK\n'
 ERROR_FORMAT = r'[A-Za-z]{1,3}(\d+):(\d+)'
-DEV_ID_REGEX = re.compile(r'(Q\w+)-([0-9a-fA-F]+)')
 
+DEV_ID_PARTS_REGEX = re.compile(r'(Q\w+)-([0-9a-fA-F]+)')
+DEV_ID_REGEX = re.compile(r'\w+\d\w*-[0-9a-fA-F\*]+')
 
 # class Type(Enum):
 #     GET = auto()
@@ -344,58 +345,27 @@ class Qontroller(object):
                 
                 # Open serial port directly, get device id
                 elif 'serial_port_name' in kwargs:
-                        # Open serial communication
-                        # This will throw a serial.serialutil.SerialException if busy
-                        self.serial_port = serial.Serial(self.serial_port_name, self.baudrate, timeout = self.response_timeout)
-                        
-                        
-                        # Clear the input buffer (reset_input_buffer doesn't clear fully)
-                        self.serial_port.read(1000000)
-                        
-                        # Get device ID
-                        # Transmit our challenge string
-                        # This repeated try mechanism accounts for serial ports with starting hiccups
-                        timed_out = True
-                        for t in range(3):
-                                # Clear buffer
-                                self.serial_port.reset_input_buffer()
-                                self.serial_port.reset_output_buffer()
-                                # Send challenge
-                                self.serial_port.write('id?\n'.encode('ascii'))
-                                # Receive response
-                                start_time = time.time()
-                                # Wait for first byte to arrive
-                                while (self.serial_port.in_waiting == 0) and (time.time() - start_time < 0.2):
-                                        pass
-                                # Read response, ignoring unparsable characters
-                                try:
-                                        response = self.serial_port.read(size=64).decode('ascii')
-                                        print(response)
-                                except UnicodeDecodeError:
-                                        response = ""
-                                # Parse it
-                                ob = re.match(r'.*((?:'+ERROR_FORMAT+r')|(?:\w+\d\w*-[0-9a-fA-F\*]+)).*', response)
-                                # Check whether it's valid
-                                if ob is not None:
-                                        # Flag that we have broken out correctly
-                                        timed_out = False
-                                        break
-                        
-                        # Store the parsed value
-                        if not timed_out:
-                                self.device_id = ob.groups()[0]
-                                # Check if it was an error, in which case clear the stored value but proceed
-                                ob = re.match(r'((?:'+ERROR_FORMAT+r')|(?:Q\w+-\*+))', self.device_id)
-                                if ob is not None:
-                                        # It was an error (no ID assigned yet)
-                                        self.device_id = None
-                        else:
-                                raise RuntimeError('Qontroller.__init__: Error: Unable to communicate with device on port {0} (received response {1}, "{2}").'.format(self.serial_port_name, ":".join("{:02x}".format(ord(c)) for c in response), response.replace('\n', '\\n')))
+                    connected, res, port = self._connect_to_serial_port(self.serial_port_name)
+
+                    if connected:
+                        self.serial_port = port
+                        self.device_id = res
+                    else: 
+                        raise RuntimeError(('Qontroller.__init__: Error: '
+                                           'Unable to communicate with '
+                                           f'device on port {self.serial_port_name}'
+                                           f' (received response "{res}").'))
 
                 elif 'virtual_port' in kwargs:
                     self.serial_port = kwargs['virtual_port']
+                    
                 else:
-                        raise AttributeError('At least one of serial_port_name or device_id must be specified on Qontroller initialisation. Available serial ports are:\n  serial_port_name = {:}'.format('\n  serial_port_name = '.join([port.device for port in list(list_ports.comports())])))
+                    avail_ports = ''.join([f'serial_port_name = {port.device}\n'
+                        for port in list(list_ports.comports())])
+                    
+                    raise AttributeError(('At least one of serial_port_name or device_id must be'
+                                          ' specified on Qontroller initialisation. '
+                                          f'Available serial ports are:\n{avail_ports}'))
                 
                 
                 # Establish contents of daisy chain
@@ -462,7 +432,7 @@ class Qontroller(object):
 
         def _parse_device_id(self, device_id):    
             # Search for port with matching device ID
-            device_id_match = DEV_ID_REGEX.fullmatch(device_id)
+            device_id_match = DEV_ID_PARTS_REGEX.fullmatch(device_id)
            
             if not device_id_match:
                 return None, None
@@ -547,29 +517,29 @@ class Qontroller(object):
                                 
                 try:
                     # Instantiate the serial port
-                    serial_port_cand = serial.Serial(port.device, self.baudrate, timeout=0.5)
+                    # serial_port_cand = serial.Serial(port.device, self.baudrate, timeout=0.5)
                     
-                    # Transmit our challenge string
-                    serial_port_cand.write("id?\n".encode('ascii'))
+                    # # Transmit our challenge string
+                    # serial_port_cand.write("id?\n".encode('ascii'))
                     
-                    # Receive response
-                    response = serial_port_cand.read(size=64).decode("ascii")
+                    # # Receive response
+                    # response = serial_port_cand.read(size=64).decode("ascii")
+                    connected, res, serial_port_cand = self._connect_to_serial_port(port.device)
 
                 except serial.serialutil.SerialException:
                     print('Busy')
                     continue
                     
                 # Check if we received a response
-                if not response:
+                if not connected:
                     print('No response')
                     serial_port_cand.close()
                     continue
                         
                 # Match the device ID
-                res_match = DEV_ID_REGEX.match(response)
+                res_match = DEV_ID_PARTS_REGEX.match(res)
                 if res_match:
-                    print(f'{response}')
-                            
+                    print(f'{res}')
                     dev_type, dev_num = res_match.groups()
                             
                     if dev_type == targ_dev_type and dev_num == targ_dev_num:
@@ -590,7 +560,7 @@ class Qontroller(object):
                         
                         
                 # If the response wasn't an id, try to match it as an error
-                if re.match(ERROR_FORMAT, response):
+                if not dev_id:
                     print('Error', end='')
                         
                     # Try this port again later
@@ -613,7 +583,50 @@ class Qontroller(object):
                             
                 
                 
+        def _connect_to_serial_port(self, name):
+            # Open serial communication
+            # This will throw a serial.serialutil.SerialException if busy
+            serial_port = serial.Serial(name,
+                self.baudrate, timeout=self.response_timeout)
+                        
+                        
+            # Clear the input buffer (reset_input_buffer doesn't clear fully)
+            serial_port.read(1000000)
+                        
+            # Get device ID
+            # Transmit our challenge string
+            # This repeated try mechanism accounts for serial ports with starting hiccups
+            timed_out = True
+            timeout = 0.2 # seconds
+            for t in range(3):
+                
+                # Clear buffer
+                serial_port.reset_input_buffer()
+                serial_port.reset_output_buffer()
+                
+                # Send challenge
+                serial_port.write('id?\n'.encode('ascii'))
+                
+                # Receive response
+                start_time = time.time()
+                
+                # Wait for first byte to arrive
+                while (serial_port.in_waiting == 0) and (time.time() - start_time < timeout):
+                    
+                    # Read response, ignoring unparsable characters
+                    try:
+                        response = serial_port.read(size=64).decode('ascii')
+                    except UnicodeDecodeError:
+                        response = ""
+                                # Parse it
+                    ob = DEV_ID_REGEX.match(response)
+                    # Check whether it's valid
+                    if ob:
+                        # Flag that we have broken out correctly
+                        timed_out = False
+                        break
 
+            return (not timed_out), response, serial_port
         
         def transmit (self, command_string, binary_mode = False):
                 """
