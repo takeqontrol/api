@@ -658,140 +658,140 @@ class Qontroller(object):
             return dev_type, dev_num
         
         def transmit (self, command_string, binary_mode = False):
-                """
-                Low-level transmit data method.
-                
-                 command_string -- str or bytearray
-                """
-                # Ensure serial port is open
-                if not self.serial_port.is_open:
-                        self.serial_port.open()
-                        print ("Opening serial port!")
-                
-                # Write to port
-                if binary_mode:
-                        self.serial_port.write(command_string)
-                        self.log_append(type='tx', id='', ch='', desc=command_string.hex(), raw=command_string)
-                else:
-                        self.serial_port.write(command_string.encode('ascii'))
-                        self.log_append(type='tx', id='', ch='', desc=command_string, raw='')
+            """
+            Low-level transmit data method.
+
+             command_string -- str or bytearray
+            """
+            # Ensure serial port is open
+            if not self.serial_port.is_open:
+                    self.serial_port.open()
+                    print("Opening serial port!")
+
+            # Write to port
+            if binary_mode:
+                    self.serial_port.write(command_string)
+                    self.log_append(type='tx', id='', ch='',
+                                    desc=command_string.hex(), raw=command_string)
+            else:
+                    self.serial_port.write(command_string.encode('ascii'))
+                    self.log_append(type='tx', id='', ch='', desc=command_string, raw='')
+                    
                         
-                
-                # Log it
-                
-                # This may speed things up; YMMV:
-                # self.serial_port.flush()
         
         
         def receive (self):
-                """
-                Low-level receive data method which also checks for errors.
-                """
-                
-                # Ensure serial port is open
-                if not self.serial_port.is_open:
-                        self.serial_port.open()
-                
-                # Read from port
-                lines = []
-                errs = []
+            """
+            Low-level receive data method which also checks for errors.
+            """
 
-             
+            # Ensure serial port is open
+            if not self.serial_port.is_open:
+                self.serial_port.open()
 
-                # Check if there's anything in the input buffer
-                while self.serial_port.in_waiting > 0:
-                        
-                        # Get a line from the receive buffer
-                        rcv = self.serial_port.readline()
+            # Read from port
+            lines = []
+            errs = []
 
-                       
+            # Check if there's anything in the input buffer
+            while self.serial_port.in_waiting > 0:
+                # Get a line from the receive buffer
+                rcv = self.serial_port.readline()
 
-                        
-                        try:
-                                line = str(rcv.decode('ascii'))
-                                
-                        except UnicodeDecodeError as e:
-                                raise RuntimeError("unexpected characters in Qontroller return value. Received line '{:}'.".format(rcv) )
-                        
-                        # Check if it's an error by parsing it
-                        err = self.parse_error(line)
-                        if err is None:
-                                # No error, keep the line
-                                lines.append(line)
-                        else:
-                                # Line represents an error, add to list
-                                errs.append(err)
+                try:
+                    line = str(rcv.decode('ascii'))
+                except UnicodeDecodeError as e:
+                    raise RuntimeError(('Unexpected characters in Qontroller return value.'
+                                       'Received line "{rcv}".'))
 
+                # Check if it's an error by parsing it
+                err = self.parse_error(line)
+                if err is None:
+                    # No error, keep the line
+                    lines.append(line)
+                else:
+                    # Line represents an error, add to list
+                    errs.append(err)
 
-                
-                # Log the lines we received
-                if len(lines):
-                        self.log_append(type='rcv', id='', ch='', desc=lines, raw='')
-                
-                # Add any errors we found to our log
-                for err in errs:
-                        self.log_append(type='err', id=err['id'], ch=err['ch'], desc=err['desc'], raw=err['raw'])
-                
-                return (lines, errs)
+            # Log the lines we received
+            if len(lines):
+                self.log_append(type='rcv', id='', ch='', desc=lines, raw='')
+
+            # Add any errors we found to our log
+            for err in errs:
+                self.log_append(type='err', id=err['id'], ch=err['ch'],
+                                desc=err['desc'], raw=err['raw'])
+
+            return (lines, errs)
+        
+
         
         
         def log_append (self, type='err', id='', ch=0, value=0, desc='', raw=''):
-                """
-                Log an event; add both a calendar- and process-timestamp.
-                """
-                # Append to log fifo
-                self.log.append({'timestamp':time.asctime(), 'proctime':round(time.time()-self.init_time,3), 'type':type, 'id':id, 'ch':ch, 'value':value, 'desc':desc, 'raw':raw})
-                # Send to handler function (if defined)
-                if self.log_handler is not None:
-                        self.log_handler(self.log[-1])
-                # Send to stdout (if requested)
-                if self.log_to_stdout:
-                        self.print_log (n = 1)
+            """
+            Log an event; add both a calendar- and process-timestamp.
+            """
+            # Append to log fifo
+            self.log.append({'timestamp':time.asctime(),
+                             'proctime':round(time.time()-self.init_time,3),
+                             'type':type, 'id':id, 'ch':ch,
+                             'value':value, 'desc':desc, 'raw':raw})
+
+            # Send to handler function (if defined)
+            if self.log_handler is not None:
+                self.log_handler(self.log[-1])
+
+            # Send to stdout (if requested)
+            if self.log_to_stdout:
+                self.print_log (n = 1)
         
         
-        def print_log (self, n = None):
-                """
-                Print the n last log entries. If n == None, print all log entries.
-                """
-                if n is None:
-                        n = len(self.log)
-                
-                for i in range(-n,0):
-                        print('@ {0: 8.1f} ms, {1} : {2}'.format(1000*self.log[i]['proctime'], self.log[i]['type'], self.log[i]['desc']) )
+        def print_log (self, n=None):
+            """
+            Print the n last log entries. If n == None, print all log entries.
+            """
+            n = len(self.log) if n is None else n
+
+            timestamp = round(1000*self.log[i]['proctime'], 2)
+            type = self.log[i]['type']
+            desc = self.log[i]['desc']
+
+            for i in range(-n,0):
+                print(f'@ {timestamp} ms, {type} : {desc}')
         
         
         def parse_error (self, error_str):
-                """
-                Parse an error into its code, channel, and human-readable description.
-                """
-                # Strip whitespace
-                error_str = error_str.strip()
-                
-                # Regex out the error and channel indices from the string
-                ob = re.match(ERROR_FORMAT, error_str)
-                
-                # If error_str doesn't match an error, return None
-                if ob is None:
-                        return None
-                
-                # Extract the two matched groups (i.e. the error and channel indices)
-                errno,chno = ob.groups()
-                errno = int(errno)
-                chno = int(chno)
-                
-                # Get the error description; if none is defined, mark as unrecognised
-                errdesc = self.error_desc_dict.get(errno, 'Unrecognised error code.').format(ch=chno)
-                
-                return {'type':'err', 'id':errno, 'ch':chno, 'desc':errdesc, 'raw':error_str}
+            """
+            Parse an error into its code, channel, and human-readable description.
+            """
+            # Strip whitespace
+            error_str = error_str.strip()
+
+            # Regex out the error and channel indices from the string
+            ob = re.match(ERROR_FORMAT, error_str)
+
+            # If error_str doesn't match an error, return None
+            if ob is None:
+                    return None
+
+            # Extract the two matched groups (i.e. the error and channel indices)
+            errno,chno = ob.groups()
+            errno = int(errno)
+            chno = int(chno)
+
+            # Get the error description; if none is defined, mark as unrecognised
+            errdesc = self.error_desc_dict.get(errno, 'Unrecognised error code.').format(ch=chno)
+
+            return {'type':'err', 'id':errno, 'ch':chno, 'desc':errdesc, 'raw':error_str}
         
         
         def wait (self, seconds=0.0):
-                """
-                Do nothing while watching for errors on the serial bus.
-                """
-                start_time = time.time()
-                while time.time() < start_time + seconds:
-                        self.receive()
+            """
+            Do nothing while watching for errors on the serial bus.
+            """
+            start_time = time.time()
+            while time.time() < start_time + seconds:
+                    self.receive()
         
         
         def issue_command (self, command_id, ch=None, operator='', 
