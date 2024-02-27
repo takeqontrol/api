@@ -23,7 +23,7 @@ import os
 import time
 import random
 import pdb
-from enum import Enum
+from enum import Enum, IntFlag, Flag
 from dataclasses import dataclass, field
 import struct
 from functools import reduce
@@ -96,7 +96,7 @@ class ExtendedEnum(Enum):
         namespace.update(cls.__members__)
 
     
-class HeaderId(ExtendedEnum):
+class Header(IntFlag):
     BIN   = 0x80
     BCAST = 0x40
     ALLCH = 0x20
@@ -106,11 +106,15 @@ class HeaderId(ExtendedEnum):
     DEXT  = 0x02
     PBIT  = 0x01
 
-HeaderId.export_to(globals())
+# HeaderId.export_to(globals())
 
+globals().update(Header.__members__)
+
+
+    
 class Type(ExtendedEnum):
-    GET = ('?', {RW})
-    SET = ('=', set())
+    GET = ('?', RW)
+    SET = ('=', BIN)
 
 Type.export_to(globals())
 
@@ -122,7 +126,6 @@ def parity_odd(x):
     x = x ^ (x >> 1)
     return x & 1
 
-
 def compute_header_byte(header_set=None):
      if header_set is None:
          header_set = set()
@@ -133,56 +136,56 @@ def compute_header_byte(header_set=None):
      return header
 
 
-class HeaderMode(ExtendedEnum):
-    WRITE = set()             # 0x81
-    WRITE_DEXT = {DEXT}       # 0x82
-    WRITE_ALLCH = {ALLCH}     # 0xA0
+class HeaderMode(Flag):
+    WRITE       = BIN               # 0x81
+    WRITE_DEXT  = BIN | DEXT        # 0x82
+    WRITE_ALLCH = BIN | ALLCH       # 0xA0
     
-    READ = {RW}               # 0x88
-    READ_ALLCH = {RW, ALLCH}  # 0xA9
+    READ        = BIN | RW           # 0x88
+    READ_ALLCH  = BIN | RW | ALLCH   # 0xA9
 
-    ACT = {ACT}               # 0x84
+    ACT_M       = BIN | ACT          # 0x84
 
-HeaderMode.export_to(globals())
+globals().update(HeaderMode.__members__)
 
 
 
 class Index(ExtendedEnum):
    # command   |code  |supported header modes
-    V        = (0x00, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
-    I        = (0x01, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
-    VMAX     = (0x02, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
-    IMAX     = (0x03, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
-    VCAL     = (0x04, {WRITE, ACT, WRITE_ALLCH, READ, READ_ALLCH})
-    ICAL     = (0x05, {WRITE, ACT, WRITE_ALLCH, READ, READ_ALLCH})
-    VERR     = (0x06, {READ, READ_ALLCH})
-    IERR     = (0x07, {READ, READ_ALLCH})
-    VIP      = (0x0A, {READ_ALLCH})
-    SR       = (0x0B, set()) # Not in Programming Manual
-    PDI      = (0x0C, set()) # Not in Programming Manual
-    PDP      = (0x0D, set()) # Not in Programming Manual
-    PDR      = (0x0E, set()) # Not in Programming Manual
-    GAIN     = (0x0F, set()) # Not in Programming Manual
-    VFULL    = (0x20, {READ_ALLCH})
-    IFULL    = (0x21, {READ_ALLCH})
-    NCHAN    = (0x22, {READ_ALLCH})
-    FIRMWARE = (0x23, {READ, READ_ALLCH})
-    ID       = (0x24, {READ, READ_ALLCH})
-    LIFETIME = (0x25, {READ, READ_ALLCH})
-    NVM      = (0x26, {WRITE_ALLCH, READ_ALLCH})
-    LOG      = (0x27, {READ, READ_ALLCH})
-    QUIET    = (0x28, set()) # Not in Programming Manual
-    LED      = (0x31, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    NUP      = (0x32, {WRITE, READ})
-    ADCT     = (0x33, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    ADCN     = (0x34, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    CCFN     = (0x35, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    INTEST   = (0x36, {ACT})
-    OK       = (0x37, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    DIGSUP   = (0x38, set()) # Not in Programming Manual
-    HELP     = (0x41, {READ})
-    SAFE     = (0x42, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
-    ROCOM    = (0x43, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    V        = (0x00, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
+    I        = (0x01, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
+    VMAX     = (0x02, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
+    IMAX     = (0x03, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
+    VCAL     = (0x04, WRITE | ACT_M | WRITE_ALLCH | READ | READ_ALLCH)
+    ICAL     = (0x05, WRITE | ACT_M | WRITE_ALLCH | READ | READ_ALLCH)
+    VERR     = (0x06, READ | READ_ALLCH)
+    IERR     = (0x07, READ | READ_ALLCH)
+    VIP      = (0x0A, READ_ALLCH)
+    SR       = (0x0B, READ) # Not in Programming Manual
+    PDI      = (0x0C, READ) # Not in Programming Manual
+    PDP      = (0x0D, READ) # Not in Programming Manual
+    PDR      = (0x0E, READ) # Not in Programming Manual
+    GAIN     = (0x0F, READ) # Not in Programming Manual
+    VFULL    = (0x20, READ_ALLCH)
+    IFULL    = (0x21, READ_ALLCH)
+    NCHAN    = (0x22, READ_ALLCH)
+    FIRMWARE = (0x23, READ | READ_ALLCH)
+    ID       = (0x24, READ | READ_ALLCH)
+    LIFETIME = (0x25, READ | READ_ALLCH)
+    NVM      = (0x26, WRITE_ALLCH | READ_ALLCH)
+    LOG      = (0x27, READ | READ_ALLCH)
+    QUIET    = (0x28, READ) # Not in Programming Manual
+    LED      = (0x31, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    NUP      = (0x32, WRITE | READ)
+    ADCT     = (0x33, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    ADCN     = (0x34, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    CCFN     = (0x35, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    INTEST   = (0x36, ACT_M)
+    OK       = (0x37, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    DIGSUP   = (0x38, READ) # Not in Programming Manual
+    HELP     = (0x41, READ)
+    SAFE     = (0x42, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    ROCOM    = (0x43, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
 
     def code(self):
         return self.value[0]
@@ -200,26 +203,40 @@ class Command:
     idx: Index
     addr: int = 0
     addr_id: int = 0
-    header: set[HeaderId] = field(default_factory= lambda: set())
-    data: int | list[int] = None
+    header: Header = BIN
+    data: int | list[int] | float | list[float] = None
+    
 
     def __post_init__(self):
         # Add type info to header
+        self.header |= BIN
         self.header |= self.type.value[1]
 
     def ascii(self):
         self.addr = 'ALL' if ALLCH in self.header else self.addr
-        data = '' if self.data is None else self.data
-
-        if data != '':
-            data /= (2**16 / 12)
-            data = round(data, 2)
+        data = self._format_ascii_data(self.data)
         
-        return f'{self.idx}{self.addr}{self.type.value[0]}{data}'
+        return f'{self.idx}{self.addr}{self.type.value[0]}{data}\n'
+
+    def _format_ascii_data(self, data):
+        if not self.data:
+            return ''
+        
+        if isinstance(self.data, list):
+            # Format the data into a str of the format:
+            # d1, d2, d3 ...
+            data_str = reduce(lambda s, x: s + f',{x}',
+                              self.data[1:], str(self.data[0]))
+        else:
+            data_str = str(self.data)
+
+        return data_str
 
     def binary(self):
         # Compute header byte
-        header = compute_header_byte(self.header)
+        header = self.header
+        header |= PBIT if parity_odd(header) else 0
+        # print(f'header = {int(header)}')
 
         if self.data is None:
             self.data = 0
@@ -253,8 +270,10 @@ class Command:
         return h_idx_bytes + payload_bytes
 
     def allowed(self):
-        header_modes = map(lambda x: x.value, self.idx.header_modes())
-        return self.header in header_modes
+        # header_modes = map(lambda x: x.value, self.idx.header_modes())
+        print(self.header)
+        print(self.idx.header_modes())
+        return self.header in self.idx.header_modes().value
 
 @dataclass
 class Response:
@@ -976,8 +995,7 @@ class Qontroller(object):
                 
                 if isinstance(value_int, int):
                         v = get_val(value_int)
-                        
-                        print(f'v={v}, {int.from_bytes(v)}')
+
                         data_bytes.extend(get_val(value_int))
                 
                 elif isinstance(value_int, list) and all([isinstance(e ,int) for e in value_int]):
