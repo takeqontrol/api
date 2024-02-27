@@ -156,10 +156,10 @@ class Index(ExtendedEnum):
     I        = (0x01, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
     VMAX     = (0x02, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
     IMAX     = (0x03, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
-    VCAL     = (0x04, WRITE | ACT_M | WRITE_ALLCH | READ | READ_ALLCH)
-    ICAL     = (0x05, WRITE | ACT_M | WRITE_ALLCH | READ | READ_ALLCH)
-    VERR     = (0x06, READ | READ_ALLCH)
-    IERR     = (0x07, READ | READ_ALLCH)
+    VCAL     = (0x04, WRITE | ACT_M      | WRITE_ALLCH | READ | READ_ALLCH)
+    ICAL     = (0x05, WRITE | ACT_M      | WRITE_ALLCH | READ | READ_ALLCH)
+    VERR     = (0x06, READ  | READ_ALLCH)
+    IERR     = (0x07, READ  | READ_ALLCH)
     VIP      = (0x0A, READ_ALLCH)
     SR       = (0x0B, READ) # Not in Programming Manual
     PDI      = (0x0C, READ) # Not in Programming Manual
@@ -169,11 +169,11 @@ class Index(ExtendedEnum):
     VFULL    = (0x20, READ_ALLCH)
     IFULL    = (0x21, READ_ALLCH)
     NCHAN    = (0x22, READ_ALLCH)
-    FIRMWARE = (0x23, READ | READ_ALLCH)
-    ID       = (0x24, READ | READ_ALLCH)
-    LIFETIME = (0x25, READ | READ_ALLCH)
+    FIRMWARE = (0x23, READ  | READ_ALLCH)
+    ID       = (0x24, READ  | READ_ALLCH)
+    LIFETIME = (0x25, READ  | READ_ALLCH)
     NVM      = (0x26, WRITE_ALLCH | READ_ALLCH)
-    LOG      = (0x27, READ | READ_ALLCH)
+    LOG      = (0x27, READ  | READ_ALLCH)
     QUIET    = (0x28, READ) # Not in Programming Manual
     LED      = (0x31, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
     NUP      = (0x32, WRITE | READ)
@@ -212,6 +212,9 @@ class Command:
         self.header |= BIN
         self.header |= self.type.value[1]
 
+        # Compute header parity
+        self.header |= parity_odd(self.header)
+
     def ascii(self):
         self.addr = 'ALL' if ALLCH in self.header else self.addr
         data = self._format_ascii_data(self.data)
@@ -233,11 +236,6 @@ class Command:
         return data_str
 
     def binary(self):
-        # Compute header byte
-        header = self.header
-        header |= PBIT if parity_odd(header) else 0
-        # print(f'header = {int(header)}')
-
         if self.data is None:
             self.data = 0
         
@@ -264,15 +262,12 @@ class Command:
             data = (self.data,)
 
         # Pack data into bytes
-        h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value[0]]))
+        h_idx_bytes = struct.pack('<cc', bytes([self.header]), bytes([self.idx.value[0]]))
         payload_bytes = struct.pack(addr_fmt + data_fmt, *addr, *data)
 
         return h_idx_bytes + payload_bytes
 
     def allowed(self):
-        # header_modes = map(lambda x: x.value, self.idx.header_modes())
-        print(self.header)
-        print(self.idx.header_modes())
         return self.header in self.idx.header_modes().value
 
 @dataclass
