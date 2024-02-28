@@ -74,12 +74,6 @@ RESPONSE_OK = 'OK\n'
 DEV_ID_PARTS_REGEX = re.compile(r'(Q\w+)-([0-9a-fA-F]+)')
 DEV_ID_REGEX = re.compile(r'\w+\d\w*-[0-9a-fA-F\*]+')
 
-# class Type(Enum):
-#     GET = auto()
-#     SET = auto()
-    
-
-# IdData = namedtuple('IdData', 'type')
 
 class ExtendedEnum(Enum):
     def __str__(self):
@@ -106,37 +100,16 @@ class Header(IntFlag):
     DEXT  = 0x02
     PBIT  = 0x01
 
-# HeaderId.export_to(globals())
-
 globals().update(Header.__members__)
 
-
-    
 class Type(ExtendedEnum):
-    GET = ('?', RW)
-    SET = ('=', BIN)
+    GET = '?'
+    SET = '='
 
 Type.export_to(globals())
 
 
-def parity_odd(x):
-    """Function to compute whether a byte's parity is odd."""
-    x = x ^ (x >> 4)
-    x = x ^ (x >> 2)
-    x = x ^ (x >> 1)
-    return x & 1
-
-def compute_header_byte(header_set=None):
-     if header_set is None:
-         header_set = set()
-         
-     header = sum(map(lambda x: x.value, header_set), BIN.value)
-     header += parity_odd(header)
-
-     return header
-
-
-class HeaderMode(Flag):
+class HeaderMode(ExtendedEnum):
     WRITE       = BIN               # 0x81
     WRITE_DEXT  = BIN | DEXT        # 0x82
     WRITE_ALLCH = BIN | ALLCH       # 0xA0
@@ -146,61 +119,63 @@ class HeaderMode(Flag):
 
     ACT_M       = BIN | ACT          # 0x84
 
+
+
 globals().update(HeaderMode.__members__)
 
 
-
-class Index(ExtendedEnum):
+class CmdIndex(ExtendedEnum):
    # command   |code  |supported header modes
-    V        = (0x00, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
-    I        = (0x01, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
-    VMAX     = (0x02, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
-    IMAX     = (0x03, WRITE | WRITE_DEXT | WRITE_ALLCH | READ | READ_ALLCH)
-    VCAL     = (0x04, WRITE | ACT_M      | WRITE_ALLCH | READ | READ_ALLCH)
-    ICAL     = (0x05, WRITE | ACT_M      | WRITE_ALLCH | READ | READ_ALLCH)
-    VERR     = (0x06, READ  | READ_ALLCH)
-    IERR     = (0x07, READ  | READ_ALLCH)
-    VIP      = (0x0A, READ_ALLCH)
-    SR       = (0x0B, READ) # Not in Programming Manual
-    PDI      = (0x0C, READ) # Not in Programming Manual
-    PDP      = (0x0D, READ) # Not in Programming Manual
-    PDR      = (0x0E, READ) # Not in Programming Manual
-    GAIN     = (0x0F, READ) # Not in Programming Manual
-    VFULL    = (0x20, READ_ALLCH)
-    IFULL    = (0x21, READ_ALLCH)
-    NCHAN    = (0x22, READ_ALLCH)
-    FIRMWARE = (0x23, READ  | READ_ALLCH)
-    ID       = (0x24, READ  | READ_ALLCH)
-    LIFETIME = (0x25, READ  | READ_ALLCH)
-    NVM      = (0x26, WRITE_ALLCH | READ_ALLCH)
-    LOG      = (0x27, READ  | READ_ALLCH)
-    QUIET    = (0x28, READ) # Not in Programming Manual
-    LED      = (0x31, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    NUP      = (0x32, WRITE | READ)
-    ADCT     = (0x33, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    ADCN     = (0x34, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    CCFN     = (0x35, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    INTEST   = (0x36, ACT_M)
-    OK       = (0x37, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    DIGSUP   = (0x38, READ) # Not in Programming Manual
-    HELP     = (0x41, READ)
-    SAFE     = (0x42, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
-    ROCOM    = (0x43, WRITE | READ | READ_ALLCH | WRITE_ALLCH)
+    V        = (0x00, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    I        = (0x01, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    VMAX     = (0x02, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    IMAX     = (0x03, {WRITE, WRITE_DEXT, WRITE_ALLCH, READ, READ_ALLCH})
+    VCAL     = (0x04, {WRITE, ACT_M, WRITE_ALLCH, READ, READ_ALLCH})
+    ICAL     = (0x05, {WRITE, ACT_M, WRITE_ALLCH, READ, READ_ALLCH})
+    VERR     = (0x06, {READ, READ_ALLCH})
+    IERR     = (0x07, {READ, READ_ALLCH})
+    VIP      = (0x0A, {READ_ALLCH})
+    SR       = (0x0B, set()) # Not in Programming Manual
+    PDI      = (0x0C, set()) # Not in Programming Manual
+    PDP      = (0x0D, set()) # Not in Programming Manual
+    PDR      = (0x0E, set()) # Not in Programming Manual
+    GAIN     = (0x0F, set()) # Not in Programming Manual
+    VFULL    = (0x20, {READ_ALLCH})
+    IFULL    = (0x21, {READ_ALLCH})
+    NCHAN    = (0x22, {READ_ALLCH})
+    FIRMWARE = (0x23, {READ, READ_ALLCH})
+    ID       = (0x24, {READ, READ_ALLCH})
+    LIFETIME = (0x25, {READ, READ_ALLCH})
+    NVM      = (0x26, {WRITE_ALLCH, READ_ALLCH})
+    LOG      = (0x27, {READ, READ_ALLCH})
+    QUIET    = (0x28, set()) # Not in Programming Manual
+    LED      = (0x31, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    NUP      = (0x32, {WRITE, READ})
+    ADCT     = (0x33, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    ADCN     = (0x34, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    CCFN     = (0x35, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    INTEST   = (0x36, {ACT_M})
+    OK       = (0x37, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    DIGSUP   = (0x38, set()) # Not in Programming Manual
+    HELP     = (0x41, {READ})
+    SAFE     = (0x42, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
+    ROCOM    = (0x43, {WRITE, READ, READ_ALLCH, WRITE_ALLCH})
 
     def code(self):
         return self.value[0]
 
     def header_modes(self):
         return self.value[1]
+
+    def supports(self, *header_modes):
+        return all([h in self.header_modes() for h in header_modes])
     
-    
-Index.export_to(globals())
+CmdIndex.export_to(globals())
 
 
 @dataclass
 class Command:
-    type: Type
-    idx: Index
+    idx: CmdIndex
     addr: int = 0
     addr_id: int = 0
     header: Header = BIN
@@ -210,16 +185,31 @@ class Command:
     def __post_init__(self):
         # Add type info to header
         self.header |= BIN
-        self.header |= self.type.value[1]
 
-        # Compute header parity
-        self.header |= parity_odd(self.header)
+        # If there is data this is a WRITE command
+        if not self.data:
+            self.header |= RW
+            
+    def _parity_odd(self, x):
+        """Function to compute whether a byte's parity is odd."""
+        x = x ^ (x >> 4)
+        x = x ^ (x >> 2)
+        x = x ^ (x >> 1)
+        return x & 1
+
+    def type(self):
+        if RW in self.header:
+            return GET
+        else:
+            return SET
 
     def ascii(self):
         self.addr = 'ALL' if ALLCH in self.header else self.addr
         data = self._format_ascii_data(self.data)
+
+        type = self.type().value
         
-        return f'{self.idx}{self.addr}{self.type.value[0]}{data}\n'
+        return f'{self.idx}{self.addr}{type}{data}\n'
 
     def _format_ascii_data(self, data):
         if not self.data:
@@ -238,6 +228,10 @@ class Command:
     def binary(self):
         if self.data is None:
             self.data = 0
+
+        # Compute header parity
+        header = self.header
+        header |= self._parity_odd(self.header)
         
         # Handle addressing modes
         # If ADDM = 1
@@ -262,13 +256,18 @@ class Command:
             data = (self.data,)
 
         # Pack data into bytes
-        h_idx_bytes = struct.pack('<cc', bytes([self.header]), bytes([self.idx.value[0]]))
+        h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value[0]]))
         payload_bytes = struct.pack(addr_fmt + data_fmt, *addr, *data)
 
         return h_idx_bytes + payload_bytes
 
     def allowed(self):
-        return self.header in self.idx.header_modes().value
+        header_modes = map(lambda x: x.value, self.idx.header_modes())
+        return self.header in header_modes
+
+
+# Alias Command
+Cmd = Command
 
 @dataclass
 class Response:
@@ -680,7 +679,7 @@ class Qontroller(object):
                     chain = self.issue_command('nup', operator = '?',
                         target_errors = [0,10,11,12,13,14,15,16],
                         output_regex = r'(?:([^:\s]+)\s*:\s*(\d+)\n*)*')
-                    
+   
                 # Further parse each found device into a dictionary
                 for i in range(len(chain)):
                     ob = re.match(r'\x00*([^-\x00]+)-([0-9a-fA-F\*]+)', chain[i][0])
@@ -698,15 +697,13 @@ class Qontroller(object):
                         
                 # Scan out number of channels from device type
                 ob = re.match(r'[^\d]+(\d*)[^\d]*', device_type)
-                        
-                        
+                
                 try:
                     n_chs = int(ob.groups()[0])
                 except ValueError:
                     n_chs = -1
                     print(('Qontroller.__init__: Warning: Unable to determine'
                            f' number of channels of device at daisy chain index {index}.'))
-                        
                 chain[i] = {
                     'device_id':device_id,
                     'device_type':device_type,
@@ -715,9 +712,9 @@ class Qontroller(object):
                     'index':index}
                 
              except:
-                chain = []
-                print(('Qontroller.__init__: Warning: Unable to determine '
-                       'daisy chain configuration.'))
+                 chain = []
+                 print(('Qontroller.__init__: Warning: Unable to determine '
+                        'daisy chain configuration.'))
                 
              self.chain = chain
 
@@ -888,7 +885,7 @@ class Qontroller(object):
                         tx_str += ',{:}'.format(v)
                 else:
                     tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator, value)
-                
+
                 self.transmit(tx_str+'\n')                    
                 
                 # Log it
