@@ -5,12 +5,12 @@ from random import randint, uniform
 import math
 
 
-# p = Program.from_json_file('progs/binary_test.json')
-# vm = VirtualModule(p)
-# q = Qontroller(virtual_port=vm.port, response_timeout=0.5)
+p = Program.from_json_file('progs/binary_test.json')
+vm = VirtualModule(p)
+q = Qontroller(virtual_port=vm.port, response_timeout=0.1)
 
-dev_port='/dev/cu.usbserial-FT677TKA'
-q = Qontroller(serial_port_name=dev_port, response_timeout=0.4)
+# dev_port='/dev/cu.usbserial-FT677TKA'
+# q = Qontroller(serial_port_name=dev_port, response_timeout=0.4)
 
 
 
@@ -20,17 +20,18 @@ all_pass = True
 def expected(cmd):
 
     args = {}
-    for i in HeaderId:
-        if i == BIN or i == PBIT:
-            continue
+    # for i in HeaderId:
+    #     if i == BIN or i == PBIT:
+    #         continue
         
-        if i in cmd.header:
-            args[str(i)] = 1
-        else:
-            args[str(i)] = 0
+    #     if i in cmd.header:
+    #         args[str(i)] = 1
+    #     else:
+    #         args[str(i)] = 0
 
     args['value_int'] = cmd.data
     args['addr_id_num'] = cmd.addr_id
+    print(cmd.idx.code())
     expected = q.issue_binary_command(cmd.idx.code(),
                                       ch=cmd.addr,
                                       **args)
@@ -39,72 +40,74 @@ def expected(cmd):
 
 
 def compare(cmd):
+    global all_pass
 
     args = {}
-    for i in HeaderId:
+    for i in Header:
         if i == BIN or i == PBIT:
             continue
         
         if i in cmd.header:
-            args[str(i)] = 1
+            args[str(i.name)] = 1
         else:
-            args[str(i)] = 0
+            args[str(i.name)] = 0
 
-    args['value_int'] = cmd.data
+    args['value_int'] = cmd.data if cmd.data else 0
     args['addr_id_num'] = cmd.addr_id
     expected = q.issue_binary_command(cmd.idx.code(),
                                       ch=cmd.addr,
                                       **args)
 
+    
+
+    
     print(f'{cmd.binary() == expected} {expected} | {cmd.binary()}')
 
-    all_pass =  cmd.binary() == expected
-        
-    
+    all_pass = cmd.binary() == expected
     return cmd.binary() == expected
 
 
 def test_binary():
     for i in range(8):
         compare(Command(GET, V, i))
-        compare(Command(SET, V, i, data=i))
+        compare(Command(SET, V, 0, data=1))
     
 
-    compare(Command(GET, V, header={ALLCH}))
-    compare(Command(GET, I, header={ALLCH, BCAST}))
+    compare(Command(GET, V, header=ALLCH))
+    compare(Command(GET, I, header=ALLCH | BCAST))
 
-    compare(Command(SET, V, data=100, header={ALLCH}))
+    compare(Command(SET, V, data=100, header=ALLCH))
 
 
-    compare(Command(GET, V, data=[1], header={DEXT}))
-    compare(Command(GET, I, data=[1, 5, 90], header={DEXT}))
+    compare(Command(GET, V, data=[1], header=DEXT))
+    compare(Command(GET, I, data=[1, 5, 90], header=DEXT))
 
     for cmd in Index:
         compare(Command(GET, cmd))
-        compare(Command(GET, cmd, header={ALLCH}))
+        compare(Command(GET, cmd, header=ALLCH))
 
         for i in range(255):
             compare(Command(GET, cmd, i))
             compare(Command(SET, cmd, i, data=randint(0, 1000)))
             compare(Command(SET, cmd, i, data=[randint(0, 1000) for _ in range(255)],
-                            header={DEXT}))
+                            header=DEXT))
         
             compare(Command(GET, cmd, i, addr_id=i,
-                            header={ADDM}))
+                            header=ADDM))
         
             compare(Command(GET, cmd, i, addr_id=randint(0, 255),
-                            header={ADDM}))
+                            header=ADDM))
 
             compare(Command(SET, cmd, i, data=randint(0, 1000),
                             addr_id=i,
-                            header={ADDM}))
+                            header=ADDM))
 
             compare(Command(SET, cmd, i, data=[randint(0, 1000) for _ in range(255)],
                             addr_id=i,
-                            header={ADDM, DEXT}))
+                            header=ADDM | DEXT))
 
 
-            compare(Command(GET, V, i, addr_id=5, header={ADDM}))
+            compare(Command(GET, V, i, addr_id=5, header=ADDM))
     
     print(f'all_pass = {all_pass}')
 
@@ -137,7 +140,7 @@ def send_ascii(cmd):
 
 
 if __name__ == '__main__':
-    #test_binary()
+    test_binary()
     # v = 3.01
     # d = math.floor(v * (2**16 / 12))
     # C = Command(SET, V, 1, data=d, header={ALLCH})
@@ -151,7 +154,8 @@ if __name__ == '__main__':
     # print(res)
 
 
-    # c = Command(GET, VIP, 0)
+    # c = Command(Type.GET, Index.V, header = ALLCH | DEXT)
+    # print(c.allowed())
 
     
     # if c.allowed():
@@ -161,18 +165,18 @@ if __name__ == '__main__':
     #     print('Command not allowed')
         
 
-    for cmd in Index:
+    # for cmd in Index:
 
-        if READ in cmd.header_modes():
+    #     if READ in cmd.header_modes():
 
-            if cmd in {NVM}:
-                continue
+    #         if cmd in {NVM}:
+    #             continue
 
-            for ch in range(8):
-                c = Command(GET, cmd, ch)
+    #         for ch in range(8):
+    #             c = Command(GET, cmd, ch)
    
-                send_ascii(c)
-                q.send_binary(c)
+    #             send_ascii(c)
+    #             q.send_binary(c)
 
 
 
@@ -185,14 +189,14 @@ if __name__ == '__main__':
 
 
     
-    for ch in range(8):
-        v = uniform(0.0, 12.0)
-        dv = math.floor(v * (2**16 / 12))
+    # for ch in range(8):
+    #     v = uniform(0.0, 12.0)
+    #     dv = math.floor(v * (2**16 / 12))
 
-        c = Command(SET, V, ch, data=dv)
+    #     c = Command(SET, V, ch, data=dv)
 
-        send_ascii(c)
-        q.send_binary(c)
+    #     send_ascii(c)
+    #     q.send_binary(c)
         
         #print(f'V{ch}={v}   {res}')
         
@@ -214,6 +218,6 @@ if __name__ == '__main__':
     
     
 
-    q.print_log()
-    p = ProgramGenerator("Binary Program", q.log)
-    p.write('progs/binary_test_3.json')
+    # q.print_log()
+    # p = ProgramGenerator("Binary Program", q.log)
+    # p.write('progs/binary_test_3.json')

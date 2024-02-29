@@ -1,88 +1,66 @@
-import qontrol
+from qontrol import *
 from virtual_module import *
 from pprint import pprint
+import time
+from collections import deque
 
-N_CH = 8
+# q = Qontroller(device_id='Q8iv-0001', response_timeout=0.400, log_max_len=None)
 
-def cmd(q, id, ch='', val=''):
-    
-    op = '=' if val != '' else '?'
 
-    
-    #print(f'> {id}{ch}{op}{val}')
-    res = q.issue_command(command_id=id, ch=ch, operator=op, value=val)
-    #print(f'< {res}')
+# do_not_write =  {SAFE, ICAL, VCAL, IMAX, VMAX, ROCOM, OK, ADCN, ADCT, CCFN, LED, NVM}
+
+# for c in [V, I]:
+
+#     if c.supports(READ_ALLCH):
+#         cmd = Command(c, header=ALLCH)
             
-#########################################################
-# Program
-#########################################################
+#         q.send_binary(cmd)
+#         time.sleep(0.01)
+            
+#         q.send_ascii(cmd)
+#         time.sleep(0.01)
+
+
+    # if c.supports(READ_ALLCH):
+    #     for ch in range(16):
+    #         cmd = Command(c, header=ALLCH)
+            
+    #         q.send_binary(cmd)
+    #         time.sleep(0.01)
+            
+    #         q.send_ascii(cmd)
+    #         time.sleep(0.01)
+        
+    # if c.supports(WRITE) and c not in do_not_write:
+    #     for ch in range(16):
+    #         cmd = Command(c, addr=ch, data=1)
+
+    #         q.send_binary(cmd)
+    #         time.sleep(0.01)
+            
+    #         q.send_ascii(cmd)
+    #         time.sleep(0.01)
+        
+
+
+
+
+
+# pg = ProgramGenerator('Two Q8iv', q.log)
+# pg.write('progs/two_q8iv_3.json')
+
+
+
 c = CustomHandler()
 
 @c.register
-def id_custom(cmd, cnt, vm):
-    if cnt > 3:
-        return vm._queue_out('bla bla')
-    else:
-        return vm._queue_out('Q8iv-0000')
+def handle_unknown_command(cmd, cnt, vm):
+    vm._queue_out(f'Unknown command: {cmd}')
 
-
-@c.register
-def handle_wildcard(cmd, cnt, vm):
-    return vm._queue_out(f'idk how to handle {cmd}')
-
-
-
-p = Program.from_json_file('./progs/test.json', custom=c)
-
+p = Program.from_json_file('progs/two_q8iv_3.json', custom=c)
 vm = VirtualModule(program=p)
+q = Qontroller(virtual_port=vm.port, response_timeout=0.400)
 
 
-q = qontrol.Qontroller(virtual_port=vm.port, response_timeout=0.200)
-
-
-# #########################################################
-# # Commands
-# #########################################################
-
-# cmd(q, 'id')
-# cmd(q, 'lifetime')
-# cmd(q, 'firmware')
-# cmd(q, 'vall')
-# cmd(q, 'iall')
-# cmd(q, 'vall')
-# cmd(q, 'iall')
-
-# for ch in range(N_CH):
-#     cmd(q, f'v{ch}=0.1')
-#     cmd(q, f'v{ch}?')
-#     cmd(q, f'vcal{ch}?')
-
-
-#     cmd(q, f'i{ch}=0')
-#     cmd(q, f'i{ch}')
-#     cmd(q, f'ical{ch}')
-    
-# cmd(q, 'nchan')
-# cmd(q, 'nvmall')
-
-cmd(q, 'log')
-
-
-def print_log(log):
-    t = 0
-    
-    for item in log:
-        time_ms = 1000*item['proctime']
-        type = item['type']
-        desc = item['desc']
-
-        if isinstance(desc, str):
-            desc = desc.strip()
-
-        print(f'{time_ms} {type} {desc} ')
-
-
-print_log(q.log)
-
-#pprint(vm.cmd_cnt, indent=4)
-
+res = q.send_binary(Cmd(ICAL, header=ALLCH))
+print(res)
