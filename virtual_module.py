@@ -456,15 +456,16 @@ class Program:
             prog (dict) - Program dict
             custom (CustomHandler, optional) - custom handlers
         """
+
+        cls._assert_has_keys(['name', 'data', 'initial_out'], prog,
+                             msg=lambda k: f'Required top level field "{k}" missing!')
         try:
             name = prog['name']
             data, cmd2idx = cls._parse_data(prog['data'], custom)
-            # default = cls._parse_data(prog['*'], custom)
             initial_out = prog['initial_out']
             
-            
-        except Exception:
-            log.exception('Creating program from json data')
+        except:
+            error(f'Exception occured when creating program from json data!')
   
 
         return cls(name, data, initial_out, custom, cmd2idx)
@@ -477,11 +478,12 @@ class Program:
         cmd2idx = {}
 
         for i, cmd_entry in enumerate(data):
-
+            cls._assert_has_keys(['cmd', 'entries', 'encoding'], cmd_entry,
+                msg=lambda k: f'Could not find required field "{k}" in entry #{i}!')
+            
             # Save the command index
             cmd2idx[cmd_entry['cmd']] = i
 
-            
             for entry in cmd_entry['entries']:
                 cls._parse_entry(entry, custom)
 
@@ -492,21 +494,54 @@ class Program:
         """Parse a single command entry.
         """
 
+        cls._assert_has_keys(['action'], entry,
+            msg=lambda k: f'Could not find required field "{k}" in command entry!')
+        
         # Convert the action to its enum
-        action = Action[entry['action']]
+        try: 
+            action = Action[entry['action']]
+        except:
+            error(f"Action {entry['action']} does not exist!")
+        
         entry['action'] = action
 
-        # In case of RUN_CUSTOM
-        # load the appropriate handler
-        if action == Action.RUN_CUSTOM:
-            func = getattr(custom, entry['func'], None)
+        
+        match action:
+            # In case of RUN_CUSTOM
+            # load the appropriate handler
+            case Action.RUN_CUSTOM:
+                cls._assert_has_keys(['func'], entry,
+                    msg=lambda k: f'Could not find required field "{k}" in command entry!')
+            
+                func = getattr(custom, entry['func'], None)
 
-            if func is None:
-                error(f"Can't find custom behaviour {entry['func']}!")
+                if func is None:
+                    error(f"Could not find custom behaviour {entry['func']}!")
                     
-            entry['func'] = func
+                entry['func'] = func
+            case _:
+
+                # Check all fields are there
+                cls._assert_has_keys(['data'], entry,
+                        msg=lambda k: f'Could not find required field {k} in command entry!')
+                
+                if 'divide' in entry:
+                    cls._assert_has_keys(['frames', 'delays'], entry['divide'],
+                        msg=lambda k: f'Could not find required field {k} in "divide" entry!')
+                else:
+                    cls._assert_has_keys(['delay'], entry,
+                        msg=lambda k: f'Could not find required field {k} in command entry!')
+                
+            
                 
         return entry
+
+    @classmethod
+    def _assert_has_keys(cls, keys, dict,
+                         msg=lambda k: f"Could not find key '{k}'"):
+        for k in keys:
+            if not k in dict:
+                error(msg(k))
 
 
 
