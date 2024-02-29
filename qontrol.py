@@ -98,7 +98,7 @@ class Header(IntFlag):
     RW    = 0x08
     ACT   = 0x04
     DEXT  = 0x02
-    PBIT  = 0x01
+ #   PBIT  = 0x01  This shouldn't be user accesible
 
 globals().update(Header.__members__)
 
@@ -377,7 +377,7 @@ class Qontroller(object):
                      response_timeout=0.100, inter_response_timeout=0.050,
                      wait_for_responses=True, baudrate=115200,
                      log_handler=None, log_to_stdout=False,
-                     virtual_port=None):
+                     virtual_port=None, log_max_len=4096):
                 """
                 Initialiser.
                 """
@@ -394,9 +394,12 @@ class Qontroller(object):
 
                 # Serial port baud rate (signalling frequency, Hz)
                 self.baudrate = baudrate
+
+
+                self.log_max_len = log_max_len
                 
                 # Log FIFO of sent commands and received errors
-                self.log = fifo(maxlen = 4096)
+                self.log = fifo(maxlen = log_max_len)
 
                 # Function which catches log dictionaries
                 self.log_handler = log_handler
@@ -828,11 +831,12 @@ class Qontroller(object):
             """
             n = len(self.log) if n is None else n
 
-            timestamp = round(1000*self.log[i]['proctime'], 2)
-            type = self.log[i]['type']
-            desc = self.log[i]['desc']
+            
 
             for i in range(-n,0):
+                timestamp = round(1000*self.log[i]['proctime'], 2)
+                type = self.log[i]['type']
+                desc = self.log[i]['desc']
                 print(f'@ {timestamp} ms, {type} : {desc}')
         
         
@@ -855,7 +859,7 @@ class Qontroller(object):
                     self.receive()
         
         
-        def issue_command (self, command_id, ch=None, operator='', 
+        def issue_command(self, command_id, ch=None, operator='', 
                 value=None, n_lines_requested=2**31, target_errors=None, 
                 output_regex=r'(.*)', special_timeout=None, return_cmd=False):
                 """
@@ -871,37 +875,42 @@ class Qontroller(object):
                  target_errors       Error numbers which will be raised as RuntimeError
                  special_timeout     Timeout to use for this command only
                 """
-                # Check for previous errors
-                lines,errs = self.receive()
-                
-                # Transmit command
-                if ch is None:
-                    ch = ''
-                if value is None:
-                    value = ''
-                if isinstance(value,list):
-                    tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator,value[0])
-                    for v in value[1:]:
-                        tx_str += ',{:}'.format(v)
-                else:
-                    tx_str = '{0}{1}{2}{3}'.format(command_id, ch, operator, value)
 
-                self.transmit(tx_str+'\n')                    
+                ch = '' if not ch else ch
+                cmd = Command(CmdIndex[command_id.upper()], addr=ch, data=value)
+
+                if ch == 'all':
+                    cmd.header |= ALLCH
+
+                if isinstance(value, list):
+                    cmd.header |= DEXT
+
+                if operator == '?':
+                    cmd.header |= RW
+
+            
+                tx_str = cmd.ascii()
+
+                # FIXME: Only needed for tests again current
+                # programs 
+                if command_id.islower():
+                    tx_str = tx_str.lower()
                 
+                self.transmit(tx_str)
+ 
                 # Log it
-                self.log_append(type= 'set' if operator == '=' else 'get', value=value,
+                self.log_append(type= 'set' if cmd.type() == SET else 'get', value=value,
                                 id=command_id, ch=ch, desc='Command: "'+tx_str+'".')
 
                 
                 # Function to retry this command (in case of comms error)
                 def retry_function():
-                        return self.issue_command(command_id, ch, operator, value,
-                                                  n_lines_requested, target_errors, output_regex)
+                    return self.issue_command(command_id, ch, operator, value,
+                                              n_lines_requested, target_errors, output_regex)
 
                 
-                
                 # Wait for response
-                if operator=='?' or ((operator=='=' or operator=='') and self.wait_for_responses):
+                if cmd.type() == GET or ((cmd.type() == SET) and self.wait_for_responses):
                     result = self._issue_command_receive_response(retry_function,
                         n_lines_requested, target_errors, output_regex, special_timeout)
                     
@@ -910,7 +919,7 @@ class Qontroller(object):
                 
                 
         
-        def issue_binary_command (self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex=r'(.*)', special_timeout = None):
+        def issue_binary_command(self, command_id, ch=None, BCAST=0, ALLCH=0, ADDM=0, RW=0, ACT=0, DEXT=0, value_int=0, addr_id_num=0x0000, n_lines_requested=2**31, target_errors=None, output_regex=r'(.*)', special_timeout = None):
                 """
                 Transmit command to device, get response.
                 
@@ -927,108 +936,45 @@ class Qontroller(object):
                 
                 Other arguments are as described for issue_command().
                 """
-                
-                
-                def get_val(i):
-                        """Function to convert uint16 to bytearray([uint8,uint8])"""
-                        return bytearray([int(i/256),int(i)-int(i/256)*256])
-                
-                def parity_odd(x):
-                        """Function to compute whether a byte's parity is odd."""
-                        x = x ^ (x >> 4)
-                        x = x ^ (x >> 2)
-                        x = x ^ (x >> 1)
-                        return x & 1
-                
-                
-                # Format header byte
-                header_byte  =       0x80
-                header_byte += BCAST*0x40
-                header_byte += ALLCH*0x20
-                header_byte +=  ADDM*0x10
-                header_byte +=    RW*0x08
-                header_byte +=   ACT*0x04
-                header_byte +=  DEXT*0x02
-                header_byte += parity_odd(header_byte)
-                
-                
-                # Format command byte
-                if isinstance(command_id, str):
-                        command_byte = CMD_CODES[command_id.upper()]
-                elif isinstance(command_id, int):
-                        command_byte = command_id
-                
-                
-                # Format channel address
-                address_bytes = bytearray()
-                if ch is None:
-                        ch = 0
-                if ADDM == 1:
-                        address_bytes.extend(get_val(addr_id_num))
-                        address_bytes.append(ch)
-                elif ADDM == 0:
-                        address_bytes.append(0)
-                        address_bytes.extend(get_val(ch))
-                
-                
-                # Format value bytes
-                # value_int can be either an int or a list of ints (for vectorised input, DEXT = 1)
-                data_bytes = bytearray()
-                
-                if DEXT == 1:
-                        # Handle data extension length
-                        if isinstance(value_int, list):
-                                n_dext_words = len(value_int)
-                        else:
-                                n_dext_words = 1
-                        if n_dext_words > 0xFFFF:
-                                n_dext_words = 0xFFFF
-                        data_bytes.extend(get_val(n_dext_words))
-                
-                if isinstance(value_int, int):
-                        v = get_val(value_int)
 
-                        data_bytes.extend(get_val(value_int))
+                header = BIN
+                header |= Header.BCAST if BCAST else BIN
+                header |= Header.ALLCH if ALLCH else BIN
+                header |= Header.ADDM if ADDM else BIN
+                header |= Header.RW if RW else BIN
+                header |= Header.ACT if ACT else BIN
+                header |= Header.DEXT if DEXT else BIN
                 
-                elif isinstance(value_int, list) and all([isinstance(e ,int) for e in value_int]):
-                        for i,e in enumerate(value_int):
-                                data_bytes.extend(get_val(e))
-                                if i == n_dext_words:
-                                        break
-                
-                else:
-                        raise AttributeError("value_int must be of type int, or of type list with all elements of type int (received type {:})".format(type(value_int) ) )
-                
-                
-                # Compose command byte string
-                tx_str = bytearray()
-                tx_str.append(header_byte)                # Header byte
-                tx_str.append(command_byte)                             # Command byte
-                tx_str.extend(address_bytes)                    # Three bytes of channel address
-                tx_str.extend(data_bytes)                               # 2 (DEXT=0) or 2*N+1 (DEXT=1) bytes of data
-                
-                # Transmit it
-                return tx_str
-                self.transmit(tx_str, binary_mode = True)
-                
+                cmd = Command(CmdIndex[command_id], addr=ch, addr_id=addr_id_num,
+                              data=value_int, header=header)
+
+                tx_str = cmd.binary()
+                self.transmit(tx_str, binary_mode=True)
                 
                 # Function to retry this command (in case of comms error)
                 def retry_function():
-                        return self.issue_binary_command (command_id, ch, BCAST, ALLCH, ADDM, RW, ACT, DEXT, value_int, addr_id_num, n_lines_requested, target_errors, output_regex, special_timeout)
+                    return self.issue_binary_command(command_id, ch, BCAST, ALLCH,
+                                                     ADDM, RW, ACT, DEXT, value_int,
+                                                     addr_id_num, n_lines_requested,
+                                                     target_errors, output_regex,
+                                                     special_timeout)
                 
                 # Wait for response
                 if RW==1 or ((RW==0 or ACT) and self.wait_for_responses):
-                        try:
-                                result = self._issue_command_receive_response (retry_function, n_lines_requested, target_errors, output_regex, special_timeout)
-                                return result
-                        except RuntimeError as e:
-                                if RW == 1:
-                                        # If we want a return value, raise an error
-                                        raise RuntimeError ("Failed to read with command '{0}'. {1}".format(tx_str, e))
-                                else:
-                                        # If we are setting something, just warn the user
-                                        print("Qontroller.issue_command: Warning: Failed to write with command '{0}'. {1}".format(tx_str, e))
-                                        return None
+                    try:
+                        result = self._issue_command_receive_response(retry_function,
+                            n_lines_requested, target_errors,
+                            output_regex, special_timeout)
+                        return result
+                    except RuntimeError as e:
+                        if RW == 1:
+                            # If we want a return value, raise an error
+                            raise RuntimeError (f"Failed to read with command '{tx_str}'.{e}")
+                        else:
+                            # If we are setting something, just warn the user
+                            print(("Qontroller.issue_command: Warning: "
+                                   "Failed to write with command '{tx_str}'. {e}"))
+                            return None
                                 
 
         def send_binary(self, cmd, raw=False):
@@ -1057,7 +1003,36 @@ class Qontroller(object):
                     return result
             
             
-        
+        def send_ascii(self, cmd):
+
+             n_lines_requested = 2**31
+             target_errors=None
+             output_regex=r'(.*)'
+             special_timeout = None
+
+             tx_str = cmd.ascii()
+             self.transmit(tx_str)                    
+                
+             # Log it
+
+             type = 'set' if cmd.type() == SET else 'get'
+             
+             self.log_append(type=type, value=cmd.data,
+             id=cmd.idx, ch=cmd.addr, desc='Command: "'+tx_str+'".')
+
+
+             # Function to retry this command (in case of comms error)
+             def retry_function():
+                 return self.send_ascii(cmd)
+
+
+             # Wait for response
+             if cmd.type() == GET or ((cmd.type() == SET) and self.wait_for_responses):
+                 result = self._issue_command_receive_response(retry_function,
+                     n_lines_requested, target_errors, output_regex, special_timeout)
+
+                 return result
+             
         
         def _issue_command_receive_response (self, retry_function, n_lines_requested=2**31, target_errors=None, output_regex=r'(.*)', special_timeout = None):
                 """

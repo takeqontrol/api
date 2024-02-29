@@ -340,7 +340,6 @@ class TestBinaryCommand:
     ###########################################################
     @pytest.mark.parametrize('c', [cmd for cmd in CmdIndex])
     def test_all_cmds_all_headers_single(self, c):
-
         for h in Header:
             if h == DEXT:
                 cmd = Command(c, header=h, data=[0])
@@ -371,6 +370,7 @@ class TestASCIICommand:
     N_CH = 1024
     N_RANDOM = 10000
     MAX_DATA_SIZE = 100
+    MAX_FLOAT_DATA_VAL = 1000.0
     
     def expected_ascii (self, cmd):
 
@@ -381,9 +381,6 @@ class TestASCIICommand:
         ch=cmd.addr
         operator=cmd.type().value
         value=cmd.data
-        
-        # Check for previous errors
-        lines,errs = self.receive()
 
         # Transmit command
         if ch is None:
@@ -404,68 +401,77 @@ class TestASCIICommand:
     ###########################################################
     
     @pytest.mark.parametrize('c', cmds_supporting(READ))
-    def test_read_cmd_binary_no_ch(self, c):
+    def test_read_cmd_ascii_no_ch(self, c):
         cmd = Command(c)
         assert cmd.ascii() == self.expected_ascii(cmd)
 
-    # @pytest.mark.parametrize('c', cmds_supporting(READ))
-    # def test_read_cmd_binary_ch_random(self, c):
-    #     for _ in range(TestBinaryCommand.N_RANDOM):
-    #         # ch is 16 bits 
-    #         ch = random.randint(0, 2**16 - 1)
-    #         cmd = Command(c, addr=ch)
-    #         assert cmd.binary() == self.expected_binary(cmd)
+    @pytest.mark.parametrize('c', cmds_supporting(READ))
+    def test_read_cmd_ascii_ch_random(self, c):
+        for _ in range(TestASCIICommand.N_RANDOM):
+            # ch is 16 bits 
+            ch = random.randint(0, 2**16 - 1)
+            cmd = Command(c, addr=ch)
+            assert cmd.ascii() == self.expected_ascii(cmd)
             
-    # @pytest.mark.parametrize('c', cmds_supporting(READ))
-    # def test_read_cmd_binary_ch_min(self, c):
-    #     cmd = Command(c, addr=0)
-    #     assert cmd.binary() == self.expected_binary(cmd)
+    @pytest.mark.parametrize('c', cmds_supporting(READ))
+    def test_read_cmd_ascii_ch_min(self, c):
+        cmd = Command(c, addr=0)
+        assert cmd.ascii() == self.expected_ascii(cmd)
 
-    # @pytest.mark.parametrize('c', cmds_supporting(READ))
-    # def test_read_cmd_binary_ch_max(self, c):
-    #     cmd = Command(c, addr= 2**16 - 1)
-    #     assert cmd.binary() == self.expected_binary(cmd)
+    @pytest.mark.parametrize('c', cmds_supporting(READ))
+    def test_read_cmd_ascii_ch_max(self, c):
+        cmd = Command(c, addr= 2**16 - 1)
+        assert cmd.ascii() == self.expected_ascii(cmd)
 
 
-    # @pytest.mark.parametrize('c', cmds_supporting(READ_ALLCH))
-    # def test_read_allch_cmd_binary(self, c):
-    #     cmd = Command(c, header=ALLCH)
-    #     assert cmd.binary() == self.expected_binary(cmd)
+    @pytest.mark.parametrize('c', cmds_supporting(READ_ALLCH))
+    def test_read_allch_cmd_ascii(self, c):
+        cmd = Command(c, header=ALLCH)
+        assert cmd.ascii() == self.expected_ascii(cmd)
 
     ###########################################################
     # Test Write commands  ADDM = 0
     ###########################################################
             
-    # @pytest.mark.parametrize('c', cmds_supporting(WRITE))
-    # def test_write_cmds_single_channel_single_data(self, c):
-    #     for _ in range(TestBinaryCommand.N_RANDOM):
-    #         ch = random.randint(0, 2**16 - 1)
-    #         data = random.randint(0, 2**16 - 1)
+    @pytest.mark.parametrize('c', cmds_supporting(WRITE))
+    def test_write_ascii_cmds_single_channel_single_data(self, c):
+        for _ in range(TestASCIICommand.N_RANDOM):
+            ch = random.randint(0, 2**16 - 1)
+            data = random.uniform(0, TestASCIICommand.MAX_FLOAT_DATA_VAL)
 
-    #         cmd = Command(c, addr=ch, data=data)
-    #         assert cmd.binary() == self.expected_binary(cmd)
+            cmd = Command(c, addr=ch, data=data)
+            assert cmd.ascii() == self.expected_ascii(cmd)
 
-    # @pytest.mark.parametrize('c', cmds_supporting(WRITE_DEXT))
-    # def test_write_cmds_single_channel_list_data(self, c):
-    #     for _ in range(TestBinaryCommand.N_RANDOM):
-    #         ch = random.randint(0, 2**16 - 1)
+    @pytest.mark.parametrize('c', cmds_supporting(WRITE_DEXT))
+    def test_write_ascii_cmds_single_channel_list_data(self, c):
+        for _ in range(TestASCIICommand.N_RANDOM):
+            ch = random.randint(0, 2**16 - 1)
 
-    #         size = random.randint(0, TestBinaryCommand.MAX_DATA_SIZE)
-    #         data = [random.randint(0, 2**16 - 1) for _ in range(size)]
+            size = random.randint(0, TestASCIICommand.MAX_DATA_SIZE)
+            data = [random.uniform(0, TestASCIICommand.MAX_FLOAT_DATA_VAL)
+                    for _ in range(size)]
 
-    #         cmd = Command(c, addr=ch, data=data, header = DEXT)
-    #         assert cmd.binary() == self.expected_binary(cmd)
+            if not data:
+                data = [0.0]
 
-    # @pytest.mark.parametrize('c', cmds_supporting(WRITE_ALLCH))
-    # def test_write_cmds_all_ch(self, c):
-    #     for _ in range(TestBinaryCommand.N_RANDOM):
-    #         ch = random.randint(0, 2**16 - 1)
-    #         data = random.randint(0, 2**16 - 1)
+            cmd = Command(c, addr=ch, data=data, header = DEXT)
+            assert cmd.ascii() == self.expected_ascii(cmd)
 
-    #         cmd = Command(c, data=data, header=ALLCH)
-    #         assert cmd.binary() == self.expected_binary(cmd)
+    @pytest.mark.parametrize('c', cmds_supporting(WRITE_ALLCH))
+    def test_write_ascii_cmds_all_ch(self, c):
+        for _ in range(TestBinaryCommand.N_RANDOM):
+            ch = random.randint(0, 2**16 - 1)
+            data = random.uniform(0, TestASCIICommand.MAX_FLOAT_DATA_VAL)
+
+            cmd = Command(c, data=data, header=ALLCH)
+            assert cmd.ascii() == self.expected_ascii(cmd)
 
 
-
-    
+    ###########################################################
+    # Test All Commands
+    ###########################################################
+    @pytest.mark.parametrize('c', [c for c in CmdIndex])
+    def test_write_ascii_cmds_all_ch(self, c):
+        cmd = Command(c)
+        assert cmd.ascii() == self.expected_ascii(cmd)
 
