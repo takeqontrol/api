@@ -3581,13 +3581,19 @@
                     "delay": 16.0
                 }
             ]
+        },
+        {
+            "cmd": "*",
+            "encoding": "ascii",
+            "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 0.0
+                }
+            ]
         }
     ],
-    "*": {
-        "action": "QUEUE_OUT",
-        "data": "E10:02",
-        "delay": 0.0
-    },
     "initial_out": [
         "OK\n"
     ]

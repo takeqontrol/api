@@ -4,7 +4,7 @@ from qontrol import Qontroller, generic_log_handler
 from virtual_module import *
 from glob import glob
 
-cmd_re = re.compile(r'([a-zA-Z0-9]*)(\?|=)(.*)')
+cmd_re = re.compile(r'([a-zA-Z]+)([0-9]*)(\?|=)(.*)')
 
 
 
@@ -13,6 +13,10 @@ c = CustomHandler()
 @c.register
 def id_handler(cmd, cnt, vm):
     return vm._queue_out('Q8iv-0000')
+
+@c.register
+def handle_unknown_command(cmd, cnt, vm):
+    vm._queue_out(f'Unknown command: {cmd}')
 
 
 def log_handler():
@@ -42,6 +46,9 @@ def params():
         q.log_handler = log_handler()
 
         for cmd in program.commands():
+            if cmd == '*':
+                continue
+            
             ret.append((pf, program, q, cmd))
 
     return ret
@@ -60,11 +67,14 @@ class TestCommandFromProgram:
         try:
             if p[cmd]['encoding'] == 'binary':
                 res = q.send_binary(bytes.fromhex(cmd), raw=True)
-                print(res)
             else:
-            
-                c, op, val = cmd_re.search(cmd.strip()).groups()
-                res = q.issue_command(c, operator=op, value=val)
+                c, ch, op, val = cmd_re.search(cmd.strip()).groups()
+
+                if c.lower().endswith('all'):
+                    ch = 'all'
+                    c = c[:len(c) - 3]
+                
+                res = q.issue_command(c, ch=ch, operator=op, value=val)
             
         except RuntimeError as e:
             # The log_handler will raise an exception

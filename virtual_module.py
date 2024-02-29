@@ -404,9 +404,6 @@ class Program:
     # The dictionary data
     data: dict = field(default_factory= lambda: {})
 
-    # Default entry, the one under *
-    default: dict = field(default_factory= lambda: {})
-
     # Initial output queue
     initial_out: list = field(default_factory= lambda: [])
 
@@ -417,15 +414,14 @@ class Program:
     cmd2idx: dict = field(default_factory= lambda: {})
 
 
-    def __post_init__(self):
-        self.data.append(self.default)
-
     def __getitem__(self, cmd):
         """Look up the response for a command."""
-
-        i = self.cmd2idx.get(cmd, -1)
+        if cmd not in self.cmd2idx:
+            cmd = '*'
         
-        return  self.data[i]
+        i = self.cmd2idx[cmd]
+        
+        return self.data[i]
 
     def commands(self):
         return list(self.cmd2idx.keys())
@@ -463,7 +459,7 @@ class Program:
         try:
             name = prog['name']
             data, cmd2idx = cls._parse_data(prog['data'], custom)
-            default = cls._parse_entry(prog['*'], custom)
+            # default = cls._parse_data(prog['*'], custom)
             initial_out = prog['initial_out']
             
             
@@ -471,7 +467,7 @@ class Program:
             log.exception('Creating program from json data')
   
 
-        return cls(name, data, default, initial_out, custom, cmd2idx)
+        return cls(name, data, initial_out, custom, cmd2idx)
 
 
     @classmethod
@@ -534,11 +530,6 @@ class ProgramGenerator:
         self.prog = {}
         self.prog['name'] = name
         self.prog['data'] = []
-        self.prog['*'] = {
-                'action': 'QUEUE_OUT',
-                'data': 'E10:02',
-                'delay': 0.0
-        }
         self.prog['initial_out'] = ['OK\n']
 
         self.seen_cmds = set()
@@ -547,6 +538,21 @@ class ProgramGenerator:
 
         for i in self.parsed_log:
             self._gen_entry(i)
+
+        # Add the default entry for unknown commands
+        self.prog['data'].append(
+             {
+              "cmd": "*",
+              "encoding": "ascii",
+              "entries": [
+                {
+                    "action": "QUEUE_OUT",
+                    "data": "E10:00",
+                    "delay": 0.0
+                }
+              ]
+            }
+        )
 
 
 
