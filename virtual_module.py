@@ -6,8 +6,8 @@ import inspect
 from enum import Enum, auto
 from collections import deque
 from dataclasses import dataclass, field
-from threading import Thread
-
+from threading import Thread, Lock
+threadLock = Lock()
 
 formatter = logging.Formatter('%(levelname)s: %(message)s')
 log = logging.getLogger('virtual_module')
@@ -202,7 +202,9 @@ x
     def _get_next_out(self):
         """Return the next item from the out queue."""
         res = self.out.popleft()
-        self.port.in_waiting -= 1
+
+        with threadLock:
+            self.port.in_waiting -= 1
 
         # If the response is a string
         # we need to encode it
@@ -219,7 +221,9 @@ x
            
         """
         self.out.append(msg)
-        self.port.in_waiting += 1
+
+        with threadLock:
+            self.port.in_waiting += 1
 
 
     def _inc_cmd_cnt(self, cmd):
@@ -561,7 +565,7 @@ class ProgramGenerator:
     """Generates a Program from a Qontroller log"""
 
 
-    def __init__(self, name, log):
+    def __init__(self, name='', log=None):
         self.prog = {}
         self.prog['name'] = name
         self.prog['data'] = []
@@ -569,6 +573,9 @@ class ProgramGenerator:
 
         self.seen_cmds = set()
 
+        if log is None:
+            return
+            
         self.parsed_log = self._parse_log(log)
 
         for i in self.parsed_log:

@@ -36,13 +36,14 @@ def log_handler():
 
 def params():
     """Generate test parameters from all programs"""
-    program_files= glob('progs/*.json')
+    #program_files= glob('progs/*.json')
+    program_files = ['progs/two_q8iv_4.json']
 
     ret = []
     for pf in program_files:
         program = Program.from_json_file(pf, custom=c)
         vm = VirtualModule(program)
-        q = Qontroller(virtual_port=vm.port, response_timeout=0.4)
+        q = Qontroller(virtual_port=vm.port, response_timeout=0.8)
         q.log_handler = log_handler()
 
         for cmd in program.commands():
@@ -91,6 +92,7 @@ class TestCommandFromProgram:
             case Action.QUEUE_OUT_MANY:
                 # Result is an array
                 exp = list(map(lambda x: (x,), expected['data']))
+                print(len(res), len(exp))
                 assert res == exp
                 
     

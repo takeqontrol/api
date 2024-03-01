@@ -180,6 +180,7 @@ class Command:
     addr_id: int = 0
     header: Header = BIN
     data: int | list[int] | float | list[float] = None
+    binary_data_conv: any = lambda data: data
     
 
     def __post_init__(self):
@@ -187,7 +188,7 @@ class Command:
         self.header |= BIN
 
         # If there is data this is a WRITE command
-        if not self.data:
+        if self.data is None:
             self.header |= RW
             
     def _parity_odd(self, x):
@@ -249,11 +250,12 @@ class Command:
         if DEXT in self.header:
             # data = 2B for # words (N), N * 2B for data words
             data_fmt = 'H' * (len(self.data) + 1)
-            data = (len(self.data), *self.data)
+            data_conv = map(self.binary_data_conv, self.data)
+            data = (len(self.data), *data_conv)
         else:
             # data = 2B
             data_fmt = 'H'
-            data = (self.data,)
+            data = (self.binary_data_conv(self.data),)
 
         # Pack data into bytes
         h_idx_bytes = struct.pack('<cc', bytes([header]), bytes([self.idx.value[0]]))
@@ -293,6 +295,8 @@ class ErrorType(ExtendedEnum):
     TOO_MANY            = (30, 'Too many errors, some have been suppressed.')
     FIRMWARE_TRAP       = (31, 'Firmware trap.')
     POWERED_UP          = (90, 'Powered up.')
+    OVER_VOLATAGE       = (1, 'Over-voltage error on channel {ch}.')
+    OVER_CURRENT        = (2, 'Over-current error on channel {ch}.')
 
     def code(self):
         return self.value[0]
@@ -877,6 +881,11 @@ class Qontroller(object):
                 """
 
                 ch = '' if not ch else ch
+
+                if command_id.lower().endswith('all'):
+                    command_id = command_id[:len(command_id) - 3]
+                    ch = 'all'
+                
                 cmd = Command(CmdIndex[command_id.upper()], addr=ch, data=value)
 
                 if ch == 'all':
@@ -1066,6 +1075,8 @@ class Qontroller(object):
                         if (time.time() - last_message_time >
                             self.inter_response_timeout):
                             break
+                    # elif len(lines)!= 0 and self.serial_port.in_waiting == 0:
+                    #     break
                                 
                     # Receive data
                     # if (random.randint(0, 100) % 2 == 0):
