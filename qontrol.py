@@ -777,8 +777,8 @@ class _ChannelVector(object):
 			else:
 				vs = [value] * len(ks)
 			
-			for k in ks:
-				self[k] = vs[k]
+			for i,k in enumerate(ks):
+				self[k] = vs[i]
 		else:
 			# Handle normal key
 			if self.set_handle is not None:
