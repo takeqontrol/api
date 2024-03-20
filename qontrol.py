@@ -736,6 +736,7 @@ class _ChannelVector(object):
 	
 	def __init__(self, base_list, valid_types=(int,float), set_handle=None, get_handle=None):
 		self.list = base_list
+		self.n_ch = len(self.list)
 		self.valid_types = valid_types
 		try:
 			len(self.valid_types)
@@ -780,6 +781,10 @@ class _ChannelVector(object):
 			for i,k in enumerate(ks):
 				self[k] = vs[i]
 		else:
+			# set_handle doesn't recognise -1 as the last element
+			# so we need to update the key
+			key = self.n_ch - 1 if key == -1 else key
+
 			# Handle normal key
 			if self.set_handle is not None:
 				self.set_handle (key, value)
