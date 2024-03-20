@@ -20,7 +20,7 @@ from serial.tools import list_ports
 import sys
 import os
 
-__version__ = "1.1.16"
+__version__ = "1.1.17"
 
 COMMON_ERRORS = {
 	0:'Unknown error.',
