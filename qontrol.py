@@ -54,6 +54,7 @@ CMD_CODES = {'V':0x00, 'I':0x01, 'VMAX':0x02, 'IMAX':0x03, 'VCAL':0x04, 'ICAL':0
 
 DEVICE_PROPERTIES = {
 		'Q8iv':{'VFULL':12.0,'IFULL':24.0}, 
+		'Q8a':{'VFULL':12.0,'IFULL':100.0}, 
 		'Q8b':{'VFULL':12.0,'IFULL':83.333333}, 
 		'Q8bi':{'VFULL':12.0,'IFULL':100},
 		'M2':{'VFULL':8458.0,'IFULL':1375.0,'XFULL':8388352.0}}
@@ -807,6 +808,7 @@ class QXOutput(Qontroller):
 	
 	Compatible modules:
 	- Q8iv
+	- Q8a
 	- Q8b
 	"""
 	
