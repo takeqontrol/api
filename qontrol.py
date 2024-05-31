@@ -140,7 +140,7 @@ class Qontroller(object):
 			ob = re.match('([QS]\w+)-([0-9a-fA-F\*]+)', self.device_id)
 			targ_dev_type,targ_dev_num = ob.groups()
 			if ob is None:
-				raise AttributeException('Entered device ID ({0}) must be of form "[device type]-[device number]" where [device number] can be hexadecimal'.format(self.device_id))
+				raise AttributeError('Entered device ID ({0}) must be of form "[device type]-[device number]" where [device number] can be hexadecimal'.format(self.device_id))
 			
 			# Find serial port based on provided device ID (randomise their order)
 			candidates = []
@@ -774,7 +774,7 @@ class _ChannelVector(object):
 			ks = range(len(self))[key.start:key.stop:key.step]
 			if isinstance(value,list):
 				if len(ks) != len(value):
-					raise AttributeError('Attempt to set {0} channels of output to list of length {1}. Lengths must match.'.format(len(ks), len(values)))
+					raise AttributeError('Attempt to set {0} channels of output to list of length {1}. Lengths must match.'.format(len(ks), len(value)))
 				vs = value
 			else:
 				vs = [value] * len(ks)
