@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>qontrol module &#8212; TakeQontrol Documentation 0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=695f23b8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'qontrol';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Manuals" href="manuals/index.html" />
+    <link rel="prev" title="API Reference" href="modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="TakeQontrol Documentation 0 documentation - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="TakeQontrol Documentation 0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="guide/getting_started.html">Getting Started Guide</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">qontrol module</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="manuals/index.html">Manuals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="manuals/bp8/bp8.html">BP8: 8-Module Backplane</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment Instructions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/qontrol.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>qontrol module</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor"><code class="docutils literal notranslate"><span class="pre">MXMotor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">MXMotor.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.get_all_values"><code class="docutils literal notranslate"><span class="pre">MXMotor.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.get_value"><code class="docutils literal notranslate"><span class="pre">MXMotor.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.set_all_values"><code class="docutils literal notranslate"><span class="pre">MXMotor.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.set_value"><code class="docutils literal notranslate"><span class="pre">MXMotor.set_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.wait_until_stopped"><code class="docutils literal notranslate"><span class="pre">MXMotor.wait_until_stopped()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput"><code class="docutils literal notranslate"><span class="pre">QXOutput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">QXOutput.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.get_all_values"><code class="docutils literal notranslate"><span class="pre">QXOutput.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.get_value"><code class="docutils literal notranslate"><span class="pre">QXOutput.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.set_all_values"><code class="docutils literal notranslate"><span class="pre">QXOutput.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.set_value"><code class="docutils literal notranslate"><span class="pre">QXOutput.set_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller"><code class="docutils literal notranslate"><span class="pre">Qontroller</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.close"><code class="docutils literal notranslate"><span class="pre">Qontroller.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">Qontroller.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.issue_binary_command"><code class="docutils literal notranslate"><span class="pre">Qontroller.issue_binary_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.issue_command"><code class="docutils literal notranslate"><span class="pre">Qontroller.issue_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.log_append"><code class="docutils literal notranslate"><span class="pre">Qontroller.log_append()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.parse_error"><code class="docutils literal notranslate"><span class="pre">Qontroller.parse_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.print_log"><code class="docutils literal notranslate"><span class="pre">Qontroller.print_log()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.receive"><code class="docutils literal notranslate"><span class="pre">Qontroller.receive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.transmit"><code class="docutils literal notranslate"><span class="pre">Qontroller.transmit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.wait"><code class="docutils literal notranslate"><span class="pre">Qontroller.wait()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput"><code class="docutils literal notranslate"><span class="pre">SXInput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">SXInput.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.get_all_values"><code class="docutils literal notranslate"><span class="pre">SXInput.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.get_value"><code class="docutils literal notranslate"><span class="pre">SXInput.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.set_all_values"><code class="docutils literal notranslate"><span class="pre">SXInput.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.set_value"><code class="docutils literal notranslate"><span class="pre">SXInput.set_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.generic_log_handler"><code class="docutils literal notranslate"><span class="pre">generic_log_handler()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.run_interactive_shell"><code class="docutils literal notranslate"><span class="pre">run_interactive_shell()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-qontrol">
+<span id="qontrol-module"></span><h1>qontrol module<a class="headerlink" href="#module-qontrol" title="Link to this heading">#</a></h1>
+<p>Hardware interfacing for Qontrol modules.</p>
+<p>This module lets you control Qontrol hardware modules, natively in Python. It provides 
+a main Qontroller class which handles enumeration, low-level communications, sequencing, 
+error-handling, and log maintenance. Subclasses of Qontroller implement module-specific 
+features (e.g. DC current or voltage interfaces, positional interfaces).</p>
+<p>Learn more, at www.qontrol.co.uk/support, or get in touch with us at
+<a class="reference external" href="mailto:support&#37;&#52;&#48;qontrol&#46;co&#46;uk">support<span>&#64;</span>qontrol<span>&#46;</span>co<span>&#46;</span>uk</a>. Contribute at github.com/takeqontrol/api.</p>
+<ol class="loweralpha simple" start="3">
+<li><p>2021 Qontrol Ltd.</p></li>
+</ol>
+<dl class="py class">
+<dt class="sig sig-object py" id="qontrol.MXMotor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">MXMotor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qontrol.Qontroller" title="qontrol.Qontroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qontroller</span></code></a></p>
+<p>Motor controller module class. Provides channel vectors for speed (v), 
+maximum speed (vmax), maximum winding current (imax), position (x) and 
+associated minimum (xmin) and maximum (xmax), power-of-two microsteps 
+(ustep), and motor mode (mode).</p>
+<p>Compatible modules:
+- M2</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qontrol.MXMotor.error_desc_dict">
+<span class="sig-name descname"><span class="pre">error_desc_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'Unknown</span> <span class="pre">error.',</span> <span class="pre">1:</span> <span class="pre">'Out-of-range</span> <span class="pre">error</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">3:</span> <span class="pre">'Power</span> <span class="pre">error.',</span> <span class="pre">4:</span> <span class="pre">'Calibration</span> <span class="pre">error.',</span> <span class="pre">5:</span> <span class="pre">'Output</span> <span class="pre">error.',</span> <span class="pre">10:</span> <span class="pre">'Unrecognised</span> <span class="pre">command.',</span> <span class="pre">11:</span> <span class="pre">'Unrecognised</span> <span class="pre">input</span> <span class="pre">parameter.',</span> <span class="pre">12:</span> <span class="pre">'Unrecognised</span> <span class="pre">channel,</span> <span class="pre">{ch}.',</span> <span class="pre">13:</span> <span class="pre">'Operation</span> <span class="pre">forbidden.',</span> <span class="pre">14:</span> <span class="pre">'Serial</span> <span class="pre">buffer</span> <span class="pre">overflow.',</span> <span class="pre">15:</span> <span class="pre">'Serial</span> <span class="pre">communication</span> <span class="pre">error.',</span> <span class="pre">16:</span> <span class="pre">'Command</span> <span class="pre">timed</span> <span class="pre">out.',</span> <span class="pre">17:</span> <span class="pre">'SPI</span> <span class="pre">error.',</span> <span class="pre">18:</span> <span class="pre">'ADC</span> <span class="pre">error.',</span> <span class="pre">19:</span> <span class="pre">'I2C</span> <span class="pre">error.',</span> <span class="pre">20:</span> <span class="pre">'Interlock</span> <span class="pre">triggered</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">30:</span> <span class="pre">'Too</span> <span class="pre">many</span> <span class="pre">errors,</span> <span class="pre">some</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">suppressed.',</span> <span class="pre">31:</span> <span class="pre">'Firmware</span> <span class="pre">trap.',</span> <span class="pre">90:</span> <span class="pre">'Powered</span> <span class="pre">up.'}</span></em><a class="headerlink" href="#qontrol.MXMotor.error_desc_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.MXMotor.get_all_values">
+<span class="sig-name descname"><span class="pre">get_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor.get_all_values" title="Link to this definition">#</a></dt>
+<dd><p>All-channel value getter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.MXMotor.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor.get_value" title="Link to this definition">#</a></dt>
+<dd><p>Single-channel value getter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.MXMotor.set_all_values">
+<span class="sig-name descname"><span class="pre">set_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor.set_all_values" title="Link to this definition">#</a></dt>
+<dd><p>Slice up set commands into vectors for each module, and transmit.</p>
+<blockquote>
+<div><p>para:      Parameter to set {‘X’,’XMIN’,’XMAX’,’VMAX’,’IMAX’,’MODE’}
+values:    Either float/int or list of float/int of length n_chs</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.MXMotor.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor.set_value" title="Link to this definition">#</a></dt>
+<dd><p>Single-channel value setter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.MXMotor.wait_until_stopped">
+<span class="sig-name descname"><span class="pre">wait_until_stopped</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_poll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.MXMotor.wait_until_stopped" title="Link to this definition">#</a></dt>
+<dd><p>Block execution until all motors are not in motion.</p>
+<blockquote>
+<div><p>channels   Wait for channels in this list to stop. None for all channels.
+timeout    Max time before breaking.
+t_poll     Motor state polling time, seconds. Larger numbers give less polling.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qontrol.QXOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">QXOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qontrol.Qontroller" title="qontrol.Qontroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qontroller</span></code></a></p>
+<p>Output module class. Provides channel vectors for voltage (v), current (i), 
+maximum voltage (vmax), and maximum current (imax).</p>
+<p>Compatible modules:
+- Q8iv
+- Q8a
+- Q8b</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qontrol.QXOutput.error_desc_dict">
+<span class="sig-name descname"><span class="pre">error_desc_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'Unknown</span> <span class="pre">error.',</span> <span class="pre">1:</span> <span class="pre">'Over-voltage</span> <span class="pre">error</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">2:</span> <span class="pre">'Over-current</span> <span class="pre">error</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">3:</span> <span class="pre">'Power</span> <span class="pre">error.',</span> <span class="pre">4:</span> <span class="pre">'Calibration</span> <span class="pre">error.',</span> <span class="pre">5:</span> <span class="pre">'Output</span> <span class="pre">error.',</span> <span class="pre">10:</span> <span class="pre">'Unrecognised</span> <span class="pre">command.',</span> <span class="pre">11:</span> <span class="pre">'Unrecognised</span> <span class="pre">input</span> <span class="pre">parameter.',</span> <span class="pre">12:</span> <span class="pre">'Unrecognised</span> <span class="pre">channel,</span> <span class="pre">{ch}.',</span> <span class="pre">13:</span> <span class="pre">'Operation</span> <span class="pre">forbidden.',</span> <span class="pre">14:</span> <span class="pre">'Serial</span> <span class="pre">buffer</span> <span class="pre">overflow.',</span> <span class="pre">15:</span> <span class="pre">'Serial</span> <span class="pre">communication</span> <span class="pre">error.',</span> <span class="pre">16:</span> <span class="pre">'Command</span> <span class="pre">timed</span> <span class="pre">out.',</span> <span class="pre">17:</span> <span class="pre">'SPI</span> <span class="pre">error.',</span> <span class="pre">18:</span> <span class="pre">'ADC</span> <span class="pre">error.',</span> <span class="pre">19:</span> <span class="pre">'I2C</span> <span class="pre">error.',</span> <span class="pre">30:</span> <span class="pre">'Too</span> <span class="pre">many</span> <span class="pre">errors,</span> <span class="pre">some</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">suppressed.',</span> <span class="pre">31:</span> <span class="pre">'Firmware</span> <span class="pre">trap.',</span> <span class="pre">90:</span> <span class="pre">'Powered</span> <span class="pre">up.'}</span></em><a class="headerlink" href="#qontrol.QXOutput.error_desc_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.QXOutput.get_all_values">
+<span class="sig-name descname"><span class="pre">get_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_all_values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.QXOutput.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.get_value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.QXOutput.set_all_values">
+<span class="sig-name descname"><span class="pre">set_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_all_values" title="Link to this definition">#</a></dt>
+<dd><p>Slice up set commands into vectors for each module, and transmit.</p>
+<blockquote>
+<div><p>para:      Parameter to set {‘V’ or ‘I’}
+values:    Either float/int or list of float/int of length n_chs</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.QXOutput.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.QXOutput.set_value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qontrol.Qontroller">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">Qontroller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Superclass which handles communication, enumeration, and logging.</p>
+<blockquote>
+<div><p>device_id = None                    Device ID
+serial_port = None                  Serial port object
+serial_port_name = None             Name of port, (eg ‘COM1’, ‘/dev/tty1’)
+error_desc_dict = Q8x_ERRORS        Error code descriptions
+log = fifo(maxlen = 256)            Log FIFO of communications
+log_handler = None                  Function which catches log dictionaries
+log_to_stdout = True                Copy new log entries to stdout
+response_timeout = 0.100            Timeout for response to commands
+inter_response_timeout = 0.050      Timeout for response to get commands</p>
+</div></blockquote>
+<dl>
+<dt>Log handler:</dt><dd><p>The log handler may be used to catch and dynamically handle certain errors, 
+as they arise. It is a function with a single dict argument. The dict contains
+details of the log entry, with keys ‘timestamp’, ‘proctime’, ‘type’, ‘id’, ‘ch’, 
+‘value’, ‘desc’, ‘raw’. In the following example, the handler is set to raise a</p>
+<blockquote>
+<div><p>RuntimeError upon reception of errors E01, E02, and E03:</p>
+</div></blockquote>
+<p>q = Qontroller()</p>
+<p>fatal_errors = [1, 2, 3]</p>
+<dl class="simple">
+<dt>def my_log_handler(err_dict):</dt><dd><dl class="simple">
+<dt>if err_dict[‘type’] is ‘err’ and err_dict[‘id’] in fatal_errors:</dt><dd><dl class="simple">
+<dt>raise RuntimeError(‘Caught Qontrol error “{1}” at {0}</dt><dd><p>ms’.format(1000*err_dict[‘proctime’], err_dict[‘desc’]))</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>q.log_handler = my_log_handler</p>
+<p>or more simply</p>
+<p>q.log_handler = generic_log_handler(fatal_errors)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.close" title="Link to this definition">#</a></dt>
+<dd><p>Release resources</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qontrol.Qontroller.error_desc_dict">
+<span class="sig-name descname"><span class="pre">error_desc_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'Unknown</span> <span class="pre">error.',</span> <span class="pre">3:</span> <span class="pre">'Power</span> <span class="pre">error.',</span> <span class="pre">4:</span> <span class="pre">'Calibration</span> <span class="pre">error.',</span> <span class="pre">5:</span> <span class="pre">'Output</span> <span class="pre">error.',</span> <span class="pre">10:</span> <span class="pre">'Unrecognised</span> <span class="pre">command.',</span> <span class="pre">11:</span> <span class="pre">'Unrecognised</span> <span class="pre">input</span> <span class="pre">parameter.',</span> <span class="pre">12:</span> <span class="pre">'Unrecognised</span> <span class="pre">channel,</span> <span class="pre">{ch}.',</span> <span class="pre">13:</span> <span class="pre">'Operation</span> <span class="pre">forbidden.',</span> <span class="pre">14:</span> <span class="pre">'Serial</span> <span class="pre">buffer</span> <span class="pre">overflow.',</span> <span class="pre">15:</span> <span class="pre">'Serial</span> <span class="pre">communication</span> <span class="pre">error.',</span> <span class="pre">16:</span> <span class="pre">'Command</span> <span class="pre">timed</span> <span class="pre">out.',</span> <span class="pre">17:</span> <span class="pre">'SPI</span> <span class="pre">error.',</span> <span class="pre">18:</span> <span class="pre">'ADC</span> <span class="pre">error.',</span> <span class="pre">19:</span> <span class="pre">'I2C</span> <span class="pre">error.',</span> <span class="pre">30:</span> <span class="pre">'Too</span> <span class="pre">many</span> <span class="pre">errors,</span> <span class="pre">some</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">suppressed.',</span> <span class="pre">31:</span> <span class="pre">'Firmware</span> <span class="pre">trap.',</span> <span class="pre">90:</span> <span class="pre">'Powered</span> <span class="pre">up.'}</span></em><a class="headerlink" href="#qontrol.Qontroller.error_desc_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.issue_binary_command">
+<span class="sig-name descname"><span class="pre">issue_binary_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BCAST</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ALLCH</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ADDM</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RW</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ACT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DEXT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr_id_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lines_requested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2147483648</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'(.*)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_binary_command" title="Link to this definition">#</a></dt>
+<dd><p>Transmit command to device, get response.</p>
+<blockquote>
+<div><p>command_id:   Command ID, either int (command index) or str (command name)
+ch:           Channel address (max 0xFFFF for ADDM=0, 0xFF for ADDM=1)
+BCAST,
+ALLCH,
+ADDM,
+RW,
+ACT,
+DEXT:             Header bits. See Programming Manual for full description
+value_int:    Data, either int (DEXT=0) or list of int (DEXT=1)
+addr_id_num   Device ID code (ADDM=1 only)</p>
+</div></blockquote>
+<p>Other arguments are as described for issue_command().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.issue_command">
+<span class="sig-name descname"><span class="pre">issue_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lines_requested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2147483648</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'(.*)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">special_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.issue_command" title="Link to this definition">#</a></dt>
+<dd><p>Transmit command to device, get response.</p>
+<p>Command format is [command_id][ch][operator][value].</p>
+<blockquote>
+<div><p>command_id          Command header
+ch                  Channel index to apply command to
+operator            Type of command in {?, =}
+value               Value of set command
+n_lines_requested   Lines of data (not error) to wait for, or timeout
+target_errors       Error numbers which will be raised as RuntimeError
+special_timeout     Timeout to use for this command only</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.log_append">
+<span class="sig-name descname"><span class="pre">log_append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'err'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.log_append" title="Link to this definition">#</a></dt>
+<dd><p>Log an event; add both a calendar- and process-timestamp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.parse_error">
+<span class="sig-name descname"><span class="pre">parse_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.parse_error" title="Link to this definition">#</a></dt>
+<dd><p>Parse an error into its code, channel, and human-readable description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.print_log">
+<span class="sig-name descname"><span class="pre">print_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.print_log" title="Link to this definition">#</a></dt>
+<dd><p>Print the n last log entries. If n == None, print all log entries.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.receive">
+<span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.receive" title="Link to this definition">#</a></dt>
+<dd><p>Low-level receive data method which also checks for errors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.transmit">
+<span class="sig-name descname"><span class="pre">transmit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.transmit" title="Link to this definition">#</a></dt>
+<dd><p>Low-level transmit data method.</p>
+<blockquote>
+<div><p>command_string – str or bytearray</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.Qontroller.wait">
+<span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.Qontroller.wait" title="Link to this definition">#</a></dt>
+<dd><p>Do nothing while watching for errors on the serial bus.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qontrol.SXInput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">SXInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.SXInput" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qontrol.Qontroller" title="qontrol.Qontroller"><code class="xref py py-class docutils literal notranslate"><span class="pre">Qontroller</span></code></a></p>
+<p>Input module class. Provides channel vectors for current (i).</p>
+<dl class="simple">
+<dt>Arguments inherited from Qontroller:</dt><dd><p>device_id = None                    Device ID
+serial_port = None                  Serial port object
+serial_port_name = None             Name of port, (eg ‘COM1’, ‘/dev/tty1’)
+error_desc_dict                     Error code descriptions
+log = fifo(maxlen = 256)            Log FIFO of communications
+log_handler = None                  Function which catches log dictionaries
+log_to_stdout = True                Copy new log entries to stdout
+response_timeout = 0.050            Timeout for response to commands
+inter_response_timeout = 0.020      Timeout for response to get commands</p>
+</dd>
+</dl>
+<p>Compatible modules:
+- S8i</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qontrol.SXInput.error_desc_dict">
+<span class="sig-name descname"><span class="pre">error_desc_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'Unknown</span> <span class="pre">error.',</span> <span class="pre">1:</span> <span class="pre">'Over-voltage</span> <span class="pre">error</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">2:</span> <span class="pre">'Over-current</span> <span class="pre">error</span> <span class="pre">on</span> <span class="pre">channel</span> <span class="pre">{ch}.',</span> <span class="pre">3:</span> <span class="pre">'Power</span> <span class="pre">error.',</span> <span class="pre">4:</span> <span class="pre">'Calibration</span> <span class="pre">error.',</span> <span class="pre">5:</span> <span class="pre">'Output</span> <span class="pre">error.',</span> <span class="pre">10:</span> <span class="pre">'Unrecognised</span> <span class="pre">command.',</span> <span class="pre">11:</span> <span class="pre">'Unrecognised</span> <span class="pre">input</span> <span class="pre">parameter.',</span> <span class="pre">12:</span> <span class="pre">'Unrecognised</span> <span class="pre">channel,</span> <span class="pre">{ch}.',</span> <span class="pre">13:</span> <span class="pre">'Operation</span> <span class="pre">forbidden.',</span> <span class="pre">14:</span> <span class="pre">'Serial</span> <span class="pre">buffer</span> <span class="pre">overflow.',</span> <span class="pre">15:</span> <span class="pre">'Serial</span> <span class="pre">communication</span> <span class="pre">error.',</span> <span class="pre">16:</span> <span class="pre">'Command</span> <span class="pre">timed</span> <span class="pre">out.',</span> <span class="pre">17:</span> <span class="pre">'SPI</span> <span class="pre">error.',</span> <span class="pre">18:</span> <span class="pre">'ADC</span> <span class="pre">error.',</span> <span class="pre">19:</span> <span class="pre">'I2C</span> <span class="pre">error.',</span> <span class="pre">30:</span> <span class="pre">'Too</span> <span class="pre">many</span> <span class="pre">errors,</span> <span class="pre">some</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">suppressed.',</span> <span class="pre">31:</span> <span class="pre">'Firmware</span> <span class="pre">trap.',</span> <span class="pre">90:</span> <span class="pre">'Powered</span> <span class="pre">up.'}</span></em><a class="headerlink" href="#qontrol.SXInput.error_desc_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.SXInput.get_all_values">
+<span class="sig-name descname"><span class="pre">get_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.SXInput.get_all_values" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.SXInput.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'I'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.SXInput.get_value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.SXInput.set_all_values">
+<span class="sig-name descname"><span class="pre">set_all_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.SXInput.set_all_values" title="Link to this definition">#</a></dt>
+<dd><p>Slice up set commands into vectors for each module, and transmit.</p>
+<blockquote>
+<div><p>para:      Parameter to set {‘V’ or ‘I’}
+values:    Either float/int or list of float/int of length n_chs</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qontrol.SXInput.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.SXInput.set_value" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qontrol.generic_log_handler">
+<span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">generic_log_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fatal_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.generic_log_handler" title="Link to this definition">#</a></dt>
+<dd><p>A generic log handler which can be passed to Qontroller instances to
+generate a RuntimeError every time an error in the list fatal_errors
+is reported by the hardware.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>fatal_errors    List of errors that should be raised.</dt><dd><p>‘all’ will raise every error encountered (default).</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qontrol.run_interactive_shell">
+<span class="sig-prename descclassname"><span class="pre">qontrol.</span></span><span class="sig-name descname"><span class="pre">run_interactive_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serial_port_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qontrol.run_interactive_shell" title="Link to this definition">#</a></dt>
+<dd><p>Shell for interacting directly with Qontrol hardware.</p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="manuals/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Manuals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor"><code class="docutils literal notranslate"><span class="pre">MXMotor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">MXMotor.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.get_all_values"><code class="docutils literal notranslate"><span class="pre">MXMotor.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.get_value"><code class="docutils literal notranslate"><span class="pre">MXMotor.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.set_all_values"><code class="docutils literal notranslate"><span class="pre">MXMotor.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.set_value"><code class="docutils literal notranslate"><span class="pre">MXMotor.set_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.MXMotor.wait_until_stopped"><code class="docutils literal notranslate"><span class="pre">MXMotor.wait_until_stopped()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput"><code class="docutils literal notranslate"><span class="pre">QXOutput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">QXOutput.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.get_all_values"><code class="docutils literal notranslate"><span class="pre">QXOutput.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.get_value"><code class="docutils literal notranslate"><span class="pre">QXOutput.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.set_all_values"><code class="docutils literal notranslate"><span class="pre">QXOutput.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.QXOutput.set_value"><code class="docutils literal notranslate"><span class="pre">QXOutput.set_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller"><code class="docutils literal notranslate"><span class="pre">Qontroller</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.close"><code class="docutils literal notranslate"><span class="pre">Qontroller.close()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">Qontroller.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.issue_binary_command"><code class="docutils literal notranslate"><span class="pre">Qontroller.issue_binary_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.issue_command"><code class="docutils literal notranslate"><span class="pre">Qontroller.issue_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.log_append"><code class="docutils literal notranslate"><span class="pre">Qontroller.log_append()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.parse_error"><code class="docutils literal notranslate"><span class="pre">Qontroller.parse_error()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.print_log"><code class="docutils literal notranslate"><span class="pre">Qontroller.print_log()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.receive"><code class="docutils literal notranslate"><span class="pre">Qontroller.receive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.transmit"><code class="docutils literal notranslate"><span class="pre">Qontroller.transmit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.Qontroller.wait"><code class="docutils literal notranslate"><span class="pre">Qontroller.wait()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput"><code class="docutils literal notranslate"><span class="pre">SXInput</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.error_desc_dict"><code class="docutils literal notranslate"><span class="pre">SXInput.error_desc_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.get_all_values"><code class="docutils literal notranslate"><span class="pre">SXInput.get_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.get_value"><code class="docutils literal notranslate"><span class="pre">SXInput.get_value()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.set_all_values"><code class="docutils literal notranslate"><span class="pre">SXInput.set_all_values()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.SXInput.set_value"><code class="docutils literal notranslate"><span class="pre">SXInput.set_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.generic_log_handler"><code class="docutils literal notranslate"><span class="pre">generic_log_handler()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qontrol.run_interactive_shell"><code class="docutils literal notranslate"><span class="pre">run_interactive_shell()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qontrol
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023, Qontrol.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
